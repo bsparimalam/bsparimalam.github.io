@@ -31,8 +31,12 @@ for r in range(radius-1):
 	source[r, 511-(radius-round((radius**2 - (radius-r)**2)**(1/2))):, 3] = 0
 
 cv.imwrite('icon-512x512.png', source)
-cv.imwrite('icon-256x256.png', cv.resize(source, (256, 256)))
-cv.imwrite('icon-144x144.png', cv.resize(source, (144, 144)))
+cv.imwrite('icon-384x384.png', cv.resize(source, (384, 384)))
+cv.imwrite('icon-192x192.png', cv.resize(source, (192, 192)))
 cv.imwrite('icon-152x152.png', cv.resize(source, (152, 152)))
+cv.imwrite('icon-144x144.png', cv.resize(source, (144, 144)))
+cv.imwrite('icon-128x128.png', cv.resize(source, (128, 128)))
 cv.imwrite('icon-96x96.png', cv.resize(source, (96, 96)))
+cv.imwrite('icon-72x72.png', cv.resize(source, (72, 72)))
 cv.imwrite('icon-32x32.png', cv.resize(source, (32, 32)))
+cv.imwrite('icon-16x16.png', cv.resize(source, (16, 16)))
