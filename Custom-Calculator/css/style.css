@@ -1,0 +1,30 @@
+
+html, body { 
+	position: fixed;
+	top: 5%;
+	left: 5%;
+	height: 90%;
+	width: 90%;
+	overflow: hidden;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+input, button { 
+	float: center;
+	width: 23.9%; 
+	height: 13.8%; 
+	font-size: 1em; 
+	text-align: center;
+}
+
+input { 
+	width: 47.3%;
+	border-style: inset; 
+	border-width: 0.2em;
+
+}
+
+.result { 
+	width: 97.7%; 
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE  html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Custom Calculator</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="white">
+</head>
+
+<body >
+
+	<input type="number" class="input" id="x" >
+	<input type="number" class="input" id="y" ><br>
+	<input type="text" class="result" id="z" ><br>
+
+	<button type="button" name="sum" onclick="sum()" > + </button>
+	<button type="button" name="subration" onclick="subration()"> - </button>
+	<button type="button" name="multiplication" onclick="multiplication()"> x </button>
+	<button type="button" name="division" onclick="division()"> ÷ </button><br>
+
+	<button type="button" name="invert" onclick="invert()"> 1/x </button>
+	<button type="button" name="factorial" onclick="factorial()"> x! </button>
+	<button type="button" name="exponent" onclick="exponent()"> xʸ </button>
+	<button type="button" name="root" onclick="root()"> ʸ√x </button><br>
+
+	<button type="button" name="log" onclick="log()"> log(x) </button>
+	<button type="button" name="loginv" onclick="loginv()"> 10ˣ </button>
+	<button type="button" name="nlog" onclick="nlog()"> ln(x) </button>
+	<button type="button" name="nloginv" onclick="nloginv()"> eˣ </button><br>
+
+	<button type="button" name="in2mm" onclick="in2mm()"> in2mm </button>
+	<button type="button" name="mm2in" onclick="mm2in()"> mm2in </button>
+	<button type="button" name="zalign1" onclick="zalign1()"> x/sin(y) </button>
+	<button type="button" name="zalign2" onclick="zalign2()"> x/cos(y) </button><br>
+
+	<button type="button" name="sine" onclick="sine()"> sin(x) </button>
+	<button type="button" name="cosine" onclick="cosine()"> cos(x) </button>
+	<button type="button" name="tangent" onclick="tangent()"> tan(x) </button>
+	<button type="button" name="allclear" onclick="allclear()"> AC </button><br>
+
+	<script src="js/main.js"></script>
+</body>
+</html>
