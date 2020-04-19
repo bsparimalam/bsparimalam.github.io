@@ -1,4 +1,14 @@
 
+
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/service-worker.js')
+	.then(function(){
+		console.log('sw registerd')
+	});
+}
+
+
+// Calculator functions
 function sum() {
 	var x = +document.getElementById('x').value;
 	var y = +document.getElementById('y').value;
