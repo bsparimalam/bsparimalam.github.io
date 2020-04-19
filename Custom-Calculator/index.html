@@ -7,6 +7,22 @@
 	<link rel="manifest" href="/manifest.json">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="white">
+	<!-- CODELAB: Add iOS meta tags and icons -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Custom-Calculator">
+	<link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
+	<!-- Register service worker -->
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+		  window.addEventListener('load', () => {
+		    navigator.serviceWorker.register('/service-worker.js')
+		        .then((reg) => {
+		          console.log('Service worker registered.', reg);
+		        });
+		  });
+		}
+	</script>
 </head>
 
 <body >
@@ -40,7 +56,6 @@
 	<button type="button" name="tangent" onclick="tangent()"> tan(x) </button>
 	<button type="button" name="allclear" onclick="allclear()"> AC </button><br>
 
-	<script src="js/main.js"></script>
 	<script src="js/functions.js"></script>
 </body>
 </html>
