@@ -2,11 +2,11 @@
 
 const cachename = 'Custom-Calculator';
 const files2cache = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/main.js',
-  '/js/functions.js'
+  './',
+  './index.html',
+  './css/style.css',
+  './js/main.js',
+  './js/functions.js'
 ];
 
 self.addEventListener('install', function(event){
