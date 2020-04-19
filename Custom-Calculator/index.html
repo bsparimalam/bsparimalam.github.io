@@ -3,33 +3,24 @@
 <head>
 	<meta charset="utf-8">
 	<title>Custom Calculator</title>
+	<link rel="icon" href="/images/icons/icon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="manifest" href="manifest.json">
 	<meta name="description" content="custom calculator">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="white">
 	<!-- CODELAB: Add iOS meta tags and icons -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-title" content="Custom-Calculator">
 	<link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
-	<!-- Register service worker -->
-	<script type="text/javascript">
-		if ('serviceWorker' in navigator) {
-		  window.addEventListener('load', () => {
-		    navigator.serviceWorker.register('/service-worker.js')
-		        .then((reg) => {
-		          console.log('Service worker registered.', reg);
-		        });
-		  });
-		}
-	</script>
+
 </head>
 
 <body >
 
-	<input type="number" class="input" id="x" >
-	<input type="number" class="input" id="y" ><br>
+	<input type="number" class="entry" id="x" >
+	<input type="number" class="entry" id="y" ><br>
 	<input type="text" class="result" id="z" ><br>
 
 	<button type="button" name="sum" onclick="sum()" > + </button>
@@ -47,8 +38,8 @@
 	<button type="button" name="nlog" onclick="nlog()"> ln(x) </button>
 	<button type="button" name="nloginv" onclick="nloginv()"> eˣ </button><br>
 
-	<button type="button" name="in2mm" onclick="in2mm()"> in2mm </button>
-	<button type="button" name="mm2in" onclick="mm2in()"> mm2in </button>
+	<button type="button" name="in2mm" onclick="in2mm()"> in → mm </button>
+	<button type="button" name="mm2in" onclick="mm2in()"> mm → in </button>
 	<button type="button" name="zalign1" onclick="zalign1()"> x/sin(y) </button>
 	<button type="button" name="zalign2" onclick="zalign2()"> x/cos(y) </button><br>
 
