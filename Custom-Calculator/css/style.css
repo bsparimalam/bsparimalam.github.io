@@ -4,7 +4,7 @@ html {
 }
 
 body, input {
-	background-color: #52c7b8;
+	background-color: #a4a4a4;
 }
 body { 
 	margin-top: 2%;
@@ -39,14 +39,14 @@ input {
 }
 
 input::placeholder {
-	color: #009688;
+	color: #757575;
 }
 
 button {
 	border-style: none;
 	border-radius: 25%;
-	background-color: #eeeeee;
-	color: #00675b;
+	background-color: #e0e0e0;
+	color: #494949;
 	width: 22%;
 	font-family: 'Roboto Slab', serif;
 	font-size: 1em;
