@@ -1,5 +1,5 @@
 
-var version = '2.2';
+var version = '2.3';
 const expectedCaches = ['Calculator-v' + version ];
 const files2cache = [
   './',

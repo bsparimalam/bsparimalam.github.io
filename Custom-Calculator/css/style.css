@@ -17,6 +17,7 @@ body {
 	height: 96%;
 	display: flex;
 	align-content: center;
+	overflow: hidden;
 }
 
 input, button {
