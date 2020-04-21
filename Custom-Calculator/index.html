@@ -1,29 +1,38 @@
 <!DOCTYPE  html>
 <html lang="en">
 <head>
+
+	<!-- site descrition -->
 	<meta charset="utf-8">
 	<title>Calculator</title>
+	<meta name="description" content="simple calculator">
 	<link rel="icon" href="./images/icons/icon-16x16.png" type="image/png" sizes="16x16">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./css/style.css">
 	<link rel="manifest" href="./manifest.json">
-	<meta name="description" content="calculator">
+
+	<!-- style information -->
+	<link rel="stylesheet" href="./css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="white">
-	<!-- CODELAB: Add iOS meta tags and icons -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="theme-color" content="#e0e0e0"> <!--  update the manifest and stylesheet -->
+
+	<!-- ios web app tags, fuck you apple! -->
+	<meta name="apple-touch-fullscreen" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="Calculator">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link rel="apple-touch-icon" href="./images/icons/icon-152x152.png">
+	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png"/>
 
 </head>
 
 <body onresize="resize()">
 
-
 	<input class="entry" type="number" id="x" placeholder="X">
 	<input class="entry" type="number" id="y" placeholder="Y">
-	<input class="result" type="text" id="z" placeholder="results appear here">
+
+	<input class="result" type="text" id="z" placeholder="results here">
 
 	<button class="operation1" name="sum" onclick="sum()" >+</button>
 	<button class="operation1" name="subration" onclick="subration()">−</button>

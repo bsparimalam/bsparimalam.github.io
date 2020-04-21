@@ -16,8 +16,8 @@ resize();
 
 function resize() {
 
-var windowheight = mobileheight;
-var windowwidth = mobilewidth;
+var windowheight = window.innerHeight;
+var windowwidth = window.innerWidth;
 var ratio = 1.5;
 
 if ( screenheight > screenwidth ) {

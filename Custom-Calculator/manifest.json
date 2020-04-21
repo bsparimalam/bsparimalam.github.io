@@ -6,8 +6,9 @@
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "white",
-  "theme_color": "white",
+  "background_color":  "#e0e0e0",
+  "theme_color": "#e0e0e0",  
+  // update the stylesheet and metatags
   "icons": [
 
     {
