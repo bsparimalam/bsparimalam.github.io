@@ -1,5 +1,6 @@
 
-const expectedCaches = ['Calculator-v2.1'];
+var version = '2.2';
+const expectedCaches = ['Calculator-v' + version ];
 const files2cache = [
   './',
   './manifest.json',
@@ -20,8 +21,8 @@ const files2cache = [
 ];
 
 self.addEventListener('install', function(event) {
-  console.log('v2.1 installing...');
-  event.waitUntil(caches.open('Calculator-v2.1')
+  console.log('v' + version + 'installing...');
+  event.waitUntil(caches.open('Calculator-v' + version )
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
@@ -38,7 +39,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('v2.1 ready to handle fetches!');
+      console.log('v' + version + 'ready to handle fetches!');
     })
   );
 });
