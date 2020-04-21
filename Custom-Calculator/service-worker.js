@@ -1,6 +1,6 @@
 
-var version = '2.6';
-const expectedCaches = ['Calculator-v' + version ];
+var version = "v3.0"; //update the p element in the index html
+const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
   './manifest.json',
@@ -21,8 +21,8 @@ const files2cache = [
 ];
 
 self.addEventListener('install', function(event) {
-  console.log('v' + version + 'installing...');
-  event.waitUntil(caches.open('Calculator-v' + version )
+  console.log(version + ' installing...');
+  event.waitUntil(caches.open('Calculator-' + version )
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
@@ -39,7 +39,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('v' + version + 'ready to handle fetches!');
+      console.log(version + ' ready to handle fetches!');
     })
   );
 });

@@ -1,4 +1,5 @@
 
+// registering service workers
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('./service-worker.js')
 	.then(function(){
@@ -6,12 +7,13 @@ if ('serviceWorker' in navigator) {
 	});
 };
 
+// handle scaling
 const screenheight = screen.availHeight;
 const screenwidth = screen.availWidth;
 const mobileheight = window.innerHeight;
 const mobilewidth = window.innerWidth;
 
-console.log("screen: " + screen.height + "," + screen.width);
+console.log("screen: " + screenheight + "," + screenwidth);
 resize();
 
 function resize() {
