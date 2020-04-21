@@ -1,13 +1,10 @@
-html {
+html { width: 100%; height: 100%; }
 
-	width: 100%;
-	height: 100%;
-}
+body, input { background-color: #a4a4a4; }
 
-body, input {
+input::placeholder { color: #757575; }
 
-	background-color: #a4a4a4;
-}
+button { color: #494949; background-color: #e0e0e0; }
 
 body {
 
@@ -31,13 +28,9 @@ input, button {
 
 .result { width: 95%; }
 
-input::placeholder { color: #757575; }
-
 button {
 
 	border-radius: 25%;
-	background-color: #e0e0e0;
-	color: #494949;
 	width: 22%;
 	font-size: 1em;
 	font-weight: bolder;
