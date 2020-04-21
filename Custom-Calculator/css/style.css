@@ -15,8 +15,6 @@ body {
 	margin-left: 2%;
 	width: 96%;
 	height: 96%;
-	display: flex;
-	align-content: center;
 	overflow: hidden;
 }
 
