@@ -17,38 +17,39 @@
 
 </head>
 
-<body >
+<body onresize="resize()">
 
-	<input type="number" class="entry" id="x"  autocomplete="off">
-	<input type="number" class="entry" id="y"  autocomplete="off"><br>
-	<input type="text" class="result" id="z" autocomplete="off" ><br>
+	<input class="entry" type="number" id="x"  autocomplete="off">
+	<input class="entry" type="number" id="y"  autocomplete="off"><br>
+	<input class="result" type="text" id="z" autocomplete="off"><br>
 
-	<button type="button" name="sum" onclick="sum()" > + </button>
-	<button type="button" name="subration" onclick="subration()"> - </button>
-	<button type="button" name="multiplication" onclick="multiplication()"> x </button>
-	<button type="button" name="division" onclick="division()"> ÷ </button><br>
+	<button class="operation" name="sum" onclick="sum()" > + </button>
+	<button class="operation" name="subration" onclick="subration()"> - </button>
+	<button class="operation" name="multiplication" onclick="multiplication()"> x </button>
+	<button class="operation" name="division" onclick="division()"> ÷ </button><br>
 
-	<button type="button" name="invert" onclick="invert()"> 1/x </button>
-	<button type="button" name="factorial" onclick="factorial()"> x! </button>
-	<button type="button" name="exponent" onclick="exponent()"> xʸ </button>
-	<button type="button" name="root" onclick="root()"> ʸ√x </button><br>
+	<button class="operation" name="invert" onclick="invert()"> 1/x </button>
+	<button class="operation" name="factorial" onclick="factorial()"> x! </button>
+	<button class="operation" name="exponent" onclick="exponent()"> xʸ </button>
+	<button class="operation" name="root" onclick="root()"> ʸ√x </button><br>
 
-	<button type="button" name="log" onclick="log()"> log(x) </button>
-	<button type="button" name="loginv" onclick="loginv()"> 10ˣ </button>
-	<button type="button" name="nlog" onclick="nlog()"> ln(x) </button>
-	<button type="button" name="nloginv" onclick="nloginv()"> eˣ </button><br>
+	<button class="operation" name="log" onclick="log()"> log(x) </button>
+	<button class="operation" name="loginv" onclick="loginv()"> 10ˣ </button>
+	<button class="operation" name="nlog" onclick="nlog()"> ln(x) </button>
+	<button class="operation" name="nloginv" onclick="nloginv()"> eˣ </button><br>
 
-	<button type="button" name="in2mm" onclick="in2mm()"> in → mm </button>
-	<button type="button" name="mm2in" onclick="mm2in()"> mm → in </button>
-	<button type="button" name="zalign1" onclick="zalign1()"> x/sin(y) </button>
-	<button type="button" name="zalign2" onclick="zalign2()"> x/cos(y) </button><br>
+	<button class="operation" name="in2mm" onclick="in2mm()"> in → mm </button>
+	<button class="operation" name="mm2in" onclick="mm2in()"> mm → in </button>
+	<button class="operation" name="zalign1" onclick="zalign1()"> x/sin(y) </button>
+	<button class="operation" name="zalign2" onclick="zalign2()"> x/cos(y) </button><br>
 
-	<button type="button" name="sine" onclick="sine()"> sin(x) </button>
-	<button type="button" name="cosine" onclick="cosine()"> cos(x) </button>
-	<button type="button" name="tangent" onclick="tangent()"> tan(x) </button>
-	<button type="button" name="allclear" onclick="allclear()"> AC </button><br>
+	<button class="operation" name="sine" onclick="sine()"> sin(x) </button>
+	<button class="operation" name="cosine" onclick="cosine()"> cos(x) </button>
+	<button class="operation" name="tangent" onclick="tangent()"> tan(x) </button>
+	<button class="operation" name="allclear" onclick="allclear()"> AC </button><br>
 
 	<script src="./js/main.js"></script>
 	<script src="./js/functions.js"></script>
+
 </body>
 </html>
