@@ -1,5 +1,4 @@
 
-
 const cachename = 'Custom-Calculator';
 const files2cache = [
   './',
