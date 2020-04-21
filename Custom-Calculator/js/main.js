@@ -8,14 +8,16 @@ if ('serviceWorker' in navigator) {
 
 const screenheight = screen.availHeight;
 const screenwidth = screen.availWidth;
+const mobileheight = window.innerHeight;
+const mobilewidth = window.innerWidth;
 
 console.log("screen: " + screen.height + "," + screen.width);
 resize();
 
 function resize() {
 
-var windowheight = window.innerHeight;
-var windowwidth = window.innerWidth;
+var windowheight = mobileheight;
+var windowwidth = mobilewidth;
 var ratio = 1.5;
 
 if ( screenheight > screenwidth ) {
