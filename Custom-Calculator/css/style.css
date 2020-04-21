@@ -13,13 +13,12 @@ body {
 	border-radius: 25%;
 	width: 96%;
 	height: 96%;
-	overflow: hidden;
 }
 
 input, button {
 	margin-top: 2%;
 	margin-left: 2%;
-	height: 13%;
+	height: 12%;
 	text-align: center;
 	border-width: 0.1em;
 }
@@ -31,11 +30,11 @@ input {
 	font-size: 2em;
 }
 .entry {
-	width: 45%;
+	width: 40%;
 }
 
 .result {
-	width: 95%;
+	width: 90%;
 }
 
 input::placeholder {
@@ -47,7 +46,7 @@ button {
 	border-radius: 25%;
 	background-color: #e0e0e0;
 	color: #494949;
-	width: 22%;
+	width: 20%;
 	font-family: 'Roboto Slab', serif;
 	font-size: 1em;
 	font-weight: bolder;

@@ -1,5 +1,5 @@
 
-const expectedCaches = ['Calculator-v2.0'];
+const expectedCaches = ['Calculator-v2.1'];
 const files2cache = [
   './',
   './manifest.json',
@@ -16,20 +16,20 @@ const files2cache = [
   './images/icons/icon-96x96.png',
   './images/icons/icon-72x72.png',
   './images/icons/icon-32x32.png',
-  './images/icons/icon-16x16.png'  
+  './images/icons/icon-16x16.png'
 ];
 
 self.addEventListener('install', function(event) {
-  console.log('v2.0 installing...');
-  event.waitUntil(caches.open('Calculator-v2.0')
+  console.log('v2.1 installing...');
+  event.waitUntil(caches.open('Calculator-v2.1')
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
-  console.log('update complete!');
+  console.log('Installation complete!');
 });
 
 self.addEventListener('activate', function(event){
-  console.log('service workers activated');
+  console.log('Service workers activated');
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.map(key => {
@@ -38,7 +38,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('v2.0 ready to handle fetches!');
+      console.log('v2.1 ready to handle fetches!');
     })
   );
 });
