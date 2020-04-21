@@ -3,12 +3,14 @@ html {
 	height: 100%;
 }
 
+body, input {
+	background-color: #52c7b8;
+}
 body { 
-
 	margin-top: 2%;
 	margin-left: 2%;
-	font-family: auto;
-	font-size: auto;
+	border-style: none;
+	border-radius: 25%;
 	width: 96%;
 	height: 96%;
 	overflow: hidden;
@@ -18,13 +20,15 @@ input, button {
 	margin-top: 2%;
 	margin-left: 2%;
 	height: 13%;
-	border-radius: 1em;
 	text-align: center;
-	border-width: 0.2em;
+	border-width: 0.1em;
 }
 
 input {
-	border-style: inset;
+	border-style: none;
+	border-radius: 0.5em;
+	font-family: 'Roboto Slab', serif;
+	font-size: 2em;
 }
 .entry {
 	width: 45%;
@@ -34,7 +38,33 @@ input {
 	width: 95%;
 }
 
+input::placeholder {
+	color: #009688;
+}
+
 button {
-	border-style: outset;
+	border-style: none;
+	border-radius: 25%;
+	background-color: #eeeeee;
+	color: #00675b;
 	width: 22%;
+	font-family: 'Roboto Slab', serif;
+	font-size: 1em;
+	font-weight: bolder;
+}
+
+.operation1 {
+	font-size: 2.5em;
+}
+
+.operation2 {
+	font-size: 1.5em;
+}
+
+.operation3 {
+	font-size: 1.2em;
+}
+
+:focus {
+    outline: none !important;
 }

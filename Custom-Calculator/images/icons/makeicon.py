@@ -4,8 +4,8 @@ import numpy as np
 # generate icon 
 source = np.ones((512, 512, 4))
 source[:, :, 3] = 255
-colors = [[130, 0, 75], [255, 0, 0], [0, 255, 0], [0, 0, 255]]
-radius = 200
+colors = [[100, 200, 100], [100, 100, 100], [200, 200, 200], [100, 100, 200]]
+radius = 51
 
 source[:256, :256, 0] = colors[0][0]
 source[:256, :256, 1] = colors[0][1]
@@ -29,6 +29,11 @@ for r in range(radius-1):
 	source[511-r, 511-(radius-round((radius**2 - (radius-r)**2)**(1/2))):, 3] = 0
 	source[511-r, :radius-round((radius**2 - (radius-r)**2)**(1/2)), 3] = 0
 	source[r, 511-(radius-round((radius**2 - (radius-r)**2)**(1/2))):, 3] = 0
+
+source = cv.putText(source, "+", (50, 200), cv.FONT_HERSHEY_SIMPLEX, 7, (255, 255, 255), 25, cv.LINE_AA)
+source = cv.putText(source, "-", (306, 200), cv.FONT_HERSHEY_SIMPLEX, 7, (255, 255, 255), 25, cv.LINE_AA)
+source = cv.putText(source, "%", (60, 446), cv.FONT_HERSHEY_SIMPLEX, 5, (255, 255, 255), 25, cv.LINE_AA)
+source = cv.putText(source, "=", (306, 456), cv.FONT_HERSHEY_SIMPLEX, 7, (255, 255, 255), 25, cv.LINE_AA)
 
 cv.imwrite('icon-512x512.png', source)
 cv.imwrite('icon-384x384.png', cv.resize(source, (384, 384)))
