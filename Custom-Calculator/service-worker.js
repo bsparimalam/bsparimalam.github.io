@@ -1,5 +1,5 @@
 
-var version = "v3.0"; //update the p element in the index html
+var version = "v3.2"; //update the p element in the index html
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
