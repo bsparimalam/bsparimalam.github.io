@@ -174,7 +174,7 @@ function inr() {
 function times() {
 
 	(async () => {
-		let estraw = await fetch("http://worldtimeapi.org/api/timezone/America/New_York");
+		let estraw = await fetch("https://worldtimeapi.org/api/timezone/America/New_York");
 		if (estraw.ok) {
 			let estdt = await estraw.json();
 			let est = await gettime12hr(estdt.datetime, 0, 0);
@@ -184,7 +184,7 @@ function times() {
 		document.getElementById('x').value = estoutput;
 	})();
 	(async () => {
-		let pstraw = await fetch("http://worldtimeapi.org/api/timezone/America/Vancouver");
+		let pstraw = await fetch("https://worldtimeapi.org/api/timezone/America/Vancouver");
 		if (pstraw.ok) {
 			let pstdt = await pstraw.json();
 			let pst = await gettime12hr(pstdt.datetime, 0, 0);
@@ -194,7 +194,7 @@ function times() {
 		document.getElementById('y').value = pstoutput;
 	})();
 	(async () => {
-		let istraw = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+		let istraw = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
 		if (istraw.ok) {
 			let istdt = await istraw.json();
 			let ist = await gettime12hr(istdt.datetime, 0, 0);
