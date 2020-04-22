@@ -10,8 +10,8 @@ if ('serviceWorker' in navigator) {
 // handle scaling
 const screenheight = screen.availHeight;
 const screenwidth = screen.availWidth;
-const mobileheight = window.innerHeight;
-const mobilewidth = window.innerWidth;
+var mobileheight = window.innerHeight;
+var mobilewidth = window.innerWidth;
 
 console.log("screen: " + screenheight + "," + screenwidth);
 resize();
@@ -21,11 +21,26 @@ function resize() {
 var windowheight = window.innerHeight;
 var windowwidth = window.innerWidth;
 var ratio = 1.5;
+i1 = document.getElementById("x") == document.activeElement;
+i2 = document.getElementById("y") == document.activeElement;
+o = document.getElementById("z") == document.activeElement;
+
+console.log("focus status : " + (i1 || i2 || o))
 
 if ( screenheight > screenwidth ) {
 
-	appheight = mobileheight;
-	appwidth = mobilewidth;
+	if (i1 || i2 || o) {
+
+		appheight = mobileheight;
+		appwidth = mobilewidth;
+
+	} else {
+
+		mobileheight = window.innerHeight;
+		mobilewidth = window.innerWidth;
+		appheight = mobileheight;
+		appwidth = mobilewidth;
+	}
 
 } else if ( windowheight < ratio*windowwidth) {
 
