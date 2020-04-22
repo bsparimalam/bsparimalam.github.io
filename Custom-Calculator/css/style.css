@@ -2,14 +2,18 @@
 
 body, input { background-color: #006064; }
 button { background-color: #eeeeee; }
-input, a { color: #ffffff; }
+input, a, a:link, a:visited, a:hover, a:active { color: #ffffff; }
 button { color: #000000; }
 input::placeholder { color: #00838F; } /*update the manifest and metatags*/
 
 
 /*fonts*/
 
-input, button, a {	font-family: 'Roboto Slab', serif; font-weight: bolder; }
+input, button, a , a:link, a:visited, a:hover, a:active {
+
+	font-family: 'Roboto Slab', serif; font-weight: bolder;
+
+}
 .entry, .result { font-size: 2em; }
 .smallestbutton { font-size: 2em; }
 .smallbutton { font-size: 1.4em; }
@@ -61,7 +65,7 @@ button { grid-column: span 1; }
 .allclear { grid-row: span 2; }
 
 
-a:link, a:visited, a:hover, a:active{
+a, a:link, a:visited, a:hover, a:active {
 
 	grid-row: 11/ span 1; 
 	grid-column: 4/ span 1; 
