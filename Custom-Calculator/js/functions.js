@@ -123,28 +123,30 @@ function usd() {
 	var x = +document.getElementById('x').value;
 	document.getElementById('x').value = x;
 	document.getElementById('y').value = null;
-	fetch("https://api.exchangeratesapi.io/latest?base=USD&symbols=CAD")
+	fetch("https://api.exchangeratesapi.io/latest?base=USD&symbols=CAD,INR")
 		.then(function(exchangerate) {
 			if (exchangerate.status == 200) {
 				exchangerate.json().then(function(data) {
-					candol = (x/data.rates.CAD).toFixed(2);
-					document.getElementById('z').value = candol + " C$";
+					candol = (x*data.rates.CAD).toFixed(2);
+					indrup = (x*data.rates.INR).toFixed(2);
+					document.getElementById('z').value = candol + " C$, " + indrup + " ₹";
 				});
 			} else {
 				document.getElementById('z').value = "xchange rate fetch failed";
 			}
 		});
-}		
+}
 function cad() {
 	var x = +document.getElementById('x').value;
 	document.getElementById('x').value = x;
 	document.getElementById('y').value = null;
-	fetch("https://api.exchangeratesapi.io/latest?base=CAD&symbols=USD")
+	fetch("https://api.exchangeratesapi.io/latest?base=CAD&symbols=USD,INR")
 		.then(function(exchangerate) {
 			if (exchangerate.status == 200) {
 				exchangerate.json().then(function(data) {
-					amdol = (x/data.rates.USD).toFixed(2);
-					document.getElementById('z').value = amdol + " $";
+					amdol = (x*data.rates.USD).toFixed(2);
+					indrup = (x*data.rates.INR).toFixed(2);
+					document.getElementById('z').value = amdol + " $, " + indrup + " ₹";
 				});
 			} else {
 				document.getElementById('z').value = "xchange rate fetch failed";
@@ -152,6 +154,21 @@ function cad() {
 		});
 }	
 function inr() {
+	var x = +document.getElementById('x').value;
+	document.getElementById('x').value = x;
+	document.getElementById('y').value = null;
+	fetch("https://api.exchangeratesapi.io/latest?base=INR&symbols=USD,CAD")
+		.then(function(exchangerate) {
+			if (exchangerate.status == 200) {
+				exchangerate.json().then(function(data) {
+					amdol = (x*data.rates.USD).toFixed(2);
+					candol = (x*data.rates.CAD).toFixed(2);
+					document.getElementById('z').value = amdol + " $, " + candol + " C$";
+				});
+			} else {
+				document.getElementById('z').value = "xchange rate fetch failed";
+			}
+		});
 	document.getElementById('z').value = "xchange rate fetch failed";
 }
 function times() {

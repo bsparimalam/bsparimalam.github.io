@@ -24,8 +24,8 @@ var ratio = 1.5;
 
 if ( screenheight > screenwidth ) {
 
-	appheight = mobileheight;
-	appwidth = mobilewidth;
+	appheight = screenheight;
+	appwidth = screenwidth;
 
 } else if ( windowheight < ratio*windowwidth) {
 

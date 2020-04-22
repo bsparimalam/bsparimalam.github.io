@@ -1,9 +1,10 @@
 /*color*/
 
-body, input { background-color: #a4a4a4; }
-input, button, p { color: #494949; }
-input::placeholder { color: #757575; }
-button { background-color: #e0e0e0; } /*update the manifest and metatags*/
+body, input { background-color: #006064; }
+button { background-color: #eeeeee; }
+input, p { color: #ffffff; }
+button { color: #000000; }
+input::placeholder { color: #00838F; } /*update the manifest and metatags*/
 
 
 /*fonts*/
@@ -31,7 +32,7 @@ body {
 
 	display: grid;
 	grid-template-columns: 23% 23% 23% 23%;
-	grid-template-rows: 9% 9% 9% 9% 9% 9% 9% 9% 9% 9% 1%;
+	grid-template-rows: 13% 13% 8% 8% 8% 8% 8% 8% 8% 8% 1%;
 	justify-content: space-around;
     width: 96%; 
 	height: 96%; 
@@ -76,5 +77,5 @@ p {
 
 
 /*shape*/
-button { border-radius: 25%; }
+button { border-radius: 10%; }
 :focus { outline: none !important; }
