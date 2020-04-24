@@ -1,5 +1,5 @@
 
-var version = "v3.6"; //update the p element in the index html
+var version = "v3.7"; //update the p element in the index html
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
@@ -7,7 +7,8 @@ const files2cache = [
   './index.html',
   './css/style.css',
   './js/main.js',
-  './js/functions.js',
+  './js/style.js',
+  './js/calculator.js',
   './images/icons/icon-512x512.png',
   './images/icons/icon-384x384.png',
   './images/icons/icon-192x192.png',

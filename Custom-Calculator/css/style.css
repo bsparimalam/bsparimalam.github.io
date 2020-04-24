@@ -1,10 +1,10 @@
 /*color*/
 
-body, input { background-color: #006064; }
-button { background-color: #eeeeee; }
-input, a, a:link, a:visited, a:hover, a:active { color: #ffffff; }
-button { color: #000000; }
-input::placeholder { color: #00838F; } /*update the manifest and metatags*/
+body, .result { background-color: #455a64; }
+.entry, button { background-color: #eeeeee;}
+input, a, a:link, a:visited, a:hover, a:active, button { color: #1c313a; }
+.result { color: #eeeeee; }
+/*update the manifest and metatags*/
 
 
 /*fonts*/
@@ -14,7 +14,8 @@ input, button, a , a:link, a:visited, a:hover, a:active {
 	font-family: 'Roboto Slab', serif; font-weight: bolder;
 
 }
-.entry, .result { font-size: 2em; }
+.entry { font-size: 2.5em; }
+.result { font-size: 2em; }
 .smallestbutton { font-size: 2em; }
 .smallbutton { font-size: 1.4em; }
 .mediumbutton, .allclear { font-size: 1.2em; }
@@ -24,7 +25,7 @@ a { font-size: 0.5em; }
 
 /*size and structure*/
 
-html { width: 100%; height: 100%; }
+html { width: 100%; height: 100%; align-content: center; }
 
 
 body {
@@ -36,7 +37,7 @@ body {
 
 	display: grid;
 	grid-template-columns: 23% 23% 23% 23%;
-	grid-template-rows: 13% 13% 8% 8% 8% 8% 8% 8% 8% 8% 1%;
+	grid-template-rows: 18% 8% 8% 8% 8% 8% 8% 8% 8% 8% 1%;
 	justify-content: space-around;
     width: 96%; 
 	height: 96%; 
@@ -58,10 +59,9 @@ input, button {
 
 }
 
+.entry { grid-column: span 4; }
+.result { grid-column: span 3; }
 button { grid-column: span 1; }
-
-.entry { grid-column: span 2; }
-.result { grid-column: span 4; }
 .allclear { grid-row: span 2; }
 
 
@@ -81,5 +81,10 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 /*shape*/
-button { border-radius: 10%; }
+button, input { border-radius: 0.5em; }
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 :focus { outline: none !important; }
