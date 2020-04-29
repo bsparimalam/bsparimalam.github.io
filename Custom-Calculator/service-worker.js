@@ -1,5 +1,5 @@
 
-var version = "v4.0";
+var version = "v4.1";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
@@ -19,10 +19,11 @@ const files2cache = [
   './Roboto_Slab/static/RobotoSlab-SemiBold.ttf',
   './Roboto_Slab/static/RobotoSlab-Thin.ttf',
   './js/style.js',
-  './js/input.js',
-  './js/basic.js',
-  './js/conversion.js',
+  './js/input-output.js',
+  './js/convert.js',
   './js/function.js',
+  './js/dictionary.json',
+  './js/recent.json',
   './js/registersw.js',
   './images/icons/icon-512x512.png',
   './images/icons/icon-384x384.png',
