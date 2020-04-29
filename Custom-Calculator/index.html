@@ -5,16 +5,13 @@
 	<!-- site descrition -->
 	<meta charset="utf-16">
 	<title>Calculator</title>
-	<meta name="description" content="simple calculator">
-	<link rel="icon" href="./images/icons/icon-16x16.png" type="image/png" 
-		sizes="16x16">
+	<meta name="description" content="Calculator">
+	<link rel="icon" href="./images/icons/icon-32x32.png" type="image/png" 
+		sizes="32x32">
 	<link rel="manifest" href="./manifest.json">
 
 	<!-- style information -->
 	<link rel="stylesheet" href="./css/style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab
-		&display=swap" rel="stylesheet">
-
 
 	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,60 +26,82 @@
 	<link rel="apple-touch-icon" href="./images/icons/icon-152x152.png">
 	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png"/>
 
-
 </head>
 
 <body onresize="resize()">
 
-	<input class="entry" type="text" id="x">
-	<input class="result" type="text" id="y">
+	<input class="ip" type="text" id="ip">
+	<input class="op" type="text" id="op">
+	<button onclick="o2i()">ANS</button>
 
-	<button class="smallestbutton" onclick="r2e()" >⬏</button>
-	<button class="smallestbutton" onclick="calculate('sum')" >+</button>
-	<button class="smallestbutton" onclick="calculate('subtract')">−</button>
-	<button class="smallestbutton" onclick="calculate('multiply')">×</button>
-	<button class="smallestbutton" onclick="calculate('divide')">÷</button>
+	<button id="convert0" ></button>
+	<button id="convert1" ></button>
+	<button id="convert2" ></button>
+	<button id="convert3" ></button>
+	<button id="convert4" ></button>
+	<button id="convert5" ></button>
+	<button id="currency1" ></button>
+	<button id="currency2" ></button>
+	<button id="currency3" ></button>
+	<button id="moreconvert" >...</button>
 
-	<button class="mediumbutton" onclick="calculate('in2mm')" >in→mm</button>
-	<button class="mediumbutton" onclick="calculate('ft2m')">ft→m</button>
-	<button class="mediumbutton" onclick="calculate('lb2kg')">lb→kg</button>
-	<button class="mediumbutton" onclick="calculate('f2c')">°F→°C</button>
+	<button id="func0" ></button>
+	<button id="func1" ></button>
+	<button id="func2" ></button>
+	<button id="func3" ></button>
+	<button id="func4" ></button>
+	<button id="func5" ></button>
+	<button id="func6" ></button>
+	<button id="func7" ></button>
+	<button id="func8" ></button>
+	<button id="morefunc" >...</button>
 
-	<button class="mediumbutton" onclick="calculate('mm2in')" >mm→in</button>
-	<button class="mediumbutton" onclick="calculate('m2ft')">m→ft</button>
-	<button class="mediumbutton" onclick="calculate('kg2lb')">kg→lb</button>
-	<button class="mediumbutton" onclick="calculate('c2f')">°C→°F</button>
+	<button onclick="typein('sin(')" >sin</button>
+	<button onclick="typein('cos(')" >cos</button>
+	<button onclick="typein('tan(')" >tan</button>
+	<button onclick="typein('ln(')" >ln</button>
+	<button onclick="typein('log(')" >log</button>
 
+	<button onclick="typein('sin⁻¹(')" >sin⁻¹</button>
+	<button onclick="typein('cos⁻¹(')" >cos⁻¹</button>
+	<button onclick="typein('tan⁻¹(')" >tan⁻¹</button>
+	<button onclick="typein('e^(')" >e⬚</button>
+	<button onclick="typein('10^(')" >10⬚</button>
 
-	<button class="smallbutton" onclick="calculate('invert')">1/x</button>
-	<button class="smallbutton" onclick="calculate('factorial')"> x! </button>
-	<button class="smallbutton" onclick="calculate('exponent')"> xʸ </button>
-	<button class="smallbutton" onclick="calculate('root')"> ʸ√x </button>
+	<button onclick="typein('^(')" >⬚ˣ</button>
+	<button onclick="typein('^(1/(')" >ˣ√⬚</button>
+	<button onclick="typein('(')">(</button>
+	<button onclick="typein(')')">)</button>
+	<button onclick="theme()">🎨</button>
 
-	<button class="mediumbutton" onclick="calculate('log')">log(x)</button>
-	<button class="smallbutton" onclick="calculate('loginv')">10ˣ</button>
-	<button class="mediumbutton" onclick="calculate('nlog')">ln(x)</button>
-	<button class="smallbutton" onclick="calculate('nloginv')">eˣ</button>
-
-	<button class="mediumbutton" onclick="calculate('sine')">sin(x)</button>
-	<button class="mediumbutton" onclick="calculate('cosine')">cos(x)</button>
-	<button class="mediumbutton" onclick="calculate('tangent')">tan(x)</button>
+	<button onclick="typein('1')" >1</button>
+	<button onclick="typein('2')" >2</button>
+	<button onclick="typein('3')" >3</button>
+	<button onclick="typein('+')" >+</button>
 	<button class="allclear" onclick="allclear()">AC</button>
 
-	<button class="mediumbutton" onclick="calculate('function1')">x/sin(y)</button>
-	<button class="mediumbutton" onclick="calculate('function2')">x/cos(y)</button>
-	<button class="mediumbutton" onclick="calculate('function3')">x/tan(y)</button>
+	<button onclick="typein('4')" >4</button>
+	<button onclick="typein('5')" >5</button>
+	<button onclick="typein('6')" >6</button>
+	<button onclick="typein('-')" >-</button>
 
-	<button class="mediumbutton"  onclick="calculate('currency1')">USD</button>
-	<button class="mediumbutton" onclick="calculate('currency2')">CAD</button>
-	<button class="mediumbutton" onclick="calculate('currency3')">INR</button>
-	<button class="largebutton" onclick="times()">TIME</button>
+	<button onclick="typein('7')" >7</button>
+	<button onclick="typein('8')" >8</button>
+	<button onclick="typein('9')" >9</button>
+	<button onclick="typein('×')" >×</button>
+	<button onclick="remove()" >←</button>
 
-	<a href="https://github.com/bsparimalam/bsparimalam.github.io/tree/master
-		/Custom-Calculator" target="_blank"> Git/v3.7 </a>
-	 <!-- update the service worker -->
+	<button onclick="typein('.')" >.</button>
+	<button onclick="typein('0')" >0</button>
+	<button onclick="typein(',')" >,</button>
+	<button onclick="typein('÷')" >÷</button>
+	<button onclick="calculate()" >=</button>
+
 	<script src="./js/style.js"></script>
-	<script src="./js/main.js"></script>
-	<script src="./js/calculator.js"></script>
+	<script src="./js/input-output.js"></script>
+	<script src="./js/convert.js"></script>
+	<script src="./js/function.js"></script>
+	<script src="./js/registersw.js"></script>
+
 </body>
 </html>

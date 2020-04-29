@@ -1,0 +1,17 @@
+{
+"conversions":[
+	"in→cm",
+	"in²→cm²"
+	"ft→m",
+	"lb→kg",
+	"psi→atm",
+	"ᵒF→ᵒC"
+	],
+"currencies": [
+	"CAD→USD",
+	"INR→CAD",
+	"USD→CAD"
+	],
+"functions": [
+				]
+}

@@ -1,53 +1,43 @@
 /*color*/
-
-body, .result { background-color: #455a64; }
-.entry, button { background-color: #eeeeee;}
-input, a, a:link, a:visited, a:hover, a:active, button { color: #1c313a; }
-.result { color: #eeeeee; }
+body, .op { background-color: #455a64; }
+.ip { background-color: #eeeeee;}
+button { background-color: #eeeeee;}
+input, button { color: #1c313a; }
+.op { color: #eeeeee; }
 /*update the manifest and metatags*/
 
-
 /*fonts*/
-
-input, button, a , a:link, a:visited, a:hover, a:active {
-
-	font-family: 'Roboto Slab', serif; font-weight: bolder;
-
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('./Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
 }
-.entry { font-size: 2.5em; }
-.result { font-size: 2em; }
-.smallestbutton { font-size: 2em; }
-.smallbutton { font-size: 1.4em; }
-.mediumbutton, .allclear { font-size: 1.2em; }
-.largebutton { font-size: 1em;  }
-a { font-size: 0.5em; }
-
+input, button {
+	font-family: 'Roboto Slab', serif; 
+	font-weight: bolder;
+	font-size: 1em;
+}
+.ip { font-size: 2.5em; }
+.op { font-size: 2em; }
 
 /*size and structure*/
-
 html { width: 100%; height: 100%; align-content: center; }
 
-
 body {
-
 	border-width: 0%;
 	padding: 0%;
 	border-style: none;
 	overflow: hidden;
 
 	display: grid;
-	grid-template-columns: 23% 23% 23% 23%;
-	grid-template-rows: 18% 8% 8% 8% 8% 8% 8% 8% 8% 8% 1%;
+	grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
+	grid-template-rows: 12% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5%;
 	justify-content: space-around;
     width: 96%; 
 	height: 96%; 
 	grid-gap: 1%;
-
 }
 
-
 input, button {
-
 	border-width: 0%;
 	padding: 0%;
 	border-style: none;
@@ -56,33 +46,14 @@ input, button {
 	grid-row: span 1;
 	width: 100%;
 	height: 100%;
-
 }
 
-.entry { grid-column: span 4; }
-.result { grid-column: span 3; }
+.ip { grid-column: span 5; }
+.op { grid-column: span 4; }
 button { grid-column: span 1; }
 .allclear { grid-row: span 2; }
-
-
-a, a:link, a:visited, a:hover, a:active {
-
-	grid-row: 11/ span 1; 
-	grid-column: 4/ span 1; 
-	text-align: right;
-	text-decoration: none;
-	margin: 0%;
-	border-width: 0%;
-	padding: 0%;
-	border-style: none;
-	width: 100%; 
-	height: 100%; 
-
-}
-
 /*shape*/
-button, input { border-radius: 0.5em; }
-
+button, input { border-radius: 0.3em; }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;

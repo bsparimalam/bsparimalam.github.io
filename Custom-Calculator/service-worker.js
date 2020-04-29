@@ -1,14 +1,29 @@
 
-var version = "v3.7"; //update the p element in the index html
+var version = "v4.0";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
   './manifest.json',
   './index.html',
   './css/style.css',
-  './js/main.js',
+  './Roboto_Slab/RobotoSlab-VariableFont_wght.ttf',
+  './Roboto_Slab/LICENSE.txt',
+  './Roboto_Slab/README.txt',
+  './Roboto_Slab/static/RobotoSlab-Black.ttf',
+  './Roboto_Slab/static/RobotoSlab-Bold.ttf',
+  './Roboto_Slab/static/RobotoSlab-ExtraBold.ttf',
+  './Roboto_Slab/static/RobotoSlab-ExtraLight.ttf',
+  './Roboto_Slab/static/RobotoSlab-Light.ttf',
+  './Roboto_Slab/static/RobotoSlab-Medium.ttf',
+  './Roboto_Slab/static/RobotoSlab-Regular.ttf',
+  './Roboto_Slab/static/RobotoSlab-SemiBold.ttf',
+  './Roboto_Slab/static/RobotoSlab-Thin.ttf',
   './js/style.js',
-  './js/calculator.js',
+  './js/input.js',
+  './js/basic.js',
+  './js/conversion.js',
+  './js/function.js',
+  './js/registersw.js',
   './images/icons/icon-512x512.png',
   './images/icons/icon-384x384.png',
   './images/icons/icon-192x192.png',
