@@ -1,5 +1,5 @@
 
-var version = "v4.3";
+var version = "v4.4";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
   './',
@@ -22,7 +22,7 @@ const files2cache = [
   './js/input-output.js',
   './js/convert.js',
   './js/function.js',
-  './data/conversions.json',
+  './data/load.json',
   './js/registersw.js',
   './images/icons/icon-512x512.png',
   './images/icons/icon-384x384.png',

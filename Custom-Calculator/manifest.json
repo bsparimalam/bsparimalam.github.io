@@ -6,7 +6,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color":  "#eeeeee",
-  "theme_color": "#eeeeee",  
+  "theme_color": "#1c313a",  
   // update the stylesheet and metatags
   "icons": [
 

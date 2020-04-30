@@ -13,5 +13,9 @@
 		],
 	"times": "IST",
 	"functions": [
+		"x/sin(y)",
+		"x/cos(y)",
+		"15%",
+		"20%"
 		]
 }

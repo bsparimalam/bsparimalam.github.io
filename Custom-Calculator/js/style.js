@@ -68,7 +68,7 @@ console.log("app: " + appheight + ", " + appwidth);
 
 ( async () => {
 
-	let temprecent = await fetch('./data/conversions.json');
+	let temprecent = await fetch('./data/load.json');
 	var recent = await temprecent.json();
 	console.log(recent);
 
@@ -81,5 +81,8 @@ console.log("app: " + appheight + ", " + appwidth);
 	document.getElementById('currency0').innerHTML = recent.currencies[0];
 	document.getElementById('currency1').innerHTML = recent.currencies[1];
 	document.getElementById('time0').innerHTML = recent.times;
-
+	document.getElementById('func0').innerHTML = recent.functions[0];
+	document.getElementById('func1').innerHTML = recent.functions[1];
+	document.getElementById('func2').innerHTML = recent.functions[2];
+	document.getElementById('func3').innerHTML = recent.functions[3];
 })();

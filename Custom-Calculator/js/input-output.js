@@ -60,7 +60,39 @@ function allclear() {
 	document.getElementById('op').value = null;
 }
 // processed input
-function readinput() {
+function readinput(multi=false) {
+	var inputbox = document.getElementById('ip');
+	var inputstring = inputbox.value;
+	var inputlength = inputstring.length;
+
+	inputstring = inputstring.replace(/×/gi, '*');
+	inputstring = inputstring.replace(/÷/gi, '/');
+	inputstring = inputstring.replace(/\^/gi, '**');
+
+	inputstring = inputstring.replace(/e/gi, 'Math.E');
+	inputstring = inputstring.replace(/π/gi, 'Math.PI');
+
+	inputstring = inputstring.replace(/log/gi, 'Math.log10');
+	inputstring = inputstring.replace(/ln/gi, 'Math.log');
+
+	inputstring = inputstring.replace(/sin\(/gi, 'Math.sin((Math.PI/180)*');
+	inputstring = inputstring.replace(/cos\(/gi, 'Math.cos((Math.PI/180)*');
+	inputstring = inputstring.replace(/tan\(/gi, 'Math.tan((Math.PI/180)*');
+	inputstring = inputstring.replace(/sin⁻¹\(/gi, '(180/Math.PI)*Math.asin(');
+	inputstring = inputstring.replace(/cos⁻¹\(/gi, '(180/Math.PI)*Math.acos(');
+	inputstring = inputstring.replace(/tan⁻¹\(/gi, '(180/Math.PI)*Math.atan(');
+
+	if (multi) { 
+		let inputlist = inputstring.split(",");
+		console.log('converted expression: ' + inputlist);
+		return inputlist;
+	} else { 
+		console.log('converted expression: ' + inputstring);
+		return inputstring;
+	}
+}
+// processed multi-input
+function readinputs() {
 	var inputbox = document.getElementById('ip');
 	var inputstring = inputbox.value;
 	var inputlength = inputstring.length;
@@ -83,28 +115,7 @@ function readinput() {
 	inputstring = inputstring.replace(/tan⁻¹\(/gi, '(180/Math.PI)*Math.atan(');
 
 	console.log('converted expression: ' + inputstring);
-	return inputstring;
-	// inputstring = inputstring.replace(/(180/Math.PI)*Math.atan\(/gi, 'tan⁻¹\(');
-	// inputstring = inputstring.replace(/(180/Math.PI)*Math.acos\(/gi, 'cos⁻¹\(' );
-	// inputstring = inputstring.replace(/(180/Math.PI)*Math.asin\(/gi, 'sin⁻¹\(' );
-
-	// inputstring = inputstring.replace(/Math.tan\((Math.PI/180)*/gi, 'tan\(');
-	// inputstring = inputstring.replace(/Math.cos\((Math.PI/180)*/gi, 'cos\(');
-	// inputstring = inputstring.replace(/Math.sin\((Math.PI/180)*/gi, 'sin\(');
-
-	// inputstring = inputstring.replace(/Math.log10/gi, 'log');
-	// inputstring = inputstring.replace(/Math.log/gi, 'ln');
-
-	// inputstring = inputstring.replace(/Math.E/gi, 'e');
-	// inputstring = inputstring.replace(/Math.PI/gi, 'π');
-
-	// inputstring = inputstring.replace(/\*/gi, '×');
-	// inputstring = inputstring.replace(/\//gi, '÷');
-	// inputstring = inputstring.replace(/\**/gi, '^');
-
-	// console.log('reverted expression: ' + inputstring);
-	// inputbox.value = inputstring;
-
+	return inputstring.;
 }
 // processed output
 function printoutput(number, unit=null) {
