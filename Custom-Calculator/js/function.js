@@ -2,35 +2,20 @@
 function func(element) {
 	let operation = element.innerHTML;
 	console.log("computation requested: " + operation);
-	var inputvalue = readinputs();
+	var inputlist = readinput(multi=true);
+	let x; let y; let z;
 	switch(operation) {
-
+		case "x/sin(y)":
+			x = eval(inputlist[0]); y = eval(inputlist[1]);
+			printoutput(x/Math.sin((Math.PI/180)*y)); break;
+		case "x/cos(y)":
+			x = eval(inputlist[0]); y = eval(inputlist[1]);
+			printoutput(x/Math.cos((Math.PI/180)*y)); break;
+		case "15%":
+			x = eval(inputlist[0]);
+			printoutput(x*0.15); break;
+		case "20%":
+			x = eval(inputlist[0]);
+			printoutput(x*0.20); break;
 	}
 }
-
-case "function1":
-
-	inputbox.value = inputs.slice(0, 2);
-	result = inputvalue/Math.sin(inputs[1]*Math.PI/180);
-	outputbox.value = result;
-	break;
-
-case "function2":
-
-	inputbox.value = inputs.slice(0, 2);
-	result = inputvalue/Math.cos(inputs[1]*Math.PI/180);
-	outputbox.value = result;
-	break;
-
-case "function3":
-
-	inputbox.value = inputs.slice(0, 2);
-	result = inputvalue/Math.tan(inputs[1]*Math.PI/180);
-	outputbox.value = result;
-	break;
-case "factorial":
-	var z = 1;
-	var i;
-	for ( i = 1; i <= (inputvalue); i++ ){
-		z = z*i;
-	} outputbox.value = z; break;
