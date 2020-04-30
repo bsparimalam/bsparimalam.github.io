@@ -1,60 +1,62 @@
 
 // unit conversions
-function convert(operation) {
+function convert(element) {
+	let operation = element.innerHTML;
+	console.log("conversion requested: " + operation);
 	var inputvalue = readinput();
 	switch (operation) {
 		// area
-		case "sqmile2sqkm": printoutput(2.58999*inputvalue, 'km²'); break;
-		case "sqkm2sqmile": printoutput(2.58999*inputvalue, 'mile²'); break;
-		case "sqinch2sqcm": printoutput(6.4516*inputvalue, 'cm²'); break;
-		case "sqcm2sqinch": printoutput(0.1550*inputvalue, 'inch²'); break;
+		case "mi²→km²": printoutput(2.58999*inputvalue, 'km²'); break;
+		case "km²→mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
+		case "in²→cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
+		case "cm²→in²": printoutput(0.1550*inputvalue, 'inch²'); break;
 		// length
-		case "inch2cm": printoutput(2.54*inputvalue, 'cm'); break;
-		case "cm2inch": printoutput(inputvalue*0.3937, 'inch'); break;
-		case "ft2m": printoutput(0.3048*inputvalue, 'm'); break;
-		case "m2ft": printoutput(inputvalue*3.2808, 'ft'); break;
-		case "mile2km": printoutput(inputvalue*1.60934, 'km'); break;
-		case "km2mile": printoutput(inputvalue*0.621371, 'mile'); break;
+		case 'in→cm': printoutput(2.54*inputvalue, 'cm'); break;
+		case "cm→in": printoutput(inputvalue*0.3937, 'inch'); break;
+		case "ft→m": printoutput(0.3048*inputvalue, 'm'); break;
+		case "m→ft": printoutput(inputvalue*3.2808, 'ft'); break;
+		case "mi→km": printoutput(inputvalue*1.60934, 'km'); break;
+		case "km→mi": printoutput(inputvalue*0.621371, 'mile'); break;
 		// energy
-		case "kcal2kj": printoutput(4.184*inputvalue, 'kJ'); break;
-		case "kj2kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
-		case "kwh2kj": printoutput(3600*inputvalue, 'kJ'); break;
-		case "kj2kwh": printoutput(inputvalue/3600, 'kWh'); break;
+		case "kcal→kJ": printoutput(4.184*inputvalue, 'kJ'); break;
+		case "kJ→kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
+		case "kWh→kJ": printoutput(3600*inputvalue, 'kJ'); break;
+		case "kJ→kWh": printoutput(inputvalue/3600, 'kWh'); break;
 		// mass
-		case "lb2kg": printoutput(0.453592*inputvalue, 'kg'); break;
-		case "kg2lb": printoutput(inputvalue*2.2090, 'lb'); break;
-		case "ounce2kg": printoutput(inputvalue/35.274, 'kg'); break;
-		case "kg2ounce": printoutput(inputvalue*35.274, 'ounce'); break;
+		case "lb→kg": printoutput(0.453592*inputvalue, 'kg'); break;
+		case "kg→lb": printoutput(inputvalue*2.2090, 'lb'); break;
+		case "ou→kg": printoutput(inputvalue/35.274, 'kg'); break;
+		case "kg→ou": printoutput(inputvalue*35.274, 'ounce'); break;
 		// pressure
-		case "kPa2atm": printoutput(inputvalue/101.325, 'atm'); break;
-		case "atm2kPa": printoutput(inputvalue*101.325, 'kPa'); break;
-		case "psi2atm": printoutput(inputvalue/14.696, 'atm'); break;
-		case "atm2psi": printoutput(inputvalue*14.696, 'psi'); break;
-		case "bar2atm": printoutput(inputvalue/1.013, 'atm'); break;
-		case "atm2bar": printoutput(inputvalue*1.013, 'bar'); break;
-		case "torr2atm": printoutput(inputvalue/760, 'atm'); break;
-		case "atm2torr": printoutput(inputvalue*760, 'torr'); break;
+		case "kPa→atm": printoutput(inputvalue/101.325, 'atm'); break;
+		case "atm→kPa": printoutput(inputvalue*101.325, 'kPa'); break;
+		case "psi→atm": printoutput(inputvalue/14.696, 'atm'); break;
+		case "atm→psi": printoutput(inputvalue*14.696, 'psi'); break;
+		case "bar→atm": printoutput(inputvalue/1.013, 'atm'); break;
+		case "atm→bar": printoutput(inputvalue*1.013, 'bar'); break;
+		case "torr→atm": printoutput(inputvalue/760, 'atm'); break;
+		case "atm→torr": printoutput(inputvalue*760, 'torr'); break;
 		// temperature
-		case "fah2cel":	printoutput((inputvalue-32)*(5/9), 'ᵒC'); break;
-		case "cel2fah":	printoutput((inputvalue*(9/5) + 32), 'ᵒF'); break;
+		case "ᵒF→ᵒC":	printoutput((inputvalue-32)*(5/9), 'ᵒC'); break;
+		case "ᵒC→ᵒF":	printoutput((inputvalue*(9/5) + 32), 'ᵒF'); break;
 	}
 }
 // currency conversions
-function currency(base, target) {
+function currency(element) {
+	let operation = element.innerHTML;
+	console.log("conversion requested: " + operation);
+	let base = operation.slice(0, 3); let target = operation.slice(4, 7);
 	var inputvalue = readinput();
 	let baseurl = "https://api.exchangeratesapi.io/latest?";
 	let basecurr = "base=" + base;
 	let targetcurr = "&symbols=" + target;
 	printoutput("loading...");
 	(async () => {
-		let response = await fetch(baseurl+basecurr+targetcurr);
-		if (response.ok) {
-			let data = await response.json();
-			printoutput(inputvalue*data.rates.target, target);
-		} else { printoutput("xchange rate fetch failed") }
-	});
+		let response = await fetch( baseurl + basecurr + targetcurr );
+		let data = await response.json();
+		printoutput(inputvalue*data["rates"][target], target);
+	})();
 }
-
 
 //time conversions
 function gettime12hr(dateandtime, hr, mn) {
@@ -75,32 +77,16 @@ function gettime12hr(dateandtime, hr, mn) {
 	}
 	if (hour == 0 ) { hour = 12; }
 	if (String(min).length < 2 ) { min = "0" + min; }
-	return hour + ":" + min + period;
+	printoutput(hour + " : " + min, period);
 }
 
-function times() {
-
-	document.getElementById('y').value = "loading...";
-
+function time(element) {
+	let timezone = element.innerHTML;
+	console.log("time requested: " + timezone);
+	printoutput("loading...");
 	(async () => {
-		let url4 = "https://worldtimeapi.org/api/timezone/America/New_York";
-		let estraw = await fetch(url4);
-		if (estraw.ok) {
-			let estdt = await estraw.json();
-			let est = await gettime12hr(estdt.datetime, 0, 0);
-			estoutput = est + "-EST";
-		} else { estoutput = "EST fetch failed" }
-
-		let url5 = "https://worldtimeapi.org/api/timezone/Asia/Kolkata";
-		let istraw = await fetch(url5);
-		if (istraw.ok) {
-			let istdt = await istraw.json();
-			let ist = await gettime12hr(istdt.datetime, 0, 0);
-			istoutput = ist + "-IST";
-		} else { istoutput = "IST fetch failed"}
-
-	document.getElementById('y').value = estoutput + "; " + istoutput;
-
+		let response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
+		let data = await response.json();
+		await gettime12hr(data.datetime, 0, 0);
 	})();
-
 }

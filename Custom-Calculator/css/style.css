@@ -30,7 +30,7 @@ body {
 
 	display: grid;
 	grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
-	grid-template-rows: 12% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5% 6.5%;
+	grid-template-rows: 13% 7% 7% 7% 7% 7% 7% 7% 7% 7% 7% 7%;
 	justify-content: space-around;
     width: 96%; 
 	height: 96%; 

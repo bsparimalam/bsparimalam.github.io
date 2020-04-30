@@ -65,3 +65,21 @@ console.log("window: " + windowheight + ", " + windowwidth);
 console.log("app: " + appheight + ", " + appwidth);
 
 }
+
+( async () => {
+
+	let temprecent = await fetch('./data/conversions.json');
+	var recent = await temprecent.json();
+	console.log(recent);
+
+	document.getElementById('convert0').innerHTML = recent.conversions[0];
+	document.getElementById('convert1').innerHTML = recent.conversions[1];
+	document.getElementById('convert2').innerHTML = recent.conversions[2];
+	document.getElementById('convert3').innerHTML = recent.conversions[3];
+	document.getElementById('convert4').innerHTML = recent.conversions[4];
+	document.getElementById('convert5').innerHTML = recent.conversions[5];
+	document.getElementById('currency0').innerHTML = recent.currencies[0];
+	document.getElementById('currency1').innerHTML = recent.currencies[1];
+	document.getElementById('time0').innerHTML = recent.times;
+
+})();

@@ -1,7 +1,7 @@
 
 // listen to the mouse and defocus buttons after click
 document.addEventListener('mouseup', event => {
-	console.log('mouse click on : ' + event.srcElement);
+	console.log('mouse click on : ', event.srcElement);
 	if (event.srcElement.tagName != 'INPUT') { 
 		event.srcElement.blur();
 	}
