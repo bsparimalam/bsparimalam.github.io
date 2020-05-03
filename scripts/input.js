@@ -1,11 +1,9 @@
 
-
  // listen to the keyboard input and insert text
 document.addEventListener('keydown', event => {
 	key = event.key;
 	let inputbox = document.getElementById('ip');
 	let outputbox = document.getElementById('op');
-	autofontsize(inputbox, 16, 10, 11);
 	ipfocused = inputbox == document.activeElement;
 	opfocused = outputbox == document.activeElement;
 	isinputfocused = ipfocused || opfocused;
@@ -59,3 +57,22 @@ function defocus(element) {
 	element.blur(); 
 	console.log(element.innerHTML + '-button defocused');
 }
+
+//  // listen to the keyboard input and insert text
+// document.addEventListener('keydown', event => {
+// 	key = event.key;
+// 	let inputbox = document.getElementById('ip');
+// 	let outputbox = document.getElementById('op');
+// 	ipfocused = inputbox == document.activeElement;
+// 	opfocused = outputbox == document.activeElement;
+// 	isinputfocused = ipfocused || opfocused;
+// 	console.log("key pressed : " + key);
+// 	if ( key == "Enter" ) { calculate();}
+// 	if (!isinputfocused ) {
+// 	if ((key == "Backspace") || (key == "Delete")) {
+// 		inputbox.value = inputbox.value.slice(0, -1);
+// 	} else if ( key == '*' ) { inputbox.value += '×'; 
+// 	} else if ( key == '/' ) { inputbox.value += '÷'; 
+// 	} else if ( key.length == 1 ) { inputbox.value += key;
+// 	}}	autofontsize(inputbox, 16, 10, 11);
+// })

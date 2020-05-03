@@ -1,0 +1,37 @@
+
+input, button {
+	font-family: system-ui;
+	text-align:center;
+}
+
+button {
+	user-select: none;
+}
+
+#ip {
+    font-size: 4em;
+}
+#op {
+	font-size: 3em;
+}
+.sci, #bspc {
+	font-size: 1.75em;
+}
+
+.num, .opr {
+	font-size: 2.5em;
+}
+
+#ANS {
+	font-size: 1.25em;
+	font-weight: 500;
+}
+
+#CE {
+	font-size: 2.5em;
+}
+
+#comma, #decimal {
+	font-size: 3em;
+    padding-bottom: 40%; 
+}

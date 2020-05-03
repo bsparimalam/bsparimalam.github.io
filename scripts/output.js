@@ -9,11 +9,11 @@ function calculate() {
 
 // processed output
 function printoutput(number, unit=null) {
+
 	var outputbox = document.getElementById('op'); console.log(number);
 	if ( typeof(number) != "number" ) { outputbox.value = number.message;
-	} else if (String(number).length > 9 ) { number = number.toPrecision(9); } 
-
-	if ( !unit ) { outputbox.value = number;
+	} else if (String(number).length > 9 ) { number = number.toPrecision(9); }
+    number = Number(number).toString();
+    if ( !unit ) { outputbox.value = number;
 	} else { outputbox.value = number + ' ' + unit; }
-	autofontsize(outputbox, 12, 8, 11);
 }

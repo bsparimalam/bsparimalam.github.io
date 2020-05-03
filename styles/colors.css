@@ -1,0 +1,52 @@
+
+:focus { outline: none !important; }
+
+/* default theme */
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	html {
+		background-color: #c1d5e0;		
+	}
+	.inputs, input {
+		background-color: #78909c; 
+		color: #000000; 
+	}
+	.scis, .sci, #bspc { 
+		background-color: #90a4ae;
+		color: #222222; 
+	}
+	.sci:active, #bspc:active {
+		background-color: #a7c0cd;
+	}
+	.nums, .num, .opr, .io { 
+		background-color: #b0bec5; 
+		color: #333333;
+	}
+	.num:active, .opr:active, .io:active {
+		background-color: #c1d5e0;
+	}
+}
+
+/* dark theme */
+@media (prefers-color-scheme: dark) {
+	html {
+		background-color: #37474f;		
+	}
+    .inputs, input {
+    	background-color: #000a12; 
+    	color: #e2f1f8; 
+	}
+	.scis, .sci, #bspc { 
+    	background-color: #101a20;
+    	color: #e2f1f8; 
+	}
+	.sci:active, #bspc:active {
+		background-color: #263238;
+	}
+	.nums, .num, .opr, .io {
+    	background-color: #102027;
+    	color: #e2f1f8;
+	}
+	.num:active, .opr:active, .io:active {
+		background-color: #37474f;
+	}
+}

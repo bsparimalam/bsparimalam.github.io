@@ -10,11 +10,13 @@
 	<link rel="manifest" href="./manifest.json">
 
 	<!-- style information -->
-	<link href="./styles/default.css" rel="stylesheet">
+	<link href="./styles/colors.css" rel="stylesheet">
+	<link href="./styles/layouts.css" rel="stylesheet">
+	<link href="./styles/fonts.css" rel="stylesheet">
 
 	<!-- web app tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#222222"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="theme-color" content="#b0bec5"> 
 	<!--  update the manifest and stylesheet -->
 
 	<!-- ios web app tags, fuck you apple! -->
@@ -26,11 +28,12 @@
 	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png"/>
 </head>
 
-<body onresize="resize()">
-
-	<input class="ip" type="text" id="ip">
-	<input class="op" type="text" id="op">
-
+<body >
+    <div class='inputs'>
+	<input type="text" id="ip" spellcheck="false" >
+	<input type="text" id="op" spellcheck="false" >
+    </div>
+    <div class="prefs">
 	<button class="pref" id="convert0" onclick="convert(this)" >in² ▸ cm²</button>
 	<button class="pref" id="convert1" onclick="convert(this)" >in ▸ cm</button>
 	<button class="pref" id="convert2" onclick="convert(this)" >m ▸ ft</button>
@@ -47,50 +50,52 @@
 	<button class="pref" id="func2" onclick="func(this)" >15%</button>
 	<button class="pref" id="func3" onclick="func(this)" >20%</button>
 	<button class="pref" id="morefunc" >...</button>
+    </div>
+    <div class="scis">
+	<button class="sci" id="sin" onclick="transtype(this)" >sin</button>
+	<button class="sci" id="sin⁻¹" onclick="transtype(this)" >sin⁻¹</button>
+	<button class="sci" id="xʸ" onclick="transtype(this)" >xʸ</button>
+	<button class="sci" id="ln" onclick="transtype(this)" >ln</button>
+	<button class="sci" id="log" onclick="transtype(this)" >log</button>
 
-	<button class="sci" onclick="transtype(this)" >sin</button>
-	<button class="sci" onclick="transtype(this)" >sin⁻¹</button>
-	<button class="sci" onclick="transtype(this)" >xʸ</button>
-	<button class="sci" onclick="transtype(this)" >ln</button>
-	<button class="sci" onclick="transtype(this)" >log</button>
+	<button class="sci" id="cos" onclick="transtype(this)" >cos</button>
+	<button class="sci" id="cos⁻¹" onclick="transtype(this)" >cos⁻¹</button>
+	<button class="sci" id="π" onclick="softtype(this)" >π</button>
+	<button class="sci" id="eˣ" onclick="transtype(this)" >eˣ</button>
+	<button class="sci" id="10ˣ" onclick="transtype(this)" >10ˣ</button>
 
-	<button class="sci" onclick="transtype(this)" >cos</button>
-	<button class="sci" onclick="transtype(this)" >cos⁻¹</button>
-	<button class="sci" onclick="softtype(this)" >π</button>
-	<button class="sci" onclick="transtype(this)" >eˣ</button>
-	<button class="sci" onclick="transtype(this)" >10ˣ</button>
+	<button class="sci" id="tan" onclick="transtype(this)" >tan</button>
+	<button class="sci" id="tan⁻¹" onclick="transtype(this)" >tan⁻¹</button>
+	<button class="sci" id="\(" onclick="softtype(this)">(</button>
+	<button class="sci" id="\)" onclick="softtype(this)">)</button>
+	<button class="io" id="bspc" onclick="transtype(this)" >⌫</button>
+    </div>
+    <div class="nums">
+	<button class="num" id="1" onclick="softtype(this)" >1</button>
+	<button class="num" id="2" onclick="softtype(this)" >2</button>
+	<button class="num" id="3" onclick="softtype(this)" >3</button>
+	<button class="opr" id="+" onclick="softtype(this)" >+</button>
+	<button class="io" id="CE" onclick="transtype(this)" >CE</button>
 
-	<button class="sci" onclick="transtype(this)" >tan</button>
-	<button class="sci" onclick="transtype(this)" >tan⁻¹</button>
-	<button class="sci" onclick="softtype(this)">(</button>
-	<button class="sci" onclick="softtype(this)">)</button>
-	<button class="sci" onclick="transtype(this)" >⌫</button>
+	<button class="num" id="4" onclick="softtype(this)" >4</button>
+	<button class="num" id="5" onclick="softtype(this)" >5</button>
+	<button class="num" id="6" onclick="softtype(this)" >6</button>
+	<button class="opr" id="-" onclick="softtype(this)" >-</button>
 
-	<button class="num" onclick="softtype(this)" >1</button>
-	<button class="num" onclick="softtype(this)" >2</button>
-	<button class="num" onclick="softtype(this)" >3</button>
-	<button class="opr" onclick="softtype(this)" >+</button>
-	<button class="ce" onclick="transtype(this)" >CE</button>
+	<button class="num" id="7" onclick="softtype(this)" >7</button>
+	<button class="num" id="8" onclick="softtype(this)" >8</button>
+	<button class="num" id="9" onclick="softtype(this)" >9</button>
+	<button class="opr" id="×" onclick="softtype(this)" >×</button>
+	<button class="io" id="ANS" onclick="transtype(this)" >ANS</button>
 
-	<button class="num" onclick="softtype(this)" >4</button>
-	<button class="num" onclick="softtype(this)" >5</button>
-	<button class="num" onclick="softtype(this)" >6</button>
-	<button class="opr" onclick="softtype(this)" >-</button>
-
-	<button class="num" onclick="softtype(this)" >7</button>
-	<button class="num" onclick="softtype(this)" >8</button>
-	<button class="num" onclick="softtype(this)" >9</button>
-	<button class="opr" onclick="softtype(this)" >×</button>
-	<button class="ans" onclick="transtype(this)" >ANS</button>
-
-	<button class="decimal" onclick="softtype(this)" >.</button>
-	<button class="num" onclick="softtype(this)" >0</button>
-	<button class="opr" onclick="transtype(this)" >=</button>
-	<button class="opr" onclick="softtype(this)" >÷</button>
-	<button class="comma" onclick="softtype(this)" >,</button>
-
+	<button class="num" id="decimal" onclick="softtype(this)" >.</button>
+	<button class="num" id="0" onclick="softtype(this)" >0</button>
+	<button class="opr" id="=" onclick="transtype(this)" >=</button>
+	<button class="opr" id="÷" onclick="softtype(this)" >÷</button>
+	<button class="num" id="comma" onclick="softtype(this)" >,</button>
+    </div>
 	<script src='./scripts/loadpref.js'></script>
-	<script src='./scripts/resize.js'></script>
+	<script src='./scripts/style.js'></script>
 	<script src='./scripts/input.js'></script>
 	<script src='./scripts/parse.js'></script>
 	<script src='./scripts/functions.js'></script>

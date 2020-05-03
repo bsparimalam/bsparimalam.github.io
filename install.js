@@ -1,12 +1,14 @@
-var version = "v1.0";
+var version = "v2.0";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
     './manifest.json',
     './index.html',
-    './styles/default.css',
+    './styles/colors.css',
+    './styles/layouts.css',
+    './styles/fonts.css',
     './scripts/loadpref.js',
-    './scripts/resize.js',
+    './scripts/style.js',
     './scripts/input.js',
     './scripts/parse.js',
     './scripts/functions.js',
