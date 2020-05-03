@@ -9,29 +9,36 @@ button {
 }
 
 #ip {
-    font-size: 4em;
+    font-size: 3.5em;
 }
 #op {
-	font-size: 3em;
-}
-.sci, #bspc {
-	font-size: 1.75em;
-}
-
-.num, .opr {
 	font-size: 2.5em;
 }
+.sci, #bspc {
+	font-size: 1.25em;
+	font-weight: normal;
+}
+
+.num {
+	font-size: 2em;
+	font-weight: normal;
+}
+.opr {
+	font-size: 2.5em;
+	font-weight: normal;
+}
+
 
 #ANS {
-	font-size: 1.25em;
+	font-size: 1.3em;
 	font-weight: 500;
 }
 
 #CE {
-	font-size: 2.5em;
+	font-size: 2em;
 }
 
 #comma, #decimal {
-	font-size: 3em;
+	font-size: 2.5em;
     padding-bottom: 40%; 
 }

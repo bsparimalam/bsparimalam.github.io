@@ -1,10 +1,23 @@
+inprogress = true;
+inputbox = document.getElementById('ip');
+outputbox = document.getElementById('op');
 
-function autofontsize( element, optfont, minfont, strcapacity ) {
-	let newsize = optfont * ( strcapacity / element.value.length);
-	if ( newsize > optfont ) { element.style.fontSize = optfont/4 + 'em' ; 
-	} else if ( newsize > minfont ) { element.style.fontSize = newsize/4 + 'em' ;
-	} else { element.style.fontSize = minfont/4 + 'em' ;
-	element.scrollLeft = element.scrollWidth; }
+function autofontsize() {
+	let optfont = 3.5; let minfont = 2; let strcapacity = 9;
+	let newsize = optfont * ( strcapacity / inputbox.value.length);
+	if ( newsize > optfont ) { 
+		inputbox.style.fontSize = optfont + 'em' ; 
+	} else if ( newsize > minfont ) { 
+		inputbox.style.fontSize = newsize + 'em' ;
+	} else {
+		inputbox.style.fontSize = minfont + 'em' ;
+		inputbox.scrollLeft = inputbox.scrollWidth;
+	} console.log('input resized and/or scrolled')
+}
+
+function defocus(element) {
+	element.blur(); 
+	console.log(element.innerHTML + '-button defocused');
 }
 
 // // listen to the keyboard input and insert text
