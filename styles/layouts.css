@@ -25,7 +25,16 @@ html{
 		width: 100%;
 	}    
 }
-
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 body { 
     margin: 0; border-width: 0; padding: 0; border-style: none;
 	border-radius: 0; overflow: hidden;
@@ -33,7 +42,7 @@ body {
 	-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 100%;
-	grid-template-rows: 28% 0% 24% 48%;
+	grid-template-rows: 28% 24% 48%;
 }
 input, button, div { 
 	margin: 0; border-width: 0; padding: 0; border-style: none;
@@ -44,11 +53,11 @@ input, button, div {
 	grid-template-columns: 100%;
 	grid-template-rows: 50% 50%;
 }
-.prefs {
+/*.prefs {
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 25% 25% 25% 25%;
-}
+}*/
 .scis {
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;

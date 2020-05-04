@@ -5,11 +5,9 @@
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color":  "#ffffff",
-  "theme_color": "#b0bec5",  
-  // update the stylesheet and metatags
+  "background_color":  "#b0bec5",
+  "theme_color": "#b0bec5", 
   "icons": [
-
     {
       "src": "./images/icons/icon-16x16.png",
       "sizes": "16x16",

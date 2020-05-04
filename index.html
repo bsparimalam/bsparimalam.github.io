@@ -15,96 +15,98 @@
 	<link href="./styles/fonts.css" rel="stylesheet">
 
 	<!-- web app tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,
-		maximum-scale=1.0, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 	<meta name="theme-color" content="#b0bec5"> 
 	<!--  update the manifest and stylesheet -->
 
 	<!-- ios web app tags, fuck you apple! -->
-	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" >
 	<meta name="apple-mobile-web-app-title" content="Calculator">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link rel="apple-touch-icon" href="./images/icons/icon-152x152.png">
-	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png"/>
+	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png">
 </head>
 
 <body >
     <div class='inputs'>
-	<input type="text" id="ip" spellcheck="false" >
-	<input type="text" id="op" spellcheck="false" >
+    <label for="ip" class="visuallyhidden">input box</label>
+	<input type="text" id="ip" name="input box" spellcheck="false" >
+	<label for="op" class="visuallyhidden">output box</label>
+	<input type="text" id="op" name="output box" spellcheck="false" >
     </div>
-    <div class="prefs">
-	<button class="pref" id="convert0" onclick="convert(this)" >in² ▸ cm²</button>
-	<button class="pref" id="convert1" onclick="convert(this)" >in ▸ cm</button>
-	<button class="pref" id="convert2" onclick="convert(this)" >m ▸ ft</button>
-	<button class="pref" id="convert3" onclick="convert(this)" >psi ▸ atm</button>
-	<button class="pref" id="convert4" onclick="convert(this)" >km ▸ mi</button>
-	<button class="pref" id="convert5" onclick="convert(this)" >kg ▸ lb</button>
-	<button class="pref" id="currency0" onclick="currency(this)">EUR ▸ USD</button>
-	<button class="pref" id="currency1" onclick="currency(this)">USD ▸ EUR</button>
-	<button class="pref" id="time0" onclick="time(this)">PST</button>
+<!--     <div class="prefs">
+	<button class="pref" id="convert0" name="" onclick="convert(this)" >in² ▸ cm²</button>
+	<button class="pref" id="convert1" name="" onclick="convert(this)" >in ▸ cm</button>
+	<button class="pref" id="convert2" name="" onclick="convert(this)" >m ▸ ft</button>
+	<button class="pref" id="convert3" name="" onclick="convert(this)" >psi ▸ atm</button>
+	<button class="pref" id="convert4" name="" onclick="convert(this)" >km ▸ mi</button>
+	<button class="pref" id="convert5" name="" onclick="convert(this)" >kg ▸ lb</button>
+	<button class="pref" id="currency0" name="" onclick="currency(this)">EUR ▸ USD</button>
+	<button class="pref" id="currency1" name="" onclick="currency(this)">USD ▸ EUR</button>
+	<button class="pref" id="time0" name="" onclick="time(this)">PST</button>
 	<button class="pref" id="moreconvert" >...</button>
 
-	<button class="pref" id="func0" onclick="func(this)" >x/sin(y)</button>
-	<button class="pref" id="func1" onclick="func(this)" >x/cos(y)</button>
-	<button class="pref" id="func2" onclick="func(this)" >15%</button>
-	<button class="pref" id="func3" onclick="func(this)" >20%</button>
+	<button class="pref" id="func0" name="" onclick="func(this)" >x/sin(y)</button>
+	<button class="pref" id="func1" name="" onclick="func(this)" >x/cos(y)</button>
+	<button class="pref" id="func2" name="" onclick="func(this)" >15%</button>
+	<button class="pref" id="func3" name="" onclick="func(this)" >20%</button>
 	<button class="pref" id="morefunc" >...</button>
-    </div>
+    </div> -->
     <div class="scis">
-	<button class="sci" id="sin" onclick="transtype(this)" >sin</button>
-	<button class="sci" id="sin⁻¹" onclick="transtype(this)" >sin⁻¹</button>
-	<button class="sci" id="xʸ" onclick="transtype(this)" >xʸ</button>
-	<button class="sci" id="ln" onclick="transtype(this)" >ln</button>
-	<button class="sci" id="log" onclick="transtype(this)" >log</button>
+	<button class="sci" id="sin" name="sine" onclick="defocus(this); add('sin(')" >sin</button>
+	<button class="sci" id="sin⁻¹" name="sine inverse" 
+		onclick="defocus(this); add('sin⁻¹(')" >sin⁻¹</button>
+	<button class="sci" id="xʸ" name="exponent" onclick="defocus(this); add('^(')" >xʸ</button>
+	<button class="sci" id="ln" name="natural log" onclick="defocus(this); add('ln(')" >ln</button>
+	<button class="sci" id="log" name="log" onclick="defocus(this); add('log(')" >log</button>
 
-	<button class="sci" id="cos" onclick="transtype(this)" >cos</button>
-	<button class="sci" id="cos⁻¹" onclick="transtype(this)" >cos⁻¹</button>
-	<button class="sci" id="π" onclick="softtype(this)" >π</button>
-	<button class="sci" id="eˣ" onclick="transtype(this)" >eˣ</button>
-	<button class="sci" id="10ˣ" onclick="transtype(this)" >10ˣ</button>
+	<button class="sci" id="cos" name="cosine" onclick="defocus(this); add('cos(')" >cos</button>
+	<button class="sci" id="cos⁻¹" name="cosine inverse" onclick="defocus(this); add('cos⁻¹(')" >cos⁻¹</button>
+	<button class="sci" id="π" name="pi" onclick="defocus(this); add('π' )">π</button>
+	<button class="sci" id="eˣ" name="natural log inverse" onclick="defocus(this); add('e^(')" >eˣ</button>
+	<button class="sci" id="10ˣ" name="log inverse" onclick="defocus(this); add('10^(')" >10ˣ</button>
 
-	<button class="sci" id="tan" onclick="transtype(this)" >tan</button>
-	<button class="sci" id="tan⁻¹" onclick="transtype(this)" >tan⁻¹</button>
-	<button class="sci" id="\(" onclick="softtype(this)">(</button>
-	<button class="sci" id="\)" onclick="softtype(this)">)</button>
-	<button class="io" id="bspc" onclick="transtype(this)" >⌫</button>
+	<button class="sci" id="tan" name="tangent" onclick="defocus(this); add('tan(')" >tan</button>
+	<button class="sci" id="tan⁻¹" name="tangent inverse" onclick="defocus(this); add('tan⁻¹(')" >tan⁻¹</button>
+	<button class="sci" id="\(" name="opening bracket" onclick="defocus(this); add('(')" >(</button>
+	<button class="sci" id="\)" name="closing bracket" onclick="defocus(this); add(')')" >)</button>
+	<button class="io" id="bspc" name="delete" onclick="defocus(this); remove()" >⌫</button>
     </div>
     <div class="nums">
-	<button class="num" id="1" onclick="softtype(this)" >1</button>
-	<button class="num" id="2" onclick="softtype(this)" >2</button>
-	<button class="num" id="3" onclick="softtype(this)" >3</button>
-	<button class="opr" id="+" onclick="softtype(this)" >+</button>
-	<button class="io" id="CE" onclick="transtype(this)" >CE</button>
+	<button class="num" id="1" name="one" onclick="defocus(this); add('1')" >1</button>
+	<button class="num" id="2" name="two" onclick="defocus(this); add('2')" >2</button>
+	<button class="num" id="3" name="three" onclick="defocus(this); add('3')" >3</button>
+	<button class="opr" id="+" name="add" onclick="defocus(this); add('+')" >+</button>
+	<button class="io" id="CE" name="clear all" onclick="defocus(this); clearall()" >CE</button>
 
-	<button class="num" id="4" onclick="softtype(this)" >4</button>
-	<button class="num" id="5" onclick="softtype(this)" >5</button>
-	<button class="num" id="6" onclick="softtype(this)" >6</button>
-	<button class="opr" id="-" onclick="softtype(this)" >-</button>
+	<button class="num" id="4" name="four" onclick="defocus(this); add('4')" >4</button>
+	<button class="num" id="5" name="five" onclick="defocus(this); add('5')" >5</button>
+	<button class="num" id="6" name="six" onclick="defocus(this); add('6')" >6</button>
+	<button class="opr" id="-" name="subtract" onclick="defocus(this); add('-')" >-</button>
 
-	<button class="num" id="7" onclick="softtype(this)" >7</button>
-	<button class="num" id="8" onclick="softtype(this)" >8</button>
-	<button class="num" id="9" onclick="softtype(this)" >9</button>
-	<button class="opr" id="×" onclick="softtype(this)" >×</button>
-	<button class="io" id="ANS" onclick="transtype(this)" >ANS</button>
+	<button class="num" id="7" name="seven" onclick="defocus(this); add('7')" >7</button>
+	<button class="num" id="8" name="eight" onclick="defocus(this); add('8')" >8</button>
+	<button class="num" id="9" name="nine" onclick="defocus(this); add('9')" >9</button>
+	<button class="opr" id="×" name="multiply" onclick="defocus(this); add('×')" >×</button>
+	<button class="io" id="ANS" name="passoutput" onclick="defocus(this); passoutput()" >ANS</button>
 
-	<button class="num" id="decimal" onclick="softtype(this)" >.</button>
-	<button class="num" id="0" onclick="softtype(this)" >0</button>
-	<button class="opr" id="=" onclick="transtype(this)" >=</button>
-	<button class="opr" id="÷" onclick="softtype(this)" >÷</button>
-	<button class="num" id="comma" onclick="softtype(this)" >,</button>
+	<button class="num" id="decimal" name="decimal" onclick="defocus(this); add('.')" >.</button>
+	<button class="num" id="0" name="zero" onclick="defocus(this); add('0')" >0</button>
+	<button class="opr" id="=" name="calculate" onclick="defocus(this); calculate()" >=</button>
+	<button class="opr" id="÷" name="divide" onclick="defocus(this); add('/')" >÷</button>
+	<button class="num" id="comma" name="comma" onclick="defocus(this); add(',')" >,</button>
     </div>
 
-	<script src='./scripts/loadpref.js'></script>
+<!-- 	<script src='./scripts/loadpref.js'></script> -->
 	<script src='./scripts/style.js'></script>
 	<script src='./scripts/input.js'></script>
 	<script src='./scripts/parse.js'></script>
-	<script src='./scripts/functions.js'></script>
-	<script src='./scripts/conversions.js'></script>
+<!-- 	<script src='./scripts/functions.js'></script>
+	<script src='./scripts/conversions.js'></script> -->
 	<script src='./scripts/output.js'></script>
 	<script>navigator.serviceWorker.register('./install.js')</script>
-	<script src='./scripts/log.js'></script>
+<!-- 	<script src='./scripts/log.js'></script> -->
 
 </body>
 </html>

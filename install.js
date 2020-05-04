@@ -1,4 +1,4 @@
-var version = "v2.2";
+var version = "v2.3";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
@@ -7,16 +7,10 @@ const files2cache = [
     './styles/colors.css',
     './styles/layouts.css',
     './styles/fonts.css',
-    './scripts/loadpref.js',
     './scripts/style.js',
     './scripts/input.js',
     './scripts/parse.js',
-    './scripts/functions.js',
-    './scripts/conversions.js',
     './scripts/output.js',
-    './scripts/log.js',
-    './data/log.json',
-    './data/pref.json',
     './images/icons/icon-512x512.png',
     './images/icons/icon-384x384.png',
     './images/icons/icon-192x192.png',
