@@ -9,6 +9,4 @@ Low Priority
 
 1. touch event too sticky
 2. format the exponent character
-3. create a dev channel
-4. classifying exponential notation as number for root and exp operations
-5. 
+4. classifying scientific notation as number for root and exp operations

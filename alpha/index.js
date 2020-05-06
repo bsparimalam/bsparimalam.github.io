@@ -266,8 +266,8 @@ outputformat = 'DECI';
 
 function changerep(element) {
     if (element.innerHTML == 'DECI') {
-        element.innerHTML = 'EXP';
-        outputformat = 'EXP';
+        element.innerHTML = 'SCI';
+        outputformat = 'SCI';
         if ( outputbox.innerHTML != '' ) { calculate(); }
     } else {
         element.innerHTML = 'DECI';
@@ -315,7 +315,7 @@ function printoutput(number, unit=null) {
             number = String(number).replace(/e/g, 'E');
             console.log('decimal output: ' + number);
         }
-        if ((outputformat == 'EXP') || (number.length > 10 )) {
+        if ((outputformat == 'SCI') || (number.length > 10 )) {
             number = Number(number).toExponential();
             number = String(number).replace(/e/g, 'E');
             console.log('exponential output: ' + number);
