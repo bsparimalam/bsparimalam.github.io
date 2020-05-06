@@ -1,0 +1,147 @@
+<!DOCTYPE  html>
+<html lang="en">
+<head>
+	<!-- site descrition -->
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<meta name="description" content="Calculator">
+	<link rel="icon" href="./images/icons/icon-32x32.png" type="image/png" 
+		sizes="32x32">
+	<link rel="manifest" href="./manifest.json">
+
+	<!-- style information -->
+	<link href="./index.css" rel="stylesheet">
+
+	<!-- web app tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#b0bec5"> 
+	<!--  update the manifest and stylesheet -->
+
+	<!-- ios web app tags, fuck you apple! -->
+	<meta name="apple-touch-fullscreen" content="yes" >
+	<meta name="apple-mobile-web-app-title" content="Calculator">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<link rel="apple-touch-icon" href="./images/icons/icon-152x152.png">
+	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png">
+</head>
+
+<body id="body" onresize='viewportcheck()' >
+    <div class='inputs'>
+	    <label for="ip" class="visuallyhidden">input box</label>
+		<input type="text" id="ip" name="input box" spellcheck="false" >
+		<p id="op" ></p>
+		<button class="panel" id="more" name="more" 
+			onclick="defocus(this); openmore()" >. . .</button>
+		<button class="panel" id="angleunit" name="angle unit" 
+			onclick="defocus(this); setangleunit(this)" >DEG</button>
+		<button class="panel" id="representation" name="representation" 
+			onclick="defocus(this); changerep(this)" >DECIMAL</button>
+		<button class="panel" id="memory" name="memory" 
+			onclick="defocus(this); memory(this)" >STORE</button>
+		<button class="panel" id="bspc" name="delete" 
+			onclick="defocus(this); remove()" >⌫</button>
+    </div>
+<!--     <div class="prefs">
+	<button class="pref" id="convert0" name="" onclick="convert(this)" >in² ▸ cm²</button>
+	<button class="pref" id="convert1" name="" onclick="convert(this)" >in ▸ cm</button>
+	<button class="pref" id="convert2" name="" onclick="convert(this)" >m ▸ ft</button>
+	<button class="pref" id="convert3" name="" onclick="convert(this)" >psi ▸ atm</button>
+	<button class="pref" id="convert4" name="" onclick="convert(this)" >km ▸ mi</button>
+	<button class="pref" id="convert5" name="" onclick="convert(this)" >kg ▸ lb</button>
+	<button class="pref" id="currency0" name="" onclick="currency(this)">EUR ▸ USD</button>
+	<button class="pref" id="currency1" name="" onclick="currency(this)">USD ▸ EUR</button>
+	<button class="pref" id="time0" name="" onclick="time(this)">PST</button>
+	<button class="pref" id="moreconvert" >...</button>
+
+	<button class="pref" id="func0" name="" onclick="func(this)" >x/sin(y)</button>
+	<button class="pref" id="func1" name="" onclick="func(this)" >x/cos(y)</button>
+	<button class="pref" id="func2" name="" onclick="func(this)" >15%</button>
+	<button class="pref" id="func3" name="" onclick="func(this)" >20%</button>
+	<button class="pref" id="morefunc" >...</button>
+    </div> -->
+    <div class="scis">
+		<button class="sci" id="sin" name="sine" 
+			onclick="defocus(this); add('sin(')" >sin</button>
+		<button class="sci" id="sin⁻¹" name="sine inverse" 
+			onclick="defocus(this); add('sin⁻¹(')" >sin⁻¹</button>
+		<button class="sci" id="xʸ" name="exponent" 
+			onclick="defocus(this); add('^(')" >xʸ</button>
+		<button class="sci" id="ln" name="natural log" 
+			onclick="defocus(this); add('ln(')" >ln</button>
+		<button class="sci" id="log" name="log" 
+			onclick="defocus(this); add('log(')" >log</button>
+
+		<button class="sci" id="cos" name="cosine" 
+			onclick="defocus(this); add('cos(')" >cos</button>
+		<button class="sci" id="cos⁻¹" name="cosine inverse" 
+			onclick="defocus(this); add('cos⁻¹(')" >cos⁻¹</button>
+		<button class="sci" id="ˣ√" name="root" 
+			onclick="defocus(this); add('√(' )">ˣ√</button>
+		<button class="sci" id="eˣ" name="natural log inverse" 
+			onclick="defocus(this); add('e^(')" >eˣ</button>
+		<button class="sci" id="10ˣ" name="log inverse" 
+			onclick="defocus(this); add('10^(')" >10ˣ</button>
+
+		<button class="sci" id="tan" name="tangent" 
+			onclick="defocus(this); add('tan(')" >tan</button>
+		<button class="sci" id="tan⁻¹" name="tangent inverse" 
+			onclick="defocus(this); add('tan⁻¹(')" >tan⁻¹</button>
+		<button class="sci" id="\(" name="opening bracket" 
+			onclick="defocus(this); add('(')" >(</button>
+		<button class="sci" id="\)" name="closing bracket" 
+			onclick="defocus(this); add(')')" >)</button>
+		<button class="sci" id="π" name="pi" 
+			onclick="defocus(this); add('π' )">π</button>
+    </div>
+
+    <div class="nums">
+		<button class="num" id="1" name="one" 
+			onclick="defocus(this); add('1')" >1</button>
+		<button class="num" id="2" name="two" 
+			onclick="defocus(this); add('2')" >2</button>
+		<button class="num" id="3" name="three" 
+			onclick="defocus(this); add('3')" >3</button>
+		<button class="opr" id="+" name="add" 
+			onclick="defocus(this); add('+')" >+</button>
+		<button class="io" id="CE" name="clear all" 
+			onclick="defocus(this); clearall()" >CE</button>
+
+		<button class="num" id="4" name="four" 
+			onclick="defocus(this); add('4')" >4</button>
+		<button class="num" id="5" name="five" 
+			onclick="defocus(this); add('5')" >5</button>
+		<button class="num" id="6" name="six" 
+			onclick="defocus(this); add('6')" >6</button>
+		<button class="opr" id="-" name="subtract" 
+			onclick="defocus(this); add('-')" >-</button>
+
+
+		<button class="num" id="7" name="seven" 
+			onclick="defocus(this); add('7')" >7</button>
+		<button class="num" id="8" name="eight" 
+			onclick="defocus(this); add('8')" >8</button>
+		<button class="num" id="9" name="nine" 
+			onclick="defocus(this); add('9')" >9</button>
+		<button class="opr" id="×" name="multiply" 
+			onclick="defocus(this); add('×')" >×</button>
+		<button class="io" id="ANS" name="passoutput" 
+			onclick="defocus(this); passoutput()" >ANS</button>
+
+		<button class="num" id="decimal" name="decimal" 
+			onclick="defocus(this); add('.')" >.</button>
+		<button class="num" id="0" name="zero" 
+			onclick="defocus(this); add('0')" >0</button>
+		<button class="opr" id="=" name="calculate" 
+			onclick="defocus(this); calculate()" >=</button>
+		<button class="opr" id="÷" name="divide" 
+			onclick="defocus(this); add('/')" >÷</button>
+		<button class="num" id="comma" name="comma" 
+			onclick="defocus(this); add(',')" >,</button>
+    </div>
+
+	<script src='./index.js'></script>
+	<script>navigator.serviceWorker.register('./install.js')</script>
+
+</body>
+</html>
