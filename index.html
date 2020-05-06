@@ -1,0 +1,39 @@
+<!DOCTYPE  html>
+<html lang="en">
+<head>
+	<!-- site descrition -->
+	<meta charset="utf-8">
+	<title>bhar</title>
+	<style>
+		html { 
+			margin: 0; border-width: 0; padding: 0; border-style: none;
+			border-radius: 0; width: 100%; height: 100%; overflow: hidden;
+			background-color: #c1d5e0;
+		}
+        body { 
+			margin: 0; border-width: 0; padding: 0; border-style: none; border-radius: 0; 
+			overflow: hidden; touch-action: pinch-zoom; touch-action: manipulation;
+			position: absolute; top: 50%; left: 50%;
+			-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
+			width: 100%; height: 100%; max-width: 12cm; min-width: 6cm;
+			max-height: 24cm; min-height: 12cm;
+			display: grid; grid-template-columns: 100%; grid-template-rows: 20% 20% 20% 20%;
+			grid-gap: 5%;
+		}
+	    button {
+	    	width: 100%; height: 100%; grid-row: span 1; grid-column: span 1;
+	    	display: grid; grid-template-columns: 100%; grid-template-rows: 100%; grid-gap: 0%;
+	    	background-color: #333333; border-style: none; color: #c1d5e0; text-align: center;
+	    	font-size: 4em;
+	    }
+	</style>
+</head>
+<body>
+
+<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
+<button onclick="window.location.href='./calculator'"> Personal Calculator </button>
+<button style="visibility: hidden;" onclick="window.location.href='./calculator'"> </button>
+<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
+
+</body>
+</html>
