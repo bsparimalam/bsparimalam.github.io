@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:/alpha/
-Disallow:/images/
-Disallow:/beta/
+Disallow:/calcualtor/images/
+Disallow:/calculator/alpha/
+Disallow:/calculator/beta/
