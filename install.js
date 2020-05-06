@@ -1,16 +1,11 @@
-var version = "v2.3";
+var version = "v3.0";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
     './manifest.json',
     './index.html',
-    './styles/colors.css',
-    './styles/layouts.css',
-    './styles/fonts.css',
-    './scripts/style.js',
-    './scripts/input.js',
-    './scripts/parse.js',
-    './scripts/output.js',
+    './index.css',
+    './index.js',
     './images/icons/icon-512x512.png',
     './images/icons/icon-384x384.png',
     './images/icons/icon-192x192.png',

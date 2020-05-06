@@ -36,11 +36,11 @@
 		<button class="panel" id="angleunit" name="angle unit" 
 			onclick="defocus(this); setangleunit(this)" >DEG</button>
 		<button class="panel" id="representation" name="representation" 
-			onclick="defocus(this); changerep(this)" >DECIMAL</button>
+			onclick="defocus(this); changerep(this)" >DECI</button>
 		<button class="panel" id="memory" name="memory" 
 			onclick="defocus(this); memory(this)" >STORE</button>
-		<button class="panel" id="bspc" name="delete" 
-			onclick="defocus(this); remove()" >⌫</button>
+		<button class="panel" id="mc" name="memclear" 
+			onclick="defocus(this); memory(this)" >MC</button>
     </div>
 <!--     <div class="prefs">
 	<button class="pref" id="convert0" name="" onclick="convert(this)" >in² ▸ cm²</button>
@@ -104,8 +104,9 @@
 			onclick="defocus(this); add('3')" >3</button>
 		<button class="opr" id="+" name="add" 
 			onclick="defocus(this); add('+')" >+</button>
-		<button class="io" id="CE" name="clear all" 
-			onclick="defocus(this); clearall()" >CE</button>
+		<button class="io" id="bspc" name="delete" 
+			onclick="defocus(this); remove()" >⌫</button>
+
 
 		<button class="num" id="4" name="four" 
 			onclick="defocus(this); add('4')" >4</button>
@@ -115,7 +116,8 @@
 			onclick="defocus(this); add('6')" >6</button>
 		<button class="opr" id="-" name="subtract" 
 			onclick="defocus(this); add('-')" >-</button>
-
+		<button class="io" id="CE" name="clear all" 
+			onclick="defocus(this); clearall()" >CE</button>
 
 		<button class="num" id="7" name="seven" 
 			onclick="defocus(this); add('7')" >7</button>
