@@ -35,8 +35,6 @@ function viewportcheck() {
 	} else {
 		widthhistory = temp.getPropertyValue('width');
 		heighthistory = temp.getPropertyValue('height');
-		app[0].style.width = widthhistory;
-		app[0].style.height = heighthistory;
 	}
 	console.log('body width: ' + widthhistory + 'body height: ' + heighthistory);
 	console.log(app);
