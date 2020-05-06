@@ -25,20 +25,22 @@ function defocus(element) {
 	element.blur();
 }
 
-widthhistory = null; heighthistory = null; viewportcheck();
-// android view port fix
-function viewportcheck() {
-	let temp = window.getComputedStyle(document.querySelector('body'));
-	if ( inputbox == document.activeElement ) {
-		app[0].style.width = widthhistory;
-		app[0].style.height = heighthistory;
-	} else {
-		widthhistory = temp.getPropertyValue('width');
-		heighthistory = temp.getPropertyValue('height');
-	}
-	console.log('body width: ' + widthhistory + 'body height: ' + heighthistory);
-	console.log(app);
-}
+// widthhistory = null; heighthistory = null; viewportcheck();
+// // android view port fix
+// function viewportcheck() {
+// 	let temp = window.getComputedStyle(document.querySelector('body'));
+// 	if ( inputbox == document.activeElement ) {
+// 		app[0].style.width = widthhistory;
+// 		app[0].style.height = heighthistory;
+// 	} else {
+// 		widthhistory = temp.getPropertyValue('width');
+// 		heighthistory = temp.getPropertyValue('height');
+// 		app[0].style.width = widthhistory;
+// 		app[0].style.height = heighthistory;
+// 	}
+// 	console.log('body width: ' + widthhistory + 'body height: ' + heighthistory);
+// 	console.log(app);
+// }
 
 function openmore() {
 	outputbox.innerHTML = "🚧👷🏗️";
@@ -264,8 +266,8 @@ outputformat = 'DECI';
 
 function changerep(element) {
     if (element.innerHTML == 'DECI') {
-        element.innerHTML = 'EXP';
-        outputformat = 'EXP';
+        element.innerHTML = 'SCI';
+        outputformat = 'SCI';
         if ( outputbox.innerHTML != '' ) { calculate(); }
     } else {
         element.innerHTML = 'DECI';
@@ -293,6 +295,16 @@ function getgcd(a, b) {
     console.log('GCD : ' + a );
     return a;
 }
+function istoolong(string, length) {
+	string = string.replace(/\./g, '');
+	eindex = string.indexOf('E');
+	if ( eindex != -1 ) {
+		string = string.slice(0, eindex);
+	}
+	console.log('string: ' + string);
+	return string.length > length;
+}
+        
 // processed output
 function printoutput(number, unit=null) {
     console.log( 'evaluation : ' + number + ' ' + unit);
@@ -313,7 +325,7 @@ function printoutput(number, unit=null) {
             number = String(number).replace(/e/g, 'E');
             console.log('decimal output: ' + number);
         }
-        if ((outputformat == 'EXP') || (number.length > 10 )) {
+        if ((outputformat == 'SCI') || istoolong(number, 10)) {
             number = Number(number).toExponential();
             number = String(number).replace(/e/g, 'E');
             console.log('exponential output: ' + number);

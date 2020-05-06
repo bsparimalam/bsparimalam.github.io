@@ -24,7 +24,7 @@ div {
 .inputs {
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
-	grid-template-rows: 40% 30% 30%;
+	grid-template-rows: 50% 30% 20%;
 }
 input, p { 
     margin: 0; border-width: 0; padding: 0; border-style: none;
@@ -68,22 +68,33 @@ button {
 		background-color: #78909c; 
 		color: #000000; 
 	}
-	.panel:active {
-		background-color: #8eacbb;
-	}
 	.scis, .sci { 
 		background-color: #90a4ae;
 		color: #222222; 
-	}
-	.sci:active {
-		background-color: #a7c0cd;
 	}
 	.nums, .num, .opr, .io { 
 		background-color: #b0bec5; 
 		color: #333333;
 	}
-	.num:active, .opr:active, .io:active {
+	.panel:active {
+		background-color: #8eacbb;
+	}
+	.sci:active {
+		background-color: #a7c0cd;
+	}
+	.num:active, .opr:active, .io:active, {
 		background-color: #c1d5e0;
+	}
+	@media (hover: hover) {
+		.panel:hover {
+			background-color: #8eacbb;
+		}
+		.sci:hover {
+			background-color: #a7c0cd;
+		}
+		.num:hover, .opr:hover, .io:hover {
+			background-color: #c1d5e0;
+		}
 	}
 }
 
@@ -96,22 +107,33 @@ button {
     	background-color: #000a12; 
     	color: #e2f1f8; 
 	}
-	.panel:active {
-		background-color: #263238;
-	}
 	.scis, .sci { 
     	background-color: #101a20;
     	color: #e2f1f8; 
-	}
-	.sci:active {
-		background-color: #263238;
 	}
 	.nums, .num, .opr, .io {
     	background-color: #102027;
     	color: #e2f1f8;
 	}
+	.panel:active {
+		background-color: #263238;
+	}
+	.sci:active {
+		background-color: #263238;
+	}
 	.num:active, .opr:active, .io:active {
 		background-color: #263238;
+	}
+	@media (hover: hover) {
+		.panel:hover {
+			background-color: #263238;
+		}
+		.sci:hover {
+			background-color: #263238;
+		}
+		.num:hover, .opr:hover, .io:hover {
+			background-color: #263238;
+		}
 	}
 }
 /*------------------------------------------------------------------------*/
@@ -134,9 +156,6 @@ button {
 .panel{
 	font-size: 1em;
 }
-#bspc {
-	font-size: 1.25em;
-}
 #more {
 	padding-bottom: 0.5em;
 }
@@ -153,8 +172,9 @@ button {
 	font-size: 2.5em;
 	font-weight: normal;
 }
-
-
+#bspc {
+	font-size: 1.75em;
+}
 #ANS {
 	font-size: 1.3em;
 	font-weight: 500;
