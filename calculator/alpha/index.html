@@ -10,7 +10,7 @@
 	<link rel="manifest" href="./manifest.json">
 
 	<!-- style information -->
-	<link href="./index.css" rel="stylesheet">
+	<link href="./styles.css" rel="stylesheet">
 
 	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,13 +26,11 @@
 	<link rel="apple-touch-startup-image" href="./images/icons/icon-152x152.png">
 </head>
 
-<body id="body" onresize='viewportcheck()' >
+<body id="body" onresize="analyzeresize()">
     <div class='inputs'>
 	    <label for="ip" class="visuallyhidden">input box</label>
 		<input type="text" id="ip" name="input box" spellcheck="false" >
 		<p id="op" ></p>
-		<button class="panel" id="more" name="more" 
-			onclick="defocus(this); openmore()" >. . .</button>
 		<button class="panel" id="angleunit" name="angle unit" 
 			onclick="defocus(this); setangleunit(this)" >DEG</button>
 		<button class="panel" id="representation" name="representation" 
@@ -41,25 +39,56 @@
 			onclick="defocus(this); memory(this)" >STORE</button>
 		<button class="panel" id="mc" name="memclear" 
 			onclick="defocus(this); memory(this)" >MC</button>
+		<button class="panel" id="more" name="more" 
+			onclick="defocus(this); openmore(this)" >· · ·</button>
     </div>
-<!--     <div class="prefs">
-	<button class="pref" id="convert0" name="" onclick="convert(this)" >in² ▸ cm²</button>
-	<button class="pref" id="convert1" name="" onclick="convert(this)" >in ▸ cm</button>
-	<button class="pref" id="convert2" name="" onclick="convert(this)" >m ▸ ft</button>
-	<button class="pref" id="convert3" name="" onclick="convert(this)" >psi ▸ atm</button>
-	<button class="pref" id="convert4" name="" onclick="convert(this)" >km ▸ mi</button>
-	<button class="pref" id="convert5" name="" onclick="convert(this)" >kg ▸ lb</button>
-	<button class="pref" id="currency0" name="" onclick="currency(this)">EUR ▸ USD</button>
-	<button class="pref" id="currency1" name="" onclick="currency(this)">USD ▸ EUR</button>
-	<button class="pref" id="time0" name="" onclick="time(this)">PST</button>
-	<button class="pref" id="moreconvert" >...</button>
+    <div class="personals">
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >ᵒF▸ᵒC</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >ᵒC▸ᵒF</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >in▸cm</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >cm▸in</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >ft▸m</button>
 
-	<button class="pref" id="func0" name="" onclick="func(this)" >x/sin(y)</button>
-	<button class="pref" id="func1" name="" onclick="func(this)" >x/cos(y)</button>
-	<button class="pref" id="func2" name="" onclick="func(this)" >15%</button>
-	<button class="pref" id="func3" name="" onclick="func(this)" >20%</button>
-	<button class="pref" id="morefunc" >...</button>
-    </div> -->
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >m▸ft</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >lb▸kg</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >kg▸lb</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >psi▸atm</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >atm▸psi</button>
+
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >USD⏵<br>CAD</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >CAD⏵<br>USD</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >CAD⏵<br>INR</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >EUR⏵<br>USD</button>
+		<button class="personal" 
+			onclick="defocus(this); calculateindex(this)" >USD⏵<br>EUR</button>
+    </div>
+    <div class="categories">
+		<button class="category" onclick="defocus(this);" >💰</button>
+		<button class="category" onclick="defocus(this);" >🧮</button>
+		<button class="category" onclick="defocus(this);" >📦</button>
+
+		<button class="category" onclick="defocus(this);" >⚖️</button>
+		<button class="category" onclick="defocus(this);" >📏</button>
+		<button class="category" onclick="defocus(this);" >⬜</button>
+
+		<button class="category" onclick="defocus(this);" >⚡</button>
+		<button class="category" onclick="defocus(this);" >🕛</button>
+		<button class="category" onclick="defocus(this);" >🌡️</button>
+    </div>
     <div class="scis">
 		<button class="sci" id="sin" name="sine" 
 			onclick="defocus(this); add('sin(')" >sin</button>
@@ -94,7 +123,6 @@
 		<button class="sci" id="π" name="pi" 
 			onclick="defocus(this); add('π' )">π</button>
     </div>
-
     <div class="nums">
 		<button class="num" id="1" name="one" 
 			onclick="defocus(this); add('1')" >1</button>
@@ -142,7 +170,7 @@
 			onclick="defocus(this); add(',')" >,</button>
     </div>
 
-	<script src='./index.js'></script>
+	<script src='./scripts.js'></script>
 	<script>navigator.serviceWorker.register('./install.js')</script>
 
 </body>

@@ -1,10 +1,11 @@
 High Priority:
 Fixes:
 - [ ] cleaning trigonometric outputs
-- [ ] fix the android viewport resizing issue
+- [x] fix the android viewport resizing issue
 - [ ] classifying scientific notation as number for root and exp operations
+- [x] background on touch on lightmode
 Features:
-- [ ] adding conversions, functions sections
+- [] adding conversions, functions sections
 
 Low Priority
 Fixes:

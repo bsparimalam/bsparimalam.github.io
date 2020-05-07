@@ -25,25 +25,32 @@ function defocus(element) {
 	element.blur();
 }
 
-// widthhistory = null; heighthistory = null; viewportcheck();
-// // android view port fix
-// function viewportcheck() {
-// 	let temp = window.getComputedStyle(document.querySelector('body'));
-// 	if ( inputbox == document.activeElement ) {
-// 		app[0].style.width = widthhistory;
-// 		app[0].style.height = heighthistory;
-// 	} else {
-// 		widthhistory = temp.getPropertyValue('width');
-// 		heighthistory = temp.getPropertyValue('height');
-// 		app[0].style.width = widthhistory;
-// 		app[0].style.height = heighthistory;
-// 	}
-// 	console.log('body width: ' + widthhistory + 'body height: ' + heighthistory);
-// 	console.log(app);
-// }
-
-function openmore() {
-	outputbox.innerHTML = "🚧👷🏗️";
+// stop android softkeyboard resize
+bodycomp = window.getComputedStyle(document.querySelector('body'));
+widthhistory = bodycomp.getPropertyValue('width');
+heighthistory = bodycomp.getPropertyValue('height');
+function analyzeresize() {
+	if ( inputbox == document.activeElement ) {
+		app[0].style.width = widthhistory; 
+		app[0].style.height = heighthistory;
+		console.log('resize denied : ' + widthhistory + ' X ' + heighthistory);
+	} else {
+		bodycomp = window.getComputedStyle(document.querySelector('body'));
+		widthhistory = bodycomp.getPropertyValue('width');
+		heighthistory = bodycomp.getPropertyValue('height');
+		console.log('resize validated : ' + widthhistory + ' X ' + heighthistory);
+	}
+}
+function openmore(element) {
+	let status = element.innerHTML;
+	if ( status == '· · ·' ) {
+		app[0].style.gridTemplateRows = '30% 25% 45% 0% 0%';
+		element.innerHTML = '↶';
+	} else {
+		app[0].style.gridTemplateRows = '30% 0% 0% 25% 45%';
+		element.innerHTML = '· · ·';
+	}
+	console.log(app[0].style.gridTemplateRows);
 }
 //---------------------------------------------------------------------------
 // -----------------------------input.js-------------------------------------
@@ -330,9 +337,13 @@ function printoutput(number, unit=null) {
             number = String(number).replace(/e/g, 'E');
             console.log('exponential output: ' + number);
         }
-        outputbox.innerHTML = number;
         inprogress = false;
         console.log('calculation in progress: ' + inprogress );
+        if ( unit == null ) {
+        	outputbox.innerHTML = number;
+        } else {
+        	outputbox.innerHTML = number + '  ' + unit ;
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -393,64 +404,81 @@ function printoutput(number, unit=null) {
 // }
 
 
-// // unit conversions
-// function convert(element) {
-// 	let operation = element.innerHTML;
-// 	console.log("conversion requested: " + operation);
-// 	var inputvalue = readinput();
-// 	switch (operation) {
-// 		// area
-// 		case "mi² ▸ km²": printoutput(2.58999*inputvalue, 'km²'); break;
-// 		case "km² ▸ mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
-// 		case "in² ▸ cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
-// 		case "cm² ▸ in²": printoutput(0.1550*inputvalue, 'inch²'); break;
-// 		// length
-// 		case 'in ▸ cm': printoutput(2.54*inputvalue, 'cm'); break;
-// 		case "cm ▸ in": printoutput(inputvalue*0.3937, 'inch'); break;
-// 		case "ft ▸ m": printoutput(0.3048*inputvalue, 'm'); break;
-// 		case "m ▸ ft": printoutput(inputvalue*3.2808, 'ft'); break;
-// 		case "mi ▸ km": printoutput(inputvalue*1.60934, 'km'); break;
-// 		case "km ▸ mi": printoutput(inputvalue*0.621371, 'mile'); break;
-// 		// energy
-// 		case "kcal ▸ kJ": printoutput(4.184*inputvalue, 'kJ'); break;
-// 		case "kJ ▸ kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
-// 		case "kWh ▸ kJ": printoutput(3600*inputvalue, 'kJ'); break;
-// 		case "kJ ▸ kWh": printoutput(inputvalue/3600, 'kWh'); break;
-// 		// mass
-// 		case "lb ▸ kg": printoutput(0.453592*inputvalue, 'kg'); break;
-// 		case "kg ▸ lb": printoutput(inputvalue*2.2090, 'lb'); break;
-// 		case "ou ▸ kg": printoutput(inputvalue/35.274, 'kg'); break;
-// 		case "kg ▸ ou": printoutput(inputvalue*35.274, 'ounce'); break;
-// 		// pressure
-// 		case "kPa ▸ atm": printoutput(inputvalue/101.325, 'atm'); break;
-// 		case "atm ▸ kPa": printoutput(inputvalue*101.325, 'kPa'); break;
-// 		case "psi ▸ atm": printoutput(inputvalue/14.696, 'atm'); break;
-// 		case "atm ▸ psi": printoutput(inputvalue*14.696, 'psi'); break;
-// 		case "bar ▸ atm": printoutput(inputvalue/1.013, 'atm'); break;
-// 		case "atm ▸ bar": printoutput(inputvalue*1.013, 'bar'); break;
-// 		case "torr ▸ atm": printoutput(inputvalue/760, 'atm'); break;
-// 		case "atm ▸ torr": printoutput(inputvalue*760, 'torr'); break;
-// 		// temperature
-// 		case "ᵒF ▸ ᵒC":	printoutput((inputvalue-32)*(5/9), 'ᵒC'); break;
-// 		case "ᵒC ▸ ᵒF":	printoutput((inputvalue*(9/5) + 32), 'ᵒF'); break;
-// 	}
-// }
-// // currency conversions
-// function currency(element) {
-// 	let operation = element.innerHTML;
-// 	console.log("conversion requested: " + operation);
-// 	let base = operation.slice(0, 3); let target = operation.slice(6, 9);
-// 	var inputvalue = readinput();
-// 	let baseurl = "https://api.exchangeratesapi.io/latest?";
-// 	let basecurr = "base=" + base;
-// 	let targetcurr = "&symbols=" + target;
-// 	printoutput("loading...");
-// 	(async () => {
-// 		let response = await fetch( baseurl + basecurr + targetcurr );
-// 		let data = await response.json();
-// 		printoutput(inputvalue*data["rates"][target], target);
-// 	})();
-// }
+// indexed function
+function calculateindex(element) {
+	let operation = element.innerHTML;
+	if ( operation.indexOf('⏵') != -1 ) {
+		convertcurrency(element);
+		console.log('currency conversion initiated...');
+	} else if ( operation.indexOf('▸') != -1 ) {
+		convertunit(element);
+		console.log('unit conversion initiated...');
+	} else {
+		executefunction(element);
+		console.log('function execution initiated...');
+	}
+}
+
+function convertunit(element) {
+	let operation = element.innerHTML;
+	let inputvalue = eval(parse());
+	console.log("function requested: " + operation + 'input: ' + inputvalue );
+	switch (operation) {
+		// area
+		case "mi²▸km²": printoutput(2.58999*inputvalue, 'km²'); break;
+		case "km²▸mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
+		case "in²▸cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
+		case "cm²▸in²": printoutput(0.1550*inputvalue, 'inch²'); break;
+		// length
+		case 'in▸cm': printoutput(2.54*inputvalue, 'cm'); break;
+		case "cm▸in": printoutput(inputvalue*0.3937, 'inch'); break;
+		case "ft▸m": printoutput(0.3048*inputvalue, 'm'); break;
+		case "m▸ft": printoutput(inputvalue*3.2808, 'ft'); break;
+		case "mi▸km": printoutput(inputvalue*1.60934, 'km'); break;
+		case "km▸mi": printoutput(inputvalue*0.621371, 'mile'); break;
+		// energy
+		case "kcal▸kJ": printoutput(4.184*inputvalue, 'kJ'); break;
+		case "kJ▸kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
+		case "kWh▸kJ": printoutput(3600*inputvalue, 'kJ'); break;
+		case "kJ▸kWh": printoutput(inputvalue/3600, 'kWh'); break;
+		// mass
+		case "lb▸kg": printoutput(0.453592*inputvalue, 'kg'); break;
+		case "kg▸lb": printoutput(inputvalue*2.2090, 'lb'); break;
+		case "ou▸kg": printoutput(inputvalue/35.274, 'kg'); break;
+		case "kg▸ou": printoutput(inputvalue*35.274, 'ounce'); break;
+		// pressure
+		case "kPa▸atm": printoutput(inputvalue/101.325, 'atm'); break;
+		case "atm▸kPa": printoutput(inputvalue*101.325, 'kPa'); break;
+		case "psi▸atm": printoutput(inputvalue/14.696, 'atm'); break;
+		case "atm▸psi": printoutput(inputvalue*14.696, 'psi'); break;
+		case "bar▸atm": printoutput(inputvalue/1.013, 'atm'); break;
+		case "atm▸bar": printoutput(inputvalue*1.013, 'bar'); break;
+		case "torr▸atm": printoutput(inputvalue/760, 'atm'); break;
+		case "atm▸torr": printoutput(inputvalue*760, 'torr'); break;
+		// temperature
+		case "ᵒF▸ᵒC": 
+			printoutput(Number(((inputvalue-32)*(5/9)).toFixed(0)), 'ᵒC'); 
+			break;
+		case "ᵒC▸ᵒF":
+			printoutput(Number(((inputvalue*(9/5) + 32)).toFixed(0)), 'ᵒF'); 
+			break;
+	}
+}
+// currency conversions
+function convertcurrency(element) {
+	let operation = element.innerHTML;
+	console.log("conversion requested: " + operation);
+	let base = operation.slice(0, 3); let target = operation.slice(8, 11);
+	var inputvalue = eval(parse());
+	let baseurl = "https://api.exchangeratesapi.io/latest?";
+	let basecurr = "base=" + base;
+	let targetcurr = "&symbols=" + target;
+	(async () => {
+		let response = await fetch( baseurl + basecurr + targetcurr );
+		let data = await response.json();
+		printoutput(Number(inputvalue*data["rates"][target].toFixed(2)), target);
+	})();
+}
 
 // //time conversions
 // function gettime12hr(dateandtime, hr, mn) {

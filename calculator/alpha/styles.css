@@ -11,7 +11,7 @@ body {
 	position: absolute; top: 50%; left: 50%;
 	-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
 	display: grid; grid-gap: 0%; grid-template-columns: 100%; 
-	grid-template-rows: 30% 25% 45%;
+	grid-template-rows: 30% 0% 0% 25% 45%;
 	width: 100%; height: 100%; max-width: 12cm; min-width: 6cm;
 	max-height: 24cm; min-height: 12cm;
 }
@@ -32,7 +32,7 @@ input, p {
 	touch-action: pinch-zoom; touch-action: manipulation;
 	width: 100%; height: 100%; grid-row: span 1; grid-column: span 5;
 }
-.scis {
+.scis, .personals {
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 33.33% 33.33% 33.33%;
@@ -41,6 +41,11 @@ input, p {
 	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 25% 25% 25% 25%;
+}
+.categories {
+	display: grid; grid-gap: 0%;
+	grid-template-columns: 33.33% 33.33% 33.33%;
+	grid-template-rows: 33.33% 33.33% 33.33%;
 }
 button {
     margin: 0; border-width: 0; padding: 0; border-style: none;
@@ -68,31 +73,31 @@ button {
 		background-color: #78909c; 
 		color: #000000; 
 	}
-	.scis, .sci { 
+	.scis, .sci, .personals, .personal { 
 		background-color: #90a4ae;
 		color: #222222; 
 	}
-	.nums, .num, .opr, .io { 
+	.nums, .num, .opr, .io, .categories, .category { 
 		background-color: #b0bec5; 
 		color: #333333;
 	}
 	.panel:active {
 		background-color: #8eacbb;
 	}
-	.sci:active {
+	.sci:active, .personal:active {
 		background-color: #a7c0cd;
 	}
-	.num:active, .opr:active, .io:active, {
+	.num:active, .opr:active, .io:active, .category:active {
 		background-color: #c1d5e0;
 	}
 	@media (hover: hover) {
 		.panel:hover {
 			background-color: #8eacbb;
 		}
-		.sci:hover {
+		.sci:hover, .persona:hover {
 			background-color: #a7c0cd;
 		}
-		.num:hover, .opr:hover, .io:hover {
+		.num:hover, .opr:hover, .io:hover, .category:hover {
 			background-color: #c1d5e0;
 		}
 	}
@@ -107,31 +112,31 @@ button {
     	background-color: #000a12; 
     	color: #e2f1f8; 
 	}
-	.scis, .sci { 
+	.scis, .sci, .personals, .personal { 
     	background-color: #101a20;
     	color: #e2f1f8; 
 	}
-	.nums, .num, .opr, .io {
+	.nums, .num, .opr, .io, .categories, .category {
     	background-color: #102027;
     	color: #e2f1f8;
 	}
 	.panel:active {
 		background-color: #263238;
 	}
-	.sci:active {
+	.sci:active, .personal:active {
 		background-color: #263238;
 	}
-	.num:active, .opr:active, .io:active {
+	.num:active, .opr:active, .io:active, .category:active {
 		background-color: #263238;
 	}
 	@media (hover: hover) {
 		.panel:hover {
 			background-color: #263238;
 		}
-		.sci:hover {
+		.sci:hover, .personal:hover {
 			background-color: #263238;
 		}
-		.num:hover, .opr:hover, .io:hover {
+		.num:hover, .opr:hover, .io:hover, .category:hover {
 			background-color: #263238;
 		}
 	}
@@ -143,7 +148,6 @@ input, p, button {
 	font-family: system-ui;
 	text-align:center;
 }
-
 button {
 	user-select: none;
 }
@@ -156,14 +160,14 @@ button {
 .panel{
 	font-size: 1em;
 }
-#more {
-	padding-bottom: 0.5em;
-}
 .sci {
 	font-size: 1.25em;
 	font-weight: normal;
 }
-
+.personal {
+	font-size: 1em;
+	font-weight: normal;
+}
 .num {
 	font-size: 2em;
 	font-weight: normal;
@@ -179,11 +183,13 @@ button {
 	font-size: 1.3em;
 	font-weight: 500;
 }
-
 #CE {
 	font-size: 2em;
 }
 #comma, #decimal {
 	font-size: 2.5em;
 	padding-bottom: 0.6em;
+}
+.category {
+	font-size: 4em;
 }
