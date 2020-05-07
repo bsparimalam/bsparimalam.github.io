@@ -5,7 +5,7 @@ Fixes:
 - [ ] classifying scientific notation as number for root and exp operations
 - [x] background on touch on lightmode
 Features:
-- [] adding conversions, functions sections
+- [x] adding conversions, functions sections
 
 Low Priority
 Fixes:
