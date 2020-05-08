@@ -6,20 +6,31 @@ outputbox = document.getElementById('op');
 app = document.getElementsByTagName('BODY');
 
 // font size fix
-function autofontsize() {
-	let optfont = 3.5; let minfont = 2; let strcapacity = 9;
-	let newsize = optfont * ( strcapacity / inputbox.value.length);
-	if ( newsize > optfont ) { 
-		inputbox.style.fontSize = optfont + 'em' ; 
-	} else if ( newsize > minfont ) { 
-		inputbox.style.fontSize = newsize + 'em' ;
-		console.log('input font changed to : ' + newsize + 'em');
-	} else {
-		inputbox.style.fontSize = minfont + 'em' ;
-		inputbox.scrollLeft = inputbox.scrollWidth;
-	} 
+function autofontsize(box) {
+	console.log(box);
+	if ( box == 'input') {
+		let optfont = 3.5; let minfont = 2; let strcapacity = 9;
+		let newsize = optfont * ( strcapacity / inputbox.value.length);
+		if ( newsize > optfont ) { 
+			inputbox.style.fontSize = optfont + 'em' ; 
+		} else if ( newsize > minfont ) { 
+			inputbox.style.fontSize = newsize + 'em' ;
+			console.log('input font changed to : ' + newsize + 'em');
+		} else {
+			inputbox.style.fontSize = minfont + 'em' ;
+			inputbox.scrollLeft = inputbox.scrollWidth;
+		} 
+	} else if ( box == 'output') {
+		let optfont = 2.5; let strcapacity = 9;
+		let newsize = optfont * ( strcapacity / outputbox.innerHTML.length);
+		if ( newsize > optfont ) { 
+			outputbox.style.fontSize = optfont + 'em' ; 
+		} else { 
+			outputbox.style.fontSize = newsize + 'em' ;
+			console.log('output font changed to : ' + newsize + 'em');
+		}	
+	}
 }
-
 // defocus buttons after click
 function defocus(element) {
 	element.blur();
@@ -43,12 +54,17 @@ function analyzeresize() {
 }
 function openmore(element) {
 	let status = element.innerHTML;
-	if ( status == '· · ·' ) {
-		app[0].style.gridTemplateRows = '30% 25% 45% 0% 0%';
-		element.innerHTML = '↶';
-	} else {
+	if ( status == '⠇' ) {
 		app[0].style.gridTemplateRows = '30% 0% 0% 25% 45%';
-		element.innerHTML = '· · ·';
+		element.innerHTML = '↶';
+		element.style.fontSize = '2em';
+		element.style.fontWeight = 'normal';
+// 		element.
+	} else {
+		app[0].style.gridTemplateRows = '30% 25% 45% 0% 0%';
+		element.innerHTML = '⠇';
+		element.style.fontSize = '1em';
+		element.style.fontWeight = '900';
 	}
 	console.log(app[0].style.gridTemplateRows);
 }
@@ -93,13 +109,13 @@ function add(string) {
 	inprogress = true;
 	inputbox.value += string;
 	console.log( string + ' inserted ' );
-	autofontsize();
+	autofontsize('input');
 }
 function remove() {
 	inputbox.value = inputbox.value.slice(0, -1); inprogress = true;
 	console.log('last character deleted, ' 
 		+ 'calculation in progress: ' + inprogress );
-	autofontsize();
+	autofontsize('input');
 }
 
 function clearall() {
@@ -108,7 +124,7 @@ function clearall() {
 	inprogress = true;
 	console.log('cleared everything, ' 
 		+ 'calculation in progress: ' + inprogress );
-	autofontsize();
+	autofontsize('input');
 }
 
 function passoutput() {
@@ -117,7 +133,7 @@ function passoutput() {
 	inprogress = true;
 	console.log('moving the result to input..., ' 
 		+ 'calculation in progress: ' + inprogress );
-	autofontsize();
+	autofontsize('input');
 }
 
  // listen to the keyboard input and insert text
@@ -153,7 +169,7 @@ document.addEventListener('keydown', event => {
 				key = key.toLowerCase(); inputbox.value += key; 
 				console.log( key + ' inserted ' ); break;
 		}
-	autofontsize();
+	autofontsize('input');
 	} else {
 		inprogress = true;
 	}
@@ -345,6 +361,7 @@ function printoutput(number, unit=null) {
         	outputbox.innerHTML = number + '  ' + unit ;
         }
     }
+    autofontsize('output');
 }
 //---------------------------------------------------------------------------
 // -----------------------------loadpref.js----------------------------------
@@ -407,10 +424,10 @@ function printoutput(number, unit=null) {
 // indexed function
 function calculateindex(element) {
 	let operation = element.innerHTML;
-	if ( operation.indexOf('⏵') != -1 ) {
+	if ( operation.indexOf('<br>') != -1 ) {
 		convertcurrency(element);
 		console.log('currency conversion initiated...');
-	} else if ( operation.indexOf('▸') != -1 ) {
+	} else if ( operation.indexOf(' ▸ ') != -1 ) {
 		convertunit(element);
 		console.log('unit conversion initiated...');
 	} else {
@@ -425,41 +442,41 @@ function convertunit(element) {
 	console.log("function requested: " + operation + 'input: ' + inputvalue );
 	switch (operation) {
 		// area
-		case "mi²▸km²": printoutput(2.58999*inputvalue, 'km²'); break;
-		case "km²▸mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
-		case "in²▸cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
-		case "cm²▸in²": printoutput(0.1550*inputvalue, 'inch²'); break;
+		case "mi² ▸ km²": printoutput(2.58999*inputvalue, 'km²'); break;
+		case "km² ▸ mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
+		case "in² ▸ cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
+		case "cm² ▸ in²": printoutput(0.1550*inputvalue, 'inch²'); break;
 		// length
-		case 'in▸cm': printoutput(2.54*inputvalue, 'cm'); break;
-		case "cm▸in": printoutput(inputvalue*0.3937, 'inch'); break;
-		case "ft▸m": printoutput(0.3048*inputvalue, 'm'); break;
-		case "m▸ft": printoutput(inputvalue*3.2808, 'ft'); break;
-		case "mi▸km": printoutput(inputvalue*1.60934, 'km'); break;
-		case "km▸mi": printoutput(inputvalue*0.621371, 'mile'); break;
+		case 'in ▸ cm': printoutput(2.54*inputvalue, 'cm'); break;
+		case "cm ▸ in": printoutput(inputvalue*0.3937, 'inch'); break;
+		case "ft ▸ m": printoutput(0.3048*inputvalue, 'm'); break;
+		case "m ▸ ft": printoutput(inputvalue*3.2808, 'ft'); break;
+		case "mi ▸ km": printoutput(inputvalue*1.60934, 'km'); break;
+		case "km ▸ mi": printoutput(inputvalue*0.621371, 'mile'); break;
 		// energy
-		case "kcal▸kJ": printoutput(4.184*inputvalue, 'kJ'); break;
-		case "kJ▸kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
-		case "kWh▸kJ": printoutput(3600*inputvalue, 'kJ'); break;
-		case "kJ▸kWh": printoutput(inputvalue/3600, 'kWh'); break;
+		case "kcal ▸ kJ": printoutput(4.184*inputvalue, 'kJ'); break;
+		case "kJ ▸ kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
+		case "kWh ▸ kJ": printoutput(3600*inputvalue, 'kJ'); break;
+		case "kJ ▸ kWh": printoutput(inputvalue/3600, 'kWh'); break;
 		// mass
-		case "lb▸kg": printoutput(0.453592*inputvalue, 'kg'); break;
-		case "kg▸lb": printoutput(inputvalue*2.2090, 'lb'); break;
-		case "ou▸kg": printoutput(inputvalue/35.274, 'kg'); break;
-		case "kg▸ou": printoutput(inputvalue*35.274, 'ounce'); break;
+		case "lb ▸ kg": printoutput(0.453592*inputvalue, 'kg'); break;
+		case "kg ▸ lb": printoutput(inputvalue*2.2090, 'lb'); break;
+		case "ou ▸ kg": printoutput(inputvalue/35.274, 'kg'); break;
+		case "kg ▸ ou": printoutput(inputvalue*35.274, 'ounce'); break;
 		// pressure
-		case "kPa▸atm": printoutput(inputvalue/101.325, 'atm'); break;
-		case "atm▸kPa": printoutput(inputvalue*101.325, 'kPa'); break;
-		case "psi▸atm": printoutput(inputvalue/14.696, 'atm'); break;
-		case "atm▸psi": printoutput(inputvalue*14.696, 'psi'); break;
-		case "bar▸atm": printoutput(inputvalue/1.013, 'atm'); break;
-		case "atm▸bar": printoutput(inputvalue*1.013, 'bar'); break;
-		case "torr▸atm": printoutput(inputvalue/760, 'atm'); break;
-		case "atm▸torr": printoutput(inputvalue*760, 'torr'); break;
+		case "kPa ▸ atm": printoutput(inputvalue/101.325, 'atm'); break;
+		case "atm ▸ kPa": printoutput(inputvalue*101.325, 'kPa'); break;
+		case "psi ▸ atm": printoutput(inputvalue/14.696, 'atm'); break;
+		case "atm ▸ psi": printoutput(inputvalue*14.696, 'psi'); break;
+		case "bar ▸ atm": printoutput(inputvalue/1.013, 'atm'); break;
+		case "atm ▸ bar": printoutput(inputvalue*1.013, 'bar'); break;
+		case "torr ▸ atm": printoutput(inputvalue/760, 'atm'); break;
+		case "atm ▸ torr": printoutput(inputvalue*760, 'torr'); break;
 		// temperature
-		case "ᵒF▸ᵒC": 
+		case "ᵒF ▸ ᵒC": 
 			printoutput(Number(((inputvalue-32)*(5/9)).toFixed(0)), 'ᵒC'); 
 			break;
-		case "ᵒC▸ᵒF":
+		case "ᵒC ▸ ᵒF":
 			printoutput(Number(((inputvalue*(9/5) + 32)).toFixed(0)), 'ᵒF'); 
 			break;
 	}
