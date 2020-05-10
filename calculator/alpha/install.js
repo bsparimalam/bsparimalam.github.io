@@ -1,21 +1,14 @@
-var version = "v3.4";
+var version = "v3.5";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
-    './manifest.json',
     './index.html',
-    './index.css',
-    './index.js',
+    './styles.css',
+    './scripts.js',
+    './manifest.json',
     './images/icons/icon-512x512.png',
-    './images/icons/icon-384x384.png',
-    './images/icons/icon-192x192.png',
     './images/icons/icon-152x152.png',
-    './images/icons/icon-144x144.png',
-    './images/icons/icon-128x128.png',
-    './images/icons/icon-96x96.png',
-    './images/icons/icon-72x72.png',
-    './images/icons/icon-32x32.png',
-    './images/icons/icon-16x16.png'
+    './images/icons/icon-32x32.png'
 ];
 
 self.addEventListener('install', function(event) {
