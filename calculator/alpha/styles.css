@@ -99,7 +99,7 @@ button {
 		.panel:hover {
 			background-color: #8eacbb;
 		}
-		.sci:hover, .persona:hover {
+		.sci:hover, .personal:hover {
 			background-color: #a7c0cd;
 		}
 		.num:hover, .opr:hover, .io:hover, .category:hover {

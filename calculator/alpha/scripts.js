@@ -1,12 +1,41 @@
+
+//---------------------------------------------------------------------------
+// ----------------------------definitions.js--------------------------------
+//---------------------------------------------------------------------------
+// Booleans
+function isoperator(string) {
+	return ( string=='+' || string=='-' || string=='×' || string=='*'
+		|| string == 'x' || string=='X' || string=='/' || string=='^(' 
+		|| string=='^' || string=='%' || string=='√(' );
+}
+function isopenparan(string) {
+	return ( string=='(' || string=='{' || string=='[' || string=='<' );
+}
+function iscloseparan(string) {
+	return ( string==')' || string=='}' || string==']' || string=='>' );
+}
+function isnumber(string) {
+	return ( !isNaN(string) || string=='.' );
+}
+function istoolong(string, length) {
+	string = string.replace(/\./g, '');
+	eindex = string.indexOf('e');
+	if ( eindex != -1 ) { string = string.slice(0, eindex); }
+	return string.length > length;
+}
+// Classes
 class Inputbox {
 	constructor(element) {
 		this.e = element;
 	}
+	read() {
+		return this.e.value;
+	}
 	length() {
-		return this.e.value.length;
+		return this.read().length;
 	}
 	setfontsize() {
-		var optfont = 3.5; var minfont = 2; var strcapacity = 9;
+		const optfont = 3.5; const minfont = 2; const strcapacity = 9;
 		var newsize = optfont * ( strcapacity / this.length() );
 		if ( newsize > optfont ) { 
 			newsize = optfont + 'em' ; 
@@ -19,32 +48,29 @@ class Inputbox {
 		}
 		this.e.style.fontSize = newsize;
 	}
+	write(string) {
+		this.e.value = string;
+		this.setfontsize();
+	}
 	addastring(string) {
-		if ( !inprogress && isoperator(string) ) { 
-			this.e.value = outputbox.read();
-			outputbox.removeall();
-		}
-		inprogress = true;
 		this.e.value += string;
 		this.setfontsize();
-		console.log('string added : ' + string);
 	}
-	remove(instruction) {
-		if( instruction == 'achar') {
-			this.e.value = this.e.value.slice(0, -1);
-			console.log('last character removed');
-		} else if ( instruction == 'all') {
-			this.e.value = null;
-			console.log('inputbox cleared');
-		}
-		inprogress = true;
+	removeastring() {
+		this.e.value = this.e.value.slice(0, -1);
 		this.setfontsize();
 	}
-	evaluate() {
-		if (angleunit.innerHTML == 'DEG') { 
+	removeall() {
+		this.e.value = null;
+		this.setfontsize();
+	}
+	evaluate(angleunit) {
+		var angleconv; var angleconvinv;
+		if (angleunit == 'DEG') { 
 			angleconv = ''; angleconvinv = '';
 		} else { 
-			angleconv = "(Math.PI/180)*"; angleconvinv = "(180/Math.PI)*"; 
+			angleconv = "(Math.PI/180)*";
+			angleconvinv = "(180/Math.PI)*"; 
 		}
 		var parsedstring = this.e.value.replace(/×/gi, '*').replace(
 			/÷/gi, '/').replace(/x/gi, '*').replace(/X/gi, '*').replace(
@@ -107,7 +133,7 @@ class Inputbox {
 				exponented = parsedstring.slice(rootindex + 1, end + 1); 
 			}
 
-			if (start = -1) {
+			if (start == -1) {
 				parsedstring = exponented + '**' + exponent + parsedstring.slice(end+1, );
 			} else {
 				parsedstring = parsedstring.slice(0,start) + exponented + '**' + exponent
@@ -124,10 +150,10 @@ class Inputbox {
 		} else {
 			var evaluted = eval(parsedstring);
 		}
+		console.log('evaluted output: ' + evaluted);
 		return evaluted;
 	}
 }
-
 class Outputbox {
 	constructor(element) {
 		this.e = element;
@@ -139,7 +165,7 @@ class Outputbox {
 		return this.read().length;
 	}
 	setfontsize() {
-		var optfont = 2.5; var strcapacity = 9;
+		const optfont = 2.5; const strcapacity = 9;
 		var newsize = optfont * ( strcapacity / this.length());
 		if ( newsize > optfont ) { 
 			newsize = optfont + 'em' ; 
@@ -148,72 +174,139 @@ class Outputbox {
 		}
 		this.e.style.fontSize = newsize;
 	}
-	write(evaluted, unit=null) {
-		
-		if (isNaN(number)) { 
+	removeall() {
+		this.e.innerHTML = null;
+	}
+	write(outputformat, evaluted, unit=null) {
+		console.log(outputformat, evaluted, unit);
+		if (isNaN(evaluted)) { 
 			this.e.innerHTML = 'invalid input :(';
-		} else if ( typeof(number) != "number" ) { 
+		} else if ( typeof(evaluted) != "number" ) { 
 			this.e.innerHTML = "error";
-			console.log('error detail: ' + number.message);
 		} else {
-			if (number.toString().length > 10) { number = number.toPrecision(10); }
-
+			if (evaluted.toString().length > 10) { 
+				evaluted = evaluted.toPrecision(10); 
+			}
 			if ( outputformat == 'DECI') {
-				number = Number(number).toString();
+				evaluted = Number(evaluted).toString();
 			}
-			if ((outputformat == 'SCI') || istoolong(number, 10)) {
-				number = Number(number).toExponential();
+			if ((outputformat == 'SCI') || istoolong(evaluted, 10)) {
+				evaluted = Number(evaluted).toExponential();
 			}
-			number = String(number).replace(/e/g, 'E');
-			inprogress = false;
+			evaluted = String(evaluted).replace(/e/g, 'E');
 
-			if ( unit == null ) { this.e.value = number;
-			} else { this.e.value = number + '  ' + unit; }
+			if ( unit == null ) { this.e.innerHTML = evaluted;
+			} else { this.e.innerHTML = evaluted + '  ' + unit; }
 		}
 		this.setfontsize();
 	}
 }
-
-// globals
+//---------------------------------------------------------------------------
+// ------------------------------globals.js----------------------------------
+//---------------------------------------------------------------------------
 app = document.getElementsByTagName('BODY');
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
 
 inprogress = true; memorystored = '';
 angleunit = document.getElementById('angleunit');
-numberrep = document.getElementById('representation');
+numrep = document.getElementById('representation');
 memory = document.getElementById('memory');
-
+//---------------------------------------------------------------------------
+// -------------------------------styles.js----------------------------------
+//---------------------------------------------------------------------------
 function setangleunit() {
 	if (angleunit.innerHTML == 'DEG') { angleunit.innerHTML = 'RAD';
 	} else { angleunit.innerHTML = 'DEG'}
 }
-function changerep() {
-    if (numberrep.innerHTML == 'DECI') { numberrep.innerHTML = 'SCI';
-    } else { numberrep.innerHTML = 'DECI'; }
+function setnumrep() {
+    if (numrep.innerHTML == 'DECI') { numrep.innerHTML = 'SCI';
+    } else { numrep.innerHTML = 'DECI'; }
 }
-function memory(element) {
-	if ( memory.innerHTML == 'STORE' ) { 
-		memory.innerHTML = 'RECALL';
-		memorystored = outputbox.value;
-	} else if (memory.innerHTML == 'RECALL') {
+function setmemory(element) {
+	if ( element.innerHTML == 'STORE' ) { 
+		element.innerHTML = 'RECALL';
+		memorystored = outputbox.e.innerHTML;
+	} else if (element.innerHTML == 'RECALL') {
 		inputbox.addastring(memorystored);
 	} else {
 		memory.innerHTML = 'STORE';
 	}
 }
-
- // listen to the keyboard input and insert text
+function openmore(element) {
+	var status = element.innerHTML;
+	if ( status == '⠇' ) {
+		app[0].style.gridTemplateRows = '30% 0% 0% 25% 45%';
+		element.innerHTML = '↶';
+		element.style.fontSize = '1em';
+		element.style.fontWeight = '900';
+// 		element.
+	} else {
+		app[0].style.gridTemplateRows = '30% 25% 45% 0% 0%';
+		element.innerHTML = '⠇';
+		element.style.fontSize = '1em';
+		element.style.fontWeight = '900';
+	}
+	console.log(app[0].style.gridTemplateRows);
+}
+function defocus(element) {
+	element.blur();
+}
+// stop android softkeyboard resize
+// bodycomp = window.getComputedStyle(document.querySelector('body'));
+// widthhistory = bodycomp.getPropertyValue('width');
+// heighthistory = bodycomp.getPropertyValue('height');
+function validateresize() {
+	// if ( inputbox == document.activeElement ) {
+	// 	app[0].style.width = widthhistory; 
+	// 	app[0].style.height = heighthistory;
+	// 	console.log('resize denied : ' + widthhistory + ' X ' + heighthistory);
+	// } else {
+	// 	bodycomp = window.getComputedStyle(document.querySelector('body'));
+	// 	widthhistory = bodycomp.getPropertyValue('width');
+	// 	heighthistory = bodycomp.getPropertyValue('height');
+	// 	console.log('resize validated : ' + widthhistory + ' X ' + heighthistory);
+	// }
+}
+//---------------------------------------------------------------------------
+// ----------------------------input/output.js-------------------------------
+//---------------------------------------------------------------------------
+// touch input
+function touchinput(key) {
+	if ( key == "evaluate" ) {
+		outputbox.write(numrep.innerHTML, inputbox.evaluate(
+			angleunit.innerHTML));
+		inprogress = false;
+	} else if ( key == 'delete') {
+		inputbox.removeastring();
+		inprogress = true;
+	} else if ( key == 'clearall') {
+		inputbox.removeall();
+		outputbox.removeall();
+		inprogress = true;
+	} else if ( key == 'passoutput') {
+		inputbox.write(outputbox.read());
+		outputbox.removeall();
+		inprogress = true;
+	} else {
+		inputbox.addastring(key);
+		inprogress = true;
+	}
+}
+// keyboard input
 document.addEventListener('keydown', event => {
 	key = event.key;
-// 	if ( key == "Enter" ) { 
-// //------------------------------------------------------------------------
-// 		outputbox.write(inputbox.evaluate());
-// //------------------------------------------------------------------------
-// 	} else 
-	if ( inputbox.el != document.activeElement ) {
+	if ( key == "Enter" ) {
+		outputbox.write(numrep.innerHTML, inputbox.evaluate(
+			angleunit.innerHTML));
+		inprogress = false;
+	} else if ( inputbox.e != document.activeElement ) {
+		if (!inprogress && isoperator(key)) {
+			inputbox.e.value = outputbox.read();
+			outputbox.removeall();
+		}
 		switch (key) {
-			case 'Backspace': case 'Devare':
+			case 'Backspace': case 'Delete':
 				inputbox.removeastring(); break;
 			case '*': case 'x': case 'X':
 				inputbox.addastring('×'); break;
@@ -233,70 +326,81 @@ document.addEventListener('keydown', event => {
 			case 'S': case 'T':
 				inputbox.addastring(key.toLowerCase()); break;
 		}
+		inprogress = true;
+	} else { inprogress = true; 
 	}
 });
-
-// Booleans
-function isoperator(string) {
-	return ( string=='+' || string=='-' || string=='×' || string=='*'
-		|| string == 'x' || string=='X' || string=='/' || string=='^(' 
-		|| string=='^' || string=='%' || string=='√(' );
-}
-function isopenparan(string) {
-	return ( string=='(' || string=='{' || string=='[' || string=='<' );
-}
-function iscloseparan(string) {
-	return ( string==')' || string=='}' || string==']' || string=='>' );
-}
-function isnumber(string) {
-	return ( !isNaN(string) || string=='.' || string=='E' );
-}
-function istoolong(string, length) {
-	string = string.replace(/\./g, '');
-	eindex = string.indexOf('e');
-	if ( eindex != -1 ) { string = string.slice(0, eindex); }
-	return string.length > length;
-}
-
-// defocus buttons after click
-function defocus(element) {
-	element.blur();
-}
-function validateresize() {
-	// keep the dream alive
-}
-
-// stop android softkeyboard resize
-bodycomp = window.getComputedStyle(document.querySelector('body'));
-widthhistory = bodycomp.getPropertyValue('width');
-heighthistory = bodycomp.getPropertyValue('height');
-function analyzeresize() {
-	if ( inputbox == document.activeElement ) {
-		app[0].style.width = widthhistory; 
-		app[0].style.height = heighthistory;
-		console.log('resize denied : ' + widthhistory + ' X ' + heighthistory);
+// indexed functions
+function calculateindex(element) {
+	const operation = element.innerHTML;
+	if ( operation.indexOf('<br>') != -1 ) {
+		convertcurrency(operation);
+	} else if ( operation.indexOf(' ▸ ') != -1 ) {
+		convertunit(operation);
 	} else {
-		bodycomp = window.getComputedStyle(document.querySelector('body'));
-		widthhistory = bodycomp.getPropertyValue('width');
-		heighthistory = bodycomp.getPropertyValue('height');
-		console.log('resize validated : ' + widthhistory + ' X ' + heighthistory);
+		executefunction(operation);
 	}
 }
-function openmore(element) {
-	var status = element.innerHTML;
-	if ( status == '⠇' ) {
-		app[0].style.gridTemplateRows = '30% 0% 0% 25% 45%';
-		element.innerHTML = '↶';
-		element.style.fontSize = '2em';
-		element.style.fontWeight = 'normal';
-// 		element.
-	} else {
-		app[0].style.gridTemplateRows = '30% 25% 45% 0% 0%';
-		element.innerHTML = '⠇';
-		element.style.fontSize = '1em';
-		element.style.fontWeight = '900';
+function convertunit(operation) {
+	const inputvalue = inputbox.evaluate();
+	const of = numrep.innerHTML;
+	console.log("function requested: " + operation + 'input: ' + inputvalue );
+	switch (operation) {
+		// area
+		case "mi² ▸ km²": outputbox.write(of, 2.58999*inputvalue, 'km²'); break;
+		case "km² ▸ mi²": outputbox.write(of, 2.58999*inputvalue, 'mile²'); break;
+		case "in² ▸ cm²": outputbox.write(of, 6.4516*inputvalue, 'cm²'); break;
+		case "cm² ▸ in²": outputbox.write(of, 0.1550*inputvalue, 'inch²'); break;
+		// length
+		case 'in ▸ cm': outputbox.write(of, 2.54*inputvalue, 'cm'); break;
+		case "cm ▸ in": outputbox.write(of, inputvalue*0.3937, 'inch'); break;
+		case "ft ▸ m": outputbox.write(of, 0.3048*inputvalue, 'm'); break;
+		case "m ▸ ft": outputbox.write(of, inputvalue*3.2808, 'ft'); break;
+		case "mi ▸ km": outputbox.write(of, inputvalue*1.60934, 'km'); break;
+		case "km ▸ mi": outputbox.write(of, inputvalue*0.621371, 'mile'); break;
+		// energy
+		case "kcal ▸ kJ": outputbox.write(of, 4.184*inputvalue, 'kJ'); break;
+		case "kJ ▸ kcal": outputbox.write(of, 0.2390*inputvalue, 'kcal'); break;
+		case "kWh ▸ kJ": outputbox.write(of, 3600*inputvalue, 'kJ'); break;
+		case "kJ ▸ kWh": outputbox.write(of, inputvalue/3600, 'kWh'); break;
+		// mass
+		case "lb ▸ kg": outputbox.write(of, 0.453592*inputvalue, 'kg'); break;
+		case "kg ▸ lb": outputbox.write(of, inputvalue*2.2090, 'lb'); break;
+		case "ou ▸ kg": outputbox.write(of, inputvalue/35.274, 'kg'); break;
+		case "kg ▸ ou": outputbox.write(of, inputvalue*35.274, 'ounce'); break;
+		// pressure
+		case "kPa ▸ atm": outputbox.write(of, inputvalue/101.325, 'atm'); break;
+		case "atm ▸ kPa": outputbox.write(of, inputvalue*101.325, 'kPa'); break;
+		case "psi ▸ atm": outputbox.write(of, inputvalue/14.696, 'atm'); break;
+		case "atm ▸ psi": outputbox.write(of, inputvalue*14.696, 'psi'); break;
+		case "bar ▸ atm": outputbox.write(of, inputvalue/1.013, 'atm'); break;
+		case "atm ▸ bar": outputbox.write(of, inputvalue*1.013, 'bar'); break;
+		case "torr ▸ atm": outputbox.write(of, inputvalue/760, 'atm'); break;
+		case "atm ▸ torr": outputbox.write(of, inputvalue*760, 'torr'); break;
+		// temperature
+		case "ᵒF ▸ ᵒC": 
+			outputbox.write(of, Number(((inputvalue-32)*(5/9)).toFixed(0)), 'ᵒC'); 
+			break;
+		case "ᵒC ▸ ᵒF":
+			outputbox.write(of, Number(((inputvalue*(9/5) + 32)).toFixed(0)), 'ᵒF'); 
+			break;
 	}
-	console.log(app[0].style.gridTemplateRows);
+}
+// currency conversions
+function convertcurrency(operation) {
+	const inputvalue = inputbox.evaluate();
+	const of = numrep.innerHTML;
+	console.log("function requested: " + operation + 'input: ' + inputvalue );
+	var base = operation.slice(0, 3); var target = operation.slice(9, 12);
+	var baseurl = "https://api.exchangeratesapi.io/latest?";
+	var basecurr = "base=" + base;
+	var targetcurr = "&symbols=" + target;
+	(async () => {
+		var response = await fetch( baseurl + basecurr + targetcurr );
+		var data = await response.json();
+		outputbox.write(of, Number(
+			inputvalue*data["rates"][target].toFixed(2)), target);
+	})();
 }
 
 //---------------------------------------------------------------------------
@@ -343,95 +447,18 @@ function openmore(element) {
 // 	switch(operation) {
 // 		case "x/sin(y)":
 // 			x = eval(inputlist[0]); y = eval(inputlist[1]);
-// 			printoutput(x/Math.sin((Math.PI/180)*y)); break;
+// 			outputbox.write(of, x/Math.sin((Math.PI/180)*y)); break;
 // 		case "x/cos(y)":
 // 			x = eval(inputlist[0]); y = eval(inputlist[1]);
-// 			printoutput(x/Math.cos((Math.PI/180)*y)); break;
+// 			outputbox.write(of, x/Math.cos((Math.PI/180)*y)); break;
 // 		case "15%":
 // 			x = eval(inputlist[0]);
-// 			printoutput(x*0.15); break;
+// 			outputbox.write(of, x*0.15); break;
 // 		case "20%":
 // 			x = eval(inputlist[0]);
-// 			printoutput(x*0.20); break;
+// 			outputbox.write(of, x*0.20); break;
 // 	}
 // }
-
-
-// indexed function
-function calculateindex(element) {
-	var operation = element.innerHTML;
-	if ( operation.indexOf('<br>') != -1 ) {
-		convertcurrency(element);
-		console.log('currency conversion initiated...');
-	} else if ( operation.indexOf(' ▸ ') != -1 ) {
-		convertunit(element);
-		console.log('unit conversion initiated...');
-	} else {
-		executefunction(element);
-		console.log('function execution initiated...');
-	}
-}
-
-function convertunit(element) {
-	var operation = element.innerHTML;
-	var inputvalue = eval(parse());
-	console.log("function requested: " + operation + 'input: ' + inputvalue );
-	switch (operation) {
-		// area
-		case "mi² ▸ km²": printoutput(2.58999*inputvalue, 'km²'); break;
-		case "km² ▸ mi²": printoutput(2.58999*inputvalue, 'mile²'); break;
-		case "in² ▸ cm²": printoutput(6.4516*inputvalue, 'cm²'); break;
-		case "cm² ▸ in²": printoutput(0.1550*inputvalue, 'inch²'); break;
-		// length
-		case 'in ▸ cm': printoutput(2.54*inputvalue, 'cm'); break;
-		case "cm ▸ in": printoutput(inputvalue*0.3937, 'inch'); break;
-		case "ft ▸ m": printoutput(0.3048*inputvalue, 'm'); break;
-		case "m ▸ ft": printoutput(inputvalue*3.2808, 'ft'); break;
-		case "mi ▸ km": printoutput(inputvalue*1.60934, 'km'); break;
-		case "km ▸ mi": printoutput(inputvalue*0.621371, 'mile'); break;
-		// energy
-		case "kcal ▸ kJ": printoutput(4.184*inputvalue, 'kJ'); break;
-		case "kJ ▸ kcal": printoutput(0.2390*inputvalue, 'kcal'); break;
-		case "kWh ▸ kJ": printoutput(3600*inputvalue, 'kJ'); break;
-		case "kJ ▸ kWh": printoutput(inputvalue/3600, 'kWh'); break;
-		// mass
-		case "lb ▸ kg": printoutput(0.453592*inputvalue, 'kg'); break;
-		case "kg ▸ lb": printoutput(inputvalue*2.2090, 'lb'); break;
-		case "ou ▸ kg": printoutput(inputvalue/35.274, 'kg'); break;
-		case "kg ▸ ou": printoutput(inputvalue*35.274, 'ounce'); break;
-		// pressure
-		case "kPa ▸ atm": printoutput(inputvalue/101.325, 'atm'); break;
-		case "atm ▸ kPa": printoutput(inputvalue*101.325, 'kPa'); break;
-		case "psi ▸ atm": printoutput(inputvalue/14.696, 'atm'); break;
-		case "atm ▸ psi": printoutput(inputvalue*14.696, 'psi'); break;
-		case "bar ▸ atm": printoutput(inputvalue/1.013, 'atm'); break;
-		case "atm ▸ bar": printoutput(inputvalue*1.013, 'bar'); break;
-		case "torr ▸ atm": printoutput(inputvalue/760, 'atm'); break;
-		case "atm ▸ torr": printoutput(inputvalue*760, 'torr'); break;
-		// temperature
-		case "ᵒF ▸ ᵒC": 
-			printoutput(Number(((inputvalue-32)*(5/9)).toFixed(0)), 'ᵒC'); 
-			break;
-		case "ᵒC ▸ ᵒF":
-			printoutput(Number(((inputvalue*(9/5) + 32)).toFixed(0)), 'ᵒF'); 
-			break;
-	}
-}
-// currency conversions
-function convertcurrency(element) {
-	var operation = element.innerHTML;
-	console.log("conversion requested: " + operation);
-	var base = operation.slice(0, 3); var target = operation.slice(8, 11);
-	var inputvalue = eval(parse());
-	var baseurl = "https://api.exchangeratesapi.io/latest?";
-	var basecurr = "base=" + base;
-	var targetcurr = "&symbols=" + target;
-	(async () => {
-		var response = await fetch( baseurl + basecurr + targetcurr );
-		var data = await response.json();
-		printoutput(Number(inputvalue*data["rates"][target].toFixed(2)), target);
-	})();
-}
 
 // //time conversions
 // function gettime12hr(dateandtime, hr, mn) {
@@ -452,27 +479,27 @@ function convertcurrency(element) {
 // 	}
 // 	if (hour == 0 ) { hour = 12; }
 // 	if (String(min).length < 2 ) { min = "0" + min; }
-// 	printoutput(hour + ":" + min, period);
+// 	outputbox.write(of, hour + ":" + min, period);
 // }
 
 // function time(element) {
 // 	var timezone = element.innerHTML;
 // 	console.log("time requested: " + timezone);
-// 	printoutput("loading...");
+// 	outputbox.write(of, "loading...");
 // 	(async () => {
 // 		var response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
 // 		var data = await response.json();
 // 		await gettime12hr(data.datetime, 0, 0);
 // 	})();
 // }
-function getgcd(a, b) {
-    while ( a != b ) {
-        if ( a > b ) {
-            a = a - b;
-        } else {
-            b = b - a;
-        }
-    }
-    console.log('GCD : ' + a );
-    return a;
-}
+// function getgcd(a, b) {
+//     while ( a != b ) {
+//         if ( a > b ) {
+//             a = a - b;
+//         } else {
+//             b = b - a;
+//         }
+//     }
+//     console.log('GCD : ' + a );
+//     return a;
+// }

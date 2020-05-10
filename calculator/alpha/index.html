@@ -34,93 +34,93 @@
 		<button class="panel" id="angleunit" name="angle unit" 
 			onclick="defocus(this); setangleunit()" >DEG</button>
 		<button class="panel" id="representation" name="representation" 
-			onclick="defocus(this); changerep()" >DECI</button>
+			onclick="defocus(this); setnumrep()" >DECI</button>
 		<button class="panel" id="memory" name="memory" 
-			onclick="defocus(this); memory(this)" >STORE</button>
+			onclick="defocus(this); setmemory(this)" >STORE</button>
 		<button class="panel" id="mc" name="memclear" 
-			onclick="defocus(this); memory(this)" >MC</button>
+			onclick="defocus(this); setmemory(this)" >MC</button>
 		<button class="panel" id="more" name="more" 
 			onclick="defocus(this); openmore(this)" >⠇</button>
     </div>
     <div class="scis">
 		<button class="sci" id="sin" name="sine" 
-			onclick="defocus(this); inputbox.addastring('sin(')" >sin</button>
+			onclick="defocus(this); touchinput('sin(')" >sin</button>
 		<button class="sci" id="sin⁻¹" name="sine inverse" 
-			onclick="defocus(this); inputbox.addastring('sin⁻¹(')" >sin⁻¹</button>
+			onclick="defocus(this); touchinput('sin⁻¹(')" >sin⁻¹</button>
 		<button class="sci" id="xʸ" name="exponent" 
-			onclick="defocus(this); inputbox.addastring('^(')" >xʸ</button>
+			onclick="defocus(this); touchinput('^(')" >xʸ</button>
 		<button class="sci" id="ln" name="natural log" 
-			onclick="defocus(this); inputbox.addastring('ln(')" >ln</button>
+			onclick="defocus(this); touchinput('ln(')" >ln</button>
 		<button class="sci" id="log" name="log" 
-			onclick="defocus(this); inputbox.addastring('log(')" >log</button>
+			onclick="defocus(this); touchinput('log(')" >log</button>
 
 		<button class="sci" id="cos" name="cosine" 
-			onclick="defocus(this); inputbox.addastring('cos(')" >cos</button>
+			onclick="defocus(this); touchinput('cos(')" >cos</button>
 		<button class="sci" id="cos⁻¹" name="cosine inverse" 
-			onclick="defocus(this); inputbox.addastring('cos⁻¹(')" >cos⁻¹</button>
+			onclick="defocus(this); touchinput('cos⁻¹(')" >cos⁻¹</button>
 		<button class="sci" id="ˣ√" name="root" 
-			onclick="defocus(this); inputbox.addastring('√(' )">ˣ√</button>
+			onclick="defocus(this); touchinput('√(' )">ˣ√</button>
 		<button class="sci" id="eˣ" name="natural log inverse" 
-			onclick="defocus(this); inputbox.addastring('e^(')" >eˣ</button>
+			onclick="defocus(this); touchinput('e^(')" >eˣ</button>
 		<button class="sci" id="10ˣ" name="log inverse" 
-			onclick="defocus(this); inputbox.addastring('10^(')" >10ˣ</button>
+			onclick="defocus(this); touchinput('10^(')" >10ˣ</button>
 
 		<button class="sci" id="tan" name="tangent" 
-			onclick="defocus(this); inputbox.addastring('tan(')" >tan</button>
+			onclick="defocus(this); touchinput('tan(')" >tan</button>
 		<button class="sci" id="tan⁻¹" name="tangent inverse" 
-			onclick="defocus(this); inputbox.addastring('tan⁻¹(')" >tan⁻¹</button>
+			onclick="defocus(this); touchinput('tan⁻¹(')" >tan⁻¹</button>
 		<button class="sci" id="\(" name="opening bracket" 
-			onclick="defocus(this); inputbox.addastring('(')" >(</button>
+			onclick="defocus(this); touchinput('(')" >(</button>
 		<button class="sci" id="\)" name="closing bracket" 
-			onclick="defocus(this); inputbox.addastring(')')" >)</button>
+			onclick="defocus(this); touchinput(')')" >)</button>
 		<button class="sci" id="π" name="pi" 
-			onclick="defocus(this); inputbox.addastring('π' )">π</button>
+			onclick="defocus(this); touchinput('π' )">π</button>
     </div>
     <div class="nums">
 		<button class="num" id="1" name="one" 
-			onclick="defocus(this); inputbox.addastring('1')" >1</button>
+			onclick="defocus(this); touchinput('1')" >1</button>
 		<button class="num" id="2" name="two" 
-			onclick="defocus(this); inputbox.addastring('2')" >2</button>
+			onclick="defocus(this); touchinput('2')" >2</button>
 		<button class="num" id="3" name="three" 
-			onclick="defocus(this); inputbox.addastring('3')" >3</button>
+			onclick="defocus(this); touchinput('3')" >3</button>
 		<button class="opr" id="+" name="add" 
-			onclick="defocus(this); inputbox.addastring('+')" >+</button>
+			onclick="defocus(this); touchinput('+')" >+</button>
 		<button class="io" id="bspc" name="delete" 
-			onclick="defocus(this); inputbox.remove('achar')" >⌫</button>
+			onclick="defocus(this); touchinput('delete')" >⌫</button>
 
 
 		<button class="num" id="4" name="four" 
-			onclick="defocus(this); inputbox.addastring('4')" >4</button>
+			onclick="defocus(this); touchinput('4')" >4</button>
 		<button class="num" id="5" name="five" 
-			onclick="defocus(this); inputbox.addastring('5')" >5</button>
+			onclick="defocus(this); touchinput('5')" >5</button>
 		<button class="num" id="6" name="six" 
-			onclick="defocus(this); inputbox.addastring('6')" >6</button>
+			onclick="defocus(this); touchinput('6')" >6</button>
 		<button class="opr" id="-" name="subtract" 
-			onclick="defocus(this); inputbox.addastring('-')" >-</button>
-		<button class="io" id="CE" name="clear all" 
-			onclick="defocus(this); inputbox.remove('all')" >CE</button>
+			onclick="defocus(this); touchinput('-')" >-</button>
+		<button class="io" id="CE" name="clear all" onclick="defocus(this); 
+			touchinput('clearall')" >CE</button>
 
 		<button class="num" id="7" name="seven" 
-			onclick="defocus(this); inputbox.addastring('7')" >7</button>
+			onclick="defocus(this); touchinput('7')" >7</button>
 		<button class="num" id="8" name="eight" 
-			onclick="defocus(this); inputbox.addastring('8')" >8</button>
+			onclick="defocus(this); touchinput('8')" >8</button>
 		<button class="num" id="9" name="nine" 
-			onclick="defocus(this); inputbox.addastring('9')" >9</button>
+			onclick="defocus(this); touchinput('9')" >9</button>
 		<button class="opr" id="×" name="multiply" 
-			onclick="defocus(this); inputbox.addastring('×')" >×</button>
-		<button class="io" id="ANS" name="passoutput" 
-			onclick="defocus(this); function () {inputbox.value = outputbox.value; outputbox.value = null }" >ANS</button>
+			onclick="defocus(this); touchinput('×')" >×</button>
+		<button class="io" id="ANS" name="passoutput" onclick="defocus(this);
+			touchinput('passoutput')" >ANS</button>
 
 		<button class="num" id="decimal" name="decimal" 
-			onclick="defocus(this); inputbox.addastring('.')" >.</button>
+			onclick="defocus(this); touchinput('.')" >.</button>
 		<button class="num" id="0" name="zero" 
-			onclick="defocus(this); inputbox.addastring('0')" >0</button>
-		<button class="opr" id="=" name="calculate" 
-			onclick="defocus(this); calculate()" >=</button>
+			onclick="defocus(this); touchinput('0')" >0</button>
+		<button class="opr" id="=" name="calculate" onclick="defocus(this); 
+			touchinput('evaluate')" >=</button>
 		<button class="opr" id="÷" name="divide" 
-			onclick="defocus(this); inputbox.addastring('/')" >÷</button>
+			onclick="defocus(this); touchinput('/')" >÷</button>
 		<button class="num" id="comma" name="comma" 
-			onclick="defocus(this); inputbox.addastring(',')" >,</button>
+			onclick="defocus(this); touchinput(',')" >,</button>
     </div>
     <div class="personals">
 		<button class="personal" 
