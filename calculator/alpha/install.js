@@ -1,9 +1,8 @@
-var version = "v3.5";
+var version = "v4.0";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
     './index.html',
-    './styles.css',
     './scripts.js',
     './manifest.json',
     './images/icons/icon-512x512.png',

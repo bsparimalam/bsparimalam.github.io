@@ -1,62 +1,59 @@
 /*------------------------------------------------------------------------*/
 /*----------------------------------layout--------------------------------*/
 /*------------------------------------------------------------------------*/
-html{ 
-	margin: 0; border-width: 0; padding: 0; border-style: none;
+html, body, div, input, p, button { 
+	margin: 0; border-width: 0; padding: 0; border-style: none; 
 	border-radius: 0; width: 100%; height: 100%; overflow: hidden;
+	touch-action: pinch-zoom; touch-action: manipulation;
+}
+body, div {
+	display: grid; grid-gap: 0%;
 }
 body { 
-    margin: 0; border-width: 0; padding: 0; border-style: none; border-radius: 0; 
-    overflow: hidden; touch-action: pinch-zoom; touch-action: manipulation;
+	max-width: 12cm; min-width: 6cm; max-height: 24cm; min-height: 12cm;
 	position: absolute; top: 50%; left: 50%;
 	-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
-	display: grid; grid-gap: 0%; grid-template-columns: 100%; 
-	grid-template-rows: 30% 25% 45% 0% 0%;
-	width: 100%; height: 100%; max-width: 12cm; min-width: 6cm;
-	max-height: 24cm; min-height: 12cm;
+
+	grid-template-columns: 100%; 
+	grid-template-rows: 30% 25% 0% 45%;
 }
 div { 
-    margin: 0; border-width: 0; padding: 0; border-style: none;
-	border-radius: 0; overflow: hidden; display: grid; grid-gap: 0%;
-	touch-action: pinch-zoom; touch-action: manipulation;
-	width: 100%; height: 100%; grid-row: span 1; grid-column: span 1;
+	grid-row: span 1; grid-column: span 1;
 }
 .inputs {
-	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 50% 30% 20%;
 }
 input, p { 
-    margin: 0; border-width: 0; padding: 0; border-style: none;
-	border-radius: 0; overflow: hidden; display: grid; grid-gap: 0%;
-	touch-action: pinch-zoom; touch-action: manipulation;
-	width: 100%; height: 100%; grid-row: span 1; grid-column: span 5;
+	grid-row: span 1; grid-column: span 5;
 }
-.scis, .personals {
-	display: grid; grid-gap: 0%;
+.scis {
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 33.33% 33.33% 33.33%;
 }
 .nums {
-	display: grid; grid-gap: 0%;
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	grid-template-rows: 25% 25% 25% 25%;
 }
-.categories {
-	display: grid; grid-gap: 0%;
-	grid-template-columns: 100% 0% 0% 0% 0% 0% 0% 0% 0% 0%;
-	grid-template-rows: 100%;
+button {
+   	padding: 5%; grid-row: span 1; grid-column: span 1;
 }
-.home {
-	display: grid; grid-gap: 0%;
-	grid-template-columns: 33.33% 33.33% 33.33%;
+.convs {
+	grid-template-columns: 25% 25% 25% 25%;
 	grid-template-rows: 33.33% 33.33% 33.33%;
 }
-button {
-    margin: 0; border-width: 0; padding: 0; border-style: none;
-	border-radius: 0; overflow: hidden; display: grid; grid-gap: 0%;
-	touch-action: pinch-zoom; touch-action: manipulation;
-	width: 100%; height: 100%; grid-row: span 1; grid-column: span 1;
+select {
+    margin: auto; border-width: 0.1em; height: 70%;
+    border-style: solid; border-radius: 0.5em; position: relative;
+    grid-row: span 1; 
+}
+.convtypes {
+	width: 90%;
+	grid-column: span 2;
+}
+.convfroms, .convtos {
+	width: 85%;
+	grid-column: span 1;
 }
 .visuallyhidden {
   border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px;
@@ -78,31 +75,34 @@ button {
 		background-color: #78909c; 
 		color: #000000; 
 	}
-	.scis, .sci, .personals, .personal { 
-		background-color: #90a4ae;
-		color: #222222; 
-	}
-	.nums, .num, .opr, .io, .categories, .category { 
-		background-color: #b0bec5; 
-		color: #333333;
-	}
 	.panel:active {
 		background-color: #8eacbb;
 	}
-	.sci:active, .personal:active {
+	.scis, .sci, .convs, select, .pref { 
+		background-color: #90a4ae;
+		color: #222222; 
+	}
+	select {
+		border-color: #555555;
+	}
+	.sci:active, select:active, .pref:active {
 		background-color: #a7c0cd;
 	}
-	.num:active, .opr:active, .io:active, .category:active {
+	.nums, .num, .opr, .io { 
+		background-color: #b0bec5; 
+		color: #333333;
+	}
+	.num:active, .opr:active, .io:active {
 		background-color: #c1d5e0;
 	}
 	@media (hover: hover) {
 		.panel:hover {
 			background-color: #8eacbb;
 		}
-		.sci:hover, .personal:hover {
+		.sci:hover, select:hover, .pref:hover {
 			background-color: #a7c0cd;
 		}
-		.num:hover, .opr:hover, .io:hover, .category:hover {
+		.num:hover, .opr:hover, .io:hover {
 			background-color: #c1d5e0;
 		}
 	}
@@ -117,31 +117,34 @@ button {
     	background-color: #000a12; 
     	color: #e2f1f8; 
 	}
-	.scis, .sci, .personals, .personal { 
-    	background-color: #101a20;
-    	color: #e2f1f8; 
-	}
-	.nums, .num, .opr, .io, .categories, .category {
-    	background-color: #102027;
-    	color: #e2f1f8;
-	}
 	.panel:active {
 		background-color: #263238;
 	}
-	.sci:active, .personal:active {
+	.scis, .sci, .convs, select, .pref { 
+    	background-color: #101a20;
+    	color: #e2f1f8; 
+	}
+	.sci:active, select:active, .pref:active {
 		background-color: #263238;
 	}
-	.num:active, .opr:active, .io:active, .category:active {
+	select {
+		border-color: #37474f;
+	}
+	.nums, .num, .opr, .io {
+    	background-color: #102027;
+    	color: #e2f1f8;
+	}
+	.num:active, .opr:active, .io:active {
 		background-color: #263238;
 	}
 	@media (hover: hover) {
 		.panel:hover {
 			background-color: #263238;
 		}
-		.sci:hover, .personal:hover {
+		.sci:hover, select:hover, .pref:active {
 			background-color: #263238;
 		}
-		.num:hover, .opr:hover, .io:hover, .category:hover {
+		.num:hover, .opr:hover, .io:hover {
 			background-color: #263238;
 		}
 	}
@@ -149,11 +152,11 @@ button {
 /*------------------------------------------------------------------------*/
 /*----------------------------------fonts---------------------------------*/
 /*------------------------------------------------------------------------*/
-input, p, button {
+input, p, button, select {
 	font-family: system-ui;
 	text-align:center;
 }
-button {
+button, select {
 	user-select: none;
 }
 #ip {
@@ -174,9 +177,11 @@ button {
 	font-size: 1.25em;
 	font-weight: normal;
 }
-.personal {
+select {
+	font-size: 1.25em;
+}
+.pref {
 	font-size: 1em;
-	font-weight: normal;
 }
 .num {
 	font-size: 2em;
@@ -199,7 +204,4 @@ button {
 #comma, #decimal {
 	font-size: 2.5em;
 	padding-bottom: 0.6em;
-}
-.category {
-	font-size: 4em;
 }
