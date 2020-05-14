@@ -1,4 +1,4 @@
-var version = "v4.1";
+var version = "v4.3";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
@@ -6,7 +6,13 @@ const files2cache = [
     './manifest.json',
     './icon-512x512.png',
     './icon-152x152.png',
-    './icon-32x32.png'
+    './icon-32x32.png',
+    './0.css',
+    './0.js',
+    './1.js',
+    './2.js',
+    './3.js',
+    './4.js'
 ];
 
 self.addEventListener('install', function(event) {
