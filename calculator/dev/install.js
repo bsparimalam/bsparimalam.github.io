@@ -1,13 +1,12 @@
-var version = "v4.0";
+var version = "v4.1";
 const expectedCaches = ['Calculator-' + version ];
 const files2cache = [
     './',
     './index.html',
-    './scripts.js',
     './manifest.json',
-    './images/icons/icon-512x512.png',
-    './images/icons/icon-152x152.png',
-    './images/icons/icon-32x32.png'
+    './icon-512x512.png',
+    './icon-152x152.png',
+    './icon-32x32.png'
 ];
 
 self.addEventListener('install', function(event) {

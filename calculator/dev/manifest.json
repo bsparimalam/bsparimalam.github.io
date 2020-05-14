@@ -1,5 +1,6 @@
 {
   "name": "Calculator",
+  "short_name": "Calculator",
   "lang": "en-US",
   "start_url": ".",
   "display": "standalone",
@@ -8,7 +9,7 @@
   "theme_color": "#b0bec5", 
   "icons": [
     {
-    	"src": "./images/icons/icon-512x512.png",
+    	"src": "./icon-512x512.png",
     	"sizes": "512x512",
     	"type": "image/png"
     }
