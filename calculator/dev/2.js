@@ -1,4 +1,4 @@
-evaluated = 0;
+lasteval = 0;
 lasttype = null;
 lastoperation = null;
 // Booleans
@@ -87,12 +87,12 @@ function touchinput(key) {
 		outputbox.removeall();
 		inprogress = true;
 	} else if ( key == 'passoutput') {
-		inputbox.write(evaluated);
+		inputbox.write(lasteval);
 		outputbox.removeall();
 		inprogress = true;
 	} else {
 		if ( !inprogress && isoperator(key) ) {
-			inputbox.e.value = evaluated;
+			inputbox.e.value = lasteval;
 			outputbox.removeall();
 		}
 		inputbox.addastring(key);
@@ -111,7 +111,7 @@ document.addEventListener('keydown', event => {
 		}
 	} else if ( inputbox.e != document.activeElement ) {
 		if (!inprogress && isoperator(key)) {
-			inputbox.e.value = evaluated;
+			inputbox.e.value = lasteval;
 			outputbox.removeall();
 		}
 		switch (key) {

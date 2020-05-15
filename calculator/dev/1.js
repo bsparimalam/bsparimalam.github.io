@@ -23,7 +23,7 @@ function setnumrep() {
 function setmemory(element) {
 	if ( element.innerHTML == 'STORE' ) { 
 		element.innerHTML = 'RECALL';
-		memorystored = evaluated;
+		memorystored = lasteval;
 		console.log( memorystored + ' stored in memeory ');
 	} else if (element.innerHTML == 'RECALL') {
 		inputbox.addastring(memorystored);

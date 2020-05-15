@@ -152,13 +152,15 @@ function calculate(type, operation=null) {
 	}
 	switch (type) {
 		case 'simple':
-			outputbox.write(filteroutput(evaluated));
+			lasteval = filteroutput(evaluated);
+			outputbox.write(lasteval);
 			break;
 		case 'area': case 'energy': case 'length': case 'mass': case 'pressure':
 		case 'volume':
 			evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
 				+ '/' + convdata[typeindex][2][targetindex] );
-			outputbox.write(filteroutput(evaluated) + ' ' + target); break;
+			lasteval = filteroutput(evaluated);
+			outputbox.write(lasteval + ' ' + target); break;
 		case 'currency':
 			var baseurl = "https://api.exchangeratesapi.io/latest?";
 			var basecurr = "base=" + base;
@@ -172,8 +174,8 @@ function calculate(type, operation=null) {
 				if (isNaN(evaluated) || (typeof(evaluated) != "number")) { 
 					outputbox.write('error');
 				} else {
-					evaluated = Number(Number(evaluated).toString()).toFixed(2);
-					outputbox.write(evaluated + ' ' + target);
+					lasteval = Number(Number(evaluated).toString()).toFixed(2);
+					outputbox.write(lasteval + ' ' + target);
 				}
 			})();
 			break;
@@ -181,8 +183,8 @@ function calculate(type, operation=null) {
 		case 'temperature':
 			evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
 			evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
-			evaluated = Number(evaluated).toFixed(2);
-			outputbox.write(evaluated + ' ' + target);
+			lasteval = Number(evaluated).toFixed(2);
+			outputbox.write(lasteval + ' ' + target);
 			break;
 	}
 	inprogress = false;
