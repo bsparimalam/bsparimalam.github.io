@@ -3,37 +3,159 @@
 <head>
 	<!-- site descrition -->
 	<meta charset="utf-8">
-	<title>bhar</title>
-	<style>
-		html { 
-			margin: 0; border-width: 0; padding: 0; border-style: none;
-			border-radius: 0; width: 100%; height: 100%; overflow: hidden;
-			background-color: #c1d5e0;
-		}
-        body { 
-			margin: 0; border-width: 0; padding: 0; border-style: none; border-radius: 0; 
-			overflow: hidden; touch-action: pinch-zoom; touch-action: manipulation;
-			position: absolute; top: 50%; left: 50%;
-			-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
-			width: 100%; height: 100%; max-width: 12cm; min-width: 6cm;
-			max-height: 24cm; min-height: 12cm;
-			display: grid; grid-template-columns: 100%; grid-template-rows: 20% 20% 20% 20%;
-			grid-gap: 5%;
-		}
-	    button {
-	    	width: 100%; height: 100%; grid-row: span 1; grid-column: span 1;
-	    	display: grid; grid-template-columns: 100%; grid-template-rows: 100%; grid-gap: 0%;
-	    	background-color: #333333; border-style: none; color: #c1d5e0; text-align: center;
-	    	font-size: 4em;
-	    }
-	</style>
+	<title>Calculator</title>
+	<meta name="description" content="Personal Calculator: ">
+	<link rel="icon" href="./icon-32x32.png" type="image/png" 
+		sizes="32x32">
+	<link rel="manifest" href="./manifest.json">
+	<link rel="stylesheet" href="./0.css">
+	<!-- web app tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#b0bec5"> 
+	<!--  update the manifest and stylesheet -->
+
+	<meta name="apple-touch-fullscreen" content="yes" >
+	<meta name="apple-mobile-web-app-title" content="Calculator">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<link rel="apple-touch-icon" href="./icon-152x152.png">
+	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
 </head>
-<body>
 
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
-<button onclick="window.location.href='./calculator'"> Personal Calculator </button>
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"> </button>
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
+<body id="body">
+    <div class='inputs'>
+	    <label for="ip" class="visuallyhidden">input box</label>
+		<input type="text" id="ip" name="input box" spellcheck="false" >
+		<p id="op" ></p>
+		<button class="panel" id="angleunit" name="angle unit" 
+			onclick="this.blur(); setangleunit()" >DEG</button>
+		<button class="panel" id="representation" name="representation" 
+			onclick="this.blur(); setnumrep()" >DECI</button>
+		<button class="panel" id="memory" name="memory" 
+			onclick="this.blur(); setmemory(this)" >STORE</button>
+		<button class="panel" id="mc" name="memclear" 
+			onclick="this.blur(); setmemory(this)" >MC</button>
+		<button class="panel" id="more" name="more" 
+			onclick="this.blur(); openmore()" >⠇</button>
+    </div>
+    <div class="scis">
+		<button class="sci" id="sin" name="sine" 
+			onclick="this.blur(); touchinput('sin(')" >sin</button>
+		<button class="sci" id="sin⁻¹" name="sine inverse" 
+			onclick="this.blur(); touchinput('sin⁻¹(')" >sin⁻¹</button>
+		<button class="sci" id="xʸ" name="exponent" 
+			onclick="this.blur(); touchinput('^(')" >xʸ</button>
+		<button class="sci" id="ln" name="natural log" 
+			onclick="this.blur(); touchinput('ln(')" >ln</button>
+		<button class="sci" id="log" name="log" 
+			onclick="this.blur(); touchinput('log(')" >log</button>
 
+		<button class="sci" id="cos" name="cosine" 
+			onclick="this.blur(); touchinput('cos(')" >cos</button>
+		<button class="sci" id="cos⁻¹" name="cosine inverse" 
+			onclick="this.blur(); touchinput('cos⁻¹(')" >cos⁻¹</button>
+		<button class="sci" id="ˣ√" name="root" 
+			onclick="this.blur(); touchinput('√(' )">ˣ√</button>
+		<button class="sci" id="eˣ" name="natural log inverse" 
+			onclick="this.blur(); touchinput('e^(')" >eˣ</button>
+		<button class="sci" id="10ˣ" name="log inverse" 
+			onclick="this.blur(); touchinput('10^(')" >10ˣ</button>
+
+		<button class="sci" id="tan" name="tangent" 
+			onclick="this.blur(); touchinput('tan(')" >tan</button>
+		<button class="sci" id="tan⁻¹" name="tangent inverse" 
+			onclick="this.blur(); touchinput('tan⁻¹(')" >tan⁻¹</button>
+		<button class="sci" id="\(" name="opening bracket" 
+			onclick="this.blur(); touchinput('(')" >(</button>
+		<button class="sci" id="\)" name="closing bracket" 
+			onclick="this.blur(); touchinput(')')" >)</button>
+		<button class="sci" id="π" name="pi" 
+			onclick="this.blur(); touchinput('π' )">π</button>
+    </div>
+    <div class="convs" id="convs">
+    	<label class="visuallyhidden" for="convtypes">conversion types</label>
+		<select class="convtypes" id="convtypes" onchange="this.blur(); 
+			setconvtype(this)"></select>
+		<label class="visuallyhidden" for="convfroms">convert from</label>
+    	<select class="convfroms" id="convfroms" onchange="this.blur();"></select> 
+    	<label class="visuallyhidden" for="convtos">convert to</label>
+		<select class="convtos" id="convtos" onchange="this.blur(); calculate(
+            convtypes.value, convfroms.value + ' ▸ ' + convtos.value)"></select>
+
+        <button class="pref" id="pref0" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref1" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref2" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref3" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref4" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref5" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref6" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+        <button class="pref" id="pref7" name="empty" onclick="this.blur(); 
+        	calculate(this.name, this.innerHTML)"></button>
+
+	</div>
+    <div class="nums">
+		<button class="num" id="1" name="one" 
+			onclick="this.blur(); touchinput('1')" >1</button>
+		<button class="num" id="2" name="two" 
+			onclick="this.blur(); touchinput('2')" >2</button>
+		<button class="num" id="3" name="three" 
+			onclick="this.blur(); touchinput('3')" >3</button>
+		<button class="opr" id="+" name="add" 
+			onclick="this.blur(); touchinput('+')" >+</button>
+		<button class="io" id="bspc" name="delete" 
+			onclick="this.blur(); touchinput('delete')" >⌫</button>
+
+
+		<button class="num" id="4" name="four" 
+			onclick="this.blur(); touchinput('4')" >4</button>
+		<button class="num" id="5" name="five" 
+			onclick="this.blur(); touchinput('5')" >5</button>
+		<button class="num" id="6" name="six" 
+			onclick="this.blur(); touchinput('6')" >6</button>
+		<button class="opr" id="-" name="subtract" 
+			onclick="this.blur(); touchinput('-')" >-</button>
+		<button class="io" id="CE" name="clear all" onclick="this.blur(); 
+			touchinput('clearall')" >CE</button>
+
+		<button class="num" id="7" name="seven" 
+			onclick="this.blur(); touchinput('7')" >7</button>
+		<button class="num" id="8" name="eight" 
+			onclick="this.blur(); touchinput('8')" >8</button>
+		<button class="num" id="9" name="nine" 
+			onclick="this.blur(); touchinput('9')" >9</button>
+		<button class="opr" id="×" name="multiply" 
+			onclick="this.blur(); touchinput('×')" >×</button>
+		<button class="io" id="ANS" name="passoutput" onclick="this.blur();
+			touchinput('passoutput')" >ANS</button>
+
+		<button class="num" id="decimal" name="decimal" 
+			onclick="this.blur(); touchinput('.')" >.</button>
+		<button class="num" id="0" name="zero" 
+			onclick="this.blur(); touchinput('0')" >0</button>
+		<button class="opr" id="=" name="calculate" onclick="this.blur(); 
+			touchinput('evaluate')" >=</button>
+		<button class="opr" id="÷" name="divide" 
+			onclick="this.blur(); touchinput('/')" >÷</button>
+		<button class="num" id="comma" name="comma" 
+			onclick="this.blur(); touchinput(',')" >,</button>
+    </div>
+    <script src='./0.js'></script><script src='./1.js'></script>
+    <script src='./2.js'></script><script src='./3.js'></script>
+    <script src='./4.js'></script>
+    
+	<script> 
+		try {
+			navigator.serviceWorker.register('./install.js');
+		} catch(error) {
+			console.log('offline functionality blocked');
+		}
+	</script>
 </body>
 </html>
