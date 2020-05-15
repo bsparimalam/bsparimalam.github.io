@@ -139,6 +139,8 @@ function filteroutput(evaluated, unit) {
 	console.log('filteroutput: ' + evaluated);
 }
 function calculate(type, operation) {
+	lasttype = type;
+	lastoperation = operation;
 	console.log('computation requested: ' + type + '; ' + operation);
 	var base; var target;
 	if (type != 'function') { evaluated = evaluate(inputbox.read()); }

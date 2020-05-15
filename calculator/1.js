@@ -8,11 +8,7 @@ function setangleunit() {
 	if (angleunit.innerHTML == 'DEG') { angleunit.innerHTML = 'RAD';
 	} else { angleunit.innerHTML = 'DEG'}
 	if (outputbox.read() != '') {
-		if ((more.innerHTML == '⠇' )||(convtypes.value == '-conversions-')) {
-			calculate('simple');
-		} else {
-			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
-		}
+		calculate(lasttype, lastoperation);
 	}
 	console.log('angle unit set to: ' + angleunit.innerHTML);
 } // sets the preferred angle unit
@@ -20,11 +16,7 @@ function setnumrep() {
     if (numrep.innerHTML == 'DECI') { numrep.innerHTML = 'SCI';
     } else { numrep.innerHTML = 'DECI'; }
 	if (outputbox.read() != '') {
-		if ((more.innerHTML == '⠇' )||(convtypes.value == '-conversions-')) {
-			calculate('simple');
-		} else {
-			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
-		}
+		calculate(lasttype, lastoperation);
 	}
     console.log('number representation set to: ' + numrep.innerHTML);
 } // sets the preferred number representation format

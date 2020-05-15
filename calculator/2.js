@@ -1,4 +1,6 @@
 evaluated = 0;
+lasttype = null;
+lastoperation = null;
 // Booleans
 function isoperator(string) {
 	return ( string=='+' || string=='-' || string=='×' || string=='*'
