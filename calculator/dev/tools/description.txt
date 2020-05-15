@@ -1,0 +1,3 @@
+Personal-Scientific-Calculator
+Scientific calculator: smart-personal shortcuts and dark mode.
+calculator, scientific, personal, conversions, currency, dark, light
