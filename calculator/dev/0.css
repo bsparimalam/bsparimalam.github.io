@@ -6,7 +6,7 @@
 		font-size: 2vw;
 	}
 	body {
-		min-height: 150vw;
+		min-height: 160vw;
 	}
 }
 @media (min-height: 24cm) and (max-width: 12cm) {
