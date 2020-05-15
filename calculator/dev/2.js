@@ -75,7 +75,6 @@ function touchinput(key) {
 		} else {
 			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
 		}
-		inprogress = false;
 	} else if ( key == 'delete') {
 		inputbox.removeastring();
 		inprogress = true;
@@ -106,7 +105,6 @@ document.addEventListener('keydown', event => {
 		} else {
 			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
 		}
-		inprogress = false;
 	} else if ( inputbox.e != document.activeElement ) {
 		if (!inprogress && isoperator(key)) {
 			inputbox.e.value = evaluated;

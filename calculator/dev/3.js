@@ -188,5 +188,6 @@ function calculate(type, operation) {
 			outputbox.write(evaluated + ' ' + target);
 			break;
 	}
+	inprogress = false;
 	log(type, operation);
 }
