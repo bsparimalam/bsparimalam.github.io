@@ -1,3 +1,4 @@
+app = document.getElementsByTagName('BODY');
 convtypes = document.getElementById('convtypes');
 convfroms = document.getElementById('convfroms');
 convtos = document.getElementById('convtos');
@@ -77,3 +78,7 @@ if (prefs == null) {
 } else {
 	loadprefs();
 } // load user preferred conversions
+
+function scrolldown(element) {
+	element.scrollIntoView();
+}

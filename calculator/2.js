@@ -8,11 +8,15 @@ function isoperator(string) {
 	);
 }
 function isnumber(string, before, after) {
-	return ( !isNaN(string) || string=='.' 
+	return ( !isNaN(string) || (string=='.')
 		|| ((string == '-' ) && (before == 'E'))
 		|| ((string == '+' ) && (before == 'E')) 
 		|| ((string == 'E' ) && (after == '-'))
-		|| ((string == 'E' ) && (after == '+')));
+		|| ((string == 'E' ) && (after == '+'))
+		|| ((string == 'E') && !isNaN(after))
+		|| ((string == 'e' ) && (after == '-'))
+		|| ((string == 'e' ) && (after == '+'))
+		|| ((string == 'e') && !isNaN(after)));
 }
 function istoolong(string, length) {
 	string = string.replace(/\./g, '');
@@ -71,7 +75,7 @@ outputbox = new Outputbox(document.getElementById('op'));
 function touchinput(key) {
 	if ( key == "evaluate" ) {
 		if ((more.innerHTML == '⠇' )||(convtypes.value == '-conversions-')) {
-			calculate('simple');
+			calculate('simple', null);
 		} else {
 			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
 		}
@@ -101,7 +105,7 @@ document.addEventListener('keydown', event => {
 	key = event.key;
 	if ( key == "Enter" ) {
 		if ((more.innerHTML == '⠇' )||(convtypes.value =='-conversions-')) {
-			calculate('simple');
+			calculate('simple', null);
 		} else {
 			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
 		}

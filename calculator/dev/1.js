@@ -1,4 +1,4 @@
-app = document.getElementsByTagName('BODY');
+
 angleunit = document.getElementById('angleunit');
 numrep = document.getElementById('representation');
 memory = document.getElementById('memory');

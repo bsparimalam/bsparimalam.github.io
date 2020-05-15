@@ -130,15 +130,11 @@ function filteroutput(evaluated, unit) {
 			evaluated = Number(evaluated).toExponential();
 		} 
 		evaluated = String(evaluated).replace(/e/g, 'E');
-		if (unit) {
-			outputbox.write(evaluated + ' ' + unit);
-		} else {
-			outputbox.write(evaluated);
-		}
 	}
 	console.log('filteroutput: ' + evaluated);
+	return evaluated;
 }
-function calculate(type, operation) {
+function calculate(type, operation=null) {
 	lasttype = type;
 	lastoperation = operation;
 	console.log('computation requested: ' + type + '; ' + operation);
@@ -148,7 +144,7 @@ function calculate(type, operation) {
 		[base, target] = operation.split(' ▸ ');
 	} catch {
 	}
-	if (type != 'simple') {
+	if ((type != 'simple') && (type != 'function')) {
 	var typeindex = 0; var baseindex = 0; var targetindex = 0;
 	while (type != convdata[typeindex][0]) { typeindex++; }
 	while (base != convdata[typeindex][1][baseindex]) { baseindex++; }
@@ -156,13 +152,13 @@ function calculate(type, operation) {
 	}
 	switch (type) {
 		case 'simple':
-			filteroutput(evaluated, null);
+			outputbox.write(filteroutput(evaluated));
 			break;
 		case 'area': case 'energy': case 'length': case 'mass': case 'pressure':
 		case 'volume':
 			evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
 				+ '/' + convdata[typeindex][2][targetindex] );
-			filteroutput(evaluated, target); break;
+			outputbox.write(filteroutput(evaluated) + ' ' + target); break;
 		case 'currency':
 			var baseurl = "https://api.exchangeratesapi.io/latest?";
 			var basecurr = "base=" + base;
@@ -181,6 +177,7 @@ function calculate(type, operation) {
 				}
 			})();
 			break;
+		case 'function': outputbox.write('haha you wish'); break;
 		case 'temperature':
 			evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
 			evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
@@ -189,5 +186,7 @@ function calculate(type, operation) {
 			break;
 	}
 	inprogress = false;
+	console.log('inprogress : ' + inprogress);
 	log(type, operation);
+	return evaluated;
 }

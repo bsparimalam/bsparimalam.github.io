@@ -5,12 +5,22 @@
 		--app-width: 100%;
 		font-size: 2vw;
 	}
+	body {
+		min-height: 150vw;
+	}
 }
 @media (min-height: 24cm) and (max-width: 12cm) {
 	:root{
 		--app-height: 200vw;
 		--app-width: 100%;
 		font-size: 2vw;
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	}
 }
 @media (max-height: 24cm) and (min-width: 12cm) {
@@ -19,12 +29,26 @@
 		--app-width: 50vh;
 		font-size: 1vh;
 	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
 }
 @media (min-height: 24cm) and (min-width: 12cm) {
 	:root{
 		--app-height: 24cm;
 		--app-width: 12cm;
 		font-size: 0.25cm;
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	}
 }
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
@@ -109,12 +133,6 @@ html {
 body {
 	width: var(--app-width); 
 	height: var(--app-height); 
-
-	position: absolute; 
-	top: 50%; 
-	left: 50%;
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
 
 	display: grid; 
 	grid-gap: 0%;
