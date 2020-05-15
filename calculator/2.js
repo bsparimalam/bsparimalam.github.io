@@ -35,17 +35,27 @@ class Inputbox {
 	length() {
 		return this.read().length;
 	}
+	setfontsize(){
+		if (this.e.value.length > 9) {
+			this.e.style.fontSize = 'var(--font-size-3-0-1)';
+		} else {
+			this.e.style.fontSize = 'var(--font-size-3-0-0)';
+		}
+	}
 	write(string) {
 		this.e.value = string;
 		this.e.scrollLeft = this.e.scrollWidth;
+		this.setfontsize();
 	}
 	addastring(string) {
 		this.e.value += string;
 		this.e.scrollLeft = this.e.scrollWidth;
+		this.setfontsize();
 	}
 	removeastring() {
 		this.e.value = this.e.value.slice(0, -1);
 		this.e.scrollLeft = this.e.scrollWidth;
+		this.setfontsize();
 	}
 	removeall() {
 		this.e.value = null;

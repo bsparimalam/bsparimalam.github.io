@@ -81,8 +81,9 @@
 	--font-size-1-4: 5rem;
 	--font-pad-1-4: 2.5rem;
 	--font-size-2-0: 2.5rem;
-	--font-size-2-1: 2rem;
-	--font-size-3-0: 7.5rem;
+	--font-size-2-1: 2.0rem;
+	--font-size-3-0-0: 7.5rem;
+	--font-size-3-0-1: 6rem;
 	--font-size-3-1: 5rem;
 	--font-size-3-2: 2rem;
 	--border-radius-2: 1rem;
@@ -217,7 +218,7 @@ input, p, button, select, option {
 	touch-action: manipulation; 
 }
 #ip {
-	font-size: var(--font-size-3-0);
+	font-size: var(--font-size-3-0-0);
 }
 #op {
 	font-size: var(--font-size-3-1);
@@ -227,16 +228,18 @@ button {
 }
 .panel {
 	font-size: var(--font-size-3-2);
+	font-weight: 500;
 }
 .sci {
 	font-size: var(--font-size-2-0);
 }
 select {
-	font-size: var(--font-size-2-1);
+	font-size: var(--font-size-2-0);
 	user-select: none;
 }
 .pref {
 	font-size: var(--font-size-2-1);
+	font-weight: 500;
 }
 .num, .opr {
 	font-size: var(--font-size-1-0);

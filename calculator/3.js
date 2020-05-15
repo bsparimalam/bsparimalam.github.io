@@ -46,19 +46,20 @@ function evaluate(string) {
 			exponent = '1/2';
 		}
 
-		if (parsedstring[start] == '(') {
+		if (parsedstring[end] == '(') {
 			blockdue = 1;
 			while ((blockdue != 0) && (end != parsedstring.length)) {
-				if (parsedstring[start] == '(') {
+				if (parsedstring[end] == '(') {
 					blockdue += 1;
-				} else if (parsedstring[start] == ')') {
+				} else if (parsedstring[end] == ')') {
 					blockdue -= 1;
 				}
 				end += 1;
 			}
 			exponented = parsedstring.slice( rootindex + 1 , end + 1 );
 		} else if (!isNaN(parsedstring[end])) {
-			while (isnumber(parsedstring[end], parsedstring[start-1], parsedstring[start+1])) {
+			while (isnumber(parsedstring[end], parsedstring[end-1], 
+				parsedstring[end+1])) {
 				end += 1;
 			}
 			end -= 1;

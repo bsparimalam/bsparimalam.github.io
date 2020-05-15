@@ -44,21 +44,32 @@ convdata = [
 				'(1/33.814)', '0.946352499983857', '3.7854092439887' ]
 	]
 ] // conversion factors/forumulas
+function setconvtype(element) {
+	var chosentype = element.value;
+	var typeindex = 0;
+	while (chosentype != convdata[typeindex][0]) { typeindex++ }
+	convfroms.innerHTML = ''; convtos.innerHTML = '';
+	var convdatalength = convdata[typeindex][1].length;
+	for (let i=0; i < convdatalength; i++) {
+		var opt1 = document.createElement('option');
+		var opt2 = document.createElement('option');
+		opt1.textContent = convdata[typeindex][1][i];
+		opt1.name = convdata[typeindex][1][i];
+		opt2.textContent = convdata[typeindex][1][convdatalength-1-i];
+		opt2.name = convdata[typeindex][1][convdatalength-1-i];
+		convfroms.appendChild(opt1);
+		convtos.appendChild(opt2);
+	}
+	console.log( chosentype + ' loaded ' );
+} // loads various conversion types
 for (let i=0; i < convdata.length; i++) {
 var opt = document.createElement('option');
 opt.textContent = convdata[i][0];
 convtypes.appendChild(opt);
-} // insert all conversion types from convdata to the app
-var convdatalength = convdata[0][1].length;
-for (let i=0; i < convdatalength; i++) {
-	var opt1 = document.createElement('option');
-	var opt2 = document.createElement('option');
-	opt1.textContent = convdata[0][1][i];
-	opt2.textContent = convdata[0][1][convdatalength-1-i];
-	convfroms.appendChild(opt1);
-	convtos.appendChild(opt2);
-} // conversions loaded
+}
+setconvtype(convtypes);
 console.log('conversions loaded');
+// insert all conversion types from convdata to the app
 
 function loadprefs(){
 	for (var i = 0; (i < 8) && (i < prefs.length ); i++) {
