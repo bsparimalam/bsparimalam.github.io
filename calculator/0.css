@@ -34,7 +34,7 @@
 	--medium: #90a4ae;
 	--dark: #78909c;
 	--select-border: var(--dark);
-	--text: 222222;
+	--text: #222222;
 	}
 }
 @media (prefers-color-scheme: dark) {
@@ -48,8 +48,7 @@
 	}
 }
 :root {
-	font-family: system-ui;
-	text-align: center;
+	--font-family: system-ui;
 	--font-size-0: ;
 	--font-size-1-0: 4rem;
 	--font-size-1-1: 3rem;
@@ -192,67 +191,13 @@ button {
   width: 1px;
 }
 
-/*layout*/
-/*html, body, div, input, p, button { 
-	margin: 0; border-width: 0; padding: 0; border-style: none; 
-	border-radius: 0; width: 100%; height: 100%; overflow: hidden;
-	touch-action: pinch-zoom; touch-action: manipulation; text-align:center;
-}
-body, div {
-	display: grid; grid-gap: 0%;
-}
-body {
-	height: var(--app-height); width: var(--app-width);
-	position: absolute; top: 50%; left: 50%;
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	grid-template-columns: 100%; 
-	grid-template-rows: 30% 25% 0% 45%;
-}
-div { 
-	grid-row: span 1; grid-column: span 1;
-}
-.inputs {
-	grid-template-columns: 20% 20% 20% 20% 20%;
-	grid-template-rows: 50% 30% 20%;
-}
-input, p { 
-	grid-row: span 1; grid-column: span 5;
-}
-.scis {
-	grid-template-columns: 20% 20% 20% 20% 20%;
-	grid-template-rows: 33.33% 33.33% 33.33%;
-}
-.convs {
-	grid-template-columns: 25% 25% 25% 25%;
-	grid-template-rows: 33.33% 33.33% 33.33%;
-}
-select {
-    margin: auto; height: 70%; border-radius: var(--border-radius-2);
-    border-style: solid; border-width: 1px; position: relative;
-    grid-row: span 1; 
-}
-.convtypes {
-	width: 90%;
-	grid-column: span 2;
-}
-.convfroms, .convtos {
-	width: 85%;
-	grid-column: span 1;
-}
-.nums {
-	grid-template-columns: 20% 20% 20% 20% 20%;
-	grid-template-rows: 25% 25% 25% 25%;
-}
-button {
-    grid-row: span 1; grid-column: span 1;
-}
-.visuallyhidden {
-  border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px;
-  overflow: hidden; padding: 0; position: absolute; width: 1px;
-}*/
-
 /*FONT*/
+input, p, button, select, option {
+	font-family: system-ui;
+	text-align: center;
+	touch-action: pinch-zoom;
+	touch-action: manipulation; 
+}
 #ip {
 	font-size: var(--font-size-3-0);
 }
@@ -304,7 +249,7 @@ html {
 .panel:active {
 	background-color: var(--active-color-3);
 }
-.scis, .sci, .convs, select, .pref { 
+.scis, .sci, .convs, select, option, .pref { 
 	background-color: var(--bg-color-2);
 	color: var(--fg-color-2);
 }
@@ -324,11 +269,20 @@ select {
 @media (hover: hover) {
 	.panel:hover {
 		background-color: var(--hover-color-3);
+		border-style: solid;
+		border-width: 1px;
+		border-color: var(--border-color-2);
 	}
 	.sci:hover, select:hover, .pref:hover {
 		background-color: var(--hover-color-2);
+		border-style: solid;
+		border-width: 1px;
+		border-color: var(--border-color-2);
 	}
 	.num:hover, .opr:hover, .io:hover {
 		background-color: var(--hover-color-1);
+		border-style: solid;
+		border-width: 1px;
+		border-color: var(--border-color-2);
 	}
 }
