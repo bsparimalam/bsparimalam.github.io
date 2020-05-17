@@ -1,77 +1,7 @@
 
-@media (max-height: 24cm) and (max-width: 12cm) {
-	:root{
-		--app-height: 100%;
-		--app-width: 100%;
-		font-size: 2vw;
-	}
-	body {
-		min-height: 160vw;
-	}
-}
-@media (min-height: 24cm) and (max-width: 12cm) {
-	:root{
-		--app-height: 200vw;
-		--app-width: 100%;
-		font-size: 2vw;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-@media (max-height: 24cm) and (min-width: 12cm) {
-	:root{
-		--app-height: 100%;
-		--app-width: 50vh;
-		font-size: 1vh;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-@media (min-height: 24cm) and (min-width: 12cm) {
-	:root{
-		--app-height: 24cm;
-		--app-width: 12cm;
-		font-size: 0.25cm;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
-	:root{
-	--lighter: #c1d5e0;
-	--light: #b0bec5;
-	--medium: #90a4ae;
-	--dark: #78909c;
-	--select-border: var(--dark);
-	--text: #222222;
-	}
-}
-@media (prefers-color-scheme: dark) {
-	:root{
-	--lighter: #37474f;
-	--light: #102027;
-	--medium: #101a20;
-	--dark: #000a12;
-	--select-border: var(--lighter);
-	--text: #e2f1f8;
-	}
-}
 :root {
+	--app-corner-radius-0: 0.5cm;
+
 	--font-family: system-ui;
 	--font-size-0: ;
 	--font-size-1-0: 4rem;
@@ -107,7 +37,108 @@
 	--border-color-2: var(--select-border);
 }
 
+@media (prefers-color-scheme: no-preference) {
+	:root{
+	--lighter: #c1d5e0;
+	--light: #b0bec5;
+	--medium: #90a4ae;
+	--dark: #78909c;
+	--select-border: var(--dark);
+	--text: #222222;
+	--preview-text: #555555;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root{
+	--lighter: #37474f;
+	--light: #102027;
+	--medium: #091518;
+	--dark: #000a12;
+	--select-border: var(--lighter);
+	--text: #e2f1f8;
+	--preview-text: #627077;
+	}
+}
+@media (prefers-color-scheme: light) {
+	:root{
+	--lighter: #dddddd;
+	--light: #cccccc;
+	--medium: #bbbbbb;
+	--dark: #aaaaaa;
+	--select-border: var(--dark);
+	--text: #222222;
+	--preview-text: #666666;
+	}
+}
+
+@media (max-height: 24cm) and (max-width: 12cm) {
+	:root{
+		--app-height: 100%;
+		--app-width: 100%;
+		font-size: 2vw;
+		--app-corner-radius: 0;
+	}
+	body {
+		min-height: 160vw;
+	}
+}
+@media (min-height: 24cm) and (max-width: 12cm) {
+	:root{
+		--app-height: 200vw;
+		--app-width: 90%;
+		font-size: 2vw;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (max-height: 24cm) and (min-width: 12cm) {
+	:root{
+		--app-height: 95%;
+		--app-width: 50vh;
+		font-size: 1vh;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (min-height: 24cm) and (min-width: 12cm) {
+	:root{
+		--app-height: 24cm;
+		--app-width: 12cm;
+		font-size: 0.25cm;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
 /*MISCELLANEOUS*/
+html, body, div, input, p, button { 
+	margin: 0;
+	border-width: 0;
+	padding: 0;
+	border-style: none;
+	border-radius: 0;
+	overflow: hidden;
+} /*common parameters*/
+body {
+	border-radius: var(--app-corner-radius);
+}
 html, body, div, input, p, button {
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
@@ -115,14 +146,6 @@ html, body, div, input, p, button {
 :focus { 
 	outline: none !important; 
 } /*focus outline*/
-html, body, div, input, p, button { 
-	margin: 0;
-	border-width: 0;
-	padding: 0;
-	border-style: none; 
-	border-radius: 0;
-	overflow: hidden;
-} /*common parameters*/
 
 /*LAYOUT*/
 html { 
@@ -159,7 +182,7 @@ div {
 	grid-template-rows: 33.33% 33.33% 33.33%;
 }
 .convs {
-	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
 	grid-template-rows: 33.33% 33.33% 33.33%;
 }
 .nums {
@@ -168,36 +191,46 @@ div {
 }
 
 /*LEVEL TWO*/
-#ip, #op {
-	grid-row: span 1; 
-	grid-column: span 5; 
+button {
+    grid-row: span 1;
+    grid-column: span 1;
 	width: 100%; 
 	height: 100%;
 }
-select {
+select, #convert {
     margin: auto;
     position: relative;
     border-style: solid;
     border-width: 1px; 
     border-radius: var(--border-radius-2);
 }
-.convtypes {
+#ip, #op {
 	grid-row: span 1; 
-	grid-column: span 2; 
+	grid-column: span 5; 
+	width: 100%; 
+	height: 100%;
+}
+#convtypes {
+	grid-row: span 1; 
+	grid-column: span 8; 
 	width: 90%; 
 	height: 70%;
 }
-.convfroms, .convtos {
+#convfroms, #convtos, #convert {
 	grid-row: span 1; 
-	grid-column: span 1; 
+	grid-column: span 4; 
 	width: 85%; 
 	height: 70%;
 }
-button {
-    grid-row: span 1;
-    grid-column: span 1;
-	width: 100%; 
-	height: 100%;
+.pref {
+	margin: auto;
+	position: relative;
+	grid-row: span 1;
+    grid-column: span 5;
+    border: 0.2rem dashed;
+    border-radius: var(--border-radius-2);
+    width: 70%;
+    height: 70%;
 }
 .visuallyhidden {
   border: 0; 
@@ -230,10 +263,13 @@ button {
 	font-size: var(--font-size-3-2);
 	font-weight: 500;
 }
+#more {
+	font-weight: 900;
+}
 .sci {
 	font-size: var(--font-size-2-0);
 }
-select {
+select, #convert {
 	font-size: var(--font-size-2-0);
 	user-select: none;
 }
@@ -270,14 +306,14 @@ html {
 .panel:active {
 	background-color: var(--active-color-3);
 }
-.scis, .sci, .convs, select, option, .pref { 
+.scis, .sci, .convs, select, option, #convert, .pref { 
 	background-color: var(--bg-color-2);
 	color: var(--fg-color-2);
 }
-select {
+select, #convert, .pref {
 	border-color: var(--border-color-2);
 }
-.sci:active, select:active, .pref:active {
+.sci:active, select:active, #convert:active, .pref:active {
 	background-color: var(--active-color-2);
 }
 .nums, .num, .opr, .io { 
@@ -294,7 +330,7 @@ select {
 		border-width: 1px;
 		border-color: var(--border-color-2);
 	}
-	.sci:hover, select:hover, .pref:hover {
+	.sci:hover, select:hover, #convert:hover, .pref:hover {
 		background-color: var(--hover-color-2);
 		border-style: solid;
 		border-width: 1px;
@@ -305,5 +341,12 @@ select {
 		border-style: solid;
 		border-width: 1px;
 		border-color: var(--border-color-2);
+	}
+	#comma:hover {
+		border-radius: 0 0 var(--app-corner-radius) 0;
+	}
+	#decimal {
+		border-radius: 0 0 0 var(--app-corner-radius);
+
 	}
 }

@@ -1,9 +1,16 @@
+userprefversion = "v1";
 app = document.getElementsByTagName('BODY');
 convtypes = document.getElementById('convtypes');
 convfroms = document.getElementById('convfroms');
 convtos = document.getElementById('convtos');
+angleunit = document.getElementById('angleunit');
+numrep = document.getElementById('representation');
+memory = document.getElementById('memory');
+more = document.getElementById('more');
+memorystored = null;
+
 convdata = [
-	['-conversions-', ['-from-', '-to-']
+	['conversion', []
 	],
 	['area', [ 'km²', 'hect', 'm²', 'cm²', 'mm²', 'inch²', 'ft²', 
 			'yd²',  'acre', 'mile²' ],
@@ -44,52 +51,128 @@ convdata = [
 				'(1/33.814)', '0.946352499983857', '3.7854092439887' ]
 	]
 ] // conversion factors/forumulas
+
+function setconvblank() {
+	var opt1 = document.createElement('option');
+	var opt2 = document.createElement('option');
+	opt1.textContent = 'from';
+	opt1.name = 'empty'
+	opt2.textContent = 'to';
+	opt2.name = 'empty';
+	convfroms.appendChild(opt1);
+	convtos.appendChild(opt2);
+}
+
+for (let i=0; i < convdata.length; i++) {
+	var opt = document.createElement('option');
+	opt.textContent = convdata[i][0];
+	convtypes.appendChild(opt);
+}
+setconvblank();
+console.log('conversions loaded');
+// insert all conversion types from convdata to the app
+
+function loaduserpref() {
+	angleunit.innerHTML = userpref.angleunit;
+	numrep.innerHTML = userpref.representation;
+	memorystored = userpref.memory;
+	if ( memorystored == null ) {
+		memory.innerHTML = 'STORE';
+	} else {
+		memory.innerHTML = 'RECALL';
+	}
+	for (var i = 0; (i < 8) && (i < userpref.conversionlog.length ); i++) {
+		var prefbutton = document.getElementById('pref'+i);
+		prefbutton.style.margin = '0';
+		prefbutton.style.borderStyle = 'none';
+		prefbutton.style.borderRadius = '0';
+		prefbutton.style.width = '100%';
+		prefbutton.style.height = '100%';
+		prefbutton.innerHTML = userpref.conversionlog[i].operation;
+		prefbutton.convtype = userpref.conversionlog[i].type;
+		prefbutton.name = userpref.conversionlog[i].type;
+	}
+}
+function saveuserpref() {
+	window.localStorage.setItem("userpref" + userprefversion, 
+		JSON.stringify(userpref));
+}
+userpref = JSON.parse(window.localStorage.getItem("userpref" + userprefversion));
+if (userpref == null) { 
+	userpref = {
+		'angleunit': 'DEG',
+		'representation': 'DECI',
+		'memory': null,
+		'conversionlog': []
+	}
+} else {
+	loaduserpref();
+} // load user preferred conversions
+
+function setangleunit() {
+	if (angleunit.innerHTML == 'DEG') {
+		angleunit.innerHTML = 'RAD';
+	} else {
+		angleunit.innerHTML = 'DEG'
+	}
+	userpref.angleunit = angleunit.innerHTML;
+	saveuserpref();
+	if (outputbox.read() != '') {
+		calculate(lasttype, lastoperation);
+	}
+	console.log('angle unit set to: ' + angleunit.innerHTML);
+} // sets the preferred angle unit
+function setnumrep() {
+    if (numrep.innerHTML == 'DECI') { numrep.innerHTML = 'SCI';
+    } else { numrep.innerHTML = 'DECI'; }
+	userpref.representation = numrep.innerHTML;
+	saveuserpref();
+	if (outputbox.read() != '') {
+		calculate(lasttype, lastoperation);
+	}
+    console.log('number representation set to: ' + numrep.innerHTML);
+} // sets the preferred number representation format
+function setmemory(element) {
+	if ( element.innerHTML == 'STORE' ) { 
+		element.innerHTML = 'RECALL';
+		memorystored = lasteval;
+		userpref.memory = lasteval;
+		saveuserpref();
+		console.log( memorystored + ' stored in memeory ');
+	} else if (element.innerHTML == 'RECALL') {
+		inputbox.addastring(memorystored);
+		console.log( memorystored + ' recalled from memory ');
+	} else {
+		memory.innerHTML = 'STORE';
+		console.log( memorystored + ' erased from memory ');
+	}
+} // stores a number to memory
+function openmore() {
+	var status = more.innerHTML;
+	if ( status == '⠇' ) {
+		app[0].style.gridTemplateRows = '30% 0% 25% 45%';
+		more.innerHTML = '↶';
+	} else {
+		app[0].style.gridTemplateRows = '30% 25% 0% 45%';
+		more.innerHTML = '⠇';
+	}
+} // toggles between scientific functions and conversions
+
 function setconvtype(element) {
+	convfroms.innerHTML = ''; convtos.innerHTML = '';
 	var chosentype = element.value;
 	var typeindex = 0;
 	while (chosentype != convdata[typeindex][0]) { typeindex++ }
-	convfroms.innerHTML = ''; convtos.innerHTML = '';
-	var convdatalength = convdata[typeindex][1].length;
-	for (let i=0; i < convdatalength; i++) {
+	setconvblank();
+	for (let i=0; i < convdata[typeindex][1].length; i++) {
 		var opt1 = document.createElement('option');
 		var opt2 = document.createElement('option');
 		opt1.textContent = convdata[typeindex][1][i];
 		opt1.name = convdata[typeindex][1][i];
-		opt2.textContent = convdata[typeindex][1][convdatalength-1-i];
-		opt2.name = convdata[typeindex][1][convdatalength-1-i];
+		opt2.textContent = convdata[typeindex][1][i];
+		opt2.name = convdata[typeindex][1][i];
 		convfroms.appendChild(opt1);
 		convtos.appendChild(opt2);
 	}
 	console.log( chosentype + ' loaded ' );
 } // loads various conversion types
-for (let i=0; i < convdata.length; i++) {
-var opt = document.createElement('option');
-opt.textContent = convdata[i][0];
-convtypes.appendChild(opt);
-}
-setconvtype(convtypes);
-console.log('conversions loaded');
-// insert all conversion types from convdata to the app
-
-function loadprefs(){
-	for (var i = 0; (i < 8) && (i < prefs.length ); i++) {
-		var prefbutton = document.getElementById('pref'+i);
-		prefbutton.innerHTML = prefs[i].operation;
-		prefbutton.convtype = prefs[i].type;
-		prefbutton.name = prefs[i].type;
-	}
-}
-prefs = JSON.parse(window.localStorage.getItem("prefs"));
-if (prefs == null) { 
-	prefs = [{
-		operation: null,
-		usecount: 0,
-		type: null,
-	}]; 
-} else {
-	loadprefs();
-} // load user preferred conversions
-
-function scrolldown(element) {
-	element.scrollIntoView();
-}

@@ -1,5 +1,5 @@
-var version = "v5.3";
-const expectedCaches = ['Calculator-' + version ];
+var appversion = "v5.5";
+const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
     './index.html',
@@ -11,13 +11,12 @@ const files2cache = [
     './0.js',
     './1.js',
     './2.js',
-    './3.js',
-    './4.js'
+    './3.js'
 ];
 
 self.addEventListener('install', function(event) {
-  console.log(version + ' downloading...');
-  event.waitUntil(caches.open('Calculator-' + version )
+  console.log(appversion + ' downloading...');
+  event.waitUntil(caches.open('Calculator-' + appversion )
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
@@ -34,7 +33,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('Calculator-' + version + ' ready to load offline!');
+      console.log('Calculator-' + appversion + ' ready to load offline!');
     })
   );
 });
