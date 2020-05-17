@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="./0.css">
 	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#b0bec5"> 
+	<meta name="theme-color" content="#cccccc"> 
 	<!--  update the manifest and stylesheet -->
 
 	<meta name="apple-touch-fullscreen" content="yes" >
@@ -23,6 +23,16 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link rel="apple-touch-icon" href="./icon-152x152.png">
 	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-166908735-1');
+	</script>
+
 </head>
 
 <body id="body" >
@@ -145,7 +155,7 @@
 			onclick="this.blur(); touchinput('.')" >.</button>
 		<button class="num" id="0" name="zero" 
 			onclick="this.blur(); touchinput('0')" >0</button>
-		<button class="opr" id="=" name="calculate" onclick="this.blur(); 
+		<button class="num" id="=" name="calculate" onclick="this.blur(); 
 			touchinput('evaluate')" >=</button>
 		<button class="opr" id="÷" name="divide" 
 			onclick="this.blur(); touchinput('/')" >÷</button>

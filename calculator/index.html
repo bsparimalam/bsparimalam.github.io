@@ -7,14 +7,14 @@
 	<meta name="description" content="Scientific calculator with 
 		smart-personal shortcuts and dark mode">
 	<meta name="keywords" content="calculator, scientific, personal, 
-		conversions, currency, dark, light">
+		conversions, currency, dark, light, mode">
 	<link rel="icon" href="./icon-32x32.png" type="image/png" 
 		sizes="32x32">
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" href="./0.css">
 	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#b0bec5"> 
+	<meta name="theme-color" content="#cccccc"> 
 	<!--  update the manifest and stylesheet -->
 
 	<meta name="apple-touch-fullscreen" content="yes" >
@@ -23,13 +23,23 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link rel="apple-touch-icon" href="./icon-152x152.png">
 	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-166908735-1');
+	</script>
+
 </head>
 
 <body id="body" >
     <div class='inputs'>
 	    <label for="ip" class="visuallyhidden">input box</label>
 		<input type="text" id="ip" name="input box" spellcheck="false" 
-		inputmode="decimal" onfocus="scrolldown(this)" >
+		inputmode="decimal" onfocus="this.scrollIntoView();" >
 		<p id="op" ></p>
 		<button class="panel" id="angleunit" name="angle unit" 
 			onclick="this.blur(); setangleunit()" >DEG</button>
@@ -38,7 +48,7 @@
 		<button class="panel" id="memory" name="memory" 
 			onclick="this.blur(); setmemory(this)" >STORE</button>
 		<button class="panel" id="mc" name="memclear" 
-			onclick="this.blur(); setmemory(this)" >MC</button>
+			onclick="this.blur(); setmemory(this)" >CLEAR</button>
 		<button class="panel" id="more" name="more" 
 			onclick="this.blur(); openmore()" >⠇</button>
     </div>
@@ -78,13 +88,16 @@
     </div>
     <div class="convs" id="convs">
     	<label class="visuallyhidden" for="convtypes">conversion types</label>
-		<select class="convtypes" id="convtypes" onchange="this.blur(); 
+		<select class="options" id="convtypes" onchange="this.blur(); 
 			setconvtype(this)"></select>
 		<label class="visuallyhidden" for="convfroms">convert from</label>
-    	<select class="convfroms" id="convfroms" onchange="this.blur();"></select> 
+    	<select class="options" id="convfroms" onchange="this.blur();"></select> 
     	<label class="visuallyhidden" for="convtos">convert to</label>
-		<select class="convtos" id="convtos" onchange="this.blur(); calculate(
+		<select class="options" id="convtos" onchange="this.blur(); calculate(
             convtypes.value, convfroms.value + ' ▸ ' + convtos.value)"></select>
+        <button class="options" id="convert" name="convert" onclick="this.blur(); 
+        	calculate(convtypes.value, convfroms.value + ' ▸ ' 
+        	+ convtos.value)"> ▸ </button>
 
         <button class="pref" id="pref0" name="empty" onclick="this.blur(); 
         	calculate(this.name, this.innerHTML)"></button>
@@ -116,7 +129,6 @@
 		<button class="io" id="bspc" name="delete" 
 			onclick="this.blur(); touchinput('delete')" >⌫</button>
 
-
 		<button class="num" id="4" name="four" 
 			onclick="this.blur(); touchinput('4')" >4</button>
 		<button class="num" id="5" name="five" 
@@ -143,7 +155,7 @@
 			onclick="this.blur(); touchinput('.')" >.</button>
 		<button class="num" id="0" name="zero" 
 			onclick="this.blur(); touchinput('0')" >0</button>
-		<button class="opr" id="=" name="calculate" onclick="this.blur(); 
+		<button class="num" id="=" name="calculate" onclick="this.blur(); 
 			touchinput('evaluate')" >=</button>
 		<button class="opr" id="÷" name="divide" 
 			onclick="this.blur(); touchinput('/')" >÷</button>
@@ -152,14 +164,6 @@
     </div>
     <script src='./0.js'></script><script async src='./1.js'></script>
     <script async src='./2.js'></script><script async src='./3.js'></script>
-    <script async src='./4.js'></script>
-    
-	<script> 
-		try {
-			navigator.serviceWorker.register('./install.js');
-		} catch(error) {
-			console.log('offline functionality blocked');
-		}
-	</script>
+	<script> navigator.serviceWorker.register('./install.js'); </script>
 </body>
 </html>

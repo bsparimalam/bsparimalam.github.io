@@ -95,8 +95,7 @@ function log (type, operation) {
 				type = lookuptable[i][0];
 				operation = lookuptable[i][1];
 				console.log('conversion detected: ' +operation + ' ' + type);
-				break;
-			}
+				break;}
 			i++;
 		}
 	}

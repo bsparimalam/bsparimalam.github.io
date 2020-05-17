@@ -1,152 +1,198 @@
-lasteval = 0;
-lasttype = null;
-lastoperation = null;
-// Booleans
-function isoperator(string) {
-	return ( string=='+' || string=='-' || string=='×' || string=='*'
-		|| string == 'x' || string=='X' || string=='/' || string=='÷' 
-	);
-}
-function isnumber(string, before, after) {
-	return ( !isNaN(string) || (string=='.')
-		|| ((string == '-' ) && (before == 'E'))
-		|| ((string == '+' ) && (before == 'E')) 
-		|| ((string == 'E' ) && (after == '-'))
-		|| ((string == 'E' ) && (after == '+'))
-		|| ((string == 'E') && !isNaN(after))
-		|| ((string == 'e' ) && (after == '-'))
-		|| ((string == 'e' ) && (after == '+'))
-		|| ((string == 'e') && !isNaN(after)));
-}
-function istoolong(string, length) {
-	string = string.replace(/\./g, '');
-	eindex = string.indexOf('E');
-	if ( eindex != -1 ) { string = string.slice(0, eindex); }
-	return string.length > length;
-}
-// Classes
-class Inputbox {
-	constructor(element) {
-		this.e = element;
+
+function parse(string) {
+	var angleconv; var angleconvinv;
+	if (angleunit.innerHTML == 'DEG') {
+		angleconv = "(Math.PI/180)*";
+		angleconvinv = "(180/Math.PI)*"; 
+	} else { 
+		angleconv = ''; angleconvinv = '';
 	}
-	read() {
-		return this.e.value;
-	}
-	length() {
-		return this.read().length;
-	}
-	setfontsize(){
-		if (this.e.value.length > 9) {
-			this.e.style.fontSize = 'var(--font-size-3-0-1)';
+	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(
+		/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(
+		/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(
+		/π/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
+		/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(
+		/cos\(/gi, 'Math.cos(' + angleconv).replace(
+		/tan\(/gi, 'Math.tan(' + angleconv).replace(
+		/sin⁻¹\(/gi, angleconvinv + 'Math.asin(').replace(
+		/cos⁻¹\(/gi, angleconvinv + 'Math.acos(').replace(
+		/tan⁻¹\(/gi, angleconvinv + 'Math.atan(').replace(/ |,/gi, '');
+	// parsing root
+	while ( parsedstring.indexOf('√') != -1 ) {
+		var rootindex = parsedstring.indexOf('√');
+		var exponent; var exponented;
+		var start = rootindex - 1 ; var end = rootindex + 1;
+		var blockdue = 0;
+
+		if ( parsedstring[start] == ')') {
+			blockdue = -1;
+			while ((blockdue != 0) && (start != 0)) {
+				if (parsedstring[start] == '(') {
+					blockdue += 1;
+				} else if (parsedstring[start] == ')') {
+					blockdue -= 1;
+				}
+				start -= 1;
+			}
+			exponent = '1/' + parsedstring.slice(start, rootindex);
+		} else if (!isNaN(parsedstring[start])) {
+			while (isnumber(parsedstring[start], parsedstring[start-1], 
+				parsedstring[start+1])) {
+				start -= 1;
+			}
+			start += 1;
+			exponent = '1/' + parsedstring.slice(start, rootindex);
 		} else {
-			this.e.style.fontSize = 'var(--font-size-3-0-0)';
+			exponent = '1/2';
+		}
+
+		if (parsedstring[end] == '(') {
+			blockdue = 1;
+			while ((blockdue != 0) && (end != parsedstring.length)) {
+				if (parsedstring[end] == '(') {
+					blockdue += 1;
+				} else if (parsedstring[end] == ')') {
+					blockdue -= 1;
+				}
+				end += 1;
+			}
+			exponented = parsedstring.slice( rootindex + 1 , end + 1 );
+		} else if (!isNaN(parsedstring[end])) {
+			while (isnumber(parsedstring[end], parsedstring[end-1], 
+				parsedstring[end+1])) {
+				end += 1;
+			}
+			end -= 1;
+			exponented = parsedstring.slice(rootindex + 1, end + 1); 
+		}
+		if (start == -1) {
+			parsedstring = '((' + exponented + ')**(' + exponent + '))' 
+				+ parsedstring.slice(end+1, );
+		} else {
+			parsedstring = parsedstring.slice(0,start) + '((' + exponented
+				 + ')**(' + exponent + '))' + parsedstring.slice(end+1 , );
 		}
 	}
-	write(string) {
-		this.e.value = string;
-		this.e.scrollLeft = this.e.scrollWidth;
-		this.setfontsize();
-	}
-	addastring(string) {
-		this.e.value += string;
-		this.e.scrollLeft = this.e.scrollWidth;
-		this.setfontsize();
-	}
-	removeastring() {
-		this.e.value = this.e.value.slice(0, -1);
-		this.e.scrollLeft = this.e.scrollWidth;
-		this.setfontsize();
-	}
-	removeall() {
-		this.e.value = null;
-	}
-}
-class Outputbox {
-	constructor(element) {
-		this.e = element;
-	}
-	read() {
-		return this.e.innerHTML;
-	}
-	length() {
-		return this.read().length;
-	}
-	removeall() {
-		this.e.innerHTML = null;
-	}
-	write(string) {
-		this.e.innerHTML = string;
-	}
-}
-inprogress = true; 
-inputbox = new Inputbox(document.getElementById('ip'));
-outputbox = new Outputbox(document.getElementById('op'));
-// touch input
-function touchinput(key) {
-	if ( key == "evaluate" ) {
-		if ((more.innerHTML == '⠇' )||(convtypes.value == '-conversions-')) {
-			calculate('simple', null);
-		} else {
-			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
+	console.log('Parsed expression: ' + parsedstring);
+	// cleaning up trig functions, eg. assigning sin(pi) = 0
+	function cleanuptrig(trigfunction, reminder) {
+		var start = 0;
+		while ((parsedstring.indexOf(trigfunction, start) != -1)) {
+			var trigindex = parsedstring.indexOf(trigfunction, start);
+			var start = trigindex + 8 ; var end = start + 1;
+			var blockdue = 1;
+			while (blockdue != 0) {
+				if (parsedstring[end] == '(') {
+					blockdue++;
+				} else if (parsedstring[end] == ')') {
+					blockdue--;
+				}
+				end++;
+			}
+			if (((eval(parsedstring.slice(
+				start, end))/Math.PI).toPrecision(5))%1 == reminder ) {
+				if (trigindex != 0) {
+					parsedstring = parsedstring.slice(0,trigindex) 
+						+ '(0)' + parsedstring.slice(end, );
+				} else {
+					parsedstring = '(0)' + parsedstring.slice(end, );
+				}
+			}
+			start = trigindex + 1;
 		}
-	} else if ( key == 'delete') {
-		inputbox.removeastring();
+	}
+	if (parsedstring.split('(').length == parsedstring.split(')').length) {
+		cleanuptrig('Math.sin(', 0);
+		cleanuptrig('Math.tan(', 0);
+		cleanuptrig('Math.cos(', 0.5);
+		console.log('trigonometric functions cleaned: '+ parsedstring);
+	}
+
+
+	return parsedstring;
+}
+function filteroutput(evaluated, unit) {
+
+	if (evaluated.toString().length > 10) { 
+		evaluated = evaluated.toPrecision(10); 
+	}
+	if ( numrep.innerHTML == 'DECI') {
+		evaluated = Number(evaluated).toString();
+	} 
+	if ((numrep.innerHTML == 'SCI') || istoolong(evaluated, 11)) {
+		evaluated = Number(evaluated).toExponential();
+	} 
+	evaluated = String(evaluated).replace(/e/g, 'E');
+	evaluated = insertcomma(evaluated);
+	console.log('filteroutput: ' + evaluated);
+	return evaluated;
+}
+function calculate(type, operation=null) {
+	lasttype = type; lastoperation = operation;
+	console.log('computation requested: ' + type + '; ' + operation);
+	var base=null ; var target=null;
+	try {
+		evaluated = eval(parse(inputbox.read()));		
+	} catch {
+		evaluated = 'error';
+	}
+	try {
+		[base, target] = operation.split(' ▸ ');
+	} catch {}
+	if ((evaluated == 'error') || (type == 'conversion') || (base == 'from')
+			|| (target == 'to') || isNaN(evaluated) 
+			|| (typeof(evaluated) != "number"))  {
+		outputbox.write('error');
 		inprogress = true;
-	} else if ( key == 'clearall') {
-		inputbox.removeall();
-		outputbox.removeall();
-		inprogress = true;
-	} else if ( key == 'passoutput') {
-		inputbox.write(lasteval);
-		outputbox.removeall();
-		inprogress = true;
+		console.log('inprogress : ' + inprogress);
+	} else if (type == 'simple') {
+		lasteval = filteroutput(evaluated);
+		outputbox.write(lasteval);
+		inprogress = false;
+		console.log('inprogress : ' + inprogress);
+		log(type, operation);
 	} else {
-		if ( !inprogress && isoperator(key) ) {
-			inputbox.e.value = lasteval;
-			outputbox.removeall();
+		var typeindex = 0; var baseindex = 0; var targetindex = 0;
+		while (type != convdata[typeindex][0]) { typeindex++; }
+		while (base != convdata[typeindex][1][baseindex]) { baseindex++; }
+		while (target != convdata[typeindex][1][targetindex]) {	targetindex++; }
+		switch (type) {
+			case 'area': case 'energy': case 'length': case 'mass': case 'pressure':
+			case 'volume':
+				evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
+					+ '/' + convdata[typeindex][2][targetindex] );
+				lasteval = filteroutput(evaluated);
+				outputbox.write(lasteval + ' ' + target); break;
+			case 'currency':
+				var baseurl = "https://api.exchangeratesapi.io/latest?";
+				var basecurr = "base=" + base;
+				var target = operation.slice(6, 9);
+				var targetcurr = "&symbols=" + target;
+				outputbox.write('loading...');
+				(async () => {
+					var response = await fetch( baseurl + basecurr + targetcurr );
+					var data = await response.json();
+					evaluated = evaluated*data["rates"][target];
+					if (isNaN(evaluated) || (typeof(evaluated) != "number")) { 
+						outputbox.write('error');
+					} else {
+						lasteval = Number(Number(evaluated).toString()).toFixed(2);
+						lasteval = insertcomma(lasteval);
+						outputbox.write(lasteval + ' ' + target);
+					}
+				})();
+				break;
+			case 'temperature':
+				evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
+				evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
+				lasteval = Number(evaluated).toFixed(2);
+				lasteval = insertcomma(lasteval);
+				outputbox.write(lasteval + ' ' + target);
+				break;
 		}
-		inputbox.addastring(key);
-		inprogress = true;
+		inprogress = false;
+		console.log('inprogress : ' + inprogress);
+		log(type, operation);
+		return evaluated;
 	}
-	console.log('inprogress : ' + inprogress);
 }
-// keyboard input
-document.addEventListener('keydown', event => {
-	key = event.key;
-	if ( key == "Enter" ) {
-		if ((more.innerHTML == '⠇' )||(convtypes.value =='-conversions-')) {
-			calculate('simple', null);
-		} else {
-			calculate(convtypes.value, convfroms.value + ' ▸ ' + convtos.value);
-		}
-	} else if ( inputbox.e != document.activeElement ) {
-		if (!inprogress && isoperator(key)) {
-			inputbox.e.value = lasteval;
-			outputbox.removeall();
-		}
-		switch (key) {
-			case 'Backspace': case 'Delete':
-				inputbox.removeastring(); break;
-			case '*': case 'x': case 'X':
-				inputbox.addastring('×'); break;
-			case '^':
-				inputbox.addastring('^('); break;
-			case '(': case '{': case '[': case '<': 
-				inputbox.addastring('('); break;
-			case ')': case '}': case ']': case '>':
-				inputbox.addastring(')'); break;
-			case '0': case '1': case '2': case '3': case '4': case '5': case '6': 
-			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
-			case '+': case '-': case '/': case '%':
-			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
-			case 's': case 't':
-				inputbox.addastring(key); break;
-			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
-			case 'S': case 'T':
-				inputbox.addastring(key.toLowerCase()); break;
-		}
-		inprogress = true;
-	} else { inprogress = true; 
-	}
-	console.log('inprogress : ' + inprogress);
-});

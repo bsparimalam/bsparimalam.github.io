@@ -1,6 +1,8 @@
 
 :root {
 	--app-corner-radius-0: 0.5cm;
+	--app-border-width-0: 0.1cm;
+	--app-border-style-0: solid;
 
 	--font-family: system-ui;
 	--font-size-0: ;
@@ -18,56 +20,72 @@
 	--font-size-3-2: 2rem;
 	--border-radius-2: 1rem;
 
-	--bg-color-0: var(--lighter);
-	--bg-color-1: var(--light);
-	--bg-color-2: var(--medium);
-	--bg-color-3: var(--dark);
-	--fg-color-0:;
-	--fg-color-1: var(--text);
-	--fg-color-2: var(--text);
-	--fg-color-3: var(--text);
-	--active-color-0:;
-	--active-color-1: var(--lighter);
-	--active-color-2: var(--light);
-	--active-color-3: var(--medium);
-	--hover-color-0:;
-	--hover-color-1: var(--lighter);
-	--hover-color-2: var(--light);
-	--hover-color-3: var(--medium);
-	--border-color-2: var(--select-border);
 }
 
-@media (prefers-color-scheme: no-preference) {
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme:light ) {
 	:root{
-	--lighter: #c1d5e0;
-	--light: #b0bec5;
-	--medium: #90a4ae;
-	--dark: #78909c;
-	--select-border: var(--dark);
-	--text: #222222;
-	--preview-text: #555555;
+	--color-one: #1565c0;
+	--color-two: #ffffff;
+    --color-three: #000000;
+	--color-four: #cccccc;
+	--color-five: #1e88e5;
+
+
+	--bg-color-0: var(--color-one);
+	--bg-color-1: var(--color-two);
+	--bg-color-2: var(--color-one);
+	--bg-color-3: var(--color-two);
+	--fg-color-0:;
+	--fg-color-1: var(--color-three);
+	--fg-color-1-0: var(--color-one);
+	--fg-color-2: var(--color-two);
+	--fg-color-3: var(--color-three);
+	--fg-color-3-1: var(--color-four);
+	--active-color-0:;
+	--active-color-1: var(--color-four);
+	--active-color-2: var(--color-five);
+	--active-color-3:var(--color-four);
+	--hover-color-0:;
+	--hover-color-1: var(--color-four);
+	--hover-color-2: var(--color-five);
+	--hover-color-3: var(--color-four);
+
+	--border-color-1: var(--color-two);
+	--border-color-2: var(--color-four);
 	}
 }
+
 @media (prefers-color-scheme: dark) {
 	:root{
-	--lighter: #37474f;
-	--light: #102027;
-	--medium: #091518;
-	--dark: #000a12;
-	--select-border: var(--lighter);
-	--text: #e2f1f8;
-	--preview-text: #627077;
-	}
-}
-@media (prefers-color-scheme: light) {
-	:root{
-	--lighter: #dddddd;
-	--light: #cccccc;
-	--medium: #bbbbbb;
-	--dark: #aaaaaa;
-	--select-border: var(--dark);
-	--text: #222222;
-	--preview-text: #666666;
+	--color-one: #000a12;
+	--color-two: #102027;
+    --color-three: #eeeeee;
+	--color-four: #1c313a;
+	--color-five: #1c313a;
+	--color-six: #888888; 
+
+
+	--bg-color-0: var(--color-one);
+	--bg-color-1: var(--color-two);
+	--bg-color-2: var(--color-one);
+	--bg-color-3: var(--color-two);
+	--fg-color-0:;
+	--fg-color-1: var(--color-three);
+	--fg-color-1-0: var(--color-three);
+	--fg-color-2: var(--color-three);
+	--fg-color-3: var(--color-three);
+	--fg-color-3-1: var(--color-six);
+	--active-color-0:;
+	--active-color-1: var(--color-four);
+	--active-color-2: var(--color-five);
+	--active-color-3:var(--color-four);
+	--hover-color-0:;
+	--hover-color-1: var(--color-four);
+	--hover-color-2: var(--color-five);
+	--hover-color-3: var(--color-four);
+
+	--border-color-1: var(--color-two);
+	--border-color-2: var(--color-four);
 	}
 }
 
@@ -77,6 +95,8 @@
 		--app-width: 100%;
 		font-size: 2vw;
 		--app-corner-radius: 0;
+        --app-border-style: none;
+        --app-border-width: 0;
 	}
 	body {
 		min-height: 160vw;
@@ -88,6 +108,9 @@
 		--app-width: 90%;
 		font-size: 2vw;
 		--app-corner-radius: var(--app-corner-radius-0);
+		--app-border: var(--app-border-0);
+		--app-border-style: var(--app-border-style-0);
+		--app-border-width: var(--app-border-width-0);
 	}
 	body {
 		position: absolute; 
@@ -103,6 +126,9 @@
 		--app-width: 50vh;
 		font-size: 1vh;
 		--app-corner-radius: var(--app-corner-radius-0);
+		--app-border: var(--app-border-0);
+		--app-border-style: var(--app-border-style-0);
+		--app-border-width: var(--app-border-width-0);
 	}
 	body {
 		position: absolute; 
@@ -118,6 +144,9 @@
 		--app-width: 12cm;
 		font-size: 0.25cm;
 		--app-corner-radius: var(--app-corner-radius-0);
+		--app-border: var(--app-border-0);
+		--app-border-style: var(--app-border-style-0);
+		--app-border-width: var(--app-border-width-0);
 	}
 	body {
 		position: absolute; 
@@ -128,7 +157,7 @@
 	}
 }
 /*MISCELLANEOUS*/
-html, body, div, input, p, button { 
+html, div, input, p, button { 
 	margin: 0;
 	border-width: 0;
 	padding: 0;
@@ -137,7 +166,13 @@ html, body, div, input, p, button {
 	overflow: hidden;
 } /*common parameters*/
 body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border-style: var(--app-border-style);
+	border-width: var(--app-border-width);
 	border-radius: var(--app-corner-radius);
+	border-color: var(--border-color-1);
 }
 html, body, div, input, p, button {
 	touch-action: pinch-zoom;
@@ -156,7 +191,7 @@ html {
 /*LEVEL ZERO*/
 body {
 	width: var(--app-width); 
-	height: var(--app-height); 
+	height: var(--app-height);
 
 	display: grid; 
 	grid-gap: 0%;
@@ -298,6 +333,7 @@ select, #convert {
 /*COLOR*/
 html {
 	background-color: var(--bg-color-0);
+	color: var(--fg-color-0);
 }
 .inputs, input, p, .panel {
 	background-color: var(--bg-color-3);
@@ -320,33 +356,20 @@ select, #convert, .pref {
 	background-color: var(--bg-color-1);
 	color: var(--fg-color-1);
 }
+.opr { 
+	color: var(--fg-color-1-0);
+}
 .num:active, .opr:active, .io:active {
 	background-color: var(--active-color-1);
 }
 @media (hover: hover) {
 	.panel:hover {
 		background-color: var(--hover-color-3);
-		border-style: solid;
-		border-width: 1px;
-		border-color: var(--border-color-2);
 	}
 	.sci:hover, select:hover, #convert:hover, .pref:hover {
 		background-color: var(--hover-color-2);
-		border-style: solid;
-		border-width: 1px;
-		border-color: var(--border-color-2);
 	}
 	.num:hover, .opr:hover, .io:hover {
 		background-color: var(--hover-color-1);
-		border-style: solid;
-		border-width: 1px;
-		border-color: var(--border-color-2);
-	}
-	#comma:hover {
-		border-radius: 0 0 var(--app-corner-radius) 0;
-	}
-	#decimal {
-		border-radius: 0 0 0 var(--app-corner-radius);
-
 	}
 }

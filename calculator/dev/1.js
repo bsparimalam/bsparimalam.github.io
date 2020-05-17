@@ -109,11 +109,11 @@ class Outputbox {
 	}
 	write(string) {
 		this.e.innerHTML = string;
-		this.e.style.color = 'var(--text)';
+		this.e.style.color = 'var(--fg-color-3)';
 	}
 	preview(string) {
 		this.e.innerHTML = string;
-		this.e.style.color = 'var(--preview-text)';
+		this.e.style.color = 'var(--fg-color-3-1)';
 	}
 }
 inprogress = true; 

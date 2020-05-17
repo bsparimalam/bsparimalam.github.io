@@ -1,195 +1,123 @@
+lookuptable = [["area","km² ▸ mile²",0.39063],
+["area","hect ▸ acre",2.4711],
+["area","m² ▸ ft²",10.764],
+["area","m² ▸ yd²",1.196],
+["area","cm² ▸ inch²",0.155],
+["area","inch² ▸ cm²",6.4516],
+["area","ft² ▸ m²",0.092903],
+["area","yd² ▸ m²",0.83613],
+["area","acre ▸ hect",0.40469],
+["area","mile² ▸ km²",2.56],
+["energy","Wh ▸ kJ",3.6],
+["energy","Wh ▸ kcal",0.86042],
+["energy","Wh ▸ BTU",3.4121],
+["energy","kJ ▸ Wh",0.27778],
+["energy","kJ ▸ kcal",0.23901],
+["energy","kJ ▸ BTU",0.9478],
+["energy","J ▸ cal",0.23901],
+["energy","cal ▸ J",4.184],
+["energy","kcal ▸ Wh",1.1622],
+["energy","kcal ▸ kJ",4.184],
+["energy","kcal ▸ BTU",3.9656],
+["energy","BTU ▸ Wh",0.29308],
+["energy","BTU ▸ kJ",1.0551],
+["energy","BTU ▸ kcal",0.25217],
+["length","km ▸ mile",0.62137],
+["length","m ▸ inch",39.37],
+["length","m ▸ ft",3.2808],
+["length","m ▸ yard",1.0936],
+["length","cm ▸ inch",0.3937],
+["length","cm ▸ ft",0.032808],
+["length","cm ▸ yard",0.010936],
+["length","mm ▸ inch",0.03937],
+["length","inch ▸ m",0.0254],
+["length","inch ▸ cm",2.54],
+["length","inch ▸ mm",25.4],
+["length","ft ▸ m",0.3048],
+["length","ft ▸ cm",30.48],
+["length","yard ▸ m",0.9144],
+["length","yard ▸ cm",91.44],
+["length","mile ▸ km",1.6093],
+["mass","kg ▸ oz",35.274],
+["mass","kg ▸ lb",2.2046],
+["mass","g ▸ oz",0.035274],
+["mass","oz ▸ kg",0.028349],
+["mass","oz ▸ g",28.349],
+["mass","lb ▸ kg",0.45359],
+["pressure","bar ▸ psi",14.504],
+["pressure","bar ▸ atm",0.98693],
+["pressure","torr ▸ psi",0.019337],
+["pressure","psi ▸ bar",0.068947],
+["pressure","psi ▸ torr",51.715],
+["pressure","psi ▸ atm",0.068046],
+["pressure","atm ▸ bar",1.0132],
+["pressure","atm ▸ psi",14.696],
+["volume","L ▸ tbs",67.628],
+["volume","L ▸ cup",4.1667],
+["volume","L ▸ oz",33.814],
+["volume","L ▸ qt",1.0567],
+["volume","L ▸ gal",0.26417],
+["volume","mL ▸ tsp",0.20288],
+["volume","mL ▸ tbs",0.067628],
+["volume","mL ▸ oz",0.033814],
+["volume","tsp ▸ mL",4.9289],
+["volume","tsp ▸ cup",0.020537],
+["volume","tbs ▸ L",0.014787],
+["volume","tbs ▸ mL",14.787],
+["volume","tbs ▸ cup",0.061612],
+["volume","cup ▸ L",0.24],
+["volume","cup ▸ tsp",48.692],
+["volume","cup ▸ tbs",16.231],
+["volume","cup ▸ oz",8.1154],
+["volume","cup ▸ qt",0.25361],
+["volume","cup ▸ gal",0.063401],
+["volume","oz ▸ L",0.029574],
+["volume","oz ▸ mL",29.574],
+["volume","oz ▸ cup",0.12322],
+["volume","qt ▸ L",0.94635],
+["volume","qt ▸ cup",3.9431],
+["volume","gal ▸ L",3.7854],
+["volume","gal ▸ cup",15.773]];
 
-function evaluate(string) {
-	var angleconv; var angleconvinv;
-	if (angleunit.innerHTML == 'DEG') {
-		angleconv = "(Math.PI/180)*";
-		angleconvinv = "(180/Math.PI)*"; 
-	} else { 
-		angleconv = ''; angleconvinv = '';
+function log (type, operation) {
+	var ipstring = inputbox.read();
+	if ((type == 'simple') && ((ipstring.split('*').length == 2) 
+			|| (ipstring.split('×').length == 2) 
+			|| (ipstring.split('/').length == 2))) {
+		var probableinput = eval(ipstring.split('*').toString().split(
+					'×').toString().split('/').toString().split(',')[0]);
+		var probableratio = evaluated/probableinput;
+		var i = 0
+		var hashsize = lookuptable.length;
+		while (i < hashsize) {
+			if  ((probableratio/lookuptable[i][2] < 1.001) 
+				&& (probableratio/lookuptable[i][2] > 0.999)){
+				type = lookuptable[i][0];
+				operation = lookuptable[i][1];
+				console.log('conversion detected: ' +operation + ' ' + type);
+				break;}
+			i++;
+		}
 	}
-	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(
-		/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(
-		/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(
-		/π/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
-		/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(
-		/cos\(/gi, 'Math.cos(' + angleconv).replace(
-		/tan\(/gi, 'Math.tan(' + angleconv).replace(
-		/sin⁻¹\(/gi, angleconvinv + 'Math.asin(').replace(
-		/cos⁻¹\(/gi, angleconvinv + 'Math.acos(').replace(
-		/tan⁻¹\(/gi, angleconvinv + 'Math.atan(').replace(/ /gi, '');
-	// parsing root
-	while ( parsedstring.indexOf('√') != -1 ) {
-		var rootindex = parsedstring.indexOf('√');
-		var exponent; var exponented;
-		var start = rootindex - 1 ; var end = rootindex + 1;
-		var blockdue = 0;
-
-		if ( parsedstring[start] == ')') {
-			blockdue = -1;
-			while ((blockdue != 0) && (start != 0)) {
-				if (parsedstring[start] == '(') {
-					blockdue += 1;
-				} else if (parsedstring[start] == ')') {
-					blockdue -= 1;
-				}
-				start -= 1;
-			}
-			exponent = '1/' + parsedstring.slice(start, rootindex);
-		} else if (!isNaN(parsedstring[start])) {
-			while (isnumber(parsedstring[start], parsedstring[start-1], 
-				parsedstring[start+1])) {
-				start -= 1;
-			}
-			start += 1;
-			exponent = '1/' + parsedstring.slice(start, rootindex);
+	if (type != 'simple') {
+		var opindex = 0;
+		while ((opindex < userpref.conversionlog.length) &&
+			(operation != userpref.conversionlog[opindex]['operation']) ) {
+			opindex++;
+		}
+		if (opindex != userpref.conversionlog.length) {
+			userpref.conversionlog[opindex].usecount += 1;
 		} else {
-			exponent = '1/2';
+			userpref.conversionlog.push({
+				'operation' : operation,
+				'usecount'	: 1,
+				'type': type
+			});
 		}
-
-		if (parsedstring[end] == '(') {
-			blockdue = 1;
-			while ((blockdue != 0) && (end != parsedstring.length)) {
-				if (parsedstring[end] == '(') {
-					blockdue += 1;
-				} else if (parsedstring[end] == ')') {
-					blockdue -= 1;
-				}
-				end += 1;
-			}
-			exponented = parsedstring.slice( rootindex + 1 , end + 1 );
-		} else if (!isNaN(parsedstring[end])) {
-			while (isnumber(parsedstring[end], parsedstring[end-1], 
-				parsedstring[end+1])) {
-				end += 1;
-			}
-			end -= 1;
-			exponented = parsedstring.slice(rootindex + 1, end + 1); 
-		}
-		if (start == -1) {
-			parsedstring = '((' + exponented + ')**(' + exponent + '))' 
-				+ parsedstring.slice(end+1, );
-		} else {
-			parsedstring = parsedstring.slice(0,start) + '((' + exponented
-				 + ')**(' + exponent + '))' + parsedstring.slice(end+1 , );
-		}
+		userpref.conversionlog.sort(function(a, b) { 
+			return b.usecount - a.usecount; 
+		});
+		console.log(userpref);
+		saveuserpref();	loaduserpref();
 	}
-	console.log('Parsed expression: ' + parsedstring);
-	// cleaning up trig functions, eg. assigning sin(pi) = 0
-	function cleanuptrig(trigfunction, reminder) {
-		var start = 0;
-		while ((parsedstring.indexOf(trigfunction, start) != -1)) {
-			var trigindex = parsedstring.indexOf(trigfunction, start);
-			var start = trigindex + 8 ; var end = start + 1;
-			var blockdue = 1;
-			while (blockdue != 0) {
-				if (parsedstring[end] == '(') {
-					blockdue++;
-				} else if (parsedstring[end] == ')') {
-					blockdue--;
-				}
-				end++;
-			}
-			if (((eval(parsedstring.slice(
-				start, end))/Math.PI).toPrecision(5))%1 == reminder ) {
-				if (trigindex != 0) {
-					parsedstring = parsedstring.slice(0,trigindex) 
-						+ '(0)' + parsedstring.slice(end, );
-				} else {
-					parsedstring = '(0)' + parsedstring.slice(end, );
-				}
-			}
-			start = trigindex + 1;
-		}
-	}
-	cleanuptrig('Math.sin(', 0);
-	cleanuptrig('Math.tan(', 0);
-	cleanuptrig('Math.cos(', 0.5);
-	console.log('trigonometric functions cleaned: '+ parsedstring);
-	if ( parsedstring.indexOf(',') != -1 ) {
-		parsedlist = parsedstring.split(',');
-		evaluated = [];
-		for ( var i=0; i<parsedlist.length; i++ ) {
-			evaluated.push(eval(parsedlist[i]));
-		}
-	} else {
-		evaluated = eval(parsedstring);
-	}
-	console.log('evaluated output: ' + evaluated);
-	return evaluated;
-}
-function filteroutput(evaluated, unit) {
-	if (isNaN(evaluated) || (typeof(evaluated) != "number")) { 
-		outputbox.write('error');
-	} else {
-		if (evaluated.toString().length > 10) { 
-			evaluated = evaluated.toPrecision(10); 
-		}
-		if ( numrep.innerHTML == 'DECI') {
-			evaluated = Number(evaluated).toString();
-		} 
-		if ((numrep.innerHTML == 'SCI') || istoolong(evaluated, 11)) {
-			evaluated = Number(evaluated).toExponential();
-		} 
-		evaluated = String(evaluated).replace(/e/g, 'E');
-	}
-	console.log('filteroutput: ' + evaluated);
-	return evaluated;
-}
-function calculate(type, operation=null) {
-	lasttype = type;
-	lastoperation = operation;
-	console.log('computation requested: ' + type + '; ' + operation);
-	var base; var target;
-	if (type != 'function') { evaluated = evaluate(inputbox.read()); }
-	try { 
-		[base, target] = operation.split(' ▸ ');
-	} catch {
-	}
-	if ((type != 'simple') && (type != 'function')) {
-	var typeindex = 0; var baseindex = 0; var targetindex = 0;
-	while (type != convdata[typeindex][0]) { typeindex++; }
-	while (base != convdata[typeindex][1][baseindex]) { baseindex++; }
-	while (target != convdata[typeindex][1][targetindex]) { targetindex++; }
-	}
-	switch (type) {
-		case 'simple':
-			lasteval = filteroutput(evaluated);
-			outputbox.write(lasteval);
-			break;
-		case 'area': case 'energy': case 'length': case 'mass': case 'pressure':
-		case 'volume':
-			evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
-				+ '/' + convdata[typeindex][2][targetindex] );
-			lasteval = filteroutput(evaluated);
-			outputbox.write(lasteval + ' ' + target); break;
-		case 'currency':
-			var baseurl = "https://api.exchangeratesapi.io/latest?";
-			var basecurr = "base=" + base;
-			var target = operation.slice(6, 9);
-			var targetcurr = "&symbols=" + target;
-			outputbox.write('loading...');
-			(async () => {
-				var response = await fetch( baseurl + basecurr + targetcurr );
-				var data = await response.json();
-				evaluated = evaluated*data["rates"][target];
-				if (isNaN(evaluated) || (typeof(evaluated) != "number")) { 
-					outputbox.write('error');
-				} else {
-					lasteval = Number(Number(evaluated).toString()).toFixed(2);
-					outputbox.write(lasteval + ' ' + target);
-				}
-			})();
-			break;
-		case 'function': outputbox.write('haha you wish'); break;
-		case 'temperature':
-			evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
-			evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
-			lasteval = Number(evaluated).toFixed(2);
-			outputbox.write(lasteval + ' ' + target);
-			break;
-	}
-	inprogress = false;
-	console.log('inprogress : ' + inprogress);
-	log(type, operation);
-	return evaluated;
 }
