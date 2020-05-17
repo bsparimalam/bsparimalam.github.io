@@ -1,8 +1,6 @@
 
 :root {
 	--app-corner-radius-0: 0.5cm;
-	--app-border-width-0: 0.1cm;
-	--app-border-style-0: solid;
 
 	--font-family: system-ui;
 	--font-size-0: ;
@@ -21,72 +19,47 @@
 	--border-radius-2: 1rem;
 
 }
-
-@media (prefers-color-scheme: no-preference), (prefers-color-scheme:light ) {
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	:root{
-	--color-one: #1565c0;
-	--color-two: #ffffff;
-    --color-three: #000000;
-	--color-four: #cccccc;
-	--color-five: #1e88e5;
-
-
-	--bg-color-0: var(--color-one);
-	--bg-color-1: var(--color-two);
-	--bg-color-2: var(--color-one);
-	--bg-color-3: var(--color-two);
-	--fg-color-0:;
-	--fg-color-1: var(--color-three);
-	--fg-color-1-0: var(--color-one);
-	--fg-color-2: var(--color-two);
-	--fg-color-3: var(--color-three);
-	--fg-color-3-1: var(--color-four);
-	--active-color-0:;
-	--active-color-1: var(--color-four);
-	--active-color-2: var(--color-five);
-	--active-color-3:var(--color-four);
-	--hover-color-0:;
-	--hover-color-1: var(--color-four);
-	--hover-color-2: var(--color-five);
-	--hover-color-3: var(--color-four);
-
-	--border-color-1: var(--color-two);
-	--border-color-2: var(--color-four);
+	--lighter: #c1d5e0;
+	--light: #b0bec5;
+	--medium: #90a4ae;
+	--dark: #78909c;
+	--select-border: var(--dark);
+	--text: #000000;
+	--preview-text: #42545d;
 	}
 }
-
 @media (prefers-color-scheme: dark) {
 	:root{
-	--color-one: #000a12;
-	--color-two: #102027;
-    --color-three: #eeeeee;
-	--color-four: #1c313a;
-	--color-five: #1c313a;
-	--color-six: #888888; 
-
-
-	--bg-color-0: var(--color-one);
-	--bg-color-1: var(--color-two);
-	--bg-color-2: var(--color-one);
-	--bg-color-3: var(--color-two);
-	--fg-color-0:;
-	--fg-color-1: var(--color-three);
-	--fg-color-1-0: var(--color-three);
-	--fg-color-2: var(--color-three);
-	--fg-color-3: var(--color-three);
-	--fg-color-3-1: var(--color-six);
-	--active-color-0:;
-	--active-color-1: var(--color-four);
-	--active-color-2: var(--color-five);
-	--active-color-3:var(--color-four);
-	--hover-color-0:;
-	--hover-color-1: var(--color-four);
-	--hover-color-2: var(--color-five);
-	--hover-color-3: var(--color-four);
-
-	--border-color-1: var(--color-two);
-	--border-color-2: var(--color-four);
+	--lighter: #37474f;
+	--light: #102027;
+	--medium: #101a20;
+	--dark: #000a12;
+	--select-border: var(--lighter);
+	--text: #e2f1f8;
+	--preview-text: #6d8692;
 	}
+}
+:root {
+	--bg-color-0: var(--lighter);
+	--bg-color-1: var(--light);
+	--bg-color-2: var(--medium);
+	--bg-color-3: var(--dark);
+	--fg-color-0:;
+	--fg-color-1: var(--text);
+	--fg-color-2: var(--text);
+	--fg-color-3: var(--text);
+	--fg-color-3-1: var(--preview-text);
+	--active-color-0:;
+	--active-color-1: var(--lighter);
+	--active-color-2: var(--light);
+	--active-color-3: var(--medium);
+	--hover-color-0:;
+	--hover-color-1: var(--lighter);
+	--hover-color-2: var(--light);
+	--hover-color-3: var(--medium);
+	--border-color-2: var(--select-border);
 }
 
 @media (max-height: 24cm) and (max-width: 12cm) {
@@ -157,7 +130,7 @@
 	}
 }
 /*MISCELLANEOUS*/
-html, div, input, p, button { 
+html, body, div, input, p, button { 
 	margin: 0;
 	border-width: 0;
 	padding: 0;
@@ -166,13 +139,7 @@ html, div, input, p, button {
 	overflow: hidden;
 } /*common parameters*/
 body {
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	border-style: var(--app-border-style);
-	border-width: var(--app-border-width);
 	border-radius: var(--app-corner-radius);
-	border-color: var(--border-color-1);
 }
 html, body, div, input, p, button {
 	touch-action: pinch-zoom;
@@ -365,11 +332,20 @@ select, #convert, .pref {
 @media (hover: hover) {
 	.panel:hover {
 		background-color: var(--hover-color-3);
+		border: 1px solid var(--bg-color-3);
 	}
 	.sci:hover, select:hover, #convert:hover, .pref:hover {
 		background-color: var(--hover-color-2);
+		border: 1px solid var(--bg-color-3);
 	}
 	.num:hover, .opr:hover, .io:hover {
 		background-color: var(--hover-color-1);
+		border: 1px solid var(--bg-color-3);
+	}
+	#comma {
+		border-radius: 0 0 var(--app-corner-radius) 0;
+	}
+	#decimal {
+		border-radius: 0 0 0 var(--app-corner-radius);
 	}
 }
