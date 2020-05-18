@@ -79,7 +79,8 @@
 	--font-family: system-ui;
 
 	--font-size-title: 3.5rem;
-	--font-size-desc: 2rem;
+	--font-size-app-title: 3rem;
+	--font-size-app-desc: 2rem;
 
 }
 /*MISCELLANEOUS*/
@@ -122,7 +123,7 @@ body {
 	display: grid; 
 	grid-gap: 0%;
 	grid-template-columns: 100%;
-	grid-template-rows: 25% 25% 25% 25%;
+	grid-template-rows: 10% 25% 25% 25% 15%;
 }
 
 /*LEVEL ONE*/
@@ -141,20 +142,23 @@ h1 {
 	width: auto; height: auto;
 	font-family: var(--font-family);
 	text-align: center;
-	font-size: var(--font-size-title);
 	color: var(--text);
 	grid-row: span 1;
 	grid-column: span 2;
 }
-.zero-title {
+.list-title {
 	grid-row: span 4;
 	grid-column: span 2;
+	font-size: var(--font-size-title);
+}
+.app-title {
+	font-size: var(--font-size-app-title);
 }
 p {
 	width: auto; height: auto;
 	font-family: var(--font-family);
 	text-align: justify;
-	font-size: var(--font-size-desc);
+	font-size: var(--font-size-app-desc);
 	color: var(--text);
 	grid-row: span 2;
 	grid-column: span 2;
@@ -163,7 +167,7 @@ button {
 	width: 90%; height: 100%;
 	font-family: var(--font-family);
 	text-align: center;
-	font-size: var(--font-size-desc);
+	font-size: var(--font-size-app-desc);
 	color: var(--text);
 	grid-row: span 1;
 	grid-column: span 1;
@@ -176,21 +180,21 @@ html {
 body {
 	background-color: var(--medium);
 }
-.zero {
+.title, .list-title {
 	background-color: var(--dark);
 }
-.one, .two, .three, .four {
+.apps {
 	background-color: var(--medium);
 }
 button {
-	background-color: var(--light);
+	background-color: var(--dark);
 }
 button:active {
-	background-color: var(--dark);
+	background-color: var(--lighter);
 }
 
 @media (hover: hover) {
 	button:hover {
-		background-color: var(--dark);
+		background-color: var(--lighter);
 	}
 }

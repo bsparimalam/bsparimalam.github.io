@@ -144,6 +144,9 @@ function setmemory(element) {
 		console.log( memorystored + ' recalled from memory ');
 	} else {
 		memory.innerHTML = 'STORE';
+		memorystored = null;
+		userpref.memory = null;
+		saveuserpref();
 		console.log( memorystored + ' erased from memory ');
 	}
 } // stores a number to memory
