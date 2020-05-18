@@ -69,7 +69,6 @@
 		--border-color-2: var(--select-border);
 	}
 }
-
 @media (max-height: 24cm) and (max-width: 12cm) {
 	:root{
 		--app-height: 100%;
@@ -259,6 +258,7 @@ input, p, button, select, option {
 }
 button, select, option {
 	user-select: none;
+	-webkit-user-select:none;
 }
 #ip {
 	font-size: var(--ip-max);
