@@ -1,39 +1,41 @@
 <!DOCTYPE  html>
 <html lang="en">
 <head>
-	<!-- site descrition -->
 	<meta charset="utf-8">
-	<title>bhar</title>
-	<style>
-		html { 
-			margin: 0; border-width: 0; padding: 0; border-style: none;
-			border-radius: 0; width: 100%; height: 100%; overflow: hidden;
-			background-color: #c1d5e0;
-		}
-        body { 
-			margin: 0; border-width: 0; padding: 0; border-style: none; border-radius: 0; 
-			overflow: hidden; touch-action: pinch-zoom; touch-action: manipulation;
-			position: absolute; top: 50%; left: 50%;
-			-ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
-			width: 100%; height: 100%; max-width: 12cm; min-width: 6cm;
-			max-height: 24cm; min-height: 12cm;
-			display: grid; grid-template-columns: 100%; grid-template-rows: 20% 20% 20% 20%;
-			grid-gap: 5%;
-		}
-	    button {
-	    	width: 100%; height: 100%; grid-row: span 1; grid-column: span 1;
-	    	display: grid; grid-template-columns: 100%; grid-template-rows: 100%; grid-gap: 0%;
-	    	background-color: #333333; border-style: none; color: #c1d5e0; text-align: center;
-	    	font-size: 4em;
-	    }
-	</style>
+	<title>bhar.app</title>
+	<meta name="description" content="list of apps">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#b0bec5">
+	<link rel="stylesheet" href="./0.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1">
+	</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-166908735-1');
+	</script>
 </head>
 <body>
-
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
-<button onclick="window.location.href='./calculator'"> Personal Calculator </button>
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"> </button>
-<button style="visibility: hidden;" onclick="window.location.href='./calculator'"></button>
-
+	<div class="zero">
+		<h1 class="zero-title">App Index</h1>
+	</div>
+	<div class="one" >
+		<h1> Personal Calculator </h1>
+		<p> Scientific calculator with 
+		smart-personal shortcuts, instant results as you type, real-time currency 
+		conversions, and dark mode. Optimized for off-line use. </p>
+		<button onclick="window.location.href='./calculator'"> try </button> 
+		<button onclick="window.location.href='https://progressiveapp.store/pwa/Calculator'"> rate</button>
+	</div>
+	<div class="two" >
+	</div>
+	<div class="three" >
+	</div>
+	<div class="four" >
+	</div>
+	<div class="five" >
+	</div>
 </body>
 </html>

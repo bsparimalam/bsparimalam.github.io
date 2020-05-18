@@ -1,0 +1,196 @@
+@media (max-height: 24cm) and (max-width: 12cm) {
+	:root{
+		--app-height: 100%;
+		--app-width: 100%;
+		font-size: 2vw;
+		--app-corner-radius: 0;
+        --app-border-style: none;
+        --app-border-width: 0;
+	}
+	body {
+		min-height: 160vw;
+	}
+}
+@media (min-height: 24cm) and (max-width: 12cm) {
+	:root{
+		--app-height: 200vw;
+		--app-width: 90%;
+		font-size: 2vw;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (max-height: 24cm) and (min-width: 12cm) {
+	:root{
+		--app-height: 95%;
+		--app-width: 50vh;
+		font-size: 1vh;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (min-height: 24cm) and (min-width: 12cm) {
+	:root{
+		--app-height: 24cm;
+		--app-width: 12cm;
+		font-size: 0.25cm;
+		--app-corner-radius: var(--app-corner-radius-0);
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	:root{
+	--lighter: #c1d5e0;
+	--light: #b0bec5;
+	--medium: #90a4ae;
+	--dark: #78909c;
+	--text: #000000;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root{
+	--lighter: #37474f;
+	--light: #102027;
+	--medium: #101a20;
+	--dark: #000a12;
+	--text: #e2f1f8;
+	}
+}
+:root {
+	--app-corner-radius-0: 0.5cm;
+	--font-family: system-ui;
+
+	--font-size-title: 3.5rem;
+	--font-size-desc: 2rem;
+
+}
+/*MISCELLANEOUS*/
+html, body, div, button { 
+	margin: 0;
+	border-width: 0;
+	padding: 0;
+	border-style: none;
+	border-radius: 0;
+	overflow: hidden;
+} /*common parameters*/
+h1, p, button {
+	margin: auto;
+	position:relative;
+	padding: 0;
+	border-style: none;
+	border-radius: 0;
+	overflow: hidden;	
+}
+body {
+	border-radius: var(--app-corner-radius);
+}
+html, body, div, button {
+	touch-action: pinch-zoom;
+	touch-action: manipulation; 
+} /*touch actions*/
+:focus { 
+	outline: none !important; 
+} /*focus outline*/
+
+/*LAYOUT*/
+html { 
+	width: 100%;
+	height: 100%;
+}
+/*LEVEL ZERO*/
+body {
+	width: var(--app-width); 
+	height: var(--app-height);
+	display: grid; 
+	grid-gap: 0%;
+	grid-template-columns: 100%;
+	grid-template-rows: 25% 25% 25% 25%;
+}
+
+/*LEVEL ONE*/
+div {
+    grid-row: span 1;
+    grid-column: span 1;
+	width: 90%; 
+	height: 100%;
+	padding: 0% 5%;
+	display: grid; grid-gap: 0;
+	grid-template-rows: 25% 25% 25% 25%;
+	grid-template-columns: 50% 50%;
+}
+/*FONT*/
+h1 {
+	width: auto; height: auto;
+	font-family: var(--font-family);
+	text-align: center;
+	font-size: var(--font-size-title);
+	color: var(--text);
+	grid-row: span 1;
+	grid-column: span 2;
+}
+.zero-title {
+	grid-row: span 4;
+	grid-column: span 2;
+}
+p {
+	width: auto; height: auto;
+	font-family: var(--font-family);
+	text-align: justify;
+	font-size: var(--font-size-desc);
+	color: var(--text);
+	grid-row: span 2;
+	grid-column: span 2;
+}
+button {
+	width: 90%; height: 100%;
+	font-family: var(--font-family);
+	text-align: center;
+	font-size: var(--font-size-desc);
+	color: var(--text);
+	grid-row: span 1;
+	grid-column: span 1;
+	border-radius: 1rem;
+}
+/*COLOR*/
+html {
+	background-color: var(--lighter);
+}
+body {
+	background-color: var(--medium);
+}
+.zero {
+	background-color: var(--dark);
+}
+.one, .two, .three, .four {
+	background-color: var(--medium);
+}
+button {
+	background-color: var(--light);
+}
+button:active {
+	background-color: var(--dark);
+}
+
+@media (hover: hover) {
+	button:hover {
+		background-color: var(--dark);
+	}
+}

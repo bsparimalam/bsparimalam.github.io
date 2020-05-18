@@ -25,10 +25,23 @@ function istoolong(string, length) {
 	return string.length > length;
 }
 function insertcomma(string) {
-	console.log(string);
-	string = string.toString().replace(/,/g, '');
+	console.log('insert comma input: ' + string);
+	string = string.toString();
+	if (string.indexOf(',') != 0) {
+		var len = string.length;
+		var start = len-1;
+		while ((!isNaN(string[start]) || (string[start] == ',')
+			||( string[start] == '.')) 
+			&& (start!=-1)) { 
+			start -= 1;
+		}
+	} else {
+		var start = 0;
+	}
+	var stringprefix = string.slice(0, start+1);
+	string = string.slice(start+1).replace(/,/g, '');
 	if( (string.indexOf('E+') == -1) && (string.indexOf('E-') == -1) ) {
-		var start = 0 ; var end = string.length; 
+		var end = string.length; 
 		if(string.indexOf('.') != -1) { 
 			end = string.indexOf('.'); 
 		}
@@ -37,11 +50,11 @@ function insertcomma(string) {
 			if( (i%3 == 1) && (i != 1) ) { 
 				withcomma = ',' + withcomma; 
 			}
-			withcomma = string[end-i] + withcomma;
+			withcomma = string[end-i].toString() + withcomma.toString();
 		}
 		string = withcomma;
 	}
-	return string;
+	return stringprefix + string;
 }
 // Classes
 class Inputbox {
@@ -68,27 +81,11 @@ class Inputbox {
 	}
 	addastring(string) {
 		this.e.value += string;
-		var wholestring = this.read();
-		var len = wholestring.length;
-		var start = len-1;
-		while (!isNaN(wholestring.slice(start, ).replace(/,/gi, '')) 
-			&& (start!=-1)) { 
-			start -= 1;
-		}
-		this.write(wholestring.slice(0, start+2) 
-			+ insertcomma(wholestring.slice(start+2,)));
+		this.write(insertcomma(this.read()));
 	}
 	removeastring() {
 		this.e.value = this.e.value.slice(0, -1);
-		var wholestring = this.read();
-		var len = wholestring.length;
-		var start = len-1;
-		while (!isNaN(wholestring.slice(start, ).replace(/,/gi, '')) 
-			&& (start!=-1)) { 
-			start -= 1;
-		}
-		this.write(wholestring.slice(0, start+2) 
-			+ insertcomma(wholestring.slice(start+2,)));
+		this.write(insertcomma(this.read()));
 	}
 	removeall() {
 		this.e.value = null;
@@ -115,13 +112,16 @@ class Outputbox {
 		this.e.innerHTML = string;
 		this.e.style.color = 'var(--fg-color-3-1)';
 	}
+	error(string) {
+		this.e.innerHTML = string;
+		this.e.style.color = 'var(--fg-color-3-2)';
+	}
 }
 inprogress = true; 
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
 function outputpreview() {
 	var string = parse(inputbox.read());
-	console.log(string, string.split('(').length, string.split(')').length);
 	try {
 		var temp = eval(string);
 	} catch { 
@@ -130,6 +130,8 @@ function outputpreview() {
 	if (!isNaN(temp)) { 
 		temp = filteroutput(temp); 
 		outputbox.preview(temp); 
+	} else if (string == '') {
+		outputbox.preview(0);
 	}
 }
 // touch input
@@ -144,7 +146,6 @@ function touchinput(key) {
 		inputbox.removeall();
 		outputbox.removeall();
 		inprogress = true;
-		outputpreview();
 	} else if ( key == 'passoutput') {
 		inputbox.write(lasteval);
 		outputbox.removeall();

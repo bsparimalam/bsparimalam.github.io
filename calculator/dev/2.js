@@ -142,7 +142,7 @@ function calculate(type, operation=null) {
 	if ((evaluated == 'error') || (type == 'conversion') || (base == 'from')
 			|| (target == 'to') || isNaN(evaluated) 
 			|| (typeof(evaluated) != "number"))  {
-		outputbox.write('error');
+		outputbox.error('invalid input');
 		inprogress = true;
 		console.log('inprogress : ' + inprogress);
 	} else if (type == 'simple') {
@@ -169,18 +169,24 @@ function calculate(type, operation=null) {
 				var target = operation.slice(6, 9);
 				var targetcurr = "&symbols=" + target;
 				outputbox.write('loading...');
-				(async () => {
-					var response = await fetch( baseurl + basecurr + targetcurr );
-					var data = await response.json();
-					evaluated = evaluated*data["rates"][target];
-					if (isNaN(evaluated) || (typeof(evaluated) != "number")) { 
-						outputbox.write('error');
-					} else {
-						lasteval = Number(Number(evaluated).toString()).toFixed(2);
-						lasteval = insertcomma(lasteval);
-						outputbox.write(lasteval + ' ' + target);
-					}
-				})();
+				fetch(baseurl + basecurr + targetcurr)
+				  .then(
+				    function(response) {
+				      if (response.status !== 200) {
+				        outputbox.error('network error');
+				        return;
+				      } else {
+				      	response.json().then(function(data) {
+							evaluated = evaluated*data["rates"][target];
+							lasteval = Number(Number(evaluated).toString()).toFixed(2);
+							lasteval = insertcomma(lasteval);
+							outputbox.write(lasteval + ' ' + target);
+					     });
+				      }
+				    })
+				  .catch(function(err) {
+				  	outputbox.error('network error');
+				});
 				break;
 			case 'temperature':
 				evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
