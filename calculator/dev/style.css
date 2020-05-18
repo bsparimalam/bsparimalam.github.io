@@ -1,68 +1,74 @@
-
+@font-face {
+  font-family: 'default';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('./font.woff2') format('woff2')
+}
 :root {
 	--app-corner-radius-0: 0.5cm;
-
-	--font-family: system-ui;
-	--font-size-0: ;
-	--font-size-1-0: 4rem;
-	--font-size-1-1: 3rem;
-	--font-size-1-2: 2rem;
-	--font-size-1-3: 3.5rem;
-	--font-size-1-4: 5rem;
-	--font-pad-1-4: 2.5rem;
-	--font-size-2-0: 2.5rem;
-	--font-size-2-1: 2.0rem;
-	--font-size-3-0-0: 7.5rem;
-	--font-size-3-0-1: 6rem;
-	--font-size-3-1: 5rem;
-	--font-size-3-2: 2rem;
-	--border-radius-2: 1rem;
-
 }
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	:root{
-	--lighter: #c1d5e0;
-	--light: #b0bec5;
-	--medium: #90a4ae;
-	--dark: #78909c;
-	--select-border: var(--dark);
-	--text: #000000;
-	--preview-text: #42545d;
-	--error: #9e0000;
+		--lighter: #c1d5e0;
+		--light: #b0bec5;
+		--medium: #90a4ae;
+		--dark: #78909c;
+		--select-border: var(--dark);
+		--text: #000000;
+		--preview-text: #42545d;
+		--error: #9e0000;
+
+		--bg-color-0: var(--lighter);
+		--bg-color-1: var(--light);
+		--bg-color-2: var(--medium);
+		--bg-color-3: var(--dark);
+		--fg-color-0:;
+		--fg-color-1: var(--text);
+		--fg-color-2: var(--text);
+		--fg-color-3: var(--text);
+		--fg-color-3-1: var(--preview-text);
+		--fg-color-3-2: var(--error);
+		--active-color-0:;
+		--active-color-1: var(--lighter);
+		--active-color-2: var(--light);
+		--active-color-3: var(--medium);
+		--hover-color-0:;
+		--hover-color-1: var(--lighter);
+		--hover-color-2: var(--light);
+		--hover-color-3: var(--medium);
+		--border-color-2: var(--select-border);
 	}
 }
 @media (prefers-color-scheme: dark) {
-	:root{
-	--lighter: #37474f;
-	--light: #102027;
-	--medium: #101a20;
-	--dark: #000a12;
-	--select-border: var(--lighter);
-	--text: #e2f1f8;
-	--preview-text: #6d8692;
-	--error: #a90000;
+	:root {
+		--lighter: #37474f;
+		--light: #102027;
+		--medium: #101a20;
+		--dark: #000a12;
+		--select-border: var(--lighter);
+		--text: #e2f1f8;
+		--preview-text: #6d8692;
+		--error: #a90000;
+		--bg-color-0: var(--lighter);
+		--bg-color-1: var(--light);
+		--bg-color-2: var(--medium);
+		--bg-color-3: var(--dark);
+		--fg-color-0:;
+		--fg-color-1: var(--text);
+		--fg-color-2: var(--text);
+		--fg-color-3: var(--text);
+		--fg-color-3-1: var(--preview-text);
+		--fg-color-3-2: var(--error);
+		--active-color-0:;
+		--active-color-1: var(--lighter);
+		--active-color-2: var(--lighter);
+		--active-color-3: var(--lighter);
+		--hover-color-0:;
+		--hover-color-1: var(--lighter);
+		--hover-color-2: var(--lighter);
+		--hover-color-3: var(--lighter);
+		--border-color-2: var(--select-border);
 	}
-}
-:root {
-	--bg-color-0: var(--lighter);
-	--bg-color-1: var(--light);
-	--bg-color-2: var(--medium);
-	--bg-color-3: var(--dark);
-	--fg-color-0:;
-	--fg-color-1: var(--text);
-	--fg-color-2: var(--text);
-	--fg-color-3: var(--text);
-	--fg-color-3-1: var(--preview-text);
-	--fg-color-3-2: var(--error);
-	--active-color-0:;
-	--active-color-1: var(--lighter);
-	--active-color-2: var(--light);
-	--active-color-3: var(--medium);
-	--hover-color-0:;
-	--hover-color-1: var(--lighter);
-	--hover-color-2: var(--light);
-	--hover-color-3: var(--medium);
-	--border-color-2: var(--select-border);
 }
 
 @media (max-height: 24cm) and (max-width: 12cm) {
@@ -73,6 +79,7 @@
 		--app-corner-radius: 0;
         --app-border-style: none;
         --app-border-width: 0;
+        --font-family: system-ui;
 	}
 	body {
 		min-height: 160vw;
@@ -87,6 +94,7 @@
 		--app-border: var(--app-border-0);
 		--app-border-style: var(--app-border-style-0);
 		--app-border-width: var(--app-border-width-0);
+		--font-family: 'default', serif;
 	}
 	body {
 		position: absolute; 
@@ -105,6 +113,7 @@
 		--app-border: var(--app-border-0);
 		--app-border-style: var(--app-border-style-0);
 		--app-border-width: var(--app-border-width-0);
+		--font-family: 'default', serif;
 	}
 	body {
 		position: absolute; 
@@ -123,6 +132,7 @@
 		--app-border: var(--app-border-0);
 		--app-border-style: var(--app-border-style-0);
 		--app-border-width: var(--app-border-width-0);
+		--font-family: 'default', serif;
 	}
 	body {
 		position: absolute; 
@@ -147,7 +157,7 @@ body {
 select, #convert {
     border-style: solid;
     border-width: 1px; 
-    border-radius: var(--border-radius-2);
+    border-radius: var(1rem);
 }
 html, body, div, input, p, button {
 	touch-action: pinch-zoom;
@@ -234,7 +244,7 @@ button {
 	grid-row: span 1;
     grid-column: span 5;
     border: 0.2rem dashed;
-    border-radius: var(--border-radius-2);
+    border-radius: var(1rem);
     width: 70%;
     height: 70%;
 }
@@ -250,55 +260,59 @@ button {
 }
 
 /*FONT*/
+:root {
+	--ip-max: 8rem;
+	--ip-min: 6rem;
+}
 input, p, button, select, option {
-	font-family: system-ui;
+	font-family: var(--font-family);
 	text-align: center;
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
 }
+button, select, option {
+	user-select: none;
+}
 #ip {
-	font-size: var(--font-size-3-0-0);
+	font-size: var(--ip-max);
 }
 #op {
-	font-size: var(--font-size-3-1);
-}
-button {
-	user-select: none;
+	font-size: 5rem;
 }
 .panel {
-	font-size: var(--font-size-3-2);
-	font-weight: 500;
+	font-size: 2rem;
 }
-#more {
-	font-weight: 900;
-}
-.sci {
-	font-size: var(--font-size-2-0);
+.sci, select, option {
+	font-size: 2.5rem;
 }
 select, #convert {
-	font-size: var(--font-size-2-0);
-	user-select: none;
+	border-radius: 1.5rem;
+}
+#convert {
+	font-size: 3rem;
 }
 .pref {
-	font-size: var(--font-size-2-1);
-	font-weight: 500;
+	font-size: 2rem;
+	border-radius: 1.5rem;
 }
-.num, .opr {
-	font-size: var(--font-size-1-0);
+.num {
+	font-size: 4rem;
+}
+.opr {
+	font-size: 4.5rem;
 }
 #bspc {
-	font-size: var(--font-size-1-1);
+	font-size: 3rem;
 }
 #ANS {
-	font-size: var(--font-size-1-2);
-	font-weight: 500;
+	font-size: 2.5rem;
 }
 #CE {
-	font-size: var(--font-size-1-3);
+	font-size: 4rem;
 }
 #comma, #decimal {
-	font-size: var(--font-size-1-4);
-	padding-bottom: var(--font-pad-1-4);
+	font-size: 5rem;
+	padding-bottom: 2.5rem;
 }
 
 /*COLOR*/

@@ -162,7 +162,11 @@ function setconvtype(element) {
 	convfroms.innerHTML = ''; convtos.innerHTML = '';
 	var chosentype = element.value;
 	var typeindex = 0;
-	while (chosentype != convdata[typeindex][0]) { typeindex++ }
+	var convlen = convdata[typeindex].length;
+	while ((chosentype != convdata[typeindex][0]) 
+			&& ( typeindex < convlen)) {
+		typeindex++;
+	}
 	setconvblank();
 	for (let i=0; i < convdata[typeindex][1].length; i++) {
 		var opt1 = document.createElement('option');

@@ -2,7 +2,7 @@
   "name": "Personal Calculator",
   "short_name": "Calculator",
   "lang": "en-US",
-  "start_url": ".",
+  "start_url": "./",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color":  "#b0bec5",

@@ -1,17 +1,18 @@
-var appversion = "v5.7";
+var appversion = "v5.8";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
     './index.html',
+    './style.css',
+    './font.woff2',
+    './load.js',
+    './io.js',
+    './compute.js',
+    './log.js',
     './manifest.json',
     './icon-512x512.png',
     './icon-152x152.png',
-    './icon-32x32.png',
-    './0.css',
-    './0.js',
-    './1.js',
-    './2.js',
-    './3.js'
+    './icon-32x32.png'
 ];
 
 self.addEventListener('install', function(event) {

@@ -5,13 +5,13 @@
 	<meta charset="utf-8">
 	<title>Personal Calculator</title>
 	<meta name="description" content="Scientific calculator with 
-		smart-personal shortcuts and dark mode">
+	smart-personal shortcuts, instant results as you type, real-time currency
+	conversions, and dark mode. Optimized for off-line use.">
 	<meta name="keywords" content="calculator, scientific, personal, 
-		conversions, currency, dark, light, mode">
-	<link rel="icon" href="./icon-32x32.png" type="image/png" 
-		sizes="32x32">
+	smart-shortcuts, conversions, currency, dark mode">
+	<link rel="icon" href="./icon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" href="./0.css">
+	<link rel="stylesheet" href="./style.css">
 	<!-- web app tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#b0bec5"> 
@@ -24,14 +24,14 @@
 	<link rel="apple-touch-icon" href="./icon-152x152.png">
 	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
+	<script async src="https://www.googletagmanager.com
+		/gtag/js?id=UA-166908735-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	  gtag('config', 'UA-166908735-1');
 	</script>
-
 </head>
 
 <body id="body" >
@@ -56,8 +56,8 @@
 			onclick="this.blur(); touchinput('sin(')" >sin</button>
 		<button class="sci" id="sin⁻¹" name="sine inverse" 
 			onclick="this.blur(); touchinput('sin⁻¹(')" >sin⁻¹</button>
-		<button class="sci" id="xʸ" name="exponent" 
-			onclick="this.blur(); touchinput('^(')" >xʸ</button>
+		<button class="sci" id="exp" name="exponent" 
+			onclick="this.blur(); touchinput('^(')" >x<sup>ʸ</sup></button>
 		<button class="sci" id="ln" name="natural log" 
 			onclick="this.blur(); touchinput('ln(')" >ln</button>
 		<button class="sci" id="log" name="log" 
@@ -67,12 +67,12 @@
 			onclick="this.blur(); touchinput('cos(')" >cos</button>
 		<button class="sci" id="cos⁻¹" name="cosine inverse" 
 			onclick="this.blur(); touchinput('cos⁻¹(')" >cos⁻¹</button>
-		<button class="sci" id="ˣ√" name="root" 
+		<button class="sci" id="root" name="root" 
 			onclick="this.blur(); touchinput('√(' )">ˣ√</button>
-		<button class="sci" id="eˣ" name="natural log inverse" 
-			onclick="this.blur(); touchinput('e^(')" >eˣ</button>
-		<button class="sci" id="10ˣ" name="log inverse" 
-			onclick="this.blur(); touchinput('10^(')" >10ˣ</button>
+		<button class="sci" id="lninv" name="natural log inverse" 
+			onclick="this.blur(); touchinput('e^(')" >e<sup>ˣ</sup></button>
+		<button class="sci" id="loginv" name="log inverse" 
+			onclick="this.blur(); touchinput('10^(')" >10<sup>ˣ</sup></button>
 
 		<button class="sci" id="tan" name="tangent" 
 			onclick="this.blur(); touchinput('tan(')" >tan</button>
@@ -82,7 +82,7 @@
 			onclick="this.blur(); touchinput('(')" >(</button>
 		<button class="sci" id="\)" name="closing bracket" 
 			onclick="this.blur(); touchinput(')')" >)</button>
-		<button class="sci" id="π" name="pi" 
+		<button class="sci" id="pi" name="pi" 
 			onclick="this.blur(); touchinput('π' )">π</button>
     </div>
     <div class="convs" id="convs">
@@ -123,7 +123,7 @@
 			onclick="this.blur(); touchinput('2')" >2</button>
 		<button class="num" id="3" name="three" 
 			onclick="this.blur(); touchinput('3')" >3</button>
-		<button class="opr" id="+" name="add" 
+		<button class="opr" id="plus" name="add" 
 			onclick="this.blur(); touchinput('+')" >+</button>
 		<button class="io" id="bspc" name="delete" 
 			onclick="this.blur(); touchinput('delete')" >⌫</button>
@@ -134,7 +134,7 @@
 			onclick="this.blur(); touchinput('5')" >5</button>
 		<button class="num" id="6" name="six" 
 			onclick="this.blur(); touchinput('6')" >6</button>
-		<button class="opr" id="-" name="subtract" 
+		<button class="opr" id="sub" name="subtract" 
 			onclick="this.blur(); touchinput('-')" >-</button>
 		<button class="io" id="CE" name="clear all" onclick="this.blur(); 
 			touchinput('clearall')" >CE</button>
@@ -145,7 +145,7 @@
 			onclick="this.blur(); touchinput('8')" >8</button>
 		<button class="num" id="9" name="nine" 
 			onclick="this.blur(); touchinput('9')" >9</button>
-		<button class="opr" id="×" name="multiply" 
+		<button class="opr" id="mult" name="multiply" 
 			onclick="this.blur(); touchinput('×')" >×</button>
 		<button class="io" id="ANS" name="passoutput" onclick="this.blur();
 			touchinput('passoutput')" >ANS</button>
@@ -154,15 +154,15 @@
 			onclick="this.blur(); touchinput('.')" >.</button>
 		<button class="num" id="0" name="zero" 
 			onclick="this.blur(); touchinput('0')" >0</button>
-		<button class="num" id="=" name="calculate" onclick="this.blur(); 
+		<button class="opr" id="=" name="calculate" onclick="this.blur(); 
 			touchinput('evaluate')" >=</button>
-		<button class="opr" id="÷" name="divide" 
+		<button class="opr" id="divi" name="divide" 
 			onclick="this.blur(); touchinput('/')" >÷</button>
 		<button class="num" id="comma" name="comma" 
 			onclick="this.blur(); touchinput('.')" >,</button>
     </div>
-    <script src='./0.js'></script><script async src='./1.js'></script>
-    <script async src='./2.js'></script><script async src='./3.js'></script>
+    <script src='./load.js'></script><script async src='./io.js'></script>
+    <script async src='./compute.js'></script><script async src='./log.js'></script>
 	<script> navigator.serviceWorker.register('./install.js'); </script>
 </body>
 </html>

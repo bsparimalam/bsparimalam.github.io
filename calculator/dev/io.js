@@ -69,9 +69,9 @@ class Inputbox {
 	}
 	setfontsize(){
 		if (this.e.value.length > 9) {
-			this.e.style.fontSize = 'var(--font-size-3-0-1)';
+			this.e.style.fontSize = 'var(--ip-min)';
 		} else {
-			this.e.style.fontSize = 'var(--font-size-3-0-0)';
+			this.e.style.fontSize = 'var(--ip-max)';
 		}
 	}
 	write(string) {
