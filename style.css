@@ -64,6 +64,31 @@
 	--dark: #78909c;
 	--text: #000000;
 	}
+	/*COLOR*/
+	html {
+		background-color: var(--lighter);
+	}
+	body {
+		background-color: var(--medium);
+	}
+	.title, .list-title {
+		background-color: var(--dark);
+	}
+	.apps {
+		background-color: var(--medium);
+	}
+	button {
+		background-color: var(--dark);
+	}
+	button:active {
+		background-color: var(--lighter);
+	}
+
+	@media (hover: hover) {
+		button:hover {
+			background-color: var(--lighter);
+		}
+	}
 }
 @media (prefers-color-scheme: dark) {
 	:root{
@@ -72,6 +97,31 @@
 	--medium: #101a20;
 	--dark: #000a12;
 	--text: #e2f1f8;
+	}
+	/*COLOR*/
+	html {
+		background-color: var(--lighter);
+	}
+	body {
+		background-color: var(--light);
+	}
+	.title, .list-title {
+		background-color: var(--dark);
+	}
+	.apps {
+		background-color: var(--light);
+	}
+	button {
+		background-color: var(--dark);
+	}
+	button:active {
+		background-color: var(--lighter);
+	}
+
+	@media (hover: hover) {
+		button:hover {
+			background-color: var(--lighter);
+		}
 	}
 }
 :root {
@@ -172,29 +222,4 @@ button {
 	grid-row: span 1;
 	grid-column: span 1;
 	border-radius: 1rem;
-}
-/*COLOR*/
-html {
-	background-color: var(--lighter);
-}
-body {
-	background-color: var(--medium);
-}
-.title, .list-title {
-	background-color: var(--dark);
-}
-.apps {
-	background-color: var(--medium);
-}
-button {
-	background-color: var(--dark);
-}
-button:active {
-	background-color: var(--lighter);
-}
-
-@media (hover: hover) {
-	button:hover {
-		background-color: var(--lighter);
-	}
 }
