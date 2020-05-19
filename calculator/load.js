@@ -63,7 +63,7 @@ function setconvblank() {
 	convtos.appendChild(opt2);
 }
 
-for (let i=0; i < convdata.length; i++) {
+for (var i=0; i < convdata.length; i++) {
 	var opt = document.createElement('option');
 	opt.textContent = convdata[i][0];
 	convtypes.appendChild(opt);
@@ -154,7 +154,7 @@ function openmore() {
 	var status = more.innerHTML;
 	if ( status == '⠇' ) {
 		app[0].style.gridTemplateRows = '30% 0% 25% 45%';
-		more.innerHTML = '↶';
+		more.innerHTML = '···';
 	} else {
 		app[0].style.gridTemplateRows = '30% 25% 0% 45%';
 		more.innerHTML = '⠇';
@@ -166,12 +166,11 @@ function setconvtype(element) {
 	var chosentype = element.value;
 	var typeindex = 0;
 	var convlen = convdata[typeindex].length;
-	while ((chosentype != convdata[typeindex][0]) 
-			&& ( typeindex < convlen)) {
+	while (chosentype != convdata[typeindex][0]) {
 		typeindex++;
 	}
 	setconvblank();
-	for (let i=0; i < convdata[typeindex][1].length; i++) {
+	for (var i=0; i < convdata[typeindex][1].length; i++) {
 		var opt1 = document.createElement('option');
 		var opt2 = document.createElement('option');
 		opt1.textContent = convdata[typeindex][1][i];
