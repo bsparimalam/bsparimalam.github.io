@@ -1,11 +1,4 @@
-/* fira-sans-regular - latin */
-@font-face {
-  font-family: 'Fira Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: url('./font.ttf') format('truetype');
-}
-/*local('Fira Sans Regular'), local('FiraSans-Regular'),*/
+
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	:root{
 		--lighter: #c1d5e0;
@@ -127,6 +120,24 @@
 		transform: translate(-50%, -50%);
 	}
 }
+@media (any-pointer: coarse) and (max-height: 24cm) and (max-width: 12cm) {
+	:root {
+		--font-family: system-ui;
+	}
+}
+@media (min-height: 24cm), (min-width: 12cm), (any-pointer: fine) {
+	@font-face {
+		font-family: 'Fira Sans';
+		font-style: normal;
+		font-weight: 400;
+		src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+			url('./font.ttf') format('truetype');
+		font-display: swap;
+	}
+	:root {
+		--font-family:'Fira Sans', sans-serif;
+	}
+}
 /*MISCELLANEOUS*/
 html, body, div, input, p, button { 
 	margin: 0;
@@ -246,7 +257,6 @@ button {
 
 /*FONT*/
 :root {
-	--font-family: 'Fira Sans', serif;
 	--ip-max: 7rem;
 	--ip-min: 6rem;
 }
