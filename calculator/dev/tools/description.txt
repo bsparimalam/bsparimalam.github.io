@@ -1,3 +1,0 @@
-Personal-Scientific-Calculator
-Scientific calculator with smart-personal shortcuts, instant results as you type, real-time currency conversions, and dark mode
-calculator, scientific, personal, conversions, currency, dark, light

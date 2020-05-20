@@ -198,8 +198,16 @@ div {
 	grid-template-rows: 33.33% 33.33% 33.33%;
 }
 .convs {
-	grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
-	grid-template-rows: 33.33% 33.33% 33.33%;
+	grid-template-columns: 100%;
+	grid-template-rows: 33.33% 66.66%;
+}
+.list {
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 100%;
+}
+.prefs {
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: 50% 50%;	
 }
 .nums {
 	grid-template-columns: 20% 20% 20% 20% 20%;
@@ -221,7 +229,7 @@ button {
 }
 #convtypes {
 	grid-row: span 1; 
-	grid-column: span 8;
+	grid-column: span 2;
 	margin: 5% 5%;
 	width: 90%;
 	height: 70%;
@@ -229,7 +237,7 @@ button {
 }
 #convfroms, #convtos, #convert {
 	grid-row: span 1; 
-	grid-column: span 4;
+	grid-column: span 1;
 	margin: 10% 5%;
 	width: 85%; 
 	height: 70%;
@@ -238,7 +246,7 @@ button {
 	margin: auto;
 	position: relative;
 	grid-row: span 1;
-    grid-column: span 5;
+    grid-column: span 1;
     border: 0.2rem dashed;
     border-radius:  var(--app-corner-radius);
     width: 70%;

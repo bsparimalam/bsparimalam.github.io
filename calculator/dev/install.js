@@ -1,4 +1,4 @@
-var appversion = "v6.0";
+var appversion = "v1.0.1";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
@@ -10,9 +10,9 @@ const files2cache = [
     './compute.js',
     './log.js',
     './manifest.json',
-    './icon-512x512.png',
-    './icon-152x152.png',
-    './icon-32x32.png'
+    './icon-512.png',
+    './icon-152.png',
+    './icon-32.png'
 ];
 
 self.addEventListener('install', function(event) {

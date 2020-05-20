@@ -1,0 +1,43 @@
+{
+  "name": "Scientific Calculator",
+  "short_name": "Calculator",
+  "version": "1.0.1",
+  "description": "Scientific calculator with smart-personal shortcuts, instant results as you type, real-time currency conversions, and dark mode.",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./icon-16.png",
+      "19": "./icon-19.png",
+      "32": "./icon-32.png",
+      "38": "./icon-38.png",
+      "48": "./icon-48.png",
+      "128": "./icon-128.png",
+      "512": "./icon-512.png"
+    },
+    "default_title": "Scientific Calculator"
+  },
+  "icons": {
+      "16": "./icon-16.png",
+      "19": "./icon-19.png",
+      "32": "./icon-32.png",
+      "38": "./icon-38.png",
+      "48": "./icon-48.png",
+      "128": "./icon-128.png",
+      "512": "./icon-512.png"
+  },
+  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io; script-src 'self' 'unsafe-eval'",
+  "sandbox": {
+     "pages": [
+      "./calculator/index.html",
+      "./calculator/font.tff",
+      "./calculator/style.css",
+      "./calculator/load.js",
+      "./calculator/io.js",
+      "./calculator/compute.js",
+      "./calculator/log.js",
+      "./calculator/icon-32.png",
+      "./calculator/icon-152.png"
+    ]
+  },
+  "manifest_version": 2
+}

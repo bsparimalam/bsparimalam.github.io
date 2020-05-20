@@ -8,7 +8,7 @@ numrep = document.getElementById('representation');
 memory = document.getElementById('memory');
 more = document.getElementById('more');
 memorystored = null;
-isextension = false;
+isextension = true;
 
 convdata = [
 	['conversion', []
