@@ -5,7 +5,7 @@
   "version": "1.0.1",
   "description": "Scientific calculator with smart-personal shortcuts, instant results as you type, real-time currency conversions, and dark mode.",
   "type": "web",
-  "launch_path": "./index.html",
+  "launch_path": "/index.html",
   "icons": {
     "56": "/images/icons/icon-56.png",
     "112": "/images/icons/icon-112.png",
