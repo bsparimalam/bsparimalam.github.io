@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "description": "Scientific calculator with smart-personal shortcuts, instant results as you type, real-time currency conversions, and dark mode.",
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": {
       "16": "./icon-16.png",
       "19": "./icon-19.png",
@@ -34,9 +34,7 @@
       "./calculator/load.js",
       "./calculator/io.js",
       "./calculator/compute.js",
-      "./calculator/log.js",
-      "./calculator/icon-32.png",
-      "./calculator/icon-152.png"
+      "./calculator/log.js"
     ]
   },
   "manifest_version": 2
