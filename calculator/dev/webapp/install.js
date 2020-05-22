@@ -10,13 +10,13 @@ const files2cache = [
     './icon-512.png',
     './icon-152.png',
     './icon-32.png',
-    './calculator/index.html',
-    './calculator/style.css',
-    './calculator/font.ttf',
-    './calculator/load.js',
-    './calculator/io.js',
-    './calculator/compute.js',
-    './calculator/log.js'
+    './core/index.html',
+    './core/style.css',
+    './core/font.ttf',
+    './core/load.js',
+    './core/io.js',
+    './core/compute.js',
+    './core/log.js'
 ];
 
 self.addEventListener('install', function(event) {

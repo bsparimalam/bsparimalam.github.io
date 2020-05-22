@@ -28,13 +28,13 @@
   "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io; script-src 'self' 'unsafe-eval'",
   "sandbox": {
      "pages": [
-      "./calculator/index.html",
-      "./calculator/font.tff",
-      "./calculator/style.css",
-      "./calculator/load.js",
-      "./calculator/io.js",
-      "./calculator/compute.js",
-      "./calculator/log.js"
+      "./core/index.html",
+      "./core/font.tff",
+      "./core/style.css",
+      "./core/load.js",
+      "./core/io.js",
+      "./core/compute.js",
+      "./core/log.js"
     ]
   },
   "manifest_version": 2
