@@ -121,7 +121,6 @@ function log (type, operation) {
 		saveuserpref();	loaduserpref();
 	}
 }
-
 if (!isextension) {
-	navigator.serviceWorker.register('./install.js'); 
+	navigator.serviceWorker.register('./install.js');
 }

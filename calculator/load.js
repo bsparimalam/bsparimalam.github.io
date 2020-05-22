@@ -9,7 +9,6 @@ memory = document.getElementById('memory');
 more = document.getElementById('more');
 memorystored = null;
 isextension = false;
-
 convdata = [
 	['conversion', []
 	],

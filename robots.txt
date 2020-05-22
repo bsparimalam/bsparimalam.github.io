@@ -1,3 +1,2 @@
 User-agent: *
 Disallow:/calcualtor/dev/
-Disallow:/calculator/extension/

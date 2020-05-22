@@ -1,61 +1,6 @@
-@media (max-height: 24cm) and (max-width: 12cm) {
-	:root{
-		--app-height: 100%;
-		--app-width: 100%;
-		font-size: 2vw;
-		--app-corner-radius: 0;
-        --app-border-style: none;
-        --app-border-width: 0;
-	}
-	body {
-		min-height: 160vw;
-	}
-}
-@media (min-height: 24cm) and (max-width: 12cm) {
-	:root{
-		--app-height: 200vw;
-		--app-width: 90%;
-		font-size: 2vw;
-		--app-corner-radius: var(--app-corner-radius-0);
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-@media (max-height: 24cm) and (min-width: 12cm) {
-	:root{
-		--app-height: 95%;
-		--app-width: 50vh;
-		font-size: 1vh;
-		--app-corner-radius: var(--app-corner-radius-0);
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-@media (min-height: 24cm) and (min-width: 12cm) {
-	:root{
-		--app-height: 24cm;
-		--app-width: 12cm;
-		font-size: 0.25cm;
-		--app-corner-radius: var(--app-corner-radius-0);
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
+
+
+
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	:root{
 	--lighter: #c1d5e0;
@@ -124,34 +69,82 @@
 		}
 	}
 }
+@media (max-width: 20cm) {
+	:root{
+		--app-width: 100%;
+		font-size: 2vw;
+	}
+}
+@media (min-width: 20cm) {
+	:root{
+		--app-width: 20cm;
+		font-size: 0.25cm;
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+@media (max-width: 12cm) {
+	:root{
+		--app-width: 100%;
+		font-size: 2vw;
+	}
+}
+@media (min-width: 12cm) {
+	:root{
+		--app-width: 12cm;
+		font-size: 0.25cm;
+	}
+	body {
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+}
+
 :root {
-	--app-corner-radius-0: 0.5cm;
 	--font-family: system-ui;
-
 	--font-size-title: 3.5rem;
-	--font-size-app-title: 3rem;
-	--font-size-app-desc: 2rem;
-
+	--font-size-app-title: 3.5rem;
+	--font-size-app-desc: 2.5rem;
+}
+a {
+    top: 10px; right: 10px;
+    position: absolute;
+	font-size: 1.5rem;
+	border-style: solid;
+	padding: 1%;
+	border-radius: 1rem;
+	border-color: var(--medium);
+	background-color: var(--dark);
+	color: var(--text);
+	text-decoration: none;
+}
+a:link, a:visited, a:hover, a:focuse, a:active {
+	text-decoration: none;
 }
 /*MISCELLANEOUS*/
-html, body, div, button { 
+html, body { 
 	margin: 0;
 	border-width: 0;
 	padding: 0;
 	border-style: none;
 	border-radius: 0;
-	overflow: hidden;
+
 } /*common parameters*/
+
 h1, p, button {
 	margin: auto;
 	position:relative;
 	padding: 0;
 	border-style: none;
 	border-radius: 0;
-	overflow: hidden;	
-}
-body {
-	border-radius: var(--app-corner-radius);
 }
 html, body, div, button {
 	touch-action: pinch-zoom;
@@ -169,11 +162,7 @@ html {
 /*LEVEL ZERO*/
 body {
 	width: var(--app-width); 
-	height: var(--app-height);
-	display: grid; 
-	grid-gap: 0%;
-	grid-template-columns: 100%;
-	grid-template-rows: 10% 25% 25% 25% 15%;
+	height: 100%;
 }
 .visuallyhidden {
   border: 0; 
@@ -187,14 +176,11 @@ body {
 }
 /*LEVEL ONE*/
 div {
-    grid-row: span 1;
-    grid-column: span 1;
-	width: 90%; 
-	height: 100%;
-	padding: 0% 5%;
-	display: grid; grid-gap: 0;
-	grid-template-rows: 25% 25% 25% 25%;
-	grid-template-columns: 50% 50%;
+
+	width: 100%; 
+	height: auto;
+	padding: 0%;
+
 }
 /*FONT*/
 h1 {
@@ -202,12 +188,9 @@ h1 {
 	font-family: var(--font-family);
 	text-align: center;
 	color: var(--text);
-	grid-row: span 1;
-	grid-column: span 2;
+	padding: 5%;
 }
 .list-title {
-	grid-row: span 4;
-	grid-column: span 2;
 	font-size: var(--font-size-title);
 }
 .app-title {
@@ -215,20 +198,19 @@ h1 {
 }
 p {
 	width: auto; height: auto;
+	padding: 0% 5% 5% 5%;
 	font-family: var(--font-family);
 	text-align: justify;
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
-	grid-row: span 2;
-	grid-column: span 2;
+
 }
 button {
-	width: 90%; height: 100%;
+	padding: 3% 0% 4% 0%; width: 39%;
+	margin: 0% 5% 0% 5%;
 	font-family: var(--font-family);
 	text-align: center;
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
-	grid-row: span 1;
-	grid-column: span 1;
 	border-radius: 1rem;
 }
