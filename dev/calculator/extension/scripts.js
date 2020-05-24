@@ -1,1 +1,3 @@
-document.getElementById('popupwindow').focus();
+setTimeout(() => {
+  document.getElementById('popupwindow').focus();
+}, 100);
