@@ -8,7 +8,6 @@ numrep = document.getElementById('representation');
 memory = document.getElementById('memory');
 more = document.getElementById('more');
 memorystored = null;
-isextension = false;
 convdata = [
 	['conversion', []
 	],
@@ -76,7 +75,7 @@ function loaduserpref() {
 	angleunit.innerHTML = userpref.angleunit;
 	numrep.innerHTML = userpref.representation;
 	memorystored = userpref.memory;
-	if ((userpref.lastinput != '') && (isextension)) {
+	if (userpref.lastinput != '') {
 		document.getElementById('ip').value = userpref.lastinput;
 	} 
 	if ( memorystored == null ) {

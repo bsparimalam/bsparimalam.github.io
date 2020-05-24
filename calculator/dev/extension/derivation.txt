@@ -1,2 +1,0 @@
-set isextension = true
-delete manifest

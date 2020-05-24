@@ -5,7 +5,6 @@
 		--light: #b0bec5;
 		--medium: #90a4ae;
 		--dark: #78909c;
-		--select-border: var(--dark);
 		--text: #000000;
 		--preview-text: #42545d;
 		--error: #9e0000;
@@ -28,7 +27,7 @@
 		--hover-color-1: var(--lighter);
 		--hover-color-2: var(--light);
 		--hover-color-3: var(--medium);
-		--border-color-2: var(--select-border);
+		--border-color-2: var(--dark);
 	}
 }
 @media (prefers-color-scheme: dark) {
@@ -37,7 +36,6 @@
 		--light: #102027;
 		--medium: #101a20;
 		--dark: #000a12;
-		--select-border: var(--lighter);
 		--text: #e2f1f8;
 		--preview-text: #6d8692;
 		--error: #a90000;
@@ -59,7 +57,7 @@
 		--hover-color-1: var(--lighter);
 		--hover-color-2: var(--lighter);
 		--hover-color-3: var(--lighter);
-		--border-color-2: var(--select-border);
+		--border-color-2: var(--lighter);
 	}
 }
 @media (max-height: 24cm) and (max-width: 12cm) {
@@ -336,10 +334,10 @@ html {
 	background-color: var(--bg-color-2);
 	color: var(--fg-color-2);
 }
-select, #convert, .pref {
+select, option, #convert, .pref {
 	border-color: var(--border-color-2);
 }
-.sci:active, select:active, #convert:active, .pref:active {
+.sci:active, select:active, option:active, #convert:active, .pref:active {
 	background-color: var(--active-color-2);
 }
 .nums, .num, .opr, .io { 
@@ -357,7 +355,7 @@ select, #convert, .pref {
 		background-color: var(--hover-color-3);
 		border: 1px solid var(--bg-color-3);
 	}
-	.sci:hover, select:hover, #convert:hover, .pref:hover {
+	.sci:hover, select:hover, option:hover, #convert:hover, .pref:hover {
 		background-color: var(--hover-color-2);
 		border: 1px solid var(--bg-color-3);
 	}
