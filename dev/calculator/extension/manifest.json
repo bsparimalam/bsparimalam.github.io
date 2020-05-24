@@ -25,7 +25,7 @@
       "128": "./icon-128.png",
       "512": "./icon-512.png"
   },
-  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io ; script-src 'self' https://bhar.app 'unsafe-eval'",
+  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io ; script-src 'self' 'unsafe-eval'",
   "sandbox": {
      "pages": [
       "./core/index.html",
