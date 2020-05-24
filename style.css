@@ -124,7 +124,7 @@
 	color: var(--text);
 	text-decoration: none;
 }
-#support:link, #support:visited, #support:hover, #support:focuse, #support:active {
+#support:link, #support:visited, #support:hover, #support:focus, #support:active {
 	text-decoration: none;
 }
 /*MISCELLANEOUS*/
