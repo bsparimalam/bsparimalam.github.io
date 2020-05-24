@@ -77,7 +77,10 @@ function loaduserpref() {
 	memorystored = userpref.memory;
 	if (userpref.lastinput != '') {
 		document.getElementById('ip').value = userpref.lastinput;
-	} 
+	}
+	if (userpref.openmore !== more.innerHTML) {
+		openmore();
+	}
 	if ( memorystored == null ) {
 		memory.innerHTML = 'STORE';
 	} else {
@@ -102,6 +105,7 @@ function saveuserpref() {
 userpref = JSON.parse(window.localStorage.getItem("userpref" + userprefversion));
 if (userpref == null) { 
 	userpref = {
+		'openmore':'⠇',
 		'lastinput': '',
 		'angleunit': 'DEG',
 		'representation': 'DECI',
@@ -158,9 +162,13 @@ function openmore() {
 	if ( status == '⠇' ) {
 		app[0].style.gridTemplateRows = '30% 0% 25% 45%';
 		more.innerHTML = '···';
+		userpref.openmore = '···';
+		saveuserpref();
 	} else {
 		app[0].style.gridTemplateRows = '30% 25% 0% 45%';
 		more.innerHTML = '⠇';
+		userpref.openmore = '⠇';
+		saveuserpref();
 	}
 } // toggles between scientific functions and conversions
 

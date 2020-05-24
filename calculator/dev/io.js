@@ -1,4 +1,4 @@
-lasteval = null;
+lasteval = 0;
 lasttype = null;
 lastoperation = null;
 // Booleans
@@ -111,6 +111,7 @@ class Outputbox {
 	}
 	removeall() {
 		this.e.innerHTML = null;
+		lasteval = 0;
 	}
 	write(string) {
 		this.e.innerHTML = string;
@@ -137,15 +138,20 @@ function outputpreview() {
 	}
 	if (!isNaN(temp)) { 
 		temp = filteroutput(temp); 
-		outputbox.preview(temp); 
+		outputbox.preview(temp);
+		lasteval = temp;
 	} else if (string == '') {
 		outputbox.preview(0);
+		lasteval = 0;
 	}
 }
 
 function touchinput(key) {
 	if ( !inprogress && isoperator(key) ) {
 		inputbox.e.value = lasteval;
+		outputbox.removeall();
+	} else if (!inprogress ) {
+		inputbox.removeall();
 		outputbox.removeall();
 	}
 	inputbox.addastring(key);
@@ -233,7 +239,10 @@ document.addEventListener('keydown', event => {
 		calculate('simple', null);
 	} else if ( inputbox.e != document.activeElement ) {
 		if (!inprogress && isoperator(key)) {
-			inputbox.e.value = lasteval;
+			inputbox.write(lasteval);
+			outputbox.removeall();
+		} else if (!inprogress && (key !== 'Backspace') && (key !== 'Delete')) {
+			inputbox.removeall();
 			outputbox.removeall();
 		}
 		switch (key) {
@@ -260,7 +269,9 @@ document.addEventListener('keydown', event => {
 				inputbox.addastring(key.toLowerCase()); break;
 		}
 		inprogress = true;
-	} else { inprogress = true; 
+	} else { 
+		inprogress = true;
+		outputpreview();
 	}
 	console.log('inprogress : ' + inprogress);
 });

@@ -25,13 +25,11 @@
       "128": "./icon-128.png",
       "512": "./icon-512.png"
   },
-  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io https://bhar.app; script-src 'self' https://bhar.app 'unsafe-eval'",
+  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io ; script-src 'self' https://bhar.app 'unsafe-eval'",
   "sandbox": {
      "pages": [
-      "./index.html",
-      "./style.css",
-      "./scripts.js",
-      "https://bhar.app/calculator/"
+      "./core/index.html",
+      "./core/*"
     ]
   },
   "manifest_version": 2
