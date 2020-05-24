@@ -130,7 +130,6 @@
 		font-weight: 400;
 		src: local('Fira Sans Regular'), local('FiraSans-Regular'),
 			url('./font.ttf') format('truetype');
-		font-display: swap;
 	}
 	:root {
 		--font-family:'Fira Sans', sans-serif;
