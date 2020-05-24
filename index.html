@@ -5,21 +5,28 @@
 	<title>bhar.app</title>
 	<meta name="description" content="list of apps">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'
-		https://api.exchangeratesapi.io; script-src 'self' 'unsafe-eval'">
 	<meta name="theme-color" content="#b0bec5">
 	<link rel="stylesheet" href="./style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
+	<script> 
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-166908735-1');
+	</script>
 </head>
 <body>
     <br><br><br><br>
 	<div class="apps" >
-	    <a href="mailto:support@bhar.app">📧 support@bhar.app</a>
+	    <a id="support" href="mailto:support@bhar.app">📧 support@bhar.app</a>
 		<h1 class="app-title"> Personal Calculator </h1>
 		<p class="app-desc"> &nbsp Scientific calculator with 
 		smart-personal shortcuts, instant results as you type, real-time currency 
-		conversions, and dark mode. Optimized for off-line use. </p>
-		<button onclick="window.location.href='./calculator'"> app </button> 
-		<button onclick="window.location.href='https://chrome.google.com/webstore/detail/scientific-calculator/ogbpkankgohcjdjaljlaflohjgepbokb'">extension</button>
+		conversions, and dark mode. Optimized for off-line use. </p> <br>
+		<a class="button" href="./calculator">WebApp</a>
+		<a class="button" href="https://chrome.google.com/webstore/detail
+		/scientific-calculator/ogbpkankgohcjdjaljlaflohjgepbokb">Extension</a>
 	</div>
 </body>
 </html>

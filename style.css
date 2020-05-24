@@ -1,6 +1,4 @@
 
-
-
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	:root{
 	--lighter: #c1d5e0;
@@ -22,15 +20,15 @@
 	.apps {
 		background-color: var(--medium);
 	}
-	button {
+	.button {
 		background-color: var(--dark);
 	}
-	button:active {
+	.button:active {
 		background-color: var(--lighter);
 	}
 
 	@media (hover: hover) {
-		button:hover {
+		.button:hover {
 			background-color: var(--lighter);
 		}
 	}
@@ -56,15 +54,15 @@
 	.apps {
 		background-color: var(--light);
 	}
-	button {
+	.button {
 		background-color: var(--dark);
 	}
-	button:active {
+	.button:active {
 		background-color: var(--lighter);
 	}
 
 	@media (hover: hover) {
-		button:hover {
+		.button:hover {
 			background-color: var(--lighter);
 		}
 	}
@@ -114,7 +112,7 @@
 	--font-size-app-title: 3.5rem;
 	--font-size-app-desc: 2.5rem;
 }
-a {
+#support {
     top: 10px; right: 10px;
     position: absolute;
 	font-size: 1.5rem;
@@ -126,7 +124,7 @@ a {
 	color: var(--text);
 	text-decoration: none;
 }
-a:link, a:visited, a:hover, a:focuse, a:active {
+#support:link, #support:visited, #support:hover, #support:focuse, #support:active {
 	text-decoration: none;
 }
 /*MISCELLANEOUS*/
@@ -136,17 +134,15 @@ html, body {
 	padding: 0;
 	border-style: none;
 	border-radius: 0;
-
 } /*common parameters*/
-
-h1, p, button {
+h1, p, .button {
 	margin: auto;
 	position:relative;
 	padding: 0;
 	border-style: none;
 	border-radius: 0;
 }
-html, body, div, button {
+html, body, .apps, .button {
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
 } /*touch actions*/
@@ -175,12 +171,10 @@ body {
   width: 1px;
 }
 /*LEVEL ONE*/
-div {
-
+.apps {
 	width: 100%; 
 	height: auto;
 	padding: 0%;
-
 }
 /*FONT*/
 h1 {
@@ -203,14 +197,14 @@ p {
 	text-align: justify;
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
-
 }
-button {
-	padding: 3% 0% 4% 0%; width: 39%;
+.button {
+	padding: 3% 9% 4% 9%;
 	margin: 0% 5% 0% 5%;
 	font-family: var(--font-family);
-	text-align: center;
+	text-align: auto;
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
 	border-radius: 1rem;
+	text-decoration: none;
 }
