@@ -6,7 +6,7 @@
 	<meta name="description" content="list of apps">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- security policy -->
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.exchangeratesapi.io https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval';">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval';">
 
 	<meta name="theme-color" content="#b0bec5">
 	<link rel="stylesheet" href="./style.css">
@@ -17,20 +17,43 @@
 		<h1 class="app-title"> Scientific Calculator </h1>
 		<p class="app-desc"> &nbsp Scientific calculator with unit and currency
 			conversions. smart-personal shortcuts, instant results as you type, 
-			real-time currency, conversions, and dark mode. Optimized for 
+			real-time currency conversions, and dark mode. Optimized for 
 			off-line use. </p> <br>
 		<a class="icon-button" href="./calculator">
-			<img class="icon" id="web"  src="./web.png"/>
+			<picture>
+		    	<source srcset="./images/web-dark.png" 
+		    		media="(prefers-color-scheme: dark)">
+				<img class="icon" id="web"  src="./images/web.png"/>
+			</picture>
 		</a>
 		<a class="icon-button" href="https://chrome.google.com/webstore/detail
 		/scientific-calculator/ogbpkankgohcjdjaljlaflohjgepbokb">
-			<img class="icon" id="chrome" src="./chrome.png"/>
+			<picture>
+		    	<source srcset="./images/chrome-dark.png" 
+		    		media="(prefers-color-scheme: dark)">
+				<img class="icon" id="chrome" src="./images/chrome.png"/>
+			</picture>
 		</a>
 		<a class="icon-button"  href="https://addons.mozilla.org/en-US/firefox/addon/calculator-bhar-app/">
-			<img  class="icon" id="firefox" src="./firefox.png"/>
+			<picture>
+		    	<source srcset="./images/firefox-dark.png" 
+		    		media="(prefers-color-scheme: dark)">
+				<img  class="icon" id="firefox" src="./images/firefox.png"/>
+			</picture>
 		</a>
 		<a class="icon-button"  href="">
-			<img  class="icon" id="edge" src="./edge.png"/>
+			<picture>
+		    	<source srcset="./images/edge-dark.png" 
+		    		media="(prefers-color-scheme: dark)">
+				<img  class="icon" id="edge" src="./images/edge.png"/>
+			</picture>
+		</a>
+		<a class="icon-button"  href="">
+			<picture>
+		    	<source srcset="./images/opera-dark.png" 
+		    		media="(prefers-color-scheme: dark)">
+				<img  class="icon" id="edge" src="./images/opera.png"/>
+			</picture>
 		</a>
 	</div>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>

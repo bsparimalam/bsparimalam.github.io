@@ -47,18 +47,18 @@
 	:root{
 		--app-width: 100%;
 		font-size: 2vw;
-		--ext-width: 10vw;
-		--ext-height: 10vw;
-		--padding: 1vw;
+		--ext-width: 7.9vw;
+		--ext-height: 7.9vw;
+		--padding: 0vw;
 	}
 }
 @media (min-width: 20cm) {
 	:root{
 		--app-width: 20cm;
 		font-size: 0.25cm;
-		--ext-width: 1.5cm;
-		--ext-height: 1.5cm;
-		--padding: 0.5cm;
+		--ext-width: 1.65cm;
+		--ext-height: 1.65cm;
+		--padding: 0cm;
 	}
 	body {
 		position: absolute; 
@@ -150,4 +150,12 @@ p {
 .icon {
     height: var(--ext-height);
     width: var(--ext-width);
+}
+.icon:active {
+
+}
+@media(hover:hover) {
+	.icon:hover {
+        filter: brightness(150%);
+	}
 }
