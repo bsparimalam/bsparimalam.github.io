@@ -122,4 +122,13 @@ function log (type, operation) {
 	}
 }
 
-navigator.serviceWorker.register('./install.js');
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./install.js');
+} else {
+	console.log('serice worker not supported');
+}
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-166908735-1');

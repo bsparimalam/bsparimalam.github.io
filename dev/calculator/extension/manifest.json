@@ -1,8 +1,8 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.0.1",
-  "description": "Scientific calculator with smart-personal shortcuts, instant results as you type, real-time currency conversions, and dark mode.",
+  "version": "6.0.3",
+  "description": "Scientific calculator with currency and unit conversions",
   "browser_action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -26,7 +26,7 @@
       "128": "./icon-128.png",
       "512": "./icon-512.png"
   },
-  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io ; script-src 'self' 'unsafe-eval'",
+  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval';",
   "sandbox": {
      "pages": [
       "./core/index.html",

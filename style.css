@@ -20,18 +20,6 @@
 	.apps {
 		background-color: var(--medium);
 	}
-	.button {
-		background-color: var(--dark);
-	}
-	.button:active {
-		background-color: var(--lighter);
-	}
-
-	@media (hover: hover) {
-		.button:hover {
-			background-color: var(--lighter);
-		}
-	}
 }
 @media (prefers-color-scheme: dark) {
 	:root{
@@ -54,29 +42,23 @@
 	.apps {
 		background-color: var(--light);
 	}
-	.button {
-		background-color: var(--dark);
-	}
-	.button:active {
-		background-color: var(--lighter);
-	}
-
-	@media (hover: hover) {
-		.button:hover {
-			background-color: var(--lighter);
-		}
-	}
 }
 @media (max-width: 20cm) {
 	:root{
 		--app-width: 100%;
 		font-size: 2vw;
+		--ext-width: 10vw;
+		--ext-height: 10vw;
+		--padding: 1vw;
 	}
 }
 @media (min-width: 20cm) {
 	:root{
 		--app-width: 20cm;
 		font-size: 0.25cm;
+		--ext-width: 1.5cm;
+		--ext-height: 1.5cm;
+		--padding: 0.5cm;
 	}
 	body {
 		position: absolute; 
@@ -86,47 +68,13 @@
 		transform: translate(-50%, -50%);
 	}
 }
-@media (max-width: 12cm) {
-	:root{
-		--app-width: 100%;
-		font-size: 2vw;
-	}
-}
-@media (min-width: 12cm) {
-	:root{
-		--app-width: 12cm;
-		font-size: 0.25cm;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-}
-
 :root {
 	--font-family: system-ui;
 	--font-size-title: 3.5rem;
 	--font-size-app-title: 3.5rem;
 	--font-size-app-desc: 2.5rem;
 }
-#support {
-    top: 10px; right: 10px;
-    position: absolute;
-	font-size: 1.5rem;
-	border-style: solid;
-	padding: 1%;
-	border-radius: 1rem;
-	border-color: var(--medium);
-	background-color: var(--dark);
-	color: var(--text);
-	text-decoration: none;
-}
-#support:link, #support:visited, #support:hover, #support:focus, #support:active {
-	text-decoration: none;
-}
+
 /*MISCELLANEOUS*/
 html, body { 
 	margin: 0;
@@ -135,14 +83,14 @@ html, body {
 	border-style: none;
 	border-radius: 0;
 } /*common parameters*/
-h1, p, .button {
+h1, p {
 	margin: auto;
 	position:relative;
 	padding: 0;
 	border-style: none;
 	border-radius: 0;
 }
-html, body, .apps, .button {
+html, body, .apps {
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
 } /*touch actions*/
@@ -160,21 +108,12 @@ body {
 	width: var(--app-width); 
 	height: 100%;
 }
-.visuallyhidden {
-  border: 0; 
-  clip: rect(0 0 0 0); 
-  height: 1px; 
-  margin: -1px;
-  overflow: hidden; 
-  padding: 0; 
-  position: absolute; 
-  width: 1px;
-}
 /*LEVEL ONE*/
 .apps {
-	width: 100%; 
+	width: 90%; 
 	height: auto;
 	padding: 0%;
+	margin: 5%;
 }
 /*FONT*/
 h1 {
@@ -198,13 +137,17 @@ p {
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
 }
-.button {
-	padding: 3% 9% 4% 9%;
-	margin: 0% 5% 0% 5%;
+.icon-button {
+	padding: var(--padding);
+	margin: inherit;
 	font-family: var(--font-family);
 	text-align: auto;
 	font-size: var(--font-size-app-desc);
 	color: var(--text);
 	border-radius: 1rem;
 	text-decoration: none;
+}
+.icon {
+    height: var(--ext-height);
+    width: var(--ext-width);
 }

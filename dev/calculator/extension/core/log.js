@@ -121,4 +121,3 @@ function log (type, operation) {
 		saveuserpref();	loaduserpref();
 	}
 }
-

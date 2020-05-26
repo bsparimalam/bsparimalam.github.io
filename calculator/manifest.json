@@ -1,6 +1,7 @@
 {
   "name": "Calculator",
   "short_name": "Calculator",
+  "version": "6.0.3",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",

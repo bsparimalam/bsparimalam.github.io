@@ -5,6 +5,7 @@ html, body, iframe {
 	border-style: none;
 	border-radius: 0;
 	overflow: hidden;
+	scrollbar-width: none;
 }
 html {
 	width: 8cm;

@@ -3,36 +3,30 @@
 <head>
 	<!-- site descrition -->
 	<meta charset="utf-8">
-	<title>Personal Calculator</title>
-	<meta name="description" content="Scientific calculator with 
-	smart-personal shortcuts, instant results as you type, real-time currency
-	conversions, and dark mode. Optimized for off-line use.">
-	<meta name="keywords" content="calculator, scientific, personal, 
-	smart-shortcuts, conversions, currency, dark mode">
+	<title>Scientific Calculator</title>
+	<meta name="description" content="Scientific calculator with currency and 
+	unit conversions. Features: smart-personal shortcuts, instant results as 
+	you type, real-time currency, unit conversions, and dark mode. Optimized 
+	for off-line use.">
+	<meta name="keywords" content="calculator, scientific, personal, unit,
+	smart-shortcuts, conversions, currency, dark mode, off-line">
+	<!-- security policy -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.exchangeratesapi.io https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval';">
 
 	<link rel="icon" href="./icon-32.png" type="image/png" sizes="32x32">
-	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" href="./style.css">
-	<!-- web app tags -->
+	<!-- web app resources -->
+	<link rel="manifest" href="./manifest.json">
+	<!-- apple web app resources -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#b0bec5"> 
-	<!--  update the manifest and stylesheet -->
-
 	<meta name="apple-touch-fullscreen" content="yes" >
 	<meta name="apple-mobile-web-app-title" content="Calculator">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<link rel="apple-touch-icon" href="./icon-152.png">
 	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'UA-166908735-1');
-	</script>
 </head>
 <body id="body" >
     <div class='inputs'>
@@ -113,5 +107,6 @@
     </div>
     <script src='./load.js'></script><script src='./io.js'></script>
     <script async src='./compute.js'></script><script async src='./log.js'></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
 </body>
 </html>
