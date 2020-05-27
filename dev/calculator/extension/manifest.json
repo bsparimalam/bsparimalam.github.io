@@ -1,7 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.0.3",
+  "version": "6.0.5",
   "description": "Scientific calculator with currency and unit conversions",
   "browser_action": {
     "default_popup": "index.html",

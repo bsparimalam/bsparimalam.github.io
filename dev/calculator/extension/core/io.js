@@ -104,25 +104,25 @@ class Outputbox {
 		this.e = element;
 	}
 	read() {
-		return this.e.innerHTML;
+		return this.e.innerText;
 	}
 	length() {
 		return this.read().length;
 	}
 	removeall() {
-		this.e.innerHTML = null;
+		this.e.innerText = null;
 		lasteval = 0;
 	}
 	write(string) {
-		this.e.innerHTML = string;
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3)';
 	}
 	preview(string) {
-		this.e.innerHTML = string;
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-1)';
 	}
 	error(string) {
-		this.e.innerHTML = string;
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-2)';
 	}
 }
@@ -189,10 +189,10 @@ document.addEventListener('click', event => {
 			case 'pi': touchinput('π' ); break;
 			case 'pref0': case 'pref1': case 'pref2': case 'pref3':	case 'pref4': 
 			case 'pref5': case 'pref6': case 'pref7':
-				calculate(target.name, target.innerHTML); break;
+				calculate(target.name, target.innerText); break;
 			case '1':case '2':case '3':case '4':case '5':case '6':case '7':
 			case '8':case '9':case '0':case 'decimal':case 'plus':case 'sub':case 'mult':
-				touchinput(target.innerHTML);break;
+				touchinput(target.innerText);break;
 			case "bspc": 		
 				inputbox.removeastring();
 				inprogress = true;

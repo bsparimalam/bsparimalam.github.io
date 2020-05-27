@@ -3,3 +3,15 @@
 3. remove meta tags and asscoiated icon
 4. remove google analytics related csp, loading, scripts
 5. load last input on reload
+
+Opera:
+
+
+Firefox:
+
+
+chrome:
+
+
+edge:
+

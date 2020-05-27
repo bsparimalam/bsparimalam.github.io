@@ -6,7 +6,7 @@ gtag('config', 'UA-166908735-1');
 document.addEventListener('click', event => {
     let target = event.target.id;
     switch(target) {
-        case 'edge': case 'opera':
+        case 'edge':
             alert('Coming Soon!');
             break; 
     }

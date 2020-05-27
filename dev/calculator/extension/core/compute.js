@@ -17,6 +17,7 @@ function parse(string) {
 		/sin⁻¹\(/gi, angleconvinv + 'Math.asin(').replace(
 		/cos⁻¹\(/gi, angleconvinv + 'Math.acos(').replace(
 		/tan⁻¹\(/gi, angleconvinv + 'Math.atan(').replace(/ |,/gi, '');
+
 	// parsing root
 	while ( parsedstring.indexOf('√') != -1 ) {
 		var rootindex = parsedstring.indexOf('√');
