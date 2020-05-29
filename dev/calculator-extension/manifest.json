@@ -1,7 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "description": "Scientific calculator with currency and unit conversions",
   "browser_action": {
     "default_popup": "index.html",
@@ -26,7 +26,7 @@
       "128": "./icon-128.png",
       "512": "./icon-512.png"
   },
-  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval';",
+  "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io 'unsafe-eval';",
   "sandbox": {
      "pages": [
       "./core/index.html",

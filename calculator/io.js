@@ -80,23 +80,27 @@ class Inputbox {
 		this.setfontsize();
 		userpref.lastinput = string;
 		saveuserpref();
+		outputpreview();
 	}
 	addastring(string) {
 		this.e.value += string;
 		this.write(insertcomma(this.read()));
 		userpref.lastinput = this.read();
 		saveuserpref();
+		outputpreview();
 	}
 	removeastring() {
 		this.e.value = this.e.value.slice(0, -1);
 		this.write(insertcomma(this.read()));
 		userpref.lastinput = this.read();
 		saveuserpref();
+		outputpreview();
 	}
 	removeall() {
 		this.e.value = null;
 		userpref.lastinput = this.read();
 		saveuserpref();
+		outputpreview();
 	}
 }
 class Outputbox {
@@ -104,25 +108,30 @@ class Outputbox {
 		this.e = element;
 	}
 	read() {
-		return this.e.innerHTML;
+		return this.e.innerText;
 	}
 	length() {
 		return this.read().length;
 	}
 	removeall() {
-		this.e.innerHTML = null;
+		this.e.innerText = '';
 		lasteval = 0;
+		angleunitwarned = false;
 	}
 	write(string) {
-		this.e.innerHTML = string;
+		string = string.toString();
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3)';
+		angleunitwarned = false;
 	}
 	preview(string) {
-		this.e.innerHTML = string;
+		string = string.toString();
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-1)';
 	}
 	error(string) {
-		this.e.innerHTML = string;
+		string = string.toString();
+		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-2)';
 	}
 }
@@ -141,7 +150,7 @@ function outputpreview() {
 		outputbox.preview(temp);
 		lasteval = temp;
 	} else if (string == '') {
-		outputbox.preview(0);
+		outputbox.preview('0');
 		lasteval = 0;
 	}
 }
@@ -156,7 +165,6 @@ function touchinput(key) {
 	}
 	inputbox.addastring(key);
 	inprogress = true;
-	outputpreview();
 }
 // touch input
 document.addEventListener('click', event => {
@@ -196,7 +204,6 @@ document.addEventListener('click', event => {
 			case "bspc": 		
 				inputbox.removeastring();
 				inprogress = true;
-				outputpreview();
 				break;
 			case "CE": 
 				inputbox.removeall();
@@ -206,7 +213,6 @@ document.addEventListener('click', event => {
 				inputbox.write(lasteval);
 				outputbox.removeall();
 				inprogress = true;
-				outputpreview();
 				break;
 			case "evaluate": calculate('simple', null); break;
 			case "divi": touchinput('/'); break;
@@ -232,6 +238,9 @@ document.addEventListener('change', event => {
 document.getElementById('ip').addEventListener('focus', event => {
 	event.target.scrollIntoView();
 });
+document.getElementById('ip').addEventListener('input', event => {
+	outputpreview();
+});
 // keyboard input
 document.addEventListener('keydown', event => {
 	key = event.key;
@@ -248,7 +257,6 @@ document.addEventListener('keydown', event => {
 		switch (key) {
 			case 'Backspace': case 'Delete':
 				inputbox.removeastring(); 
-				outputpreview();
 				break;
 			case '*': case 'x': case 'X':
 				inputbox.addastring('×'); break;
@@ -257,13 +265,13 @@ document.addEventListener('keydown', event => {
 			case '(': case '{': case '[': case '<': 
 				inputbox.addastring('('); break;
 			case ')': case '}': case ']': case '>':
-				inputbox.addastring(')'); outputpreview(); break;
+				inputbox.addastring(')'); break;
 			case '0': case '1': case '2': case '3': case '4': case '5': case '6': 
 			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
 			case '+': case '-': case '/': case '%':
 			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
 			case 's': case 't':
-				inputbox.addastring(key); outputpreview(); break;
+				inputbox.addastring(key); break;
 			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
 			case 'S': case 'T':
 				inputbox.addastring(key.toLowerCase()); break;
@@ -271,7 +279,6 @@ document.addEventListener('keydown', event => {
 		inprogress = true;
 	} else { 
 		inprogress = true;
-		outputpreview();
 	}
 	console.log('inprogress : ' + inprogress);
 });

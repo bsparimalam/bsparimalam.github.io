@@ -8,6 +8,7 @@
 		--text: #000000;
 		--preview-text: #42545d;
 		--error: #9e0000;
+		--warning: #cccc00;
 
 		--bg-color-0: var(--lighter);
 		--bg-color-1: var(--light);
@@ -39,6 +40,8 @@
 		--text: #e2f1f8;
 		--preview-text: #6d8692;
 		--error: #a90000;
+		--warning: #adad00;
+
 		--bg-color-0: var(--lighter);
 		--bg-color-1: var(--light);
 		--bg-color-2: var(--medium);
@@ -132,7 +135,7 @@
 			url('./font.ttf') format('truetype');
 	}
 	:root {
-		--font-family:'Fira Sans', sans-serif;
+		--font-family:'Fira Sans', system-ui;
 	}
 }
 /*MISCELLANEOUS*/

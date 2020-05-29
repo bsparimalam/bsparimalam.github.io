@@ -8,6 +8,7 @@ numrep = document.getElementById('representation');
 memory = document.getElementById('memory');
 more = document.getElementById('more');
 memorystored = null;
+angleunitwarned = false;
 convdata = [
 	['conversion', []
 	],
@@ -124,11 +125,25 @@ function setangleunit() {
 	}
 	userpref.angleunit = angleunit.innerHTML;
 	saveuserpref();
-	if (outputbox.read() != '') {
+	if ((outputbox.read() !== '') && (inputbox.read() !== '')) {
 		calculate(lasttype, lastoperation);
 	}
 	console.log('angle unit set to: ' + angleunit.innerHTML);
 } // sets the preferred angle unit
+function warnangleunit() {
+	if (!angleunitwarned) {
+		let loops = 2; let interval = 250;
+		for (let i = 0; i < loops; i++ ) {
+			setTimeout(() => {
+				angleunit.style.backgroundColor = 'var(--warning)';
+			}, (2*i+1)*interval);
+			setTimeout(() => {
+				angleunit.style.backgroundColor = 'var(--bg-color-3)';
+			}, (2*i+2)*interval);
+		}
+		angleunitwarned = true;	
+	}
+}
 function setnumrep() {
     if (numrep.innerHTML == 'DECI') { numrep.innerHTML = 'SCI';
     } else { numrep.innerHTML = 'DECI'; }

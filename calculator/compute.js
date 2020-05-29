@@ -89,14 +89,25 @@ function parse(string) {
 				}
 				end++;
 			}
-			if (((eval(parsedstring.slice(
-				start, end))/Math.PI).toPrecision(5))%1 == reminder ) {
+			let tempeval = eval(parsedstring.slice(start, end)).toPrecision(5);
+			let tempratio = (tempeval/Math.PI).toPrecision(5);
+			if ( tempratio%1 == reminder ) {
 				if (trigindex != 0) {
 					parsedstring = parsedstring.slice(0,trigindex) 
 						+ '(0)' + parsedstring.slice(end, );
 				} else {
 					parsedstring = '(0)' + parsedstring.slice(end, );
 				}
+			}
+			console.log('.....................................');
+			console.log(angleunit.innerHTML, tempeval%15);
+			if (
+				((angleunit.innerHTML == 'DEG') 
+					&& (inputbox.read().indexOf('π') !== -1))
+				|| ((angleunit.innerHTML == 'RAD')
+					&& (tempeval%1 == 0))
+				) {
+				warnangleunit();
 			}
 			start = trigindex + 1;
 		}
@@ -107,8 +118,6 @@ function parse(string) {
 		cleanuptrig('Math.cos(', 0.5);
 		console.log('trigonometric functions cleaned: '+ parsedstring);
 	}
-
-
 	return parsedstring;
 }
 function filteroutput(evaluated, unit) {
@@ -128,6 +137,7 @@ function filteroutput(evaluated, unit) {
 	return evaluated;
 }
 function calculate(type, operation=null) {
+	angleunitwarned = false;
 	lasttype = type; lastoperation = operation;
 	console.log('computation requested: ' + type + '; ' + operation);
 	var base=null ; var target=null;
