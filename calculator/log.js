@@ -84,19 +84,23 @@ function log (type, operation) {
 	if ((type == 'simple') && ((ipstring.split('*').length == 2) 
 			|| (ipstring.split('×').length == 2) 
 			|| (ipstring.split('/').length == 2))) {
-		var probableinput = eval(ipstring.split('*').toString().split(
-					'×').toString().split('/').toString().split(',')[0]);
-		var probableratio = evaluated/probableinput;
-		var i = 0
-		var hashsize = lookuptable.length;
-		while (i < hashsize) {
-			if  ((probableratio/lookuptable[i][2] < 1.001) 
-				&& (probableratio/lookuptable[i][2] > 0.999)){
-				type = lookuptable[i][0];
-				operation = lookuptable[i][1];
-				console.log('conversion detected: ' +operation + ' ' + type);
-				break;}
-			i++;
+		try {
+			var probableinput = eval(ipstring.split('*').toString().split(
+						'×').toString().split('/').toString().split(',')[0]);
+			var probableratio = evaluated/probableinput;
+			var i = 0
+			var hashsize = lookuptable.length;
+			while (i < hashsize) {
+				if  ((probableratio/lookuptable[i][2] < 1.001) 
+					&& (probableratio/lookuptable[i][2] > 0.999)){
+					type = lookuptable[i][0];
+					operation = lookuptable[i][1];
+					console.log('conversion detected: ' +operation + ' ' + type);
+					break;}
+				i++;
+			}
+		} catch {
+
 		}
 	}
 	if (type != 'simple') {

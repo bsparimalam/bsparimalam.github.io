@@ -1,7 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.0.6",
+  "version": "6.0.7",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",

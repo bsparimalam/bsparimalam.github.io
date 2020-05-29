@@ -7,8 +7,9 @@
 		--dark: #78909c;
 		--text: #000000;
 		--preview-text: #42545d;
+		--preview-outdated: #985252;
 		--error: #9e0000;
-		--warning: #cccc00;
+		--warning: #b7b739;
 
 		--bg-color-0: var(--lighter);
 		--bg-color-1: var(--light);
@@ -39,8 +40,9 @@
 		--dark: #000a12;
 		--text: #e2f1f8;
 		--preview-text: #6d8692;
+		--preview-outdated: #985252;
 		--error: #a90000;
-		--warning: #adad00;
+		--warning: #b7b739;
 
 		--bg-color-0: var(--lighter);
 		--bg-color-1: var(--light);
