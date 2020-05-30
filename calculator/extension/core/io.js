@@ -27,25 +27,26 @@ function istoolong(string, length) {
 function insertcomma(string) {
 	console.log('insert comma input: ' + string);
 	string = string.toString();
+	var start; var len; var stringprefix; var end; var withcomma;
 	if (string.indexOf(',') != 0) {
-		var len = string.length;
-		var start = len-1;
+		len = string.length;
+		start = len-1;
 		while ((!isNaN(string[start]) || (string[start] == ',')
 			||( string[start] == '.')) 
 			&& (start!=-1)) { 
 			start -= 1;
 		}
 	} else {
-		var start = 0;
+		start = 0;
 	}
-	var stringprefix = string.slice(0, start+1);
+	stringprefix = string.slice(0, start+1);
 	string = string.slice(start+1).replace(/,/g, '');
 	if( (string.indexOf('E+') == -1) && (string.indexOf('E-') == -1) ) {
-		var end = string.length; 
+		end = string.length; 
 		if(string.indexOf('.') != -1) { 
 			end = string.indexOf('.'); 
 		}
-		var withcomma= string.slice(end, );
+		withcomma= string.slice(end, );
 		for (var i=1; i <= end; i++ ) {
 			if( (i%3 == 1) && (i != 1) ) { 
 				withcomma = ',' + withcomma; 
@@ -134,22 +135,32 @@ class Outputbox {
 		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-2)';
 	}
+	previewoutdated() {
+		this.e.style.color = 'var(--preview-outdated)';		
+	}
 }
 inprogress = true; 
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
 function outputpreview() {
-	var string = parse(inputbox.read());
+	outputbox.previewoutdated();
+	var string = inputbox.read();
+	var numofbrac = string.split('(').length - string.split(')').length;
+	var temp;
+	for (var i = 0; i < numofbrac; i++) {
+		string = string + ')';
+	}
+	string = parse(string);
 	try {
-		var temp = eval(string);
+		temp = eval(string);
 	} catch { 
-		var temp = 'error';
+		temp = 'error';
 	}
 	if (!isNaN(temp)) { 
 		temp = filteroutput(temp); 
 		outputbox.preview(temp);
 		lasteval = temp;
-	} else if (string == '') {
+	} else if(string == '') {
 		outputbox.preview('0');
 		lasteval = 0;
 	}

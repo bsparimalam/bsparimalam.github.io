@@ -1,3 +1,5 @@
 User-agent: *
+Disallow:/calculator/html5
+Disallow:/calculator/extension
 Disallow:/dev/
 Disallow:/images/

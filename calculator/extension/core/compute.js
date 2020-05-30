@@ -75,12 +75,13 @@ function parse(string) {
 	}
 	console.log('Parsed expression: ' + parsedstring);
 	// cleaning up trig functions, eg. assigning sin(pi) = 0
-	function cleanuptrig(trigfunction, reminder) {
-		var start = 0;
+	function cleanuptrig(trigfunction, reminder, value) {
+		var start = 0; var trigindex; var start; var end;
+		var tempeval; var tempratio; 
 		while ((parsedstring.indexOf(trigfunction, start) != -1)) {
-			var trigindex = parsedstring.indexOf(trigfunction, start);
-			var start = trigindex + 8 ; var end = start + 1;
-			var blockdue = 1;
+			trigindex = parsedstring.indexOf(trigfunction, start);
+			start = trigindex + 8 ; end = start + 1;
+			blockdue = 1;
 			while (blockdue != 0) {
 				if (parsedstring[end] == '(') {
 					blockdue++;
@@ -89,35 +90,39 @@ function parse(string) {
 				}
 				end++;
 			}
-			let tempeval = eval(parsedstring.slice(start, end)).toPrecision(5);
-			let tempratio = (tempeval/Math.PI).toPrecision(5);
-			if ( tempratio%1 == reminder ) {
-				if (trigindex != 0) {
-					parsedstring = parsedstring.slice(0,trigindex) 
-						+ '(0)' + parsedstring.slice(end, );
-				} else {
-					parsedstring = '(0)' + parsedstring.slice(end, );
-				}
+			try {
+				tempeval = eval(parsedstring.slice(start, end)).toPrecision(5);
+				tempratio = (eval(parsedstring.slice(start, end))/Math.PI).toPrecision(5);
+				if ( tempratio%1 == reminder ) {
+					if (trigindex != 0) {
+						parsedstring = parsedstring.slice(0,trigindex) 
+							+ value + parsedstring.slice(end, );
+					} else {
+						parsedstring = value + parsedstring.slice(end, );
+					}
+				}		
+			} catch {
+				console.log('trig eval error');
 			}
-			console.log('.....................................');
-			console.log(angleunit.innerHTML, tempeval%15);
 			if (
 				((angleunit.innerHTML == 'DEG') 
 					&& (inputbox.read().indexOf('π') !== -1))
 				|| ((angleunit.innerHTML == 'RAD')
-					&& (tempeval%1 == 0))
+					&& (tempeval%5 == 0))
 				) {
 				warnangleunit();
 			}
 			start = trigindex + 1;
 		}
 	}
-	if (parsedstring.split('(').length == parsedstring.split(')').length) {
-		cleanuptrig('Math.sin(', 0);
-		cleanuptrig('Math.tan(', 0);
-		cleanuptrig('Math.cos(', 0.5);
-		console.log('trigonometric functions cleaned: '+ parsedstring);
+	if (parsedstring.split('(').length === parsedstring.split(')').length) {
+		cleanuptrig('Math.sin(', 0, '(0)');
+		cleanuptrig('Math.cos(', 0.5, '(0)');
+		cleanuptrig('Math.tan(', 0, '(0)');
+		cleanuptrig('Math.tan(', 0.5, '(Infinity)');
+		console.log('trigonometric functions cleaned: '+ parsedstring);		
 	}
+	
 	return parsedstring;
 }
 function filteroutput(evaluated, unit) {

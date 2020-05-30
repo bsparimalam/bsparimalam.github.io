@@ -132,10 +132,11 @@ function setangleunit() {
 } // sets the preferred angle unit
 function warnangleunit() {
 	if (!angleunitwarned) {
-		let loops = 2; let interval = 250;
-		for (let i = 0; i < loops; i++ ) {
+		var loops = 3; var interval = 500; 
+		var currentunit = angleunit.innerHTML;
+		for (var i = 0; i < loops; i++ ) {
 			setTimeout(() => {
-				angleunit.style.backgroundColor = 'var(--warning)';
+				angleunit.style.backgroundColor = 'var(--warning)';		
 			}, (2*i+1)*interval);
 			setTimeout(() => {
 				angleunit.style.backgroundColor = 'var(--bg-color-3)';

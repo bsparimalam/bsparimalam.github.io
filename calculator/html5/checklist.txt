@@ -1,0 +1,5 @@
+1. remove install.js and registration
+2. remove CSP
+4. remove google analytics, loading, scripts
+2. remove the manifest, loading, and associated icon
+3. remove meta tags and asscoiated icons
