@@ -119,15 +119,33 @@ class Outputbox {
 		lasteval = 0;
 		angleunitwarned = false;
 	}
-	write(string) {
-		string = string.toString();
-		this.e.innerText = string.replace(/<[^>]*>/g, '');
+	write(string, unit) {
+		string = string.toString().replace(/<[^>]*>/g, '');	
+		lasteval = string;
+		if (string.indexOf('E') === -1) {
+			this.e.innerText = `${string} ${unit}`;
+		} else {
+			let parts = string.split('E');
+			if (parts[1][0] === '+') {
+				parts[1] = parts[1].slice(1, );
+			}
+			this.e.innerHTML = `${parts[0]}×10<sup>${parts[1]}</sup> ${unit}`;
+		}
 		this.e.style.color = 'var(--fg-color-3)';
 		angleunitwarned = false;
 	}
 	preview(string) {
-		string = string.toString();
-		this.e.innerText = string.replace(/<[^>]*>/g, '');
+		string = string.toString().replace(/<[^>]*>/g, '');	
+		lasteval = string;
+		if (string.indexOf('E') === -1) {
+			this.e.innerText = `${string}`;
+		} else {
+			let parts = string.split('E');
+			if (parts[1][0] === '+') {
+				parts[1] = parts[1].slice(1, );
+			}
+			this.e.innerHTML = `${parts[0]}×10<sup>${parts[1]}</sup>`;
+		}
 		this.e.style.color = 'var(--fg-color-3-1)';
 	}
 	error(string) {
@@ -159,10 +177,8 @@ function outputpreview() {
 	if (!isNaN(temp)) { 
 		temp = filteroutput(temp); 
 		outputbox.preview(temp);
-		lasteval = temp;
 	} else if(string == '') {
 		outputbox.preview('0');
-		lasteval = 0;
 	}
 }
 
@@ -228,6 +244,7 @@ document.addEventListener('click', event => {
 			case "evaluate": calculate('simple', null); break;
 			case "divi": touchinput('/'); break;
 			case "comma": touchinput('.'); break;
+			case "E": touchinput('E'); break;
 		}
 		console.log('inprogress : ' + inprogress);
 	}
@@ -246,11 +263,14 @@ document.addEventListener('change', event => {
 		}
 	}
 });
-document.getElementById('ip').addEventListener('focus', event => {
+inputbox.e.addEventListener('focus', event => {
 	event.target.scrollIntoView();
 });
-document.getElementById('ip').addEventListener('input', event => {
-	outputpreview();
+inputbox.e.addEventListener('input', event => {
+		inputbox.setfontsize();
+		outputpreview();
+		userpref.lastinput = inputbox.read();
+		saveuserpref();
 });
 // keyboard input
 document.addEventListener('keydown', event => {
@@ -281,10 +301,10 @@ document.addEventListener('keydown', event => {
 			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
 			case '+': case '-': case '/': case '%':
 			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
-			case 's': case 't':
+			case 'p': case 's': case 't':
 				inputbox.addastring(key); break;
 			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
-			case 'S': case 'T':
+			case 'P': case 'S': case 'T':
 				inputbox.addastring(key.toLowerCase()); break;
 		}
 		inprogress = true;

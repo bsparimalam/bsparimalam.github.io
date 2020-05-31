@@ -123,23 +123,7 @@
 		transform: translate(-50%, -50%);
 	}
 }
-@media (any-pointer: coarse) and (max-height: 24cm) and (max-width: 12cm) {
-	:root {
-		--font-family: system-ui;
-	}
-}
-@media (min-height: 24cm), (min-width: 12cm), (any-pointer: fine) {
-	@font-face {
-		font-family: 'Fira Sans';
-		font-style: normal;
-		font-weight: 400;
-		src: local('Fira Sans Regular'), local('FiraSans-Regular'),
-			url('./font.ttf') format('truetype');
-	}
-	:root {
-		--font-family:'Fira Sans', system-ui;
-	}
-}
+
 /*MISCELLANEOUS*/
 html, body, div, input, p, button { 
 	margin: 0;
@@ -264,11 +248,18 @@ button {
   position: absolute; 
   width: 1px;
 }
-
 /*FONT*/
+@font-face {
+	font-family: 'Fira Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+		url('./font.ttf') format('truetype');
+}
 :root {
+	--font-family:'Fira Sans', system-ui;
 	--ip-max: 7rem;
-	--ip-min: 6rem;
+	--ip-min: 5.5rem;
 }
 input, p, button, select, option {
 	font-family: var(--font-family);
@@ -311,13 +302,13 @@ select, #convert {
 #bspc {
 	font-size: 3rem;
 }
-#ANS {
+#ANS, #E {
 	font-size: 2.5rem;
 }
 #CE {
 	font-size: 4rem;
 }
-#comma, #decimal {
+#decimal {
 	font-size: 4rem;
 	padding-bottom: 2rem;
 }
@@ -367,7 +358,7 @@ select, option, #convert, .pref {
 		background-color: var(--hover-color-1);
 		border: 1px solid var(--bg-color-3);
 	}
-	#comma {
+	#E {
 		border-radius: 0 0 var(--app-corner-radius) 0;
 	}
 	#decimal {

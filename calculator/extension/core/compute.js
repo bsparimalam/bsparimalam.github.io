@@ -7,10 +7,18 @@ function parse(string) {
 	} else { 
 		angleconv = ''; angleconvinv = '';
 	}
+	//implicit multilications to explicit multiplications
+	var charlist = ['s', 'S', 'c', 'C', 't', 'T', 'l', 'L', '(', 'p', 'P', 'e', 'π']
+	for (let i=0; i < string.length-1; i++) {
+		if ((!isNaN(string[i])) && (charlist.indexOf(string[i+1])!==-1)) {
+			string = string.slice(0, i+1) + '*' + string.slice(i+1, )
+			i++;
+		}
+	}
 	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(
 		/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(
 		/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(
-		/π/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
+		/π|pi/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
 		/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(
 		/cos\(/gi, 'Math.cos(' + angleconv).replace(
 		/tan\(/gi, 'Math.tan(' + angleconv).replace(
@@ -106,7 +114,7 @@ function parse(string) {
 			}
 			if (
 				((angleunit.innerHTML == 'DEG') 
-					&& (inputbox.read().indexOf('π') !== -1))
+					&& (inputbox.read().match(/π|pi/i) !== null))
 				|| ((angleunit.innerHTML == 'RAD')
 					&& (tempeval%5 == 0))
 				) {
@@ -161,8 +169,7 @@ function calculate(type, operation=null) {
 		inprogress = true;
 		console.log('inprogress : ' + inprogress);
 	} else if (type == 'simple') {
-		lasteval = filteroutput(evaluated);
-		outputbox.write(lasteval);
+		outputbox.write(filteroutput(evaluated), '');
 		inprogress = false;
 		console.log('inprogress : ' + inprogress);
 		log(type, operation);
@@ -176,14 +183,13 @@ function calculate(type, operation=null) {
 			case 'volume':
 				evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
 					+ '/' + convdata[typeindex][2][targetindex] );
-				lasteval = filteroutput(evaluated);
-				outputbox.write(lasteval + ' ' + target); break;
+				outputbox.write(filteroutput(evaluated), target); break;
 			case 'currency':
 				var baseurl = "https://api.exchangeratesapi.io/latest?";
 				var basecurr = "base=" + base;
 				var target = operation.slice(6, 9);
 				var targetcurr = "&symbols=" + target;
-				outputbox.write('loading...');
+				outputbox.write('loading...', '');
 				fetch(baseurl + basecurr + targetcurr)
 				  .then(
 				    function(response) {
@@ -193,9 +199,8 @@ function calculate(type, operation=null) {
 				      } else {
 				      	response.json().then(function(data) {
 							evaluated = evaluated*data["rates"][target];
-							lasteval = Number(Number(evaluated).toString()).toFixed(2);
-							lasteval = insertcomma(lasteval);
-							outputbox.write(lasteval + ' ' + target);
+							outputbox.write(insertcomma(Number(Number(
+								evaluated).toString()).toFixed(2)), target);
 					     });
 				      }
 				    })
@@ -206,9 +211,7 @@ function calculate(type, operation=null) {
 			case 'temperature':
 				evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
 				evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
-				lasteval = Number(evaluated).toFixed(2);
-				lasteval = insertcomma(lasteval);
-				outputbox.write(lasteval + ' ' + target);
+				outputbox.write(insertcomma(Number(evaluated).toFixed(2)), target);
 				break;
 		}
 		inprogress = false;

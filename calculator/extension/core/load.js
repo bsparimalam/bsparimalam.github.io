@@ -1,4 +1,4 @@
-userprefversion = "v1";
+storagename = 'calculator.1.0';
 app = document.getElementsByTagName('BODY');
 convtypes = document.getElementById('convtypes');
 convfroms = document.getElementById('convfroms');
@@ -76,9 +76,9 @@ function loaduserpref() {
 	angleunit.innerHTML = userpref.angleunit;
 	numrep.innerHTML = userpref.representation;
 	memorystored = userpref.memory;
-	// if (userpref.lastinput != '') {
-	// 	document.getElementById('ip').value = userpref.lastinput;
-	// }
+	if (userpref.lastinput != '') {
+		document.getElementById('ip').value = userpref.lastinput;
+	}
 	if (userpref.openmore !== more.innerHTML) {
 		openmore();
 	}
@@ -100,10 +100,9 @@ function loaduserpref() {
 	}
 }
 function saveuserpref() {
-	window.localStorage.setItem("userpref" + userprefversion, 
-		JSON.stringify(userpref));
+	window.localStorage.setItem(storagename, JSON.stringify(userpref));
 }
-userpref = JSON.parse(window.localStorage.getItem("userpref" + userprefversion));
+userpref = JSON.parse(window.localStorage.getItem(storagename));
 if (userpref == null) { 
 	userpref = {
 		'openmore':'⠇',

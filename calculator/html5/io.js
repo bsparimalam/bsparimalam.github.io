@@ -119,11 +119,6 @@ class Outputbox {
 		lasteval = 0;
 		angleunitwarned = false;
 	}
-	style(string) {
-		
-
-		return
-	}
 	write(string, unit) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
 		lasteval = string;
@@ -249,6 +244,7 @@ document.addEventListener('click', event => {
 			case "evaluate": calculate('simple', null); break;
 			case "divi": touchinput('/'); break;
 			case "comma": touchinput('.'); break;
+			case "E": touchinput('E'); break;
 		}
 		console.log('inprogress : ' + inprogress);
 	}
@@ -267,11 +263,14 @@ document.addEventListener('change', event => {
 		}
 	}
 });
-document.getElementById('ip').addEventListener('focus', event => {
+inputbox.e.addEventListener('focus', event => {
 	event.target.scrollIntoView();
 });
-document.getElementById('ip').addEventListener('input', event => {
-	outputpreview();
+inputbox.e.addEventListener('input', event => {
+		inputbox.setfontsize();
+		outputpreview();
+		userpref.lastinput = inputbox.read();
+		saveuserpref();
 });
 // keyboard input
 document.addEventListener('keydown', event => {
@@ -302,10 +301,10 @@ document.addEventListener('keydown', event => {
 			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
 			case '+': case '-': case '/': case '%':
 			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
-			case 's': case 't':
+			case 'p': case 's': case 't':
 				inputbox.addastring(key); break;
 			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
-			case 'S': case 'T':
+			case 'P': case 'S': case 'T':
 				inputbox.addastring(key.toLowerCase()); break;
 		}
 		inprogress = true;

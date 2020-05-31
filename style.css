@@ -25,7 +25,7 @@
 		font-size: 2vw;
 		--ext-width: 10vw;
 		--ext-height: 10vw;
-		--icon-pad: 3.78vw;
+		--icon-pad: 3.5vw;
 	}
 }
 @media (min-width: 20cm) {
@@ -34,7 +34,7 @@
 		font-size: 0.25cm;
 		--ext-width: 1cm;
 		--ext-height: 1cm;
-		--icon-pad: 1.275cm;
+		--icon-pad: 1.25cm;
 	}
 	body {
 		position: absolute; 

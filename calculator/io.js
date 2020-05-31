@@ -119,11 +119,6 @@ class Outputbox {
 		lasteval = 0;
 		angleunitwarned = false;
 	}
-	style(string) {
-		
-
-		return
-	}
 	write(string, unit) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
 		lasteval = string;
@@ -268,11 +263,14 @@ document.addEventListener('change', event => {
 		}
 	}
 });
-document.getElementById('ip').addEventListener('focus', event => {
+inputbox.e.addEventListener('focus', event => {
 	event.target.scrollIntoView();
 });
-document.getElementById('ip').addEventListener('input', event => {
-	outputpreview();
+inputbox.e.addEventListener('input', event => {
+		inputbox.setfontsize();
+		outputpreview();
+		userpref.lastinput = inputbox.read();
+		saveuserpref();
 });
 // keyboard input
 document.addEventListener('keydown', event => {
