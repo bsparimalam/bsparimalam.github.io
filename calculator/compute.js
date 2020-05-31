@@ -7,10 +7,18 @@ function parse(string) {
 	} else { 
 		angleconv = ''; angleconvinv = '';
 	}
+	//implicit multilications to explicit multiplications
+	var charlist = ['s', 'S', 'c', 'C', 't', 'T', 'l', 'L', '(', 'p', 'P', 'e', 'π']
+	for (let i=0; i < string.length-1; i++) {
+		if ((!isNaN(string[i])) && (charlist.indexOf(string[i+1])!==-1)) {
+			string = string.slice(0, i+1) + '*' + string.slice(i+1, )
+			i++;
+		}
+	}
 	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(
 		/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(
 		/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(
-		/π/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
+		/π|pi/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
 		/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(
 		/cos\(/gi, 'Math.cos(' + angleconv).replace(
 		/tan\(/gi, 'Math.tan(' + angleconv).replace(
@@ -106,7 +114,7 @@ function parse(string) {
 			}
 			if (
 				((angleunit.innerHTML == 'DEG') 
-					&& (inputbox.read().indexOf('π') !== -1))
+					&& (inputbox.read().match(/π|pi/i) !== null))
 				|| ((angleunit.innerHTML == 'RAD')
 					&& (tempeval%5 == 0))
 				) {

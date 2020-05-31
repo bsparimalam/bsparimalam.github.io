@@ -302,13 +302,13 @@ select, #convert {
 #bspc {
 	font-size: 3rem;
 }
-#ANS {
+#ANS, #E {
 	font-size: 2.5rem;
 }
 #CE {
 	font-size: 4rem;
 }
-#comma, #decimal {
+#decimal {
 	font-size: 4rem;
 	padding-bottom: 2rem;
 }
@@ -358,7 +358,7 @@ select, option, #convert, .pref {
 		background-color: var(--hover-color-1);
 		border: 1px solid var(--bg-color-3);
 	}
-	#comma {
+	#E {
 		border-radius: 0 0 var(--app-corner-radius) 0;
 	}
 	#decimal {
