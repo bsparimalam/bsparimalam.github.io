@@ -1,13 +1,13 @@
 {
-  "name": "Smart Calculator",
+  "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",
   "orientation": "portrait",
-  "background_color":  "#b0bec5",
-  "theme_color": "#b0bec5", 
+  "background_color":  "#78909c",
+  "theme_color": "#78909c", 
   "icons": [
     {
     	"src": "./icon-512.png",

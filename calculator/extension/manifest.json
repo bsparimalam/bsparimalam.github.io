@@ -1,8 +1,8 @@
 {
-  "name": "Smart Calculator",
+  "name": "Scientific Calculator+Unit/Currency Converter",
   "short_name": "Calculator",
-  "version": "6.1.1",
-  "description": "Scientific calculator with currency and unit conversions",
+  "version": "6.1.2",
+  "description": "👨‍🔬️🔢 Dark mode; touch & keyboard friendly; Smart personalizations with no user setup; Available on all devices as a webapp(PWA)",
   "browser_action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -15,7 +15,7 @@
       "128": "./icon-128.png",
       "512": "./icon-512.png"
     },
-    "default_title": "Smart Calculator"
+    "default_title": "Scientific Calculator+Unit/Currency Converter"
   },
   "icons": {
       "16": "./icon-16.png",

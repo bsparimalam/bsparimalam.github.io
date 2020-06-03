@@ -1,5 +1,4 @@
-// import * as np from './numjs.js';
-// import * as cv from './opencv.js';
+import * as np from './modules/numjs.js';
 
 class File {
 	constructor(file) {
