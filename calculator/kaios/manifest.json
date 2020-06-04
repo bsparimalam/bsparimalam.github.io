@@ -13,6 +13,16 @@
     	"src": "./icon-512.png",
     	"sizes": "512x512",
     	"type": "image/png"
+    },
+    {
+      "src": "./icon-112.png",
+      "sizes": "112x112",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-56.png",
+      "sizes": "56x56",
+      "type": "image/png"
     }
   ]
 }
