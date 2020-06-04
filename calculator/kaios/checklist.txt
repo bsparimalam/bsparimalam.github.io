@@ -6,7 +6,9 @@
 6. retain 56, 112 icons
 7. update the version on manifest-hosted.app
 
-
+submit:
+https://bhar.app/calculator/kaios/
+#c1d5e0
 *1.
 :root{
 	--app-height: 100%;

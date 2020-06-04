@@ -1,6 +1,6 @@
 {
   "version": "6.1.2",
-  "name": "Scientific Calculator",
+  "name": "Scientific Calculator + Unit/Currency Converter",
   "description": "Scientific calculator with unit & currency conversion",
   "type": "web",
   "launch_path": "./index.html",
