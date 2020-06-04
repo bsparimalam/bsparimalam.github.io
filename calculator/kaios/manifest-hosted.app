@@ -18,7 +18,7 @@
   "cursor": "true",
   "locales": {
     "en-US": {
-      "name": "Scientific Calculator",
+      "name": "Scientific Calculator + Unit/Currency Converter",
       "subtitle": "Scientific calculator with unit & currency conversion",
       "description": "instant results as you type, real-time currency, unit conversions, smart-personal shortcuts, smart angle unit warnings, and dark mode. Optimized for off-line use."
     }

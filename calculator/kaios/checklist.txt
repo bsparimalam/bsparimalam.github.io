@@ -7,7 +7,7 @@
 7. update the version on manifest-hosted.app
 
 submit:
-https://bhar.app/calculator/kaios/
+https://bhar.app/calculator/kaios/manifest-hosted.app
 #c1d5e0
 *1.
 :root{
