@@ -39,5 +39,6 @@
       "./core/icon-32.png"
     ]
   },
+  "offline_enabled": true,
   "manifest_version": 2
 }

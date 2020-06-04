@@ -1,0 +1,316 @@
+
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	:root{
+		--lighter: #c1d5e0;
+		--light: #b0bec5;
+		--medium: #90a4ae;
+		--dark: #78909c;
+		--text: #000000;
+		--preview-text: #42545d;
+		--preview-outdated: #985252;
+		--error: #9e0000;
+		--warning: #b7b739;
+
+		--bg-color-0: var(--lighter);
+		--bg-color-1: var(--light);
+		--bg-color-2: var(--medium);
+		--bg-color-3: var(--dark);
+		--fg-color-0:;
+		--fg-color-1: var(--text);
+		--fg-color-2: var(--text);
+		--fg-color-3: var(--text);
+		--fg-color-3-1: var(--preview-text);
+		--fg-color-3-2: var(--error);
+		--active-color-0:;
+		--active-color-1: var(--lighter);
+		--active-color-2: var(--light);
+		--active-color-3: var(--medium);
+		--hover-color-0:;
+		--hover-color-1: var(--lighter);
+		--hover-color-2: var(--light);
+		--hover-color-3: var(--medium);
+		--border-color-2: var(--dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--lighter: #37474f;
+		--light: #102027;
+		--medium: #101a20;
+		--dark: #000a12;
+		--text: #e2f1f8;
+		--preview-text: #6d8692;
+		--preview-outdated: #985252;
+		--error: #a90000;
+		--warning: #b7b739;
+
+		--bg-color-0: var(--lighter);
+		--bg-color-1: var(--light);
+		--bg-color-2: var(--medium);
+		--bg-color-3: var(--dark);
+		--fg-color-0:;
+		--fg-color-1: var(--text);
+		--fg-color-2: var(--text);
+		--fg-color-3: var(--text);
+		--fg-color-3-1: var(--preview-text);
+		--fg-color-3-2: var(--error);
+		--active-color-0:;
+		--active-color-1: var(--lighter);
+		--active-color-2: var(--lighter);
+		--active-color-3: var(--lighter);
+		--hover-color-0:;
+		--hover-color-1: var(--lighter);
+		--hover-color-2: var(--lighter);
+		--hover-color-3: var(--lighter);
+		--border-color-2: var(--lighter);
+	}
+}
+:root{
+	--app-height: 100%;
+	--app-width: 100%;
+	font-size: 2vw;
+	--app-corner-radius: 0;
+    --app-border-style: none;
+    --app-border-width: 0;
+}
+/*MISCELLANEOUS*/
+html, body, div, input, p, button { 
+	margin: 0;
+	border-width: 0;
+	padding: 0;
+	border-style: none;
+	border-radius: 0;
+	overflow: hidden;
+} /*common parameters*/
+body {
+	border-radius: var(--app-corner-radius);
+}
+select, #convert {
+    border-style: solid;
+    border-width: 1px; 
+    border-radius:  var(--app-corner-radius);
+}
+html, body, div, input, p, button {
+	touch-action: pinch-zoom;
+	touch-action: manipulation; 
+} /*touch actions*/
+
+/*LAYOUT*/
+html { 
+	width: 100%;
+	height: 100%;
+}
+
+/*LEVEL ZERO*/
+body {
+	width: var(--app-width); 
+	height: var(--app-height);
+
+	display: grid; 
+	grid-gap: 0%;
+	grid-template-columns: 100%; 
+	grid-template-rows: 40% 35% 25%;
+}
+
+/*LEVEL ONE*/
+div {
+	grid-row: span 1; 
+	grid-column: span 1; 
+	width: 100%; 
+	height: 100%;
+	display: grid;
+	grid-gap: 0%;
+}
+.convs {
+	display: none;
+}
+.inputs {
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 50% 30% 20%;
+}
+.scis {
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 33.33% 33.33% 33.33%;
+}
+.convs {
+	grid-template-columns: 100%;
+	grid-template-rows: 33.33% 66.66%;
+}
+.list {
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 100%;
+}
+.prefs {
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: 50% 50%;	
+}
+.nums {
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 50% 50%;
+}
+
+/*LEVEL TWO*/
+button {
+    grid-row: span 1;
+    grid-column: span 1;
+	width: 100%; 
+	height: 100%;
+}
+#ip, #op {
+	grid-row: span 1; 
+	grid-column: span 5; 
+	width: 100%; 
+	height: 100%;
+}
+#convtypes {
+	grid-row: span 1; 
+	grid-column: span 2;
+	margin: 5% 5%;
+	width: 90%;
+	height: 70%;
+
+}
+#convfroms, #convtos, #convert {
+	grid-row: span 1; 
+	grid-column: span 1;
+	margin: 10% 5%;
+	width: 85%; 
+	height: 70%;
+}
+.pref {
+	margin: auto;
+	position: relative;
+	grid-row: span 1;
+    grid-column: span 1;
+    border: 0.2rem dashed;
+    border-radius:  var(--app-corner-radius);
+    width: 70%;
+    height: 70%;
+}
+.visuallyhidden {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px;
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px;
+}
+/*FONT*/
+@font-face {
+	font-family: 'Fira Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+		url('./font.ttf') format('truetype');
+}
+:root {
+	--font-family:'Fira Sans', system-ui;
+	--ip-max: 7rem;
+	--ip-min: 5.5rem;
+}
+input, p, button, select, option {
+	font-family: var(--font-family);
+	text-align: center;
+	touch-action: pinch-zoom;
+	touch-action: manipulation; 
+}
+button, select, option {
+	user-select: none;
+	-webkit-user-select:none;
+}
+#ip {
+	font-size: var(--ip-max);
+}
+#op {
+	font-size: 5rem;
+}
+.panel {
+	font-size: 2rem;
+}
+.sci, select, option {
+	font-size: 2.5rem;
+}
+select, #convert {
+	border-radius: 1.5rem;
+}
+#convert {
+	font-size: 3rem;
+}
+.pref {
+	font-size: 2rem;
+	border-radius: 1.5rem;
+}
+.num {
+	font-size: 4rem;
+}
+.opr {
+	font-size: 4.5rem;
+}
+#bspc {
+	font-size: 3rem;
+}
+#ANS, #E {
+	font-size: 2.5rem;
+}
+#CE {
+	font-size: 4rem;
+}
+#decimal {
+	font-size: 4rem;
+	padding-bottom: 2rem;
+}
+
+/*COLOR*/
+html {
+	background-color: var(--bg-color-0);
+	color: var(--fg-color-0);
+}
+.inputs, input, p, .panel {
+	background-color: var(--bg-color-3);
+	color: var(--fg-color-3);
+}
+.panel:active {
+	background-color: var(--active-color-3);
+}
+.scis, .sci, .convs, select, option, #convert, .pref { 
+	background-color: var(--bg-color-2);
+	color: var(--fg-color-2);
+}
+select, option, #convert, .pref {
+	border-color: var(--border-color-2);
+}
+.sci:active, select:active, option:active, #convert:active, .pref:active {
+	background-color: var(--active-color-2);
+}
+.nums, .num, .opr, .io { 
+	background-color: var(--bg-color-1);
+	color: var(--fg-color-1);
+}
+.opr { 
+	color: var(--fg-color-1-0);
+}
+.num:active, .opr:active, .io:active {
+	background-color: var(--active-color-1);
+}
+@media (hover: hover) {
+	.panel:hover {
+		background-color: var(--hover-color-3);
+		border: 1px solid var(--bg-color-3);
+	}
+	.sci:hover, select:hover, option:hover, #convert:hover, .pref:hover {
+		background-color: var(--hover-color-2);
+		border: 1px solid var(--bg-color-3);
+	}
+	.num:hover, .opr:hover, .io:hover {
+		background-color: var(--hover-color-1);
+		border: 1px solid var(--bg-color-3);
+	}
+	#E {
+		border-radius: 0 0 var(--app-corner-radius) 0;
+	}
+	#decimal {
+		border-radius: 0 0 0 var(--app-corner-radius);
+	}
+}
