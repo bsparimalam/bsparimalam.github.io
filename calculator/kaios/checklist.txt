@@ -2,7 +2,7 @@
 2. alternative number pad
 3. body layout 40% 35% 25%;
 4. enable outline
-5. retain the manifest-hosted.app
+5. retain the manifest-hosted.app & manifest.json
 6. retain 56, 112 icons
 7. update the version on manifest-hosted.app
 

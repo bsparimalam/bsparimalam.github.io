@@ -151,6 +151,7 @@ function filteroutput(evaluated, unit) {
 }
 function calculate(type, operation=null) {
 	angleunitwarned = false;
+	inputbox.e.scrollLeft = inputbox.e.scrollWidth;
 	lasttype = type; lastoperation = operation;
 	console.log('computation requested: ' + type + '; ' + operation);
 	var base=null ; var target=null;

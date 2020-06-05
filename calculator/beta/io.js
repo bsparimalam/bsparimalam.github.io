@@ -1,6 +1,6 @@
-lasteval = 0;
-lasttype = null;
-lastoperation = null;
+lasteval = '';
+lasttype = '';
+lastoperation = '';
 // Booleans
 function isoperator(string) {
 	return ( string=='+' || string=='-' || string=='×' || string=='*'
@@ -75,33 +75,29 @@ class Inputbox {
 			this.e.style.fontSize = 'var(--ip-max)';
 		}
 	}
-	write(string) {
+	write(string, cursor) {
 		this.e.value = string;
-		this.e.scrollLeft = this.e.scrollWidth;
 		this.setfontsize();
 		userpref.lastinput = string;
 		saveuserpref();
 		outputpreview();
+		this.e.focus();
+		this.e.setSelectionRange(cursor, cursor);
 	}
 	addastring(string) {
-		this.e.value += string;
-		this.write(insertcomma(this.read()));
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		let cursorstart = this.e.selectionStart;
+		let cursorend = this.e.selectionEnd;
+		let current = this.e.value;
+		this.write(current.slice(0, cursorstart) + string + current.slice(cursorend, ), cursorstart + string.length);
 	}
 	removeastring() {
-		this.e.value = this.e.value.slice(0, -1);
-		this.write(insertcomma(this.read()));
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		let cursorstart = this.e.selectionStart;
+		let cursorend = this.e.selectionEnd;
+		let current = this.e.value;
+		this.write(current.slice(0, cursorstart-1) + current.slice(cursorend, ), cursorstart - 1 );
 	}
 	removeall() {
-		this.e.value = null;
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		this.write('', 0);
 	}
 }
 class Outputbox {
@@ -116,12 +112,12 @@ class Outputbox {
 	}
 	removeall() {
 		this.e.innerText = '';
-		lasteval = 0;
+		lasteval = '';
 		angleunitwarned = false;
 	}
 	write(string, unit) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
-		lasteval = string;
+		lasteval = string.replace(/,/g, '');
 		if (string.indexOf('E') === -1) {
 			this.e.innerText = `${string} ${unit}`;
 		} else {
@@ -136,7 +132,7 @@ class Outputbox {
 	}
 	preview(string) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
-		lasteval = string;
+		lasteval = string.replace(/,/g, '');
 		if (string.indexOf('E') === -1) {
 			this.e.innerText = `${string}`;
 		} else {
@@ -160,6 +156,7 @@ class Outputbox {
 inprogress = true; 
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
+inputbox.e.focus();
 function outputpreview() {
 	outputbox.previewoutdated();
 	var string = inputbox.read();
@@ -237,7 +234,7 @@ document.addEventListener('click', event => {
 				outputbox.removeall();
 				inprogress = true; break;
 			case "ANS": 
-				inputbox.write(lasteval);
+				inputbox.write(lasteval, lasteval.length);
 				outputbox.removeall();
 				inprogress = true;
 				break;
@@ -247,6 +244,10 @@ document.addEventListener('click', event => {
 			case "E": touchinput('E'); break;
 		}
 		console.log('inprogress : ' + inprogress);
+	} else if (target.nodeName == 'INPUT') {
+		inprogress = true;
+	} else {
+		inputbox.e.scrollLeft = inputbox.e.scrollWidth;
 	}
 });
 document.addEventListener('change', event => {
@@ -263,9 +264,6 @@ document.addEventListener('change', event => {
 		}
 	}
 });
-inputbox.e.addEventListener('focus', event => {
-	event.target.scrollIntoView();
-});
 inputbox.e.addEventListener('input', event => {
 		inputbox.setfontsize();
 		outputpreview();
@@ -274,38 +272,17 @@ inputbox.e.addEventListener('input', event => {
 });
 // keyboard input
 document.addEventListener('keydown', event => {
+	inputbox.e.focus();
 	key = event.key;
 	if ( key == "Enter" ) {
 		calculate('simple', null);
-	} else if ( inputbox.e != document.activeElement ) {
+	} else if ( inputbox.read().length === inputbox.e.selectionStart ) {
 		if (!inprogress && isoperator(key)) {
-			inputbox.write(lasteval);
+			inputbox.write(lasteval, lasteval.length);
 			outputbox.removeall();
 		} else if (!inprogress && (key !== 'Backspace') && (key !== 'Delete')) {
 			inputbox.removeall();
 			outputbox.removeall();
-		}
-		switch (key) {
-			case 'Backspace': case 'Delete':
-				inputbox.removeastring(); 
-				break;
-			case '*': case 'x': case 'X':
-				inputbox.addastring('×'); break;
-			case '^':
-				inputbox.addastring('^('); break;
-			case '(': case '{': case '[': case '<': 
-				inputbox.addastring('('); break;
-			case ')': case '}': case ']': case '>':
-				inputbox.addastring(')'); break;
-			case '0': case '1': case '2': case '3': case '4': case '5': case '6': 
-			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
-			case '+': case '-': case '/': case '%':
-			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
-			case 'p': case 's': case 't':
-				inputbox.addastring(key); break;
-			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
-			case 'P': case 'S': case 'T':
-				inputbox.addastring(key.toLowerCase()); break;
 		}
 		inprogress = true;
 	} else { 
