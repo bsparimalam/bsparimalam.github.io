@@ -1,28 +1,13 @@
-lasteval = 0;
-lasttype = null;
-lastoperation = null;
+lasteval = '';
+lasttype = '';
+lastoperation = '';
+inprogress = true;
+invalidoutput = true;
 // Booleans
 function isoperator(string) {
 	return ( string=='+' || string=='-' || string=='×' || string=='*'
 		|| string == 'x' || string=='X' || string=='/' || string=='÷' 
 	);
-}
-function isnumber(string, before, after) {
-	return ( !isNaN(string) || (string=='.')
-		|| ((string == '-' ) && (before == 'E'))
-		|| ((string == '+' ) && (before == 'E')) 
-		|| ((string == 'E' ) && (after == '-'))
-		|| ((string == 'E' ) && (after == '+'))
-		|| ((string == 'E') && !isNaN(after))
-		|| ((string == 'e' ) && (after == '-'))
-		|| ((string == 'e' ) && (after == '+'))
-		|| ((string == 'e') && !isNaN(after)));
-}
-function istoolong(string, length) {
-	string = string.replace(/\./g, '');
-	eindex = string.indexOf('E');
-	if ( eindex != -1 ) { string = string.slice(0, eindex); }
-	return string.length > length;
 }
 function insertcomma(string) {
 	console.log('insert comma input: ' + string);
@@ -75,33 +60,35 @@ class Inputbox {
 			this.e.style.fontSize = 'var(--ip-max)';
 		}
 	}
-	write(string) {
+	write(string, cursor) {
 		this.e.value = string;
-		this.e.scrollLeft = this.e.scrollWidth;
 		this.setfontsize();
 		userpref.lastinput = string;
 		saveuserpref();
 		outputpreview();
+		this.e.setSelectionRange(cursor, cursor);
+		inprogress = true;
 	}
 	addastring(string) {
-		this.e.value += string;
-		this.write(insertcomma(this.read()));
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		let cursorstart = this.e.selectionStart;
+		let cursorend = this.e.selectionEnd;
+		let current = this.e.value;
+		this.write(current.slice(0, cursorstart) + string + current.slice(cursorend, ), cursorstart + string.length);
 	}
 	removeastring() {
-		this.e.value = this.e.value.slice(0, -1);
-		this.write(insertcomma(this.read()));
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		let cursorstart = this.e.selectionStart;
+		let cursorend = this.e.selectionEnd;
+		let current = this.e.value;
+		if (cursorstart === cursorend) {
+			if (cursorstart !== 0) {
+				this.write(current.slice(0, cursorstart-1) + current.slice(cursorstart, ), cursorstart - 1 );
+			}
+		} else {
+			this.write(current.slice(0, cursorstart) + current.slice(cursorend, ), cursorstart );
+		}
 	}
 	removeall() {
-		this.e.value = null;
-		userpref.lastinput = this.read();
-		saveuserpref();
-		outputpreview();
+		this.write('', 0);
 	}
 }
 class Outputbox {
@@ -114,14 +101,9 @@ class Outputbox {
 	length() {
 		return this.read().length;
 	}
-	removeall() {
-		this.e.innerText = '';
-		lasteval = 0;
-		angleunitwarned = false;
-	}
 	write(string, unit) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
-		lasteval = string;
+		lasteval = string.replace(/,/g, '');
 		if (string.indexOf('E') === -1) {
 			this.e.innerText = `${string} ${unit}`;
 		} else {
@@ -133,10 +115,12 @@ class Outputbox {
 		}
 		this.e.style.color = 'var(--fg-color-3)';
 		angleunitwarned = false;
+		inprogress = false;
+		invalidoutput = false;
 	}
 	preview(string) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
-		lasteval = string;
+		lasteval = string.replace(/,/g, '');
 		if (string.indexOf('E') === -1) {
 			this.e.innerText = `${string}`;
 		} else {
@@ -147,25 +131,42 @@ class Outputbox {
 			this.e.innerHTML = `${parts[0]}×10<sup>${parts[1]}</sup>`;
 		}
 		this.e.style.color = 'var(--fg-color-3-1)';
+		invalidoutput = false;
 	}
 	error(string) {
 		string = string.toString();
 		this.e.innerText = string.replace(/<[^>]*>/g, '');
 		this.e.style.color = 'var(--fg-color-3-2)';
+		invalidoutput = true;
 	}
 	previewoutdated() {
-		this.e.style.color = 'var(--preview-outdated)';		
+		this.e.style.color = 'var(--preview-outdated)';
+		inprogress = true;
+		invalidoutput = false;
+	}
+	removeall() {
+		this.e.innerText = '';
+		lasteval = '';
+		angleunitwarned = false;
+		invalidoutput = true;
+	}
+	notify(string) {
+		this.e.innerHTML = string;
+		this.e.style.color = 'var(--fg-color-3-1)';
+		setTimeout(() => {
+			this.write(lasteval, '');
+		}, 750);
 	}
 }
-inprogress = true; 
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
+inputbox.e.focus();
 function outputpreview() {
 	outputbox.previewoutdated();
-	var string = inputbox.read();
-	var numofbrac = string.split('(').length - string.split(')').length;
-	var temp;
-	for (var i = 0; i < numofbrac; i++) {
+	let string = inputbox.read();
+	let numofbrac = string.split('(').length - string.split(')').length;
+	let temp;
+	for (let i = 0; i < numofbrac; i++) {
 		string = string + ')';
 	}
 	string = parse(string);
@@ -177,27 +178,39 @@ function outputpreview() {
 	if (!isNaN(temp)) { 
 		temp = filteroutput(temp); 
 		outputbox.preview(temp);
-	} else if(string == '') {
+	} else if(string === '') {
 		outputbox.preview('0');
 	}
 }
-
 function touchinput(key) {
 	if ( !inprogress && isoperator(key) ) {
-		inputbox.e.value = lasteval;
+		inputbox.write(lasteval);
 		outputbox.removeall();
-	} else if (!inprogress ) {
+	} else if (!inprogress) {
 		inputbox.removeall();
 		outputbox.removeall();
 	}
 	inputbox.addastring(key);
-	inprogress = true;
 }
 // touch input
+document.addEventListener('keydown', event => {
+	key = event.key;
+	if ( key == "Enter" ) {
+		calculate('simple', null);
+	} else {
+		if (!inprogress && isoperator(key)) {
+			inputbox.write(lasteval, lasteval.length);
+			outputbox.removeall();
+		} else if (!inprogress && (key.length === 1)) {
+			inputbox.removeall();
+			outputbox.removeall();
+		}
+		inprogress = true;
+	}
+});
 document.addEventListener('click', event => {
 	var target = event.target;
 	if (target.nodeName == 'BUTTON') { 
-		target.blur();
 		switch(target.id) {
 			case 'angleunit': setangleunit(); break;
 			case 'representation': setnumrep(); break;
@@ -230,29 +243,33 @@ document.addEventListener('click', event => {
 				touchinput(target.innerHTML);break;
 			case "bspc": 		
 				inputbox.removeastring();
-				inprogress = true;
 				break;
 			case "CE": 
 				inputbox.removeall();
 				outputbox.removeall();
-				inprogress = true; break;
+				break;
 			case "ANS": 
-				inputbox.write(lasteval);
+				inputbox.write(lasteval, lasteval.length);
 				outputbox.removeall();
-				inprogress = true;
 				break;
 			case "evaluate": calculate('simple', null); break;
 			case "divi": touchinput('/'); break;
 			case "comma": touchinput('.'); break;
 			case "E": touchinput('E'); break;
 		}
-		console.log('inprogress : ' + inprogress);
+	} else if (target.nodeName == 'INPUT') {
+		inprogress = true;
+	} else if (target.nodeName === 'P') {
+		let outputtext = outputbox.read();
+		if (!invalidoutput) {
+			navigator.clipboard.writeText(lasteval);
+			outputbox.notify('copied to clipboard!');
+		}
 	}
 });
 document.addEventListener('change', event => {
 	var target = event.target;
 	if (target.nodeName == 'SELECT') { 
-		target.blur();
 		switch(target.id) {
 			case 'convtypes': 
 				setconvtype(target); break;
@@ -262,54 +279,13 @@ document.addEventListener('change', event => {
 			break;
 		}
 	}
-});
-inputbox.e.addEventListener('focus', event => {
-	event.target.scrollIntoView();
-});
+}); // conversion selection
+inputbox.e.addEventListener('blur', event => {
+	inputbox.e.focus();
+}); // keep the inputbox focused
 inputbox.e.addEventListener('input', event => {
-		inputbox.setfontsize();
-		outputpreview();
-		userpref.lastinput = inputbox.read();
-		saveuserpref();
-});
-// keyboard input
-document.addEventListener('keydown', event => {
-	key = event.key;
-	if ( key == "Enter" ) {
-		calculate('simple', null);
-	} else if ( inputbox.e != document.activeElement ) {
-		if (!inprogress && isoperator(key)) {
-			inputbox.write(lasteval);
-			outputbox.removeall();
-		} else if (!inprogress && (key !== 'Backspace') && (key !== 'Delete')) {
-			inputbox.removeall();
-			outputbox.removeall();
-		}
-		switch (key) {
-			case 'Backspace': case 'Delete':
-				inputbox.removeastring(); 
-				break;
-			case '*': case 'x': case 'X':
-				inputbox.addastring('×'); break;
-			case '^':
-				inputbox.addastring('^('); break;
-			case '(': case '{': case '[': case '<': 
-				inputbox.addastring('('); break;
-			case ')': case '}': case ']': case '>':
-				inputbox.addastring(')'); break;
-			case '0': case '1': case '2': case '3': case '4': case '5': case '6': 
-			case '7': case '8': case '9': case ',': case '.': case 'e': case 'E':
-			case '+': case '-': case '/': case '%':
-			case 'a': case 'c': case 'g': case 'i': case 'l': case 'n': case 'o': 
-			case 'p': case 's': case 't':
-				inputbox.addastring(key); break;
-			case 'A': case 'C': case 'G': case 'I': case 'L': case 'N': case 'O': 
-			case 'P': case 'S': case 'T':
-				inputbox.addastring(key.toLowerCase()); break;
-		}
-		inprogress = true;
-	} else { 
-		inprogress = true;
-	}
-	console.log('inprogress : ' + inprogress);
+	inputbox.setfontsize();
+	outputpreview();
+	userpref.lastinput = inputbox.read();
+	saveuserpref();
 });

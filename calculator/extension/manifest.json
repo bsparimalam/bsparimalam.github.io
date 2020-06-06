@@ -1,7 +1,7 @@
 {
   "name": "Scientific Calculator+Unit/Currency Converter",
   "short_name": "Calculator",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "description": "👨‍🔬️🔢 Dark mode; touch & keyboard friendly; Smart personalizations with no user setup; Available on all devices as a webapp(PWA)",
   "browser_action": {
     "default_popup": "index.html",
@@ -36,7 +36,8 @@
       "./core/io.js",
       "./core/compute.js",
       "./core/log.js",
-      "./core/icon-32.png"
+      "./core/icon-32.png",
+      "./core/favicon.ico"
     ]
   },
   "offline_enabled": true,

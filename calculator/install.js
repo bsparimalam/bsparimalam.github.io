@@ -1,4 +1,4 @@
-var appversion = "v6.1.2";
+var appversion = "v6.1.3";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
@@ -6,6 +6,7 @@ const files2cache = [
     './icon-512.png',
     './icon-152.png',
     './icon-32.png',
+    './favicon.ico',
     './index.html',
     './style.css',
     './font.ttf',
@@ -14,7 +15,6 @@ const files2cache = [
     './compute.js',
     './log.js'
 ];
-
 self.addEventListener('install', function(event) {
   console.log(appversion + ' downloading...');
   event.waitUntil(caches.open('Calculator-' + appversion )

@@ -1,4 +1,20 @@
-
+function isnumber(string, before, after) {
+	return ( !isNaN(string) || (string=='.')
+		|| ((string == '-' ) && (before == 'E'))
+		|| ((string == '+' ) && (before == 'E')) 
+		|| ((string == 'E' ) && (after == '-'))
+		|| ((string == 'E' ) && (after == '+'))
+		|| ((string == 'E') && !isNaN(after))
+		|| ((string == 'e' ) && (after == '-'))
+		|| ((string == 'e' ) && (after == '+'))
+		|| ((string == 'e') && !isNaN(after)));
+}
+function istoolong(string, length) {
+	string = string.replace(/\./g, '');
+	eindex = string.indexOf('E');
+	if ( eindex != -1 ) { string = string.slice(0, eindex); }
+	return string.length > length;
+}
 function parse(string) {
 	var angleconv; var angleconvinv;
 	if (angleunit.innerHTML == 'DEG') {
@@ -15,16 +31,7 @@ function parse(string) {
 			i++;
 		}
 	}
-	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(
-		/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(
-		/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(
-		/π|pi/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(
-		/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(
-		/cos\(/gi, 'Math.cos(' + angleconv).replace(
-		/tan\(/gi, 'Math.tan(' + angleconv).replace(
-		/sin⁻¹\(/gi, angleconvinv + 'Math.asin(').replace(
-		/cos⁻¹\(/gi, angleconvinv + 'Math.acos(').replace(
-		/tan⁻¹\(/gi, angleconvinv + 'Math.atan(').replace(/ |,/gi, '');
+	var parsedstring = string.replace(/\(|\{|\[|\</gi, '((').replace(/\)|\}|\]|\>/gi, '))').replace(/×|x|X/gi, '*').replace(/÷/gi, '/').replace(/\^/gi, '**').replace(/e/g, 'Math.E').replace(/π|pi/gi, 'Math.PI').replace(/log/gi, 'Math.log10').replace(/ln/gi, 'Math.log').replace(/sin\(/gi, 'Math.sin(' + angleconv).replace(/cos\(/gi, 'Math.cos(' + angleconv).replace(/tan\(/gi, 'Math.tan(' + angleconv).replace(/sin⁻¹\(|sininv\(/gi, angleconvinv + 'Math.asin(').replace(/cos⁻¹\(|cosinv\(/gi, angleconvinv + 'Math.acos(').replace(/tan⁻¹\(|taninv\(/gi, angleconvinv + 'Math.atan(').replace(/ |,/gi, '').replace(/root/gi, '√');
 	// parsing root
 	while ( parsedstring.indexOf('√') != -1 ) {
 		var rootindex = parsedstring.indexOf('√');
@@ -114,9 +121,9 @@ function parse(string) {
 			}
 			if (
 				((angleunit.innerHTML == 'DEG') 
-					&& (inputbox.read().match(/π|pi/i) !== null))
+					&& (inputbox.read().match(/pi|π/i) !== null))
 				|| ((angleunit.innerHTML == 'RAD')
-					&& (tempeval%5 == 0))
+					&& ((tempeval%5 == 0) || (tempeval > 7)) && (inputbox.read().match(/pi|π/i) == null))
 				) {
 				warnangleunit();
 			}
@@ -151,7 +158,6 @@ function filteroutput(evaluated, unit) {
 }
 function calculate(type, operation=null) {
 	angleunitwarned = false;
-	inputbox.e.scrollLeft = inputbox.e.scrollWidth;
 	lasttype = type; lastoperation = operation;
 	console.log('computation requested: ' + type + '; ' + operation);
 	var base=null ; var target=null;
@@ -167,12 +173,8 @@ function calculate(type, operation=null) {
 			|| (target == 'to') || isNaN(evaluated) 
 			|| (typeof(evaluated) != "number"))  {
 		outputbox.error('invalid input');
-		inprogress = true;
-		console.log('inprogress : ' + inprogress);
 	} else if (type == 'simple') {
 		outputbox.write(filteroutput(evaluated), '');
-		inprogress = false;
-		console.log('inprogress : ' + inprogress);
 		log(type, operation);
 	} else {
 		var typeindex = 0; var baseindex = 0; var targetindex = 0;
@@ -215,8 +217,6 @@ function calculate(type, operation=null) {
 				outputbox.write(insertcomma(Number(evaluated).toFixed(2)), target);
 				break;
 		}
-		inprogress = false;
-		console.log('inprogress : ' + inprogress);
 		log(type, operation);
 		return evaluated;
 	}
