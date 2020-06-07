@@ -20,7 +20,7 @@ function insertcomma(string) {
 			||( string[start] == '.')) 
 			&& (start!=-1)) { 
 			start -= 1;
-		}
+		}0
 	} else {
 		start = 0;
 	}
@@ -63,11 +63,16 @@ class Inputbox {
 	write(string, cursor) {
 		this.e.value = string;
 		this.setfontsize();
+		this.e.setSelectionRange(cursor, cursor);
+		outputpreview();
+		inprogress = true;
+		if (this.e.selectionStart === this.read().length) {
+			this.e.scrollLeft = this.e.scrollWidth;
+		} else {
+			this.e.scrollLeft = this.e.scrollWidth*((cursor-8)/string.length);
+		}
 		userpref.lastinput = string;
 		saveuserpref();
-		outputpreview();
-		this.e.setSelectionRange(cursor, cursor);
-		inprogress = true;
 	}
 	addastring(string) {
 		let cursorstart = this.e.selectionStart;
@@ -160,7 +165,6 @@ class Outputbox {
 }
 inputbox = new Inputbox(document.getElementById('ip'));
 outputbox = new Outputbox(document.getElementById('op'));
-inputbox.e.focus();
 function outputpreview() {
 	outputbox.previewoutdated();
 	let string = inputbox.read();
@@ -186,6 +190,7 @@ function touchinput(key) {
 	if ( !inprogress && isoperator(key) ) {
 		inputbox.write(lasteval);
 		outputbox.removeall();
+		inputbox.e.setSelectionRange(9999, 9999);
 	} else if (!inprogress) {
 		inputbox.removeall();
 		outputbox.removeall();
@@ -193,7 +198,15 @@ function touchinput(key) {
 	inputbox.addastring(key);
 }
 // touch input
+inputbox.e.addEventListener('focusout', event => {
+	if (inputbox.e.selectionStart === inputbox.read().length) {
+		inputbox.e.scrollLeft = inputbox.e.scrollWidth;
+	} else {
+		inputbox.e.scrollLeft = inputbox.e.scrollWidth*((inputbox.e.selectionStart-8)/inputbox.read().length);
+	}
+});
 document.addEventListener('keydown', event => {
+	inputbox.e.focus();
 	key = event.key;
 	if ( key == "Enter" ) {
 		calculate('simple', null);
@@ -208,9 +221,18 @@ document.addEventListener('keydown', event => {
 		inprogress = true;
 	}
 });
+inputbox.e.addEventListener('input', event => {
+	inputbox.setfontsize();
+	outputpreview();
+	userpref.lastinput = inputbox.read();
+	saveuserpref();
+});
 document.addEventListener('click', event => {
 	var target = event.target;
-	if (target.nodeName == 'BUTTON') { 
+	if (target.nodeName !== 'SELECT') {
+		inputbox.e.focus();
+	}
+	if (target.nodeName == 'BUTTON') {
 		switch(target.id) {
 			case 'angleunit': setangleunit(); break;
 			case 'representation': setnumrep(); break;
@@ -259,12 +281,6 @@ document.addEventListener('click', event => {
 		}
 	} else if (target.nodeName == 'INPUT') {
 		inprogress = true;
-	} else if (target.nodeName === 'P') {
-		let outputtext = outputbox.read();
-		if (!invalidoutput) {
-			navigator.clipboard.writeText(lasteval);
-			outputbox.notify('copied to clipboard!');
-		}
 	}
 });
 document.addEventListener('change', event => {
@@ -280,12 +296,3 @@ document.addEventListener('change', event => {
 		}
 	}
 }); // conversion selection
-inputbox.e.addEventListener('blur', event => {
-	inputbox.e.focus();
-}); // keep the inputbox focused
-inputbox.e.addEventListener('input', event => {
-	inputbox.setfontsize();
-	outputpreview();
-	userpref.lastinput = inputbox.read();
-	saveuserpref();
-});
