@@ -280,6 +280,7 @@ button, select, option {
 }
 #ip {
 	font-size: var(--ip-max);
+	touch-action: pan-x;
 }
 #op {
 	font-size: 5rem;

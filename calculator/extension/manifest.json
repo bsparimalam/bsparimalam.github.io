@@ -27,6 +27,9 @@
       "512": "./icon-512.png"
   },
   "content_security_policy": "default-src 'self' https://api.exchangeratesapi.io 'unsafe-eval';",
+  "permissions": [
+	"https://api.exchangeratesapi.io"
+  ],
   "sandbox": {
      "pages": [
       "./core/index.html",

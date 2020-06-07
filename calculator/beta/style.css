@@ -270,19 +270,17 @@ button {
 }
 input, p, button, select, option {
 	font-family: var(--font-family);
+	text-align: center;
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
-}
-p, button, select, option {
-	text-align: center;
 }
 button, select, option {
 	user-select: none;
 	-webkit-user-select:none;
 }
-input {
+#ip {
 	font-size: var(--ip-max);
-	text-align: center;
+	touch-action: pan-x;
 }
 #op {
 	font-size: 5rem;
