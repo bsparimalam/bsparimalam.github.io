@@ -1,5 +1,5 @@
 {
-  "version": "6.1.2",
+  "version": "6.1.5",
   "name": "Scientific Calculator + Unit/Currency Converter",
   "description": "Scientific calculator with unit & currency conversion",
   "type": "web",

@@ -1,9 +1,10 @@
-1. remove responsive html size
-2. alternative number pad
-3. body layout 40% 35% 25%;
-4. enable outline
 5. retain the manifest-hosted.app & manifest.json
 6. retain 56, 112 icons
+
+1. remove responsive html size: or retain style.css
+2. alternative number pad: or retain index.html
+3. body layout 40% 35% 25%; or retain style.css
+
 7. update the version on manifest-hosted.app
 
 submit:

@@ -94,7 +94,9 @@ html, body, div, input, p, button {
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
 } /*touch actions*/
-
+:focus { 
+	outline: none !important; 
+} /*focus outline*/
 /*LAYOUT*/
 html { 
 	width: 100%;

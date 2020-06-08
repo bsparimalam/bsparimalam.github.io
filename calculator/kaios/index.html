@@ -14,21 +14,13 @@
 	<link rel="stylesheet" href="./style.css">
 	<!-- web app resources -->
 	<link rel="manifest" href="./manifest.json">
-	<!-- apple web app resources -->
-	<meta name="theme-color" id="theme-color" content= '#b0bec5'> 
-	<meta name="apple-touch-fullscreen" content="yes" >
-	<meta name="apple-mobile-web-app-title" content="Calculator">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="default">
-	<link rel="apple-touch-icon" href="./icon-152.png">
-	<link rel="apple-touch-startup-image" href="./icon-152x152.png">
 
 </head>
 <body id="body" >
     <div class='inputs'>
 	    <label for="ip" class="visuallyhidden">input box</label>
 		<input type="text" id="ip" name="input box" spellcheck="false" 
-		inputmode="decimal" >
+		inputmode="none" autofocus>
 		<p id="op" ></p>
 		<button class="panel" id="angleunit" name="angle unit" >DEG</button>
 		<button class="panel" id="representation" name="representation" >DECI</button>
@@ -77,7 +69,6 @@
         </div>
 	</div>
     <div class="nums">
-
 		<button class="opr" id="plus" name="add">+</button>
 		<button class="opr" id="sub" name="subtract">-</button>
 		<button class="opr" id="mult" name="multiply">×</button>
@@ -89,7 +80,6 @@
 		<button class="num" id="E" name="exp" >EXP</button>
 		<button class="io" id="CE" name="clear all" >CE</button>
 		<button class="io" id="bspc" name="delete" >⌫</button>
-
     </div>
     <script src='./load.js'></script><script src='./io.js'></script>
     <script async src='./compute.js'></script><script async src='./log.js'></script>
