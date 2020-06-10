@@ -125,7 +125,11 @@ function log (type, operation) {
 		saveuserpref();	loaduserpref();
 	}
 }
-
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./install.js');
+} else {
+	console.log('serice worker not supported');
+}
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
