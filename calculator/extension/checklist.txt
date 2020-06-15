@@ -1,9 +1,0 @@
-1. remove install.js and registration
-4. remove google analytics related csp, loading, scripts
-2. remove the manifest, loading, and associated icon
-3. remove meta tags and asscoiated icons
-
-// html5+
-5. load last input on reload
-6. increase the version number
-
