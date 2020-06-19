@@ -219,17 +219,12 @@ if (isextension) {
 				},
 				{	
 					'name': 'Calculator',
-					'url' : 'desmos.com/fourfunction',
+					'url' : 'bhar.app/calculator',
 					'usecount'	: 1
 				},
 				{	
 					'name': 'Currency Converter',
 					'url' : 'xe.com/currencyconverter',
-					'usecount'	: 1
-				},
-				{	
-					'name': 'Scientific Calculator',
-					'url' : 'desmos.com/scientific',
 					'usecount'	: 1
 				},
 				{
@@ -252,9 +247,9 @@ if (isextension) {
 					'url' : 'emojifinder.com',
 					'usecount'	: 1
 				},
-				{	
+				{
 					'name': 'Unicode Search',
-					'url' : 'xahlee.info/comp/unicode_index.html',
+					'url' : 'www.amp-what.com/unicode/search/icon',
 					'usecount'	: 1
 				},
 				{	
@@ -298,7 +293,7 @@ function strip(url) {
 	if (url.slice(url.length-1, ) === '/') {
 		url = url.slice(0, url.length-1);
 	}
-	url = url.replace(/http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\./i, '');
+	url = url.replace(/http:\/\/|https:\/\//i, '');
 	return  url;
 }
 function striptoname(url) {
