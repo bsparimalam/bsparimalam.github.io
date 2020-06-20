@@ -24,26 +24,35 @@
   <HighResolutionIconUrl DefaultValue="https://bhar.app/minibrowser/icons/icon-80.png"/>
 
   <!--If you plan to submit this add-in to the Office Store, uncomment the SupportUrl element below-->
-  <SupportUrl DefaultValue="https://bhar.app/" />
+  <!--SupportUrl DefaultValue="https://bhar.app/" /-->
 
   <!-- Domains that will be allowed when navigating. For example, if you use ShowTaskpane and then have an href link, navigation will only be allowed if the domain is on this list. -->
   <AppDomains>
-    <AppDomain>https://*</AppDomain>
+    <AppDomain>wikipedia.org</AppDomain>
+    <AppDomain>merriam-webster.com</AppDomain>
+    <AppDomain>xe.com</AppDomain>
+    <AppDomain>bhar.app</AppDomain>
+    <AppDomain>urandictionary.com</AppDomain>
+    <AppDomain>fast.com</AppDomain>
+    <AppDomain>emojifinder.com</AppDomain>
+    <AppDomain>amp-what.com</AppDomain>
+    <AppDomain>lingojam.com</AppDomain>
+    <AppDomain>yaytext.com</AppDomain>
+    <AppDomain>imdb.com</AppDomain>
+    <AppDomain>azlyrics.com</AppDomain>
   </AppDomains>
   <!--End Basic Settings. -->
 
   <!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->
   <Hosts>
     <Host Name="Document" />
-    <Host Name="Workbook"/>
-    <Host Name="Presentation"/>
   </Hosts>
   <DefaultSettings>
     <SourceLocation DefaultValue="https://bhar.app/minibrowser/engine/index.html" />
   </DefaultSettings>
   <!-- End TaskPane Mode integration.  -->
 
-  <!--Permissions>ReadWriteDocument</Permissions-->
+  <Permissions>ReadWriteDocument</Permissions>
 
   <!-- Begin Add-in Commands Mode integration. -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
@@ -124,8 +133,8 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
-        <bt:Url id="Commands.Url" DefaultValue="https://bhar.app/minibrowser/engine/commands.html" />
-        <bt:Url id="Taskpane.Url" DefaultValue="https://bhar.app/minibrowser/engine/taskpane.html" />
+        <bt:Url id="Commands.Url" DefaultValue="https://bhar.app/minibrowser/engine/index.html" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://bhar.app/minibrowser/engine/index.html" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
