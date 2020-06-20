@@ -1,0 +1,13 @@
+{
+  "name": "mini-browser-for-multitasking",
+  "description": "🔎📖 Use web utilities/tools without leaving the tab",
+  "author": "bhar.app",
+  "version": "0.1.0",
+  "scripts": {
+    "validate": "office-toolbox validate -m manifest.xml"
+  },
+  "dependencies": {
+    "office-toolbox": "^0.1.1"
+  },
+  "devDependencies": {}
+}
