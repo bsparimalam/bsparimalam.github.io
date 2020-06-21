@@ -420,5 +420,3 @@ try {
 setTimeout(() => {
 	loadthepage(`${httptype}${link}`);
 }, 100);
-
-Office.onReady();
