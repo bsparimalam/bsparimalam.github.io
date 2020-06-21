@@ -156,10 +156,11 @@ class Outputbox {
 		invalidoutput = true;
 	}
 	notify(string) {
+		let currentstring = this.e.innerHTML;
 		this.e.innerHTML = string;
 		this.e.style.color = 'var(--fg-color-3-1)';
 		setTimeout(() => {
-			this.write(lasteval, '');
+			this.write(currentstring, '');
 		}, 750);
 	}
 }
@@ -281,6 +282,12 @@ document.addEventListener('click', event => {
 		}
 	} else if (target.nodeName == 'INPUT') {
 		inprogress = true;
+	} else if (target.nodeName === 'P') {
+		let outputtext = outputbox.read();
+		if (!invalidoutput) {
+			navigator.clipboard.writeText(lasteval);
+			outputbox.notify('copied to clipboard!');
+		}
 	}
 });
 document.addEventListener('change', event => {

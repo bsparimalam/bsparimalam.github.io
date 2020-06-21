@@ -15,9 +15,6 @@ convdata = [
 	['area', [ 'km²', 'hect', 'm²', 'cm²', 'mm²', 'inch²', 'ft²', 'yd²',  'acre', 'mile²' ],
 			['1E+6', '1E+4', '1', '1E-4', '1E-6', '(1/1550)', '(1/10.7639)',  '(1/1.19599)', '4046.86', '2.56E+6']
 	],
-	['currency', [
-		'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
-	],
 	['energy', [ 'kWh', 'Wh', 'kJ', 'J', 'eV', 'keV', 'cal', 'kcal', 'BTU' ],
 				[ '3.6e+6', '3.6E+3', '1E+3', '1', '1.6022e-19', '1.6022e-16', '4.184', '4184', '1055.071288087' ]
 	],
@@ -38,6 +35,18 @@ convdata = [
 				['1E+3', '1', '1E-3', '4.92892E-3', '(1/67.628)', '0.24', '(1/33.814)', '0.946352499983857', '3.7854092439887' ]
 	]
 ] // conversion factors/forumulas
+
+// adding currency conversion to non-firefox browsers
+let currentua = navigator.userAgent;
+let temp = currentua.split(' ');
+temp = temp[temp.length-1];
+temp = temp.split('/');
+let exthost = temp[0];
+if (exthost !== 'Firefox') {
+	convdata.push(	['currency', [
+		'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
+	],)
+}
 
 function setconvblank() {
 	var opt1 = document.createElement('option');
