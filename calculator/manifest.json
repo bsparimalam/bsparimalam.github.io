@@ -1,7 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
-  "version": "6.1.6",
+  "version": "6.1.7",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",
@@ -10,7 +10,7 @@
   "theme_color": "#b0bec5", 
   "icons": [
     {
-    	"src": "./icon-512.png",
+    	"src": "./icons/icon-512.png",
     	"sizes": "512x512",
     	"type": "image/png"
     }

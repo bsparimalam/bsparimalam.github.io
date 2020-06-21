@@ -279,11 +279,8 @@ document.addEventListener('click', event => {
 			case "comma": touchinput('.'); break;
 			case "E": touchinput('E'); break;
 		}
-	} else if (target.nodeName === 'INPUT') {
+	} else if (target.nodeName == 'INPUT') {
 		inprogress = true;
-	} else if (target.nodeName === 'P') {
-		navigator.clipboard.writeText(lasteval);
-		outputbox.notify('copied to clipboard!');
 	}
 });
 document.addEventListener('change', event => {

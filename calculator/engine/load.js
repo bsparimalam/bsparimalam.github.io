@@ -63,9 +63,9 @@ function loaduserpref() {
 	angleunit.innerHTML = userpref.angleunit;
 	numrep.innerHTML = userpref.representation;
 	memorystored = userpref.memory;
-	// if (userpref.lastinput != '') {
-	// 	document.getElementById('ip').value = userpref.lastinput;
-	// }
+	if (userpref.lastinput != '') {
+		document.getElementById('ip').value = userpref.lastinput;
+	}
 	if (userpref.openmore !== more.innerHTML) {
 		openmore();
 	}
