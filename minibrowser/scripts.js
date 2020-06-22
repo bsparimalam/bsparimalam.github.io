@@ -5,4 +5,4 @@ document.getElementById('popupwindow').addEventListener('load', event => {
 
 setTimeOut(() => {
 	Office.onReady();
-});
+}, 1000);
