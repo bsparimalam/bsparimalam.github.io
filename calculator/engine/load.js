@@ -37,16 +37,16 @@ convdata = [
 ] // conversion factors/forumulas
 
 // adding currency conversion to non-firefox browsers
-let currentua = navigator.userAgent;
-let temp = currentua.split(' ');
-temp = temp[temp.length-1];
-temp = temp.split('/');
-let exthost = temp[0];
-if (exthost !== 'Firefox') {
-	convdata.push(	['currency', [
-		'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
-	],)
-}
+// let currentua = navigator.userAgent;
+// let temp = currentua.split(' ');
+// temp = temp[temp.length-1];
+// temp = temp.split('/');
+// let exthost = temp[0];
+// if (exthost !== 'Firefox') {
+// 	convdata.push(	['currency', [
+// 		'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
+// 	],)
+// }
 
 function setconvblank() {
 	var opt1 = document.createElement('option');
