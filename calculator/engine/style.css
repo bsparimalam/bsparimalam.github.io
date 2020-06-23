@@ -89,9 +89,11 @@ select, #convert {
     border-width: 1px; 
     border-radius:  var(--app-corner-radius);
 }
-html, body, div, input, p, button {
-	touch-action: pinch-zoom;
+html, body, div, input, p, button, select, option {
 	touch-action: manipulation; 
+}
+input {
+	-webkit-overflow-scrolling : touch !important;
 } /*touch actions*/
 :focus { 
 	outline: none !important; 
@@ -222,8 +224,6 @@ button {
 input, p, button, select, option {
 	font-family: var(--font-family);
 	text-align: center;
-	touch-action: pinch-zoom;
-	touch-action: manipulation; 
 }
 button, select, option {
 	user-select: none;
