@@ -93,6 +93,7 @@ html, body, div, input, p, button, select, option {
 	touch-action: manipulation; 
 }
 input {
+	overflow: scroll;
 	-webkit-overflow-scrolling : touch !important;
 } /*touch actions*/
 :focus { 
