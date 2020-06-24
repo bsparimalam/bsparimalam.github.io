@@ -1,6 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
+  "categories": ["education", "productivity"],
   "version": "6.2.1",
   "lang": "en-US",
   "start_url": "./",
@@ -13,6 +14,18 @@
     	"src": "./icons/icon-512.png",
     	"sizes": "512x512",
     	"type": "image/png"
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "1-1280x800.png",
+      "sizes": "1280x800",
+      "type": "image/png"
+    },
+    {
+      "src": "2-1280x800.png",
+      "sizes": "1280x800",
+      "type": "image/png"
     }
   ]
 }
