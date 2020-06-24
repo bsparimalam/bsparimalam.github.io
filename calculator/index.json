@@ -18,12 +18,12 @@
   ],
   "screenshots" : [
     {
-      "src": "1-1280x800.png",
+      "src": "./screenshots/1-1280x800.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "2-1280x800.png",
+      "src": "./screenshots/2-1280x800.png",
       "sizes": "1280x800",
       "type": "image/png"
     }

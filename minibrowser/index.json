@@ -14,5 +14,22 @@
     	"sizes": "512x512",
     	"type": "image/png"
     }
+  ],
+  "screenshots" : [
+    {
+      "src": "./screenshots/1-640x400.png",
+      "sizes": "640x400",
+      "type": "image/png"
+    },
+    {
+      "src": "./screenshots/2-640x400.png",
+      "sizes": "640x400",
+      "type": "image/png"
+    },
+    {
+      "src": "./screenshots/3-640x400.png",
+      "sizes": "640x400",
+      "type": "image/png"
+    }
   ]
 }
