@@ -1,6 +1,7 @@
 {
   "name": "Scientific Calculator",
   "short_name": "Calculator",
+  "description" : "Scientific calculator with unit conversions",
   "categories": ["education", "productivity"],
   "version": "6.2.1",
   "lang": "en-US",
@@ -14,18 +15,35 @@
     	"src": "./icons/icon-512.png",
     	"sizes": "512x512",
     	"type": "image/png"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
+    
   ],
   "screenshots" : [
     {
-      "src": "./screenshots/1-1280x800.png",
+      "src": "./screenshots/1280x800_1.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "./screenshots/2-1280x800.png",
+      "src": "./screenshots/1280x800_2.png",
       "sizes": "1280x800",
       "type": "image/png"
+    },
+    {
+      "src": "./screenshots/640x400_1.png",
+      "sizes": "640x400",
+      "type": "image/png"
+    },
+    {
+      "src": "./screenshots/640x400_2.png",
+      "sizes": "640x400",
+      "type": "image/png"
     }
+    
   ]
 }

@@ -1,9 +1,10 @@
-var appversion = "v6.2.1";
+var appversion = "v6_2_1";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
     './index.json',
     './icons/icon-512.png',
+    './icons/icon-192.png',
     './icons/icon-152.png',
     './icons/icon-32.png',
     './favicon.ico',
