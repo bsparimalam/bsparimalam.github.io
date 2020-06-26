@@ -58,6 +58,7 @@ function parse(string) {
 			start += 1;
 			exponent = '1/' + parsedstring.slice(start, rootindex);
 		} else {
+			start += 1;
 			exponent = '1/2';
 		}
 

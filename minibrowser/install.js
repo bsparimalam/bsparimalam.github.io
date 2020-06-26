@@ -27,7 +27,7 @@ const files2cache = [
 ];
 self.addEventListener('install', function(event) {
   console.log(appversion + ' downloading...');
-  event.waitUntil(caches.open('Calculator-' + appversion )
+  event.waitUntil(caches.open('minibrowser-' + appversion )
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
@@ -44,7 +44,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('Calculator-' + appversion + ' ready to load offline!');
+      console.log('minibrowser-' + appversion + ' ready to load offline!');
     })
   );
 });

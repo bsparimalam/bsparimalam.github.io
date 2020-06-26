@@ -1,56 +1,5 @@
 
-@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
-	:root{
-	--lighter: #c1d5e0;
-	--text: #000000;
-	}
-	/*COLOR*/
-	html, body, .apps {
-		background-color: var(--lighter);
-	}
-}
-@media (prefers-color-scheme: dark) {
-	:root{
-	--lighter: #37474f;
-	--text: #e2f1f8;
-	}
-	/*COLOR*/
-	html, body, .apps {
-		background-color: var(--lighter);
-	}
-}
-@media (max-width: 20cm) {
-	:root{
-		--app-width: 100%;
-		font-size: 2vw;
-		--ext-width: 10vw;
-		--ext-height: 10vw;
-		--icon-pad: 3.5vw;
-	}
-}
-@media (min-width: 20cm) {
-	:root{
-		--app-width: 20cm;
-		font-size: 0.25cm;
-		--ext-width: 1cm;
-		--ext-height: 1cm;
-		--icon-pad: 1.25cm;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-}
-:root {
-	--font-family: system-ui;
-	--font-size-app-title: 3.5rem;
-	--font-size-app-desc: 2.5rem;
-}
-
-/*MISCELLANEOUS*/
-html, body, .apps, .app-title, .app-desc, .icon-button, picture, a, img { 
+html, body, iframe { 
 	margin: 0;
 	border-width: 0;
 	padding: 0;
@@ -58,59 +7,30 @@ html, body, .apps, .app-title, .app-desc, .icon-button, picture, a, img {
 	border-radius: 0;
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
-} /*common parameters*/
-
-
-/*LAYOUT*/
-html { 
 	width: 100%;
 	height: 100%;
+	scroll-width: none;
 }
-/*LEVEL ZERO*/
-body {
-	width: var(--app-width); 
-	height: 100%;
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	html, body {
+		background-color: #c1d5e0;
+	}
 }
-/*LEVEL ONE*/
-.apps {
-	width: 90%; 
-	height: auto;
-	padding: 0%;
-	margin: 0%;
-	position: absolute; 
-	left: 50%;
-	transform: translate(-50%, 0%);	
-}
-/*FONT*/
-.app-title {
-	width: auto; height: auto;
-	font-family: var(--font-family);
-	text-align: center;
-	color: var(--text);
-	padding: 0%;
-    font-size: var(--font-size-app-title);
+@media (prefers-color-scheme: dark) {
+	html, body {
+		background-color: #37474f;
+	}
 }
 
-.app-desc {
-	width: auto; height: auto;
-	padding:0%;
-	font-family: var(--font-family);
-	text-align: justify;
-	font-size: var(--font-size-app-desc);
-	color: var(--text);
-}
-.icon {
-    height: var(--ext-height);
-    width: var(--ext-width);
-    padding: 0% var(--icon-pad) 0% var(--icon-pad);
-}
-.icon:active {
-	.icon:hover {
-        filter: brightness(150%);
+@media (min-width: 16cm) {
+	iframe {
+		width: 16cm;
+		position: absolute; 
+		top: 50%; 
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
-@media(hover:hover) {
-	.icon:hover {
-        filter: brightness(150%);
-	}
+::-webkit-scrollbar {
+	display: none;
 }

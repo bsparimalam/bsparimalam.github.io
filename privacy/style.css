@@ -63,7 +63,7 @@ h1 {
     font-size: 3.5rem;
 }
 
-p {
+p, li {
 	width: auto; height: auto;
 	padding:0%;
 	font-family: system-ui;
