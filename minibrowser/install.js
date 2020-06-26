@@ -13,7 +13,6 @@ const files2cache = [
     './engine/engine.html',
     './engine/engine.css',
     './engine/engine.js',
-    './engine/favicon.ico',
     './engine/back.png',
     './engine/back-dark.png',
     './engine/forward.png',
@@ -27,7 +26,7 @@ const files2cache = [
 ];
 self.addEventListener('install', function(event) {
   console.log(appversion + ' downloading...');
-  event.waitUntil(caches.open('minibrowser-' + appversion )
+  event.waitUntil(caches.open('Calculator-' + appversion )
     .then(function(cache) {
       cache.addAll(files2cache);
     }));
@@ -44,7 +43,7 @@ self.addEventListener('activate', function(event){
         }
       })
     )).then(() => {
-      console.log('minibrowser-' + appversion + ' ready to load offline!');
+      console.log('Calculator-' + appversion + ' ready to load offline!');
     })
   );
 });
