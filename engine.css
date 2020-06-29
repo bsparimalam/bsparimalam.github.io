@@ -7,18 +7,40 @@
 		color: #c1d5e0;
 	}
 	.app-title, .app-desc {
-		color: #000000;
+		color: #102027;
+	}
+	.icon {
+		filter: brightness(100%);
+	}
+	.icon:active {
+	    filter: brightness(125%);
+	}
+	@media(hover:hover) {
+		.icon:hover {
+	        filter: brightness(125%);
+		}
 	}
 }
 @media (prefers-color-scheme: dark) {
 	html, body, .apps {
-		background-color: #37474f;
+		background-color: #102027;
 	}
 	picture, a {
-		color: #37474f;
+		color: #102027;
 	}
 	.app-title, .app-desc {
-		color: #e2f1f8;
+		color: #c1d5e0;
+	}
+	.icon {
+		filter: brightness(50%);
+	}
+	.icon:active {
+	    filter: brightness(100%);
+	}
+	@media(hover:hover) {
+		.icon:hover {
+	        filter: brightness(100%);
+		}
 	}
 }
 
@@ -62,13 +84,4 @@ body {
     width: 8vw;
     padding: 0 2.95vw 0 2.95vw;
 }
-.icon:active {
-	.icon:hover {
-        filter: brightness(150%);
-	}
-}
-@media(hover:hover) {
-	.icon:hover {
-        filter: brightness(150%);
-	}
-}
+

@@ -2,13 +2,13 @@
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	html, body, h1, p, a, a:link, a:visited, a:focus, a:hover, a:active {
 		background-color: #c1d5e0;
-		color: #000000;
+		color: #102027;
 	}
 }
 @media (prefers-color-scheme: dark) {
 	html, body, h1, p, a, a:link, a:visited, a:focus, a:hover, a:active {
-		background-color: #37474f;
-		color: #e2f1f8;
+		background-color: #102027;
+		color: #c1d5e0;
 	}
 }
 
