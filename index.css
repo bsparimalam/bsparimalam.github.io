@@ -6,7 +6,7 @@
 	picture, a {
 		color: #c1d5e0;
 	}
-	h1, p {
+	h1, h2, p {
 		color: #102027;
 	}
 	.icon {
@@ -28,7 +28,7 @@
 	picture, a {
 		color: #102027;
 	}
-	h1, p {
+	h1, h2, p {
 		color: #c1d5e0;
 	}
 	.icon, .lightimage {
@@ -53,8 +53,10 @@
 		margin: auto;
 	}
 	h1 {
-		font-size: 0.7cm;
-		padding-top: 0.7cm;
+		font-size: 0.8cm;
+	}
+	h2 {
+		font-size: 0.6cm;
 	}
 	p {
 		font-size: 0.6cm;
@@ -68,21 +70,22 @@
 	html {
 		scrollbar-width: none;
 	}
+	html::-webkit-scrollbar {
+		width: 2px;
+	}
 	body {
 		margin: 2%;
 		width: 96%;
 	}
 	h1 {
-		font-size: 6vw;
-		padding-top: 6vw;
+		font-size: 7vw;
+	}
+	h2 {
+		font-size: 5vw;
 	}
 	p {
 		font-size: 5vw;
 	}
-	::-webkit-scrollbar {
-		width: 0px;
-	}
-
 }
 html {
 	margin: 0;
@@ -92,7 +95,6 @@ html {
 	border-radius: 0;
 	width: 100%;
 	height: auto;
-	scrollbar-width: thin;
 }
 body { 
 	border-width: 0;
@@ -106,6 +108,14 @@ h1 {
 	width: auto; height: auto;
 	font-family: system-ui;
 	text-align: center;
+	border-width: 0;
+	border-style: none;
+	border-radius: 0;
+}
+h2 {
+	width: auto; height: auto;
+	font-family: system-ui;
+	text-align: left;
 	border-width: 0;
 	border-style: none;
 	border-radius: 0;
@@ -138,5 +148,3 @@ p {
 	scroll-snap-align: start;
 	scroll-behavior: smooth;
 }
-
-

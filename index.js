@@ -1,7 +1,6 @@
 
 document.addEventListener('click', event => {
 	let elementtype = event.target.attributes[0].nodeValue;
-	console.log(elementtype);
 	if (elementtype.indexOf("screenshot") !== -1) {
 		let screenshot = event.target;
 		let container = screenshot.parentElement;
