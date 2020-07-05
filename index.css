@@ -46,7 +46,7 @@
 @media (min-width: 16cm) {
 	:root {
 		--icon-side: 1cm;
-		--icon-padding: 0.65cm;
+		--icon-padding: 0.88cm;
 	}
 	body {
 		width: 14.4cm;
@@ -65,11 +65,11 @@
 @media (max-width: 16cm) {
 	:root {
 		--icon-side: 8vw;
-		--icon-padding: 3.2vw;
+		--icon-padding: 5vw;
 	}
-	html {
+/*	html {
 		scrollbar-width: none;
-	}
+	}*/
 	html::-webkit-scrollbar {
 		width: 2px;
 	}
