@@ -27,6 +27,9 @@ convdata = [
 	['pressure', [ 'bar', 'Pa', 'torr', 'psi', 'atm'],
 				[ '1E+5', '1', '133.322', '6894.73824140665', '101324.72001876002469' ]
 	],
+	['storage', ['Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'KB', 'MB', 'GB', 'TB', 'PB', 'Kib', 'Mib', 'Gib', 'Tib', 'Pib', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB' ],
+		['1E-6', '1E-3', '1', '1E+3', '1E+6', '8E-6', '8E-3', '8', '8E+3', '8E+6', '1.024E-6', '1.0482E-3', '1.074', '1.1E+2', '1.126E+6', '8.192E-6', '8.38863E-3', '8.59', '8.796E+3', '9.007E+6' ]
+	],
 	['temperature', [ 'ᵒF', 'K', 'ᵒC' ],
 					[ '-32)*(5/9)+273.15', ')', '+ 273.15)' ],
 					[ '-273.15)*(9/5)+32', ')', '- 273.15)' ]
@@ -34,19 +37,7 @@ convdata = [
 	['volume', [ 'm³', 'L', 'mL', 'tsp', 'tbs', 'cup', 'oz', 'qt', 'gal'  ],
 				['1E+3', '1', '1E-3', '4.92892E-3', '(1/67.628)', '0.24', '(1/33.814)', '0.946352499983857', '3.7854092439887' ]
 	]
-] // conversion factors/forumulas
-
-// adding currency conversion to non-firefox browsers
-// let currentua = navigator.userAgent;
-// let temp = currentua.split(' ');
-// temp = temp[temp.length-1];
-// temp = temp.split('/');
-// let exthost = temp[0];
-// if (exthost !== 'Firefox') {
-// 	convdata.push(	['currency', [
-// 		'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
-// 	],)
-// }
+]
 
 function setconvblank() {
 	var opt1 = document.createElement('option');

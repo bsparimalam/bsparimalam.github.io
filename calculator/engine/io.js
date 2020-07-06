@@ -20,7 +20,7 @@ function insertcomma(string) {
 			||( string[start] == '.')) 
 			&& (start!=-1)) { 
 			start -= 1;
-		}0
+		}
 	} else {
 		start = 0;
 	}
@@ -109,15 +109,7 @@ class Outputbox {
 	write(string, unit) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
 		lasteval = string.replace(/,/g, '');
-		if (string.indexOf('E') === -1) {
-			this.e.innerText = `${string} ${unit}`;
-		} else {
-			let parts = string.split('E');
-			if (parts[1][0] === '+') {
-				parts[1] = parts[1].slice(1, );
-			}
-			this.e.innerHTML = `${parts[0]}×10<sup>${parts[1]}</sup> ${unit}`;
-		}
+		this.e.innerText = `${string} ${unit}`;
 		this.e.style.color = 'var(--fg-color-3)';
 		angleunitwarned = false;
 		inprogress = false;
@@ -126,15 +118,7 @@ class Outputbox {
 	preview(string) {
 		string = string.toString().replace(/<[^>]*>/g, '');	
 		lasteval = string.replace(/,/g, '');
-		if (string.indexOf('E') === -1) {
-			this.e.innerText = `${string}`;
-		} else {
-			let parts = string.split('E');
-			if (parts[1][0] === '+') {
-				parts[1] = parts[1].slice(1, );
-			}
-			this.e.innerHTML = `${parts[0]}×10<sup>${parts[1]}</sup>`;
-		}
+		this.e.innerText = `${string}`;
 		this.e.style.color = 'var(--fg-color-3-1)';
 		invalidoutput = false;
 	}
@@ -156,11 +140,11 @@ class Outputbox {
 		invalidoutput = true;
 	}
 	notify(string) {
-		let currentstring = this.e.innerHTML;
+		let currentstring = this.e.innerText;
 		this.e.innerHTML = string;
 		this.e.style.color = 'var(--fg-color-3-1)';
 		setTimeout(() => {
-			this.write(currentstring, '');
+			this.e.innerText = currentstring;
 		}, 750);
 	}
 }

@@ -183,35 +183,10 @@ function calculate(type, operation=null) {
 		while (base != convdata[typeindex][1][baseindex]) { baseindex++; }
 		while (target != convdata[typeindex][1][targetindex]) {	targetindex++; }
 		switch (type) {
-			case 'area': case 'energy': case 'length': case 'mass': case 'pressure':
-			case 'volume':
+			case 'area': case 'energy': case 'length': case 'mass': case 'pressure': case 'volume': case 'storage':
 				evaluated = eval(evaluated + '*' + convdata[typeindex][2][baseindex]
 					+ '/' + convdata[typeindex][2][targetindex] );
 				outputbox.write(filteroutput(evaluated), target); break;
-			// case 'currency':
-			// 	var baseurl = "https://api.exchangeratesapi.io/latest?";
-			// 	var basecurr = "base=" + base;
-			// 	var target = operation.slice(6, 9);
-			// 	var targetcurr = "&symbols=" + target;
-			// 	outputbox.write('loading...', '');
-			// 	fetch(baseurl + basecurr + targetcurr)
-			// 	  .then(
-			// 	    function(response) {
-			// 	      if (response.status !== 200) {
-			// 	        outputbox.error('network error');
-			// 	        return;
-			// 	      } else {
-			// 	      	response.json().then(function(data) {
-			// 				evaluated = evaluated*data["rates"][target];
-			// 				outputbox.write(insertcomma(Number(Number(
-			// 					evaluated).toString()).toFixed(2)), target);
-			// 		     });
-			// 	      }
-			// 	    })
-			// 	  .catch(function(err) {
-			// 	  	outputbox.error('network error');
-			// 	});
-			// 	break;
 			case 'temperature':
 				evaluated = eval('(' + evaluated + convdata[typeindex][2][baseindex])
 				evaluated = eval('(' + evaluated + convdata[typeindex][3][targetindex])
