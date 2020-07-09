@@ -43,13 +43,14 @@
 		}
 	}
 }
-@media (min-width: 16cm) {
+@media (min-width: 15cm) {
 	:root {
 		--icon-side: 1cm;
 		--icon-padding: 0.88cm;
 	}
 	body {
-		width: 14.4cm;
+		width: 20cm;
+		max-width: 96%;
 		margin: auto;
 	}
 	h1 {
@@ -62,7 +63,7 @@
 		font-size: 0.6cm;
 	}
 }
-@media (max-width: 16cm) {
+@media (max-width: 15cm) {
 	:root {
 		--icon-side: 8vw;
 		--icon-padding: 5vw;

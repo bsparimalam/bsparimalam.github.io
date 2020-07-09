@@ -1,6 +1,6 @@
 
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
-	html, body, h1, p, a, a:link, a:visited, a:focus, a:hover, a:active {
+	html, body, h1, p {
 		background-color: #c1d5e0;
 		color: #102027;
 	}
@@ -12,70 +12,28 @@
 	}
 }
 
-html, body { 
-	margin: 0;
-	border-width: 0;
-	padding: 0;
-	border-style: none;
-	border-radius: 0;
+:root { 
 	touch-action: pinch-zoom;
 	touch-action: manipulation; 
 } /*common parameters*/
 
-@media (max-width: 15cm) {
-	html { 
-		width: 100%;
-	}
-	/*LEVEL ZERO*/
-	body {
-		width: 90%;
-		margin: 5%;
-	}
-	:root {
-		font-size: 2vw;
-	}
-}
-@media (min-width: 15cm) {
-	html { 
-		width: 100%;
-	}
-	/*LEVEL ZERO*/
-	body {
-		width: 15cm; 
-	}
-	:root{
-		font-size: 0.25cm;
-	}
-	body {
-		position: absolute; 
-		top: 50%; 
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-}
 
+html { 
+	width: 100%;
+}
+/*LEVEL ZERO*/
+body {
+	width: 15cm;
+	max-width: 90%;
+	margin: auto;
+}
 /*FONT*/
-h1 {
-	width: auto; height: auto;
+:root {
 	font-family: system-ui;
+}
+h1, h3, h5 {
 	text-align: center;
-	padding: 0%;
-    font-size: 3.5rem;
 }
-
-p, li {
-	width: auto; height: auto;
-	padding:0%;
-	font-family: system-ui;
-	text-align: left;
-	font-size: 2.5rem;
-}
-
-a, a:link, a:visited, a:focus, a:hover, a:active {
-	width: auto; height: auto;
-	padding:0%;
-	font-family: system-ui;
-	text-align: left;
-	font-size: 3rem;
-	text-decoration: none;
+li {
+	padding: 1%;
 }
