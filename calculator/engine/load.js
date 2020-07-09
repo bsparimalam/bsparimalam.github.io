@@ -60,19 +60,19 @@ console.log('conversions loaded');
 // insert all conversion types from convdata to the app
 
 function loaduserpref() {
-	angleunit.innerHTML = userpref.angleunit;
-	numrep.innerHTML = userpref.representation;
+	angleunit.innerText = userpref.angleunit;
+	numrep.innerText = userpref.representation;
 	memorystored = userpref.memory;
 	if (userpref.lastinput != '') {
 		document.getElementById('ip').value = userpref.lastinput;
 	}
-	if (userpref.openmore !== more.innerHTML) {
+	if (userpref.openmore !== more.innerText) {
 		openmore();
 	}
 	if ( memorystored === '' ) {
-		memory.innerHTML = 'STORE';
+		memory.innerText = 'STORE';
 	} else {
-		memory.innerHTML = 'RECALL';
+		memory.innerText = 'RECALL';
 	}
 	for (var i = 0; (i < 8) && (i < userpref.conversionlog.length ); i++) {
 		var prefbutton = document.getElementById('pref'+i);
@@ -81,7 +81,7 @@ function loaduserpref() {
 		prefbutton.style.borderRadius = '0';
 		prefbutton.style.width = '100%';
 		prefbutton.style.height = '100%';
-		prefbutton.innerHTML = userpref.conversionlog[i].operation;
+		prefbutton.innerText = userpref.conversionlog[i].operation;
 		prefbutton.convtype = userpref.conversionlog[i].type;
 		prefbutton.name = userpref.conversionlog[i].type;
 	}
@@ -104,22 +104,22 @@ if (userpref == null) {
 } // load user preferred conversions
 
 function setangleunit() {
-	if (angleunit.innerHTML === 'DEG') {
-		angleunit.innerHTML = 'RAD';
+	if (angleunit.innerText === 'DEG') {
+		angleunit.innerText = 'RAD';
 	} else {
-		angleunit.innerHTML = 'DEG'
+		angleunit.innerText = 'DEG'
 	}
-	userpref.angleunit = angleunit.innerHTML;
+	userpref.angleunit = angleunit.innerText;
 	saveuserpref();
 	if ((outputbox.read() !== '') && (inputbox.read() !== '')) {
 		calculate(lasttype, lastoperation);
 	}
-	console.log('angle unit set to: ' + angleunit.innerHTML);
+	console.log('angle unit set to: ' + angleunit.innerText);
 } // sets the preferred angle unit
 function warnangleunit() {
 	if (!angleunitwarned) {
 		var loops = 3; var interval = 500; 
-		var currentunit = angleunit.innerHTML;
+		var currentunit = angleunit.innerText;
 		for (var i = 0; i < loops; i++ ) {
 			setTimeout(() => {
 				angleunit.style.backgroundColor = 'var(--warning)'; 
@@ -132,30 +132,30 @@ function warnangleunit() {
 	}
 }
 function setnumrep() {
-    if (numrep.innerHTML == 'DECI') { 
-    	numrep.innerHTML = 'SCI';
+    if (numrep.innerText == 'DECI') { 
+    	numrep.innerText = 'SCI';
     } else { 
-    	numrep.innerHTML = 'DECI'; 
+    	numrep.innerText = 'DECI'; 
     }
-	userpref.representation = numrep.innerHTML;
+	userpref.representation = numrep.innerText;
 	saveuserpref();
 	if (outputbox.read() != '') {
 		calculate(lasttype, lastoperation);
 	}
-    console.log('number representation set to: ' + numrep.innerHTML);
+    console.log('number representation set to: ' + numrep.innerText);
 } // sets the preferred number representation format
 function setmemory(element) {
-	if ( element.innerHTML == 'STORE' ) { 
-		element.innerHTML = 'RECALL';
+	if ( element.innerText == 'STORE' ) { 
+		element.innerText = 'RECALL';
 		memorystored = lasteval;
 		userpref.memory = lasteval;
 		saveuserpref();
 		console.log( memorystored + ' stored in memeory ');
-	} else if (element.innerHTML == 'RECALL') {
+	} else if (element.innerText == 'RECALL') {
 		inputbox.addastring(memorystored);
 		console.log( memorystored + ' recalled from memory ');
 	} else {
-		memory.innerHTML = 'STORE';
+		memory.innerText = 'STORE';
 		memorystored = '';
 		userpref.memory = '';
 		saveuserpref();
@@ -163,17 +163,17 @@ function setmemory(element) {
 	}
 } // stores a number to memory
 function openmore() {
-	var status = more.innerHTML;
+	var status = more.innerText;
 	if ( status == '⠇' ) {
 		document.getElementById('convs').style.display = 'grid';
 		document.getElementById('scis').style.display = 'none';
-		more.innerHTML = '···';
+		more.innerText = '···';
 		userpref.openmore = '···';
 		saveuserpref();
 	} else {
 		document.getElementById('convs').style.display = 'none';
 		document.getElementById('scis').style.display = 'grid';
-		more.innerHTML = '⠇';
+		more.innerText = '⠇';
 		userpref.openmore = '⠇';
 		saveuserpref();
 	}

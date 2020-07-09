@@ -17,7 +17,7 @@ function istoolong(string, length) {
 }
 function parse(string) {
 	var angleconv; var angleconvinv;
-	if (angleunit.innerHTML == 'DEG') {
+	if (angleunit.innerText == 'DEG') {
 		angleconv = "(Math.PI/180)*";
 		angleconvinv = "(180/Math.PI)*"; 
 	} else { 
@@ -121,9 +121,9 @@ function parse(string) {
 				console.log('trig eval error');
 			}
 			if (
-				((angleunit.innerHTML == 'DEG') 
+				((angleunit.innerText == 'DEG') 
 					&& (inputbox.read().match(/pi|π/i) !== null))
-				|| ((angleunit.innerHTML == 'RAD')
+				|| ((angleunit.innerText == 'RAD')
 					&& ((tempeval%5 == 0) || (tempeval > 7)) && (inputbox.read().match(/pi|π/i) == null))
 				) {
 				warnangleunit();
@@ -146,10 +146,10 @@ function filteroutput(evaluated, unit) {
 	if (evaluated.toString().length > 10) { 
 		evaluated = evaluated.toPrecision(10); 
 	}
-	if ( numrep.innerHTML == 'DECI') {
+	if ( numrep.innerText == 'DECI') {
 		evaluated = Number(evaluated).toString();
 	} 
-	if ((numrep.innerHTML == 'SCI') || istoolong(evaluated, 11)) {
+	if ((numrep.innerText == 'SCI') || istoolong(evaluated, 11)) {
 		evaluated = Number(evaluated).toExponential();
 	} 
 	evaluated = String(evaluated).replace(/e/g, 'E');

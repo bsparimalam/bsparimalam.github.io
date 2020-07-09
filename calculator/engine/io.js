@@ -141,7 +141,7 @@ class Outputbox {
 	}
 	notify(string) {
 		let currentstring = this.e.innerText;
-		this.e.innerHTML = string;
+		this.e.innerText = string;
 		this.e.style.color = 'var(--fg-color-3-1)';
 		setTimeout(() => {
 			this.e.innerText = currentstring;
@@ -244,10 +244,10 @@ document.addEventListener('click', event => {
 			case 'pi': touchinput('π' ); break;
 			case 'pref0': case 'pref1': case 'pref2': case 'pref3':	case 'pref4': 
 			case 'pref5': case 'pref6': case 'pref7':
-				calculate(target.name, target.innerHTML); break;
+				calculate(target.name, target.innerText); break;
 			case '1':case '2':case '3':case '4':case '5':case '6':case '7':
 			case '8':case '9':case '0':case 'decimal':case 'plus':case 'sub':case 'mult':
-				touchinput(target.innerHTML);break;
+				touchinput(target.innerText);break;
 			case "bspc": 		
 				inputbox.removeastring();
 				break;
