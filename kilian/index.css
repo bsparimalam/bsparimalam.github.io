@@ -1,0 +1,88 @@
+:root {
+	--searchbar-default: 40vh;
+	--searchbar-input: 5vh;
+	--highlight: #7c8f99;
+}
+html, body, div, input, span {
+	margin: 0;
+	padding: 0;
+	border-style: none;
+	font-family: system-ui;
+}
+html {
+	width: 100%;
+	height: 100%;
+	background-color: #b0bec5;
+	background-image: url('./index.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+}
+@media (min-width: 15cm) {
+	:root {
+		--radius-input: 0.75cm;
+		--font-size-input: 1cm;
+	}
+}
+@media (max-width: 15cm) {
+	:root {
+		--radius-input: 6vw;
+		--font-size-input: 8vw;
+	}
+}
+body {
+	width: 95%;
+	max-width: 20cm;
+	margin: auto;
+	height: auto;
+}
+#searchbar {
+	height: calc(2 * var(--radius-input));
+	border-radius: var(--radius-input);
+	margin-top: var(--searchbar-default);
+	display: grid;
+	grid-template-columns: var(--radius-input) auto var(--radius-input);
+	grid-template-rows: 100%;
+	background-color: white;
+	transition-property: margin-top;
+	transition-duration: 0.25s;
+}
+input {
+	grid-row: span 1;
+	grid-column: span 1;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	font-size: var(--font-size-input);
+	border-radius: 0;
+}
+span {
+	grid-row: span 1;
+	grid-column: span 1;
+	width: 100%;
+	height: 100%;	
+}
+.results {
+	width: 100%;
+	height: auto;
+}
+.episode {
+}
+h1 {
+	text-align: center;
+}
+h4 {
+	text-align: center;
+}
+p {
+	text-align: justify;
+	padding: 1rem;
+}
+a, a:active, a:hover, a:visited {
+	text-decoration: none;
+}
+:focus {
+	outline: none!important; 
+}
