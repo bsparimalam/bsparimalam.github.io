@@ -110,12 +110,12 @@ function getresults(query) {
         results.innerHTML = '';
         searchbar.style.marginTop = "var(--searchbar-default)";
     } else {
-        searchbar.style.marginTop = "var(--searchbar-input)";
         resettheresults();
         //generate the query list
         let querylist = query2list(query);
         if (querylist == '') {
-            results.innerHTML = '';
+            results.innerHTML = '<h1>☹️ Not found</h1>';
+            searchbar.style.marginTop = "var(--searchbar-default)";
         } else {
             let queryregex = list2regex(querylist);
             console.log(`query=${query}; querylist=${querylist}; queryregex=${queryregex}`);
@@ -188,12 +188,18 @@ function getresults(query) {
             searchresults.sort(function(a, b) { 
                 return b.episodescore - a.episodescore; 
             });
+            // search result
             console.log(searchresults);
-            for (let i=0; (i < searchresults.length) && (i < 10); i++) {
-                let episode = searchresults[i].episode;
-                results.appendChild(episodes[episode]);
-                for (let j=0; (j < searchresults[i].text.length) && (j < 2); j++) {
-                    let textindex = searchresults[i].text[j].text;
+            if (searchresults.length === 0) {
+                results.innerHTML = '<h1>☹️ Not found</h1>';
+                searchbar.style.marginTop = "var(--searchbar-default)";
+            } else {
+                searchbar.style.marginTop = "var(--searchbar-input)";
+                for (let i=0; (i < searchresults.length) && (i < 10); i++) {
+                    let episode = searchresults[i].episode;
+                    results.appendChild(episodes[episode]);
+                    // for (let j=0; ((j < searchresults[i].text.length) && (j < 1)); j++) {
+                    let textindex = searchresults[i].text[0].text;
                     let textid;
                     if (textindex === -2) {
                         textid = 'episode-title-' + episode;
@@ -203,6 +209,7 @@ function getresults(query) {
                         textid = 'episode-text-' + episode + '-' + textindex;
                     }
                     document.getElementById(textid).style.backgroundColor = 'var(--highlight)';
+                    // }
                 }
             }
         }
@@ -234,10 +241,19 @@ searchbox = document.getElementById('searchbox');
 results = document.getElementById('results');
 text = [];
 searchresults = [];
-searchbox.addEventListener('input', event => {
-    getresults(event.target.value);
+
+searchbox.addEventListener('keydown', event => {
+    if (event.key === "Enter") {
+        getresults(event.target.value);
+    }
 });
 
+searchbox.addEventListener('input', event => {
+    if(searchbox.value === '') {
+        searchbar.style.marginTop = "var(--searchbar-default)";
+        results.innerHTML = '';
+    }
+});
 //globals
 unimportantwords = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'the', 'a', 'an', 'every', 'this', 'those', 'many',  'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'amid', 'among', 'anti', 'around', 'as', 'at', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond', 'but', 'by', 'concerning', 'considering', 'despite', 'down', 'during', 'except', 'excepting', 'excluding', 'following', 'for', 'from', 'in', 'inside', 'into', 'like', 'minus', 'near', 'of', 'off', 'on', 'onto', 'opposite', 'outside', 'over', 'past', 'per', 'plus', 'regarding', 'round', 'save', 'since', 'than', 'through', 'to', 'toward', 'towards', 'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'via', 'with', 'within', 'without', "all", "another", "any", "anybody", "anyone", "anything", "as", "aught", "both", "each", "each other", "either", "enough", "everybody", "everyone", "everything", "few", "he", "her", "hers", "herself", "him", "himself", "his", "I", "idem", "it", "its", "itself", "many", "me", "mine", "most", "my", "myself", "naught", "neither", "no one", "nobody", "none", "nothing", "nought", "one", "one another", "other", "others", "ought", "our", "ours", "ourself", "ourselves", "several", "she", "some", "somebody", "someone", "something", "somewhat", "such", "suchlike", "that", "thee", "their", "theirs", "theirself", "theirselves", "them", "themself", "themselves", "there", "these", "they", "thine", "this", "those", "thou", "thy", "thyself", "us", "we", "what", "whatever", "whatnot", "whatsoever", "whence", "where", "whereby", "wherefrom", "wherein", "whereinto", "whereof", "whereon", "wherever", "wheresoever", "whereto", "whereunto", "wherewith", "wherewithal", "whether", "which", "whichever", "whichsoever", "who", "whoever", "whom", "whomever", "whomso", "whomsoever", "whose", "whosever", "whosesoever", "whoso", "whosoever", "ye", "yon", "yonder", "you", "your", "yours", "yourself", "yourselves", "and", "that", "but", "or", "as", "if", "when", "than", "because", "while", "where", "after", "so", "though", "since", "until", "whether", "before", "although", "nor", "like", "once", "unless", "now", "except", 'not', 'yes', 'no', 'do', 'does', 'did', 'has', 'have', 'had', 'is', 'am', 'are', 'was', 'were', 'be', 'being', 'been', 'may', 'must', 'might', 'should', 'could', 'would', 'shall', 'will', 'can'];
 symbolcleanupregex = /[^a-zA-Z0-9\s]*/gi;
@@ -247,3 +263,8 @@ if ('serviceWorker' in navigator) {
 } else {
 	console.log('serice worker not supported');
 }
+// traffic
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-166908735-1');
