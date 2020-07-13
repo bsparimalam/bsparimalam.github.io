@@ -1,8 +1,8 @@
 {
-  "name": "Kilian Experience - Script Archive",
+  "name": "Kilian said what?",
   "short_name": "Mr.Kilian",
   "description": "A searcheable script archive for Kilian experience",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "lang": "en-US",
   "display": "fullscreen",
   "orientation": "portrait",
