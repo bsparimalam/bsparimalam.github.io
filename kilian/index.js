@@ -106,7 +106,7 @@ function list2regex(list) {
     return new RegExp(string, 'gi');
 }
 function noresults() {
-    results.innerHTML = "<h1>Kilian didn't say that, instead he said... these... things...</h1><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a>";
+    results.innerHTML = "<h1>Kilian didn't say that, instead he said... these... things...</h1><center><div id='twitter-timeline'><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a></div></center>";
     let script = document.createElement('script');
     script.src = 'https://platform.twitter.com/widgets.js';
     script.charset = 'utf-8';
@@ -115,14 +115,12 @@ function noresults() {
 function getresults(query) {
     if (!query) {
         results.innerHTML = '';
-        searchbar.style.marginTop = "var(--searchbar-default)";
     } else {
         resettheresults();
         //generate the query list
         let querylist = query2list(query);
         if (querylist == '') {
             noresults();
-            searchbar.style.marginTop = "var(--searchbar-default)";
         } else {
             let queryregex = list2regex(querylist);
             console.log(`query=${query}; querylist=${querylist}; queryregex=${queryregex}`);
@@ -199,9 +197,7 @@ function getresults(query) {
             console.log(searchresults);
             if (searchresults.length === 0) {
                 noresults();
-                searchbar.style.marginTop = "var(--searchbar-default)";
             } else {
-                searchbar.style.marginTop = "var(--searchbar-input)";
                 for (let i=0; (i < searchresults.length) && (i < 10); i++) {
                     let episode = searchresults[i].episode;
                     results.appendChild(episodes[episode]);
@@ -252,6 +248,11 @@ searchresults = [];
 searchbox.addEventListener('keydown', event => {
     if (event.key === "Enter") {
         getresults(event.target.value);
+        if (searchbox.value === '') {
+            searchbar.style.marginTop = "var(--searchbar-default)";
+        } else {
+            searchbar.style.marginTop = "var(--searchbar-input)";
+        }
     }
 });
 
