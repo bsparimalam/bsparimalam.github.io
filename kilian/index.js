@@ -105,6 +105,13 @@ function list2regex(list) {
     string = string.slice(0, string.length-1);
     return new RegExp(string, 'gi');
 }
+function noresults() {
+    results.innerHTML = "<h1>Kilian didn't say that, instead he said... these... things...</h1><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a>";
+    let script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.charset = 'utf-8';
+    document.head.appendChild(script);
+}
 function getresults(query) {
     if (!query) {
         results.innerHTML = '';
@@ -114,7 +121,7 @@ function getresults(query) {
         //generate the query list
         let querylist = query2list(query);
         if (querylist == '') {
-            results.innerHTML = '<h1>☹️ Not found</h1>';
+            noresults();
             searchbar.style.marginTop = "var(--searchbar-default)";
         } else {
             let queryregex = list2regex(querylist);
@@ -191,7 +198,7 @@ function getresults(query) {
             // search result
             console.log(searchresults);
             if (searchresults.length === 0) {
-                results.innerHTML = '<h1>☹️ Not found</h1>';
+                noresults();
                 searchbar.style.marginTop = "var(--searchbar-default)";
             } else {
                 searchbar.style.marginTop = "var(--searchbar-input)";

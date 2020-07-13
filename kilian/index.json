@@ -1,8 +1,8 @@
 {
-  "name": "Kilian said what?",
+  "name": "Kilian said what?!",
   "short_name": "Mr.Kilian",
   "description": "A searcheable script archive for Kilian experience",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "lang": "en-US",
   "display": "fullscreen",
   "orientation": "portrait",
