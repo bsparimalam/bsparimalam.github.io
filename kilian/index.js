@@ -35,6 +35,7 @@ function buildanepisode(jsobject, id) {
     link.id = 'episode-link-' + id;
     link.class = 'episode-link';
     link.href = 'https://youtube.com/watch?v=' + jsobject.id;
+    link.target = "_blank";
     let date = document.createElement('h4');
     date.innerText = beautifydate(jsobject.date);
     date.id = 'episode-date-' + id;
@@ -46,7 +47,7 @@ function buildanepisode(jsobject, id) {
         let text = document.createElement('p');
         text.id = 'episode-text-' + id + '-' + String(i);
         text.class = 'episode-text';
-        text.innerHTML = `<a href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[i].timestamp}'>${beautifytime(jsobject.script[i].timestamp)}</a> ${jsobject.script[i].text}`;
+        text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[i].timestamp}'>${beautifytime(jsobject.script[i].timestamp)}</a> ${jsobject.script[i].text}`;
         episode.appendChild(text);
     }
     return episode;

@@ -4,7 +4,7 @@
   "description": "A searcheable script archive for Kilian experience",
   "version": "0.0.5",
   "lang": "en-US",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "background_color":  "#b0bec5",
   "theme_color": "#b0bec5", 
