@@ -1,8 +1,8 @@
 :root {
-	--searchbar-default: 40vh;
-	--searchbar-input: 5vh;
+	--searchbar-default: 30vh;
+	--searchbar-input: 1vh;
 	--background-color-searchbar: rgba(255, 255, 255, 1);
-	--background-color-body: rgba(255, 255, 255, 0.80);
+	--background-color-results: rgba(255, 255, 255, 0.80);
 	--border-color: #999999;
 }
 html, body, div, input, span {
@@ -14,7 +14,7 @@ html, body, div, input, span {
 html {
 	width: 100%;
 	height: 100%;
-	background-image: url('./images/background-04.png');
+	background-image: url('./images/background.png');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
@@ -36,19 +36,18 @@ body {
 	width: 100%;
 	max-width: 20cm;
 	margin: auto;
+	margin-top: var(--searchbar-default);
 	height: auto;
-	background-color: var(--background-color-body);
 	border-radius: var(--radius-input);
+	transition-property: margin-top;
+	transition-duration: 500ms;
 }
 #searchbar {
 	height: calc(2 * var(--radius-input));
 	border-radius: var(--radius-input);
-	margin-top: var(--searchbar-default);
 	display: grid;
 	grid-template-columns: var(--radius-input) auto var(--radius-input);
 	grid-template-rows: 100%;
-	transition-property: margin-top;
-	transition-duration: 500ms;
 	background-color: var(--background-color-searchbar);
 	border-width: 2px;
 	border-style: solid;
@@ -81,17 +80,19 @@ span {
 .results {
 	width: 100%;
 	height: auto;
+	background-color: var(--background-color-results);
+	border-radius: var(--radius-input);
 }
 .episode {
 }
 h1 {
 	text-align: center;
-	margin: 0.1rem;
+	margin: 0.2rem;
 	font-size: 0.7cm;
 }
 h4 {
 	text-align: center;
-	margin: 0.1rem;
+	margin: 0.2rem;
 	font-size: 0.4cm;
 }
 p {
@@ -102,11 +103,14 @@ p {
 a, a:active, a:hover, a:visited {
 	text-decoration: none;
 }
+.linkout {
+	color: white;
+}
 img {
 	width: 96%;
 	text-align: center;
 	height: auto;
-	margin: 2% 2% 0 2%;
+	margin: 2%;
 }
 :focus {
 	outline: none!important; 

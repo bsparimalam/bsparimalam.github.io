@@ -1,13 +1,12 @@
-var cachename = "kilianscripts_0_0_6";
+var cachename = "kilianscripts_0_0_7";
 const expectedCaches = [cachename];
 const files2cache = [
     './',
     './icons/icon-512.png',
     './icons/icon-152.png',
-    './images/background-01.png',
-    './images/background-02.png',
-    './images/background-03.png',
-    './images/background-04.png',
+    './images/background.png',
+    './images/banner.png',
+    './images/episode-default.png',
     './favicon.ico',
     './index.css',
     './index.html',

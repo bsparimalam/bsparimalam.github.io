@@ -1,13 +1,13 @@
 {
   "name": "Kilian said what?!",
   "short_name": "Mr.Kilian",
-  "description": "A searchable script archive for Kilian experience",
-  "version": "0.0.6",
+  "description": "A script archive for Kilian experience",
+  "version": "0.0.7",
   "lang": "en-US",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color":  "#b0bec5",
-  "theme_color": "#b0bec5", 
+  "background_color":  "#ffffff",
+  "theme_color": "#ffffff", 
   "start_url": "./",
   "icons": [
     {

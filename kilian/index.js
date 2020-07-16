@@ -197,17 +197,19 @@ function search(queryregex, scriptsobject) {
 
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
+    resultnode.appendChild(document.createElement('br'));
     for (let i=0; ((i < resultlist.length) && (i < 10)); i++) {
         let episodeindex = resultlist[i].episodeindex;
         let textindex = resultlist[i].texts[0].textindex;
         let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex);
         resultnode.appendChild(episode);
     }
+    resultnode.appendChild(document.createElement('br'));
 }
 
 globalsearchbox.addEventListener('keydown', event => {
     if ((event.key === "Enter") && (globalsearchbox.value !== '')) {
-        globalsearchbar.style.marginTop = "var(--searchbar-input)";
+        document.body.style.marginTop = "var(--searchbar-input)";
         let querylist = query2list(globalsearchbox.value);
         if (querylist.length === 0) {
             noresults(globalresultnode);
@@ -217,6 +219,7 @@ globalsearchbox.addEventListener('keydown', event => {
                 noresults(globalresultnode);
             } else {
 console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist);
+                globalsearchbox.blur();
                 printresults(resultlist, globalscripts, globalresultnode);
             }
         }
@@ -225,7 +228,7 @@ console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist)
 
 globalsearchbox.addEventListener('input', event => {
     if (globalsearchbox.value === '') {
-        globalsearchbar.style.marginTop = "var(--searchbar-default)";
+        document.body.style.marginTop = "var(--searchbar-default)";
         globalresultnode.innerHTML = '';
     }
 });
