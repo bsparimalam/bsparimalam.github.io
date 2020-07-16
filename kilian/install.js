@@ -6,7 +6,7 @@ const files2cache = [
     './icons/icon-152.png',
     './images/background.png',
     './images/banner.png',
-    './images/episode-default.png',
+    './images/episode-default.jpg',
     './favicon.ico',
     './index.css',
     './index.html',

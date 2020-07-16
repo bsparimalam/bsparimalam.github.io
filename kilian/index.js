@@ -3,8 +3,8 @@ unimportantwords = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 
 symbolcleanupregex = /[^a-zA-Z0-9\s]*/gi;
 globalscripts = undefined;
+storagename = 'kilianscripts.v1';
 fetch('./scripts.json').then(response => {
-    let storagename = 'kilianscripts.v1';
     if (response.status !== 200) {
         globalscripts = JSON.parse(window.localStorage.getItem(storagename));
     } else {
@@ -81,7 +81,7 @@ function list2regex(querylist) {
 
 function noresults(resultnode) {
     resultnode.innerHTML = '';
-    resultnode.innerHTML = "<br><h1>Kilian didn't say that, instead he said these... things...</h1><br><center><div id='twitter-timeline'><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a></div></center>";
+    resultnode.innerHTML = "<br><h1>Kilian didn't say that, instead he said these... things...</h1><br><center><div id='twitter-timeline'><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a></div></center><br>";
     let script = document.createElement('script');
     script.src = 'https://platform.twitter.com/widgets.js';
     script.charset = 'utf-8';
@@ -219,7 +219,7 @@ globalsearchbox.addEventListener('keydown', event => {
                 noresults(globalresultnode);
             } else {
 console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist);
-                globalsearchbox.blur();
+globalsearchbox.blur();
                 printresults(resultlist, globalscripts, globalresultnode);
             }
         }
