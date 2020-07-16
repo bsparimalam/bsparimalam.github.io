@@ -99,7 +99,7 @@ function buildanepisode(jsobject, id, textindex) {
     let link = document.createElement('a');
     link.id = 'episode-link-' + id;
     link.class = 'episode-link';
-    link.href = 'https://youtube.com/watch?v=' + jsobject.id;
+    link.href = `https://youtube.com/watch?v=${jsobject.id}&t=1s`;
     link.target = "_blank";
     let date = document.createElement('h4');
     date.innerText = beautifydate(jsobject.date);
