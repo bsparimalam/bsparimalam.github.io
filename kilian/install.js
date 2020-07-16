@@ -1,15 +1,18 @@
-var cachename = "kilianscripts_0_0_5";
+var cachename = "kilianscripts_0_0_6";
 const expectedCaches = [cachename];
 const files2cache = [
     './',
     './icons/icon-512.png',
     './icons/icon-152.png',
+    './images/background-01.png',
+    './images/background-02.png',
+    './images/background-03.png',
+    './images/background-04.png',
     './favicon.ico',
     './index.css',
     './index.html',
     './index.js',
-    './index.json',
-    './index.png'
+    './index.json'
 ];
 self.addEventListener('install', function(event) {
   console.log(cachename + ' downloading...');

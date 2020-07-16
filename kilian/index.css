@@ -1,7 +1,9 @@
 :root {
 	--searchbar-default: 40vh;
 	--searchbar-input: 5vh;
-	--highlight: #7c8f99;
+	--background-color-searchbar: rgba(255, 255, 255, 1);
+	--background-color-body: rgba(255, 255, 255, 0.80);
+	--border-color: #999999;
 }
 html, body, div, input, span {
 	margin: 0;
@@ -12,8 +14,7 @@ html, body, div, input, span {
 html {
 	width: 100%;
 	height: 100%;
-	background-color: #b0bec5;
-	background-image: url('./index.png');
+	background-image: url('./images/background-04.png');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
@@ -32,10 +33,12 @@ html {
 	}
 }
 body {
-	width: 95%;
+	width: 100%;
 	max-width: 20cm;
 	margin: auto;
 	height: auto;
+	background-color: var(--background-color-body);
+	border-radius: var(--radius-input);
 }
 #searchbar {
 	height: calc(2 * var(--radius-input));
@@ -44,9 +47,19 @@ body {
 	display: grid;
 	grid-template-columns: var(--radius-input) auto var(--radius-input);
 	grid-template-rows: 100%;
-	background-color: white;
 	transition-property: margin-top;
 	transition-duration: 500ms;
+	background-color: var(--background-color-searchbar);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-color);
+}
+#linkbar {
+	width: 95%;
+	margin: auto;
+	height: auto;
+	padding: 0.25cm;
+	text-align: center;
 }
 input {
 	grid-row: span 1;
@@ -57,6 +70,7 @@ input {
 	text-align: center;
 	font-size: var(--font-size-input);
 	border-radius: 0;
+	background-color: var(--background-color);
 }
 span {
 	grid-row: span 1;
@@ -72,16 +86,27 @@ span {
 }
 h1 {
 	text-align: center;
+	margin: 0.1rem;
+	font-size: 0.7cm;
 }
 h4 {
 	text-align: center;
+	margin: 0.1rem;
+	font-size: 0.4cm;
 }
 p {
 	text-align: justify;
 	padding: 1rem;
+	margin: 0;
 }
 a, a:active, a:hover, a:visited {
 	text-decoration: none;
+}
+img {
+	width: 96%;
+	text-align: center;
+	height: auto;
+	margin: 2% 2% 0 2%;
 }
 :focus {
 	outline: none!important; 
