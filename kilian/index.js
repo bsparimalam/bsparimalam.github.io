@@ -115,15 +115,23 @@ function buildanepisode(jsobject, id, textindex) {
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
-    let image = document.createElement('img');
-    image.id = 'episode-image-' + id;
-    image.class = 'episode-image';
-    image.src =`./images/${jsobject.date}.png`;
-    image.addEventListener('error', event => {
-        event.target.src = './images/episode-default.jpg';
-        event.target.removeEventListener('error', event);
-    });
-    episode.appendChild(image);
+    let iframe = document.createElement('iframe');
+    iframe.id = 'episode-iframe-' + id;
+    iframe.class = 'episode-iframe';
+    if (textindex > -1) {
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}`;
+    } else {
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;       
+    }
+    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowfullscreen = true;
+    // iframe.addEventListener('error', event => {
+    //     let image = document.createElement('img');
+    //     image.src = './images/episode-default.jpg';
+    //     episode.appendChild(image);
+    //     episode.removeChild(iframe);
+    // });
+    episode.appendChild(iframe);
     return episode;
 }
 
@@ -202,7 +210,7 @@ function search(queryregex, scriptsobject) {
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
     resultnode.appendChild(document.createElement('br'));
-    for (let i=0; ((i < resultlist.length) && (i < 15)); i++) {
+    for (let i=0; ((i < resultlist.length) && (i < 3)); i++) {
         let episodeindex = resultlist[i].episodeindex;
         let textindex = resultlist[i].texts[0].textindex;
         let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex);
