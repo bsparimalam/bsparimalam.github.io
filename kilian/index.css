@@ -49,9 +49,7 @@ body {
 	grid-template-columns: var(--radius-input) auto var(--radius-input);
 	grid-template-rows: 100%;
 	background-color: var(--background-color-searchbar);
-	border-width: 2px;
-	border-style: solid;
-	border-color: var(--border-color);
+	border-style: none;
 }
 #linkbar {
 	width: 95%;
@@ -87,18 +85,17 @@ span {
 }
 h1 {
 	text-align: center;
-	margin: 0.2rem;
+	margin: 0.5rem;
 	font-size: 0.7cm;
 }
 h4 {
 	text-align: center;
-	margin: 0.2rem;
+	margin: 0.5rem;
 	font-size: 0.4cm;
 }
 p {
 	text-align: justify;
-	padding: 1rem;
-	margin: 0;
+	margin: 0.5rem 1rem 0.5rem 1rem;
 }
 a, a:active, a:hover, a:visited {
 	text-decoration: none;

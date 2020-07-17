@@ -108,11 +108,6 @@ function buildanepisode(jsobject, id, textindex) {
     link.appendChild(title);
     episode.appendChild(link);
     episode.appendChild(date);
-    let image = document.createElement('img');
-    image.id = 'episode-image-' + id;
-    image.class = 'episode-image';
-    image.src = './images/' + jsobject.image;
-    episode.appendChild(image);
     if (textindex > -1) {
     let text = document.createElement('p');
     text.id = 'episode-text-' + id + '-' + String(textindex);
@@ -120,6 +115,15 @@ function buildanepisode(jsobject, id, textindex) {
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
+    let image = document.createElement('img');
+    image.id = 'episode-image-' + id;
+    image.class = 'episode-image';
+    image.src =`./images/${jsobject.date}.png`;
+    image.addEventListener('error', event => {
+        event.target.src = './images/episode-default.jpg';
+        event.target.removeEventListener('error', event);
+    });
+    episode.appendChild(image);
     return episode;
 }
 
@@ -198,7 +202,7 @@ function search(queryregex, scriptsobject) {
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
     resultnode.appendChild(document.createElement('br'));
-    for (let i=0; ((i < resultlist.length) && (i < 10)); i++) {
+    for (let i=0; ((i < resultlist.length) && (i < 15)); i++) {
         let episodeindex = resultlist[i].episodeindex;
         let textindex = resultlist[i].texts[0].textindex;
         let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex);
