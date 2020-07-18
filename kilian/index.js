@@ -124,9 +124,9 @@ function buildanepisode(jsobject, id, textindex) {
     iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
     iframe.allowfullscreen = true;
     if (textindex > -1) {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}; constant=2`;
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}`;
     } else {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}; constant=2`;       
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;       
     }
     episode.appendChild(iframe);
     return episode;
