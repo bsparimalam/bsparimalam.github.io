@@ -88,7 +88,7 @@ function noresults(resultnode) {
     document.head.appendChild(script);
 }
 
-function buildanepisode(jsobject, id, textindex) {
+function buildanepisode(jsobject, id, textindex, player) {
     let episode = document.createElement('div');
     episode.id = 'episode-' + id;
     episode.class = 'episode';
@@ -115,20 +115,24 @@ function buildanepisode(jsobject, id, textindex) {
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
-    // let image = document.createElement('img');
-    // image.src = `https://i.ytimg.com/vi/${jsobject.id}/maxresdefault.jpg`;
-    // episode.appendChild(image);
-    let iframe = document.createElement('iframe');
-    iframe.id = 'episode-iframe-' + id;
-    iframe.class = 'episode-iframe';
-    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowfullscreen = true;
-    if (textindex > -1) {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}`;
+    if (player) {
+        let iframe = document.createElement('iframe');
+        iframe.id = 'episode-iframe-' + id;
+        iframe.class = 'episode-iframe';
+        iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+        iframe.setAttribute('allowFullScreen', '');
+        if (textindex > -1) {
+            iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}`;
+        } else {
+            iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;      
+        }
+        episode.appendChild(iframe);
     } else {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;       
+        let image = document.createElement('img');
+        image.src = `https://i.ytimg.com/vi/${jsobject.id}/maxresdefault.jpg`;
+        episode.appendChild(image);
     }
-    episode.appendChild(iframe);
+
     return episode;
 }
 
@@ -207,10 +211,16 @@ function search(queryregex, scriptsobject) {
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
     resultnode.appendChild(document.createElement('br'));
-    for (let i=0; ((i < resultlist.length) && (i < 5)); i++) {
+    for (let i=0; ((i < resultlist.length) && (i < 15)); i++) {
         let episodeindex = resultlist[i].episodeindex;
         let textindex = resultlist[i].texts[0].textindex;
-        let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex);
+        let player;
+        if (i < 2) {
+            player = true;
+        } else {
+            player = false;
+        }
+        let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex, player);
         resultnode.appendChild(episode);
     }
     resultnode.appendChild(document.createElement('br'));

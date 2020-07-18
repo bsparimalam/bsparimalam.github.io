@@ -8,6 +8,7 @@ html, body, div, input, span {
 	margin: 0;
 	padding: 0;
 	border-style: none;
+	border-width: 0;
 	font-family: system-ui;
 }
 html {
