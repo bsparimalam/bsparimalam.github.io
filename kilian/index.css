@@ -132,6 +132,11 @@ img {
 :focus {
 	outline: none!important; 
 }
-#twitter-timeline {
+#twitter-timeline, #twitter-widget-0 {
 	max-width: 15cm;
+	margin: auto;
+	padding: auto;
+	display: block;
+	height: auto;
+	max-height: none;
 }
