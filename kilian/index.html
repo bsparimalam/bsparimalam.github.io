@@ -3,14 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<title>Kilian said what?!</title>
-	<meta name="description" content="A searchable script archive for Kilian experience">
+	<meta name="description" content="An indexed script archive for the youtube channel Kilian experience. Search any phrase and get the link to the video at the specific time">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./index.css">
 	<link rel="icon" href="./icons/icon-512.png" type="image/png" sizes="512x512">
 	<link rel="manifest" href="./index.json">
 
 	<!-- apple web app resources -->
-	<meta name="theme-color" id="theme-color" content= '#b0bec5'> 
+	<meta name="theme-color" id="theme-color" content= '#ffffff'> 
 	<meta name="apple-touch-fullscreen" content="yes" >
 	<meta name="apple-mobile-web-app-title" content="Mr.Kilian">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,13 +23,14 @@
 	<img src="./images/banner.png" alt="a script archive for kilian experience">
 	<div id="searchbar" class="searchbar">
 		<span></span>
-		<input type="text" id="searchbox" name="searchbox" autofocus placeholder="Search a phrase">
+		<input type="text" id="searchbox" name="searchbox" autofocus placeholder="Search any phrase">
 		<span></span>
 	</div>
 	<div id="linkbar">
-		<a class="linkout">105 videos archived</a>&nbsp &nbsp &nbsp
-		<a class="linkout" href="mailto:support@bhar.app?subject=Kilian - error report &body=Hi, I found an error in the transcripts. Title:  ; Link to the video: ; Timestamp: ; Issue description: ">report error</a> &nbsp &nbsp &nbsp
-		<a class="linkout" href="./scripts.json" >source</a>
+		<a class="linkout" href="mailto:support@bhar.app?subject=Kilian - issue report &body=Hi, I found an issue with transcripts/website. Title:  ; Link to the video: ; Timestamp: ; Issue description: ">Report Issue  |</a>
+		<a class="linkout" href="./scripts.json" target="_blank">  Source  |</a>
+		<a class="linkout" href="https://bhar.app/" target="_blank">  Web Design © bhar.app  |</a>
+		<a class="linkout" href="https://www.youtube.com/channel/UCjdQaSJCYS4o2eG93MvIwqg" target="_blank">  Content © Kilian Experience</a>
 	</div>
 	<div id="results" class="results"></div>
 	<script src="./index.js"></script>

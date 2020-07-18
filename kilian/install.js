@@ -1,4 +1,4 @@
-var cachename = "kilianscripts_0_0_9";
+var cachename = "kilianscripts_0_1_0";
 const expectedCaches = [cachename];
 const files2cache = [
     './',

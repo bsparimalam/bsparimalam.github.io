@@ -99,7 +99,7 @@ function buildanepisode(jsobject, id, textindex) {
     let link = document.createElement('a');
     link.id = 'episode-link-' + id;
     link.class = 'episode-link';
-    link.href = `https://youtube.com/watch?v=${jsobject.id}&t=1s`;
+    link.href = `https://youtube.com/watch?v=${jsobject.id}`;
     link.target = "_blank";
     let date = document.createElement('h4');
     date.innerText = beautifydate(jsobject.date);
@@ -115,22 +115,19 @@ function buildanepisode(jsobject, id, textindex) {
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
+    // let image = document.createElement('img');
+    // image.src = `https://i.ytimg.com/vi/${jsobject.id}/maxresdefault.jpg`;
+    // episode.appendChild(image);
     let iframe = document.createElement('iframe');
     iframe.id = 'episode-iframe-' + id;
     iframe.class = 'episode-iframe';
-    if (textindex > -1) {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}`;
-    } else {
-        iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;       
-    }
     iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
     iframe.allowfullscreen = true;
-    // iframe.addEventListener('error', event => {
-    //     let image = document.createElement('img');
-    //     image.src = './images/episode-default.jpg';
-    //     episode.appendChild(image);
-    //     episode.removeChild(iframe);
-    // });
+    if (textindex > -1) {
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}?start=${jsobject.script[textindex].timestamp}; constant=2`;
+    } else {
+        iframe.src = `https://www.youtube.com/embed/${jsobject.id}; constant=2`;       
+    }
     episode.appendChild(iframe);
     return episode;
 }
@@ -202,7 +199,7 @@ function search(queryregex, scriptsobject) {
         }
     }
     searchresults.sort(function(a, b) { 
-        return b.episodescore - a.episodescore; 
+        return b.texts[0].textscore - a.texts[0].textscore; 
     });
     return searchresults;
 }
@@ -210,7 +207,7 @@ function search(queryregex, scriptsobject) {
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
     resultnode.appendChild(document.createElement('br'));
-    for (let i=0; ((i < resultlist.length) && (i < 3)); i++) {
+    for (let i=0; ((i < resultlist.length) && (i < 5)); i++) {
         let episodeindex = resultlist[i].episodeindex;
         let textindex = resultlist[i].texts[0].textindex;
         let episode = buildanepisode(scriptsobject[episodeindex], episodeindex, textindex);
