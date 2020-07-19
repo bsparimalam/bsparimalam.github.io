@@ -21,6 +21,7 @@ fetch('./scripts.json').then(response => {
 globalsearchbar = document.getElementById('searchbar');
 globalsearchbox = document.getElementById('searchbox');
 globalresultnode = document.getElementById('results');
+phrasecloud = document.getElementById('phrasecloud');
 //
 function beautifydate(date) {
     date = String(date);
@@ -229,6 +230,7 @@ function printresults(resultlist, scriptsobject, resultnode) {
 globalsearchbox.addEventListener('keydown', event => {
     if ((event.key === "Enter") && (globalsearchbox.value !== '')) {
         document.body.style.marginTop = "var(--searchbar-input)";
+        phrasecloud.style.display = 'none';
         let querylist = query2list(globalsearchbox.value);
         if (querylist.length === 0) {
             noresults(globalresultnode);
@@ -238,7 +240,7 @@ globalsearchbox.addEventListener('keydown', event => {
                 noresults(globalresultnode);
             } else {
 console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist);
-globalsearchbox.blur();
+                globalsearchbox.blur();
                 printresults(resultlist, globalscripts, globalresultnode);
             }
         }
@@ -249,6 +251,7 @@ globalsearchbox.addEventListener('input', event => {
     if (globalsearchbox.value === '') {
         document.body.style.marginTop = "var(--searchbar-default)";
         globalresultnode.innerHTML = '';
+        phrasecloud.style.display = 'block';
     }
 });
 
