@@ -2,26 +2,30 @@
 unimportantwords = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'the', 'a', 'an', 'every', 'this', 'those', 'many',  'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'amid', 'among', 'anti', 'around', 'as', 'at', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond', 'but', 'by', 'concerning', 'considering', 'despite', 'down', 'during', 'except', 'excepting', 'excluding', 'following', 'for', 'from', 'in', 'inside', 'into', 'like', 'minus', 'near', 'of', 'off', 'on', 'onto', 'opposite', 'outside', 'over', 'past', 'per', 'plus', 'regarding', 'round', 'save', 'since', 'than', 'through', 'to', 'toward', 'towards', 'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'via', 'with', 'within', 'without', "all", "another", "any", "anybody", "anyone", "anything", "as", "aught", "both", "each", "each other", "either", "enough", "everybody", "everyone", "everything", "few", "he", "her", "hers", "herself", "him", "himself", "his", "I", "idem", "it", "its", "itself", "many", "me", "mine", "most", "my", "myself", "naught", "neither", "no one", "nobody", "none", "nothing", "nought", "one", "one another", "other", "others", "ought", "our", "ours", "ourself", "ourselves", "several", "she", "some", "somebody", "someone", "something", "somewhat", "such", "suchlike", "that", "thee", "their", "theirs", "theirself", "theirselves", "them", "themself", "themselves", "there", "these", "they", "thine", "this", "those", "thou", "thy", "thyself", "us", "we", "what", "whatever", "whatnot", "whatsoever", "whence", "where", "whereby", "wherefrom", "wherein", "whereinto", "whereof", "whereon", "wherever", "wheresoever", "whereto", "whereunto", "wherewith", "wherewithal", "whether", "which", "whichever", "whichsoever", "who", "whoever", "whom", "whomever", "whomso", "whomsoever", "whose", "whosever", "whosesoever", "whoso", "whosoever", "ye", "yon", "yonder", "you", "your", "yours", "yourself", "yourselves", "and", "that", "but", "or", "as", "if", "when", "than", "because", "while", "where", "after", "so", "though", "since", "until", "whether", "before", "although", "nor", "like", "once", "unless", "now", "except", 'not', 'yes', 'no', 'do', 'does', 'did', 'has', 'have', 'had', 'is', 'am', 'are', 'was', 'were', 'be', 'being', 'been', 'may', 'must', 'might', 'should', 'could', 'would', 'shall', 'will', 'can'];
 
 symbolcleanupregex = /[^a-zA-Z0-9\s]*/gi;
-globalscripts = undefined;
-storagename = 'kilianscripts.v1';
-fetch('./scripts.json').then(response => {
-    if (response.status !== 200) {
-        globalscripts = JSON.parse(window.localStorage.getItem(storagename));
-    } else {
-        response.json().then( data => {
-            globalscripts = data;
-            window.localStorage.setItem(storagename, JSON.stringify(globalscripts));
-        });
-    }
-}).catch(function(err) {
-    globalscripts = JSON.parse(window.localStorage.getItem(storagename));
-});
+storagename = 'kilianscripts.v2';
+globaldata = JSON.parse(window.localStorage.getItem(storagename));
+isonline = undefined;
 
 //search operation
 globalsearchbar = document.getElementById('searchbar');
 globalsearchbox = document.getElementById('searchbox');
 globalresultnode = document.getElementById('results');
-phrasecloud = document.getElementById('phrasecloud');
+
+fetch('./source.json').then(response => {
+    if (response.status !== 200) {
+        globaldata = JSON.parse(window.localStorage.getItem(storagename));
+        isonline = false;
+    } else {
+        response.json().then( data => {
+            globaldata = data;
+            window.localStorage.setItem(storagename, JSON.stringify(globaldata));
+            isonline = true;
+        });
+    }
+}).catch(function(err) {
+    globaldata = JSON.parse(window.localStorage.getItem(storagename));
+    isonline = false;
+});
 //
 function beautifydate(date) {
     date = String(date);
@@ -82,11 +86,15 @@ function list2regex(querylist) {
 
 function noresults(resultnode) {
     resultnode.innerHTML = '';
-    resultnode.innerHTML = "<br><h1>Kilian didn't say that, instead he said these... things...</h1><br><center><div id='twitter-timeline'><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a></div></center><br>";
-    let script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
-    script.charset = 'utf-8';
-    document.head.appendChild(script);
+    if (isonline) {
+        resultnode.innerHTML = "<br><h1>Kilian didn't say that, instead he said these... things...</h1><br><center><div id='twitter-timeline'><a class='twitter-timeline' data-dnt='true' href='https://twitter.com/KilExperience?ref_src=twsrc%5Etfw'>Tweets by KilExperience</a></div></center><br>";
+        let script = document.createElement('script');
+        script.src = 'https://platform.twitter.com/widgets.js';
+        script.charset = 'utf-8';
+        document.head.appendChild(script);
+    } else {
+       resultnode.innerHTML = "<br><h1>Kilian didn't say that...</h1><br>";
+    }
 }
 
 function buildanepisode(jsobject, id, textindex, player) {
@@ -116,7 +124,7 @@ function buildanepisode(jsobject, id, textindex, player) {
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
-    if (player) {
+    if (player && isonline) {
         let iframe = document.createElement('iframe');
         iframe.id = 'episode-iframe-' + id;
         iframe.class = 'episode-iframe';
@@ -128,12 +136,15 @@ function buildanepisode(jsobject, id, textindex, player) {
             iframe.src = `https://www.youtube.com/embed/${jsobject.id}`;      
         }
         episode.appendChild(iframe);
-    } else {
+    } else if (isonline) {
         let image = document.createElement('img');
         image.src = `https://i.ytimg.com/vi/${jsobject.id}/maxresdefault.jpg`;
         episode.appendChild(image);
+    } else {
+        let image = document.createElement('img');
+        image.src = './images/episode.png';
+        episode.appendChild(image);      
     }
-
     return episode;
 }
 
@@ -208,7 +219,6 @@ function search(queryregex, scriptsobject) {
     });
     return searchresults;
 }
-
 function printresults(resultlist, scriptsobject, resultnode) {
     resultnode.innerHTML = '';
     resultnode.appendChild(document.createElement('br'));
@@ -230,18 +240,17 @@ function printresults(resultlist, scriptsobject, resultnode) {
 globalsearchbox.addEventListener('keydown', event => {
     if ((event.key === "Enter") && (globalsearchbox.value !== '')) {
         document.body.style.marginTop = "var(--searchbar-input)";
-        phrasecloud.style.display = 'none';
         let querylist = query2list(globalsearchbox.value);
         if (querylist.length === 0) {
             noresults(globalresultnode);
         } else {
-            let resultlist = search(list2regex(querylist), globalscripts);
+            let resultlist = search(list2regex(querylist), globaldata.scripts);
             if (resultlist.length === 0) {
                 noresults(globalresultnode);
             } else {
-console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist);
+                console.log(globalsearchbox.value, querylist, list2regex(querylist), resultlist);
                 globalsearchbox.blur();
-                printresults(resultlist, globalscripts, globalresultnode);
+                printresults(resultlist, globaldata.scripts, globalresultnode);
             }
         }
     }
@@ -251,10 +260,8 @@ globalsearchbox.addEventListener('input', event => {
     if (globalsearchbox.value === '') {
         document.body.style.marginTop = "var(--searchbar-default)";
         globalresultnode.innerHTML = '';
-        phrasecloud.style.display = 'block';
     }
 });
-
 // register service workers
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('./install.js');

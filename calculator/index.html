@@ -8,7 +8,7 @@
 	<meta name="keywords" content="calculator, scientific, personal, unit, smart-shortcuts, conversions, dark mode, off-line">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- security policy -->
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-eval';">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'unsafe-eval';">
 	<link rel="icon" href="./icons/icon-32.png" type="image/png" sizes="32x32">
 	<link rel="stylesheet" href="./index.css">
 	<link rel="manifest" href="./index.json">
@@ -26,5 +26,6 @@
 <body>
 	<iframe id="appwindow" src="./engine/engine.html"></iframe>
 	<script src="./index.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166908735-1"></script>
 </body>
 </html>
