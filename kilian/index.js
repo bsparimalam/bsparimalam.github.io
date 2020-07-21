@@ -273,17 +273,3 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-166908735-1');
-
-// // tests
-// if(beautifydate(20200128) === 'January 28, 2020') {
-//     console.log('beautifydate passed');
-// } else { console.log('beautifydate failed'); }
-// if (beautifytime(1801) === "00:30:01") {
-//     console.log('beautifytime passed');
-// } else {console.log('beautifytime failed');}
-// console.log(query2list('is it a bird?'));
-// if (query2list('is it a bird?').length === ['is it', 'is it a', 'is it a bird','it a', 'it a bird', 'a bird', 'bird'].length) {
-//     console.log('query2list passed');
-// } else {
-//     console.log('query2list failed');
-// }
