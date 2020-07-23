@@ -26,24 +26,27 @@ html {
 	:root {
 		--radius-input: 0.75cm;
 		--font-size-input: 1cm;
-		--font-size-link: 0.55cm;
+		--font-size-link: 0.5cm;
 		--padding-link: 0.4cm;
 		--searchbar-default: 25vh;
+	}
+	body {
+		width: 20cm;
 	}
 }
 @media (max-width: 20cm) {
 	:root {
+		--radius-input: 5vw;
+		--font-size-input: 7vw;
+		--font-size-link: 2.5vw;
+		--padding-link: 2vw;
 		--searchbar-default: 30vh;
-		--radius-input: 6vw;
-		--font-size-input: 8vw;
-		--font-size-link: 2.7vw;
-		--padding-link: 2vh;
-		--searchbar-default: 30vh;
+	}
+	body {
+		width: 100vw;
 	}
 }
 body {
-	width: 100%;
-	max-width: 20cm;
 	margin: auto;
 	margin-top: var(--searchbar-default);
 	height: auto;
@@ -69,6 +72,7 @@ body {
 	height: auto;
 	padding: var(--padding-link);
 	text-align: center;
+	overflow: ellipsis;
 }
 input {
 	grid-row: span 1;
