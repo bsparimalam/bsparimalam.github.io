@@ -4,27 +4,22 @@ unimportantwords = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 symbolcleanupregex = /[^a-zA-Z0-9\s]*/gi;
 storagename = 'kilianscripts.v2';
 globaldata = JSON.parse(window.localStorage.getItem(storagename));
-isonline = undefined;
-
 //search operation
 globalsearchbar = document.getElementById('searchbar');
 globalsearchbox = document.getElementById('searchbox');
 globalresultnode = document.getElementById('results');
-
+isonline = ((navigator.connection.rtt < 1000) && navigator.onLine);
 fetch('./source.json').then(response => {
     if (response.status !== 200) {
         globaldata = JSON.parse(window.localStorage.getItem(storagename));
-        isonline = false;
     } else {
         response.json().then( data => {
             globaldata = data;
             window.localStorage.setItem(storagename, JSON.stringify(globaldata));
-            isonline = true;
         });
     }
 }).catch(function(err) {
     globaldata = JSON.parse(window.localStorage.getItem(storagename));
-    isonline = false;
 });
 //
 function beautifydate(date) {
