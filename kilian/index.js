@@ -8,7 +8,7 @@ globaldata = JSON.parse(window.localStorage.getItem(storagename));
 globalsearchbar = document.getElementById('searchbar');
 globalsearchbox = document.getElementById('searchbox');
 globalresultnode = document.getElementById('results');
-isonline = ((navigator.connection.rtt < 1000) && navigator.onLine);
+isonline = navigator.onLine;
 fetch('./source.json').then(response => {
     if (response.status !== 200) {
         globaldata = JSON.parse(window.localStorage.getItem(storagename));
@@ -234,6 +234,7 @@ function printresults(resultlist, scriptsobject, resultnode) {
 
 globalsearchbox.addEventListener('keydown', event => {
     if ((event.key === "Enter") && (globalsearchbox.value !== '')) {
+        isonline = navigator.onLine;
         document.body.style.marginTop = "var(--searchbar-input)";
         let querylist = query2list(globalsearchbox.value);
         if (querylist.length === 0) {
