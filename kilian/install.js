@@ -11,7 +11,8 @@ const files2cache = [
     './index.css',
     './index.html',
     './index.js',
-    './index.json'
+    './index.json',
+    './source.json'
 ];
 self.addEventListener('install', function(event) {
   console.log(cachename + ' downloading...');

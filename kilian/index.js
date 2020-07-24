@@ -9,17 +9,16 @@ globalsearchbar = document.getElementById('searchbar');
 globalsearchbox = document.getElementById('searchbox');
 globalresultnode = document.getElementById('results');
 isonline = navigator.onLine;
-fetch('./source.json').then(response => {
+fetch(`./source.json`).then(response => {
     if (response.status !== 200) {
-        globaldata = JSON.parse(window.localStorage.getItem(storagename));
+        globalsearchbox.placeholder = "database failed to load";
     } else {
         response.json().then( data => {
             globaldata = data;
-            window.localStorage.setItem(storagename, JSON.stringify(globaldata));
         });
     }
 }).catch(function(err) {
-    globaldata = JSON.parse(window.localStorage.getItem(storagename));
+    globalsearchbox.placeholder = "database failed to load";
 });
 //
 function beautifydate(date) {
