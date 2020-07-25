@@ -63,14 +63,14 @@ function loaduserpref() {
 	angleunit.innerText = userpref.angleunit;
 	numrep.innerText = userpref.representation;
 	memorystored = userpref.memory;
-	if (userpref.lastinput != '') {
-		document.getElementById('ip').value = userpref.lastinput;
-	}
+	// if (userpref.lastinput != '') {
+	// 	document.getElementById('ip').value = userpref.lastinput;
+	// }
 	if (userpref.openmore !== more.innerText) {
 		openmore();
 	}
 	if ( memorystored === '' ) {
-		memory.innerText = 'STORE';
+		memory.innerText = 'MS';
 	} else {
 		memory.innerText = 'RECALL';
 	}
@@ -145,7 +145,7 @@ function setnumrep() {
     console.log('number representation set to: ' + numrep.innerText);
 } // sets the preferred number representation format
 function setmemory(element) {
-	if ( element.innerText == 'STORE' ) { 
+	if ( element.innerText == 'MS' ) { 
 		element.innerText = 'RECALL';
 		memorystored = lasteval;
 		userpref.memory = lasteval;
@@ -155,7 +155,7 @@ function setmemory(element) {
 		inputbox.addastring(memorystored);
 		console.log( memorystored + ' recalled from memory ');
 	} else {
-		memory.innerText = 'STORE';
+		memory.innerText = 'MS';
 		memorystored = '';
 		userpref.memory = '';
 		saveuserpref();
