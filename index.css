@@ -206,7 +206,7 @@ html, body {
 .description {
 	grid-row: span 1;
 	grid-column: span 1;
-	width: 80%;
+	width: 90%;
 	height: auto;
 	margin: auto;
 	white-space: normal;
@@ -254,6 +254,9 @@ html, body {
 	margin: auto;
 	filter: opacity(0.3);
 	z-index: 2;
+	display: -webkit-inline-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
 }
 .app-scroll-button-left:active, .app-scroll-button-right:active {
 	filter: opacity(1);
