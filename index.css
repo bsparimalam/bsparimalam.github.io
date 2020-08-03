@@ -88,6 +88,9 @@ html, body, div, a, img, svg, h1, h2, p, ul, li {
 .screenshots::-webkit-scrollbar, .app-screenshots::-webkit-scrollbar {
 	display: none;
 }
+html {
+	scroll-padding-top: calc(1.1 * var(--height-topbar));
+}
 html, body {
 	height: auto;
 	width: 100%;
