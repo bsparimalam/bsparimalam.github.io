@@ -6,9 +6,6 @@
 	--dark: #102027;
 	--darker: #78909c;
 }
-::-webkit-scrollbar {
-    display: none;
-}
 :root {
 	--height-topbar: 1.5cm;
 	--height-button: 1.5cm;
@@ -79,8 +76,11 @@ html, body, div, a, img, svg, h1, h2, p, ul, li {
 	padding: 0;
 	border-width: 0;
 	border-style: none;
-	scrollbar-width: none;
 	scroll-behavior: smooth;
+	touch-action: manipulation; 
+}
+.screenshots::-webkit-scrollbar, .app-screenshots::-webkit-scrollbar {
+	display: none;
 }
 html, body {
 	height: auto;
@@ -187,6 +187,7 @@ html, body {
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	scroll-width: none;
+	scrollbar-width: none;
 }
 .wrapper {
 	width: 100%;
@@ -208,7 +209,6 @@ html, body {
 	width: 80%;
 	height: auto;
 	margin: auto;
-	margin-left: 5%;
 	white-space: normal;
 	color: var(--dark);
 }
@@ -275,6 +275,7 @@ html, body {
 	scroll-behavior: smooth;
 	display: inline-block;
 	scroll-width: none;
+	scrollbar-width: none;
 	width: calc(100% + calc(2 * var(--height-button)));
 	margin: auto var(--height-button) auto calc(-1 * var(--height-button));
 }
@@ -296,7 +297,7 @@ html, body {
 /* Fonts */
 .description h1 {
 	font-size: 0.7cm;
-	padding-bottom: 0.2cm;
+	padding: 0.2cm 0;
 }
 .description p {
 	font-size: 0.5cm;

@@ -95,7 +95,7 @@ document.addEventListener('click', event => {
 });
 
 setInterval(() => {
-	if ((wrapper.scrollWidth >= wrapper.scrollLeft + screenshot.scrollWidth + 5) && !userinteracted) {
+	if ((wrapper.scrollWidth >= wrapper.scrollLeft + screenshot.scrollWidth + 10) && !userinteracted) {
 		wrapper.scrollLeft = wrapper.scrollLeft + screenshot.scrollWidth;
 	} else if (!userinteracted) {
 		wrapper.scrollLeft = 0;
