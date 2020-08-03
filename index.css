@@ -9,137 +9,47 @@
 ::-webkit-scrollbar {
     display: none;
 }
+:root {
+	--height-topbar: 1.5cm;
+	--height-button: 1.5cm;
+}
 @media (min-width: 20cm) {
-	:root {
-		--height-topbar: 1.5cm;
-		--height-icon: 1cm;
-	}
 	.topbar {
 		grid-template-columns: 0 var(--height-topbar) auto 0 0;
 	}
 	.icon-menu {
 		visibility:hidden;
 	}
-	.gallery {
-		grid-template-columns: 5% 90% 5%;
-	}
-	.screenshots {
-		width: 112%;
-		margin: auto 6% auto -6%;
+	.screenshots, .app-screenshot, .app-screenshots {
 		border-radius: 1vw;
 	}
-	.wrapper {
+	.wrapper, .app {
 		grid-template-columns: 50% 50%;
-		grid-template-rows: auto;
+		grid-template-rows: 100%;
 		border-radius: 1vw;
 	}
 	.screenshot {
 		border-radius: 1vw 0 0 1vw;
 	}
-	.description {
+	.description, .app-text h2 {
 		text-align: left;
-	}
-	.app {
-		grid-template-columns: 50% 50%; 
-		grid-template-rows: 100%;
 	}
 	.narrow {
 		display: none;
 		visibility: hidden;
 	}
-	@media (max-width: 25cm) {
-		.description button {
-			font-size: 2.5vw;
-			border-radius: 1.25vw;
-			padding: 1.25vw;
-		}
-		.description h1 {
-			font-size: 3vw;
-		}
-		.app-text h2 {
-			font-size: 2.5vw;
-		}
-		.description p {
-			font-size: 2.5vw;
-		}
-		.app-text p, .app-text li {
-			font-size: 2vw;
-		}
-		.icon {
-			height: 4vw;
-			width: auto;
-			padding: 2vw;
-		}
-		.app-screenshot {
-			border-radius: 1vw;
-		}
-		.bottombar {
-			font-size: 1.5vw;
-		}
-	}
-	@media (min-width: 25cm) {
-		.description button {
-			font-size: 0.6cm;
-			border-radius: 0.3cm;
-			padding: 0.3cm;
-		}
-		.description h1 {
-			font-size: 0.9cm;
-		}
-		.app-text h2 {
-			font-size: 0.8cm;
-		}
-		.description p {
-			font-size: 0.6cm;
-		}
-		.app-text p, .app-text li {
-			font-size: 0.5cm;
-		}
-		.icon-wrapper {
-			margin: auto;
-		}
-		.icon {
-			height: 1cm;
-			width: auto;
-			padding: 0.5cm;
-		}
-		.app-screenshot, .app-screenshots {
-			border-radius: 1vw;
-		}
-		.bottombar {
-			font-size: 0.4cm;
-		}
-	}
 }
 @media (max-width: 20cm) {
-	:root {
-		--height-topbar: 1.5cm;
-		--height-icon: 1cm;
-	}
 	.topbar {
 		grid-template-columns: calc(50% - calc(var(--height-topbar) * 0.5)) var(--height-topbar) 0 calc(50% - calc(var(--height-topbar) * 1.5)) var(--height-topbar);
 	}
 	.topbar-text {
 		visibility:hidden;
 	}
-	.dropdown {
-		position: fixed;
-		width: 100%;
-		height: auto;
-		background-color: var(--dark);
-		color: var(--lightest);
-		margin-top: var(--height-topbar);
-		z-index: 100;
-	}
-	.gallery {
-		grid-template-columns: 10% 80% 10%;
-	}
-	.screenshots {
-		width: 125%;
-		margin: auto 12.5% auto -12.5%;
+	.screenshots, .app-screenshot, .app-screenshots {
 		border-radius: 2vw;
 	}
-	.wrapper {
+	.wrapper, .app {
 		grid-template-columns: 100%;
 		grid-template-rows: auto auto;
 		border-radius: 2vw;
@@ -147,52 +57,21 @@
 	.screenshot {
 		border-radius: 2vw 2vw 0 0;
 	}
-	.description {
+	.description, .app-text h2 {
 		text-align: center;
-	}
-	.description h1 {
-		font-size: 5vw;
-	}
-	.description p {
-		font-size: 4vw;
-	}
-	.description button {
-		font-size: 4vw;
-		border-radius: 2vw;
-		padding: 2vw;
-	}
-	.app {
-		grid-template-columns: 100%; 
-		grid-template-rows: 50% 50%;
 	}
 	.wide {
 		display: none;
 		visibility: hidden;
 	}
-	.app-text h2 {
-		font-size: 5vw;
-	}
-	.app-text p, .app-text li {
-		font-size: 4vw;
-	}
-	.icon {
-		height: 8vw;
-		width: auto;
-		padding: 4vw;
-	}
-	.app-screenshot, .app-screenshots {
-		border-radius: 2vw;
-	}
-	.bottombar {
-		font-size: 3vw;
-	}
 }
 @media (hover: hover) {
-	.scroll-button-left:hover, .scroll-button-right:hover {
+	.scroll-button-left:hover, .scroll-button-right:hover, .app-scroll-button-left:hover, .app-scroll-button-right:hover {
 		filter: opacity(1);
 	}
-	.app-scroll-button-left:hover, .app-scroll-button-right:hover {
-		filter: opacity(1);
+	.topbar-text a:hover, .dropdown a:hover {
+		text-decoration: none;
+		color: white;
 	}
 }
 html, body, div, a, img, svg {
@@ -203,17 +82,11 @@ html, body, div, a, img, svg {
 	scrollbar-width: none;
 	scroll-behavior: smooth;
 }
-html {
+html, body {
 	height: auto;
 	width: 100%;
 	background-color: var(--lighter);
 	overflow-x: hidden;
-}
-body {
-	margin: auto;
-	width: 100%;
-	max-width: 100%;
-	height: auto;
 	font-family: system-ui;
 }
 .topbar {
@@ -245,11 +118,25 @@ body {
 	text-align: right;
 	font-size: calc(var(--height-topbar) / 2.8);
 	font-weight: 400;
-	vertical-align: center;
 }
-.topbar-text a, .topbar-text a:visited, .topbar-text a:active, .topbar-text a:hover, .dropdown a, .dropdown a:visited, .dropdown a:active, .dropdown a:hover {
+.topbar-text a, .topbar-text a:visited, .topbar-text a:active, .dropdown a, .dropdown a:visited, .dropdown a:active {
 	text-decoration: none;
 	color: white;
+}
+.padding {
+	width: 100%;
+	height: var(--height-topbar);
+}
+.dropdown {
+	position: fixed;
+	width: 100%;
+	height: auto;
+	background-color: var(--dark);
+	color: var(--lightest);
+	margin-top: var(--height-topbar);
+	z-index: 100;
+	visibility: hidden;
+	display: none;
 }
 .dropdown div {
 	text-align: center;
@@ -262,27 +149,20 @@ body {
 .dropdown a {
 	font-size: calc(var(--height-topbar) / 2.8);
 }
-.dropdown {
-	visibility: hidden;
-	display: none;
-}
-.padding {
-	width: 100%;
-	height: var(--height-topbar);
-}
 .gallery {
 	width: 98%;
 	margin: auto;
 	height: auto;
 	display: grid;
 	grid-template-rows: 100%;
+	grid-template-columns: var(--height-button) calc(100% - calc(2 * var(--height-button))) var(--height-button);
 }
 .scroll-button-left, .scroll-button-right {
 	grid-row: span 1;
 	grid-column: span 1;
 	width: 100%;
 	height: auto;
-	filter: opacity(0.5);
+	filter: opacity(0.3);
 	margin: auto;
 	z-index: 2;
 }
@@ -291,20 +171,21 @@ body {
 	width: 90%;
 }
 .scroll-button-left img, .scroll-button-right img {
-	width: 70%;
+	width: 90%;
 	height: auto;
-	margin: 15%;
+	margin: 5%;
 }
 .screenshots {
 	grid-row: span 1;
 	grid-column: span 1;
 	height: auto;
+	width: calc(100% + calc(2 * var(--height-button)));
+	margin: auto var(--height-button) auto calc(-1 * var(--height-button));
 	overflow-x: scroll;
 	overflow-y: hidden;
 	white-space: nowrap;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	display: inline-block;
 	scroll-width: none;
 }
 .wrapper {
@@ -320,7 +201,6 @@ body {
 	grid-column: span 1;
 	width: 100%;
 	height: auto;
-	margin: 0;
 }
 .description {
 	grid-row: span 1;
@@ -340,13 +220,6 @@ body {
 	background-color: var(--dark);
 	color: var(--lightest);
 }
-.bottombar {
-	text-align: center;
-}
-.bottombar a, .bottombar a:visited, .bottombar a:active, .bottombar a:hover {
-	text-decoration: none;
-	color: var(--dark);
-}
 .app {
 	width: 98%;
 	height: auto;
@@ -360,7 +233,6 @@ body {
 	width: auto;
 	max-width: 90%;
 	margin: auto;
-	text-overflow: ellipsis;
 }
 .app-text h2, .app-text p, .app-text li {
 	color: var(--dark);
@@ -376,7 +248,7 @@ body {
 	width: 100%;
 	display: grid;
 	grid-template-rows: 100%;
-	grid-template-columns: 10% 80% 10%;
+	grid-template-columns: var(--height-button) calc(100% - calc(2 * var(--height-button))) var(--height-button);
 }
 .app-scroll-button-left, .app-scroll-button-right {
 	grid-row: span 1;
@@ -384,7 +256,7 @@ body {
 	width: 100%;
 	height: auto;
 	margin: auto;
-	filter: opacity(0.5);
+	filter: opacity(0.3);
 	z-index: 2;
 }
 .app-scroll-button-left:active, .app-scroll-button-right:active {
@@ -392,9 +264,9 @@ body {
 	width: 90%;
 }
 .app-scroll-button-left img, .app-scroll-button-right img {
-	width: 70%;
+	width: 90%;
 	height: auto;
-	margin: 15%;
+	margin: 5%;
 }
 .app-screenshots {
 	grid-row: span 1;
@@ -407,8 +279,8 @@ body {
 	scroll-behavior: smooth;
 	display: inline-block;
 	scroll-width: none;
-	width: 125%;
-	margin: auto 12.5% auto -12.5%;
+	width: calc(100% + calc(2 * var(--height-button)));
+	margin: auto var(--height-button) auto calc(-1 * var(--height-button));
 }
 .app-screenshot {
 	width: 100%;
@@ -416,4 +288,38 @@ body {
 	display: inline;
 	scroll-snap-align: start;
 	scroll-behavior: smooth;
+}
+.bottombar {
+	text-align: center;
+}
+.bottombar a, .bottombar a:visited, .bottombar a:active, .bottombar a:hover {
+	text-decoration: none;
+	color: var(--dark);
+}
+
+/* Fonts */
+.description h1 {
+	font-size: 0.7cm;
+}
+.description button {
+	font-size: 0.5cm;
+	border-radius: 0.15cm;
+	padding: 0.3cm;
+}
+.app-text h2 {
+	font-size: 0.6cm;
+}
+.description p, .app-text p, .app-text li {
+	font-size: 0.5cm;
+}
+.icon-wrapper {
+	margin: auto;
+}
+.icon {
+	height: 0.9cm;
+	width: auto;
+	padding: 0.25cm;
+}
+.bottombar {
+	font-size: 0.4cm;
 }

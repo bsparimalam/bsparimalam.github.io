@@ -16,9 +16,7 @@ userinteracted = false;
 document.addEventListener('click', event => {
 	let target = event.target;
 	let name = event.target.name;
-	console.log(name);
 	if (name === "open-dropdown") {
-		console.log('open the damn thing');
 		dropdown.style.display = "block";
 		dropdown.style.visibility = "visible";
 		dropdownbutton.name = "close-dropdown";
