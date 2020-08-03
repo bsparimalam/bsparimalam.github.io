@@ -61,11 +61,6 @@
 		display: none;
 		visibility: hidden;
 	}
-	@media (pointer: coarse) {
-		.app-scroll-button-left, .app-scroll-button-right {
-			visibility: hidden;
-		}
-	}
 }
 @media (hover: hover) {
 	.scroll-button-left:hover, .scroll-button-right:hover, .app-scroll-button-left:hover, .app-scroll-button-right:hover {

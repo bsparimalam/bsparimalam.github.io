@@ -91,7 +91,6 @@ document.addEventListener('click', event => {
 			}
 			break;
 	}
-	console.log(wrapper.scrollLeft, screenshot.scrollWidth);
 });
 
 setInterval(() => {
