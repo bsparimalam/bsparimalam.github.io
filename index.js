@@ -21,7 +21,7 @@ document.addEventListener('click', event => {
 		dropdown.style.visibility = "visible";
 		dropdownbutton.name = "close-dropdown";
 		dropdownbutton.innerHTML = '<img name="close-dropdown" src="./index/icons/icon-menu2.svg">';
-	} else {
+	} else if (dropdownbutton.name !== "open-dropdown"){
 		dropdown.style.display = "none";
 		dropdown.style.visibility = "hidden";
 		dropdownbutton.name = "open-dropdown";

@@ -43,8 +43,11 @@
 	.topbar-text {
 		visibility:hidden;
 	}
-	.screenshots, .app-screenshot, .app-screenshots {
+	.gallery, .screenshots, .app-screenshot, .app-screenshots {
 		border-radius: 2vw;
+	}
+	.gallery {
+		background-color: var(--medium);
 	}
 	.wrapper, .app {
 		grid-template-columns: 100%;
@@ -69,6 +72,9 @@
 	.topbar-text a:hover, .dropdown a:hover {
 		text-decoration: none;
 		color: white;
+	}
+	.bottombar a:hover {
+		text-decoration: none;
 	}
 }
 html, body, div, a, img, svg, h1, h2, p, ul, li {
@@ -289,7 +295,7 @@ html, body {
 .bottombar {
 	text-align: center;
 }
-.bottombar a, .bottombar a:visited, .bottombar a:active, .bottombar a:hover {
+.bottombar a, .bottombar a:visited, .bottombar a:active {
 	text-decoration: none;
 	color: var(--dark);
 }
