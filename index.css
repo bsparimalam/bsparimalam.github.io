@@ -35,6 +35,11 @@
 		display: none;
 		visibility: hidden;
 	}
+	/*privacy*/
+	.privacy {
+		width: 19.5cm;
+		margin: auto;
+	}
 }
 @media (max-width: 20cm) {
 	.topbar {
@@ -60,6 +65,14 @@
 	.wide {
 		display: none;
 		visibility: hidden;
+	}
+	/*privacy*/
+	.privacy {
+		width: 96%;
+		margin: auto;
+	}
+	.privacy h1, .privacy h2 {
+		text-align: center;
 	}
 }
 @media (hover: hover) {
@@ -327,4 +340,22 @@ html, body {
 }
 .bottombar {
 	font-size: 0.4cm;
+}
+
+/* Privacy */
+.privacy h1 {
+	font-size: 0.7cm;
+	padding: 0.2cm 0;
+}
+.privacy h2 {
+	font-size: 0.6cm;
+	padding-bottom: 0.1cm;
+}
+.privacy p, .privacy li {
+	font-size: 0.5cm;
+	padding: 0.1cm;
+	text-align: justify;
+}
+.privacy li {
+	margin-left: 0.8cm;
 }
