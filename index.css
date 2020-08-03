@@ -31,7 +31,7 @@
 	.screenshot {
 		border-radius: 1vw 0 0 1vw;
 	}
-	.description, .app-text h2 {
+	.description, .app-text h2, .icon-wrapper {
 		text-align: left;
 	}
 	.narrow {
@@ -57,7 +57,7 @@
 	.screenshot {
 		border-radius: 2vw 2vw 0 0;
 	}
-	.description, .app-text h2 {
+	.description, .app-text h2, .icon-wrapper {
 		text-align: center;
 	}
 	.wide {
@@ -74,7 +74,7 @@
 		color: white;
 	}
 }
-html, body, div, a, img, svg {
+html, body, div, a, img, svg, h1, h2, p, ul, li {
 	margin: 0;
 	padding: 0;
 	border-width: 0;
@@ -231,15 +231,11 @@ html, body {
 	grid-column: span 1;
 	height: auto;
 	width: auto;
-	max-width: 90%;
+	max-width: 95%;
 	margin: auto;
 }
 .app-text h2, .app-text p, .app-text li {
 	color: var(--dark);
-}
-.icon-wrapper {
-	margin: auto;
-	text-align: center;
 }
 .app-gallery {
 	grid-row: span 1;
@@ -300,6 +296,11 @@ html, body {
 /* Fonts */
 .description h1 {
 	font-size: 0.7cm;
+	padding-bottom: 0.2cm;
+}
+.description p {
+	font-size: 0.5cm;
+	padding-bottom: 0.4cm;
 }
 .description button {
 	font-size: 0.5cm;
@@ -308,17 +309,20 @@ html, body {
 }
 .app-text h2 {
 	font-size: 0.6cm;
+	padding-bottom: 0.1cm;
 }
-.description p, .app-text p, .app-text li {
+.app-text p, .app-text li {
 	font-size: 0.5cm;
+	padding: 0.1cm;
+	text-align: justify;
 }
-.icon-wrapper {
-	margin: auto;
+.app-text li {
+	margin-left: 0.8cm;
 }
 .icon {
 	height: 0.9cm;
 	width: auto;
-	padding: 0.25cm;
+	padding: 0.5cm 0.25cm;
 }
 .bottombar {
 	font-size: 0.4cm;
