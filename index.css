@@ -35,11 +35,6 @@
 		display: none;
 		visibility: hidden;
 	}
-	/*privacy*/
-	.privacy {
-		width: 19.5cm;
-		margin: auto;
-	}
 }
 @media (max-width: 20cm) {
 	.topbar {
@@ -59,20 +54,12 @@
 	.screenshot {
 		border-radius: 2vw 2vw 0 0;
 	}
-	.description, .app-text h2, .icon-wrapper {
+	.description, .app-text h2, .icon-wrapper, .privacy h1 {
 		text-align: center;
 	}
 	.wide {
 		display: none;
 		visibility: hidden;
-	}
-	/*privacy*/
-	.privacy {
-		width: 96%;
-		margin: auto;
-	}
-	.privacy h1, .privacy h2 {
-		text-align: center;
 	}
 }
 @media (hover: hover) {
@@ -308,7 +295,7 @@ html, body {
 }
 
 /* Fonts */
-.description h1 {
+.description h1, .privacy h1 {
 	font-size: 0.7cm;
 	padding: 0.2cm 0;
 }
@@ -325,12 +312,12 @@ html, body {
 	font-size: 0.6cm;
 	padding-bottom: 0.1cm;
 }
-.app-text p, .app-text li {
+.app-text p, .app-text li, .privacy p, .privacy li {
 	font-size: 0.5cm;
 	padding: 0.1cm;
 	text-align: justify;
 }
-.app-text li {
+.app-text li, .privacy li {
 	margin-left: 0.8cm;
 }
 .icon {
@@ -341,21 +328,8 @@ html, body {
 .bottombar {
 	font-size: 0.4cm;
 }
-
-/* Privacy */
-.privacy h1 {
-	font-size: 0.7cm;
-	padding: 0.2cm 0;
-}
-.privacy h2 {
-	font-size: 0.6cm;
-	padding-bottom: 0.1cm;
-}
-.privacy p, .privacy li {
-	font-size: 0.5cm;
-	padding: 0.1cm;
-	text-align: justify;
-}
-.privacy li {
-	margin-left: 0.8cm;
+.privacy {
+	width: 20cm;
+	max-width: 98%;
+	margin: auto;
 }
