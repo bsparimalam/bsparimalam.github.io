@@ -14,7 +14,6 @@ kilianshot = document.getElementById('kilian-screenshot');
 userinteracted = false;
 
 document.addEventListener('click', event => {
-	console.log(event.target);
 	let target = event.target;
 	let name = event.target.name;
 	if (name === "open-dropdown") {

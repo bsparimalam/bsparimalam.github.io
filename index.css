@@ -67,14 +67,16 @@
 }
 @media (hover: hover) {
 	.scroll-button-left:hover, .scroll-button-right:hover, .app-scroll-button-left:hover, .app-scroll-button-right:hover {
-		filter: opacity(1);
+		filter: opacity(0.75);
 	}
 	.topbar-text a:hover, .dropdown a:hover {
-		text-decoration: none;
-		color: white;
+		text-decoration: underline;
+	}
+	.icon:hover {
+		filter: brightness(125%);
 	}
 	.bottombar a:hover {
-		text-decoration: none;
+		text-decoration: underline;
 	}
 }
 html, body, div, a, img, svg, h1, h2, p, ul, li {
@@ -119,6 +121,11 @@ html, body {
 	height: 70%;
 	width: auto;
 }
+.topbar-icon img:active {
+	margin: 20%;
+	height: 60%;
+	width: auto;
+}
 .topbar-text {
 	grid-row: span 1;
 	grid-column: span 1;
@@ -130,7 +137,7 @@ html, body {
 }
 .topbar-text a, .topbar-text a:visited, .topbar-text a:active, .dropdown a, .dropdown a:visited, .dropdown a:active {
 	text-decoration: none;
-	color: white;
+	color: var(--lightest);
 }
 .padding {
 	width: 100%;
@@ -176,8 +183,9 @@ html, body {
 	z-index: 2;
 }
 .scroll-button-left:active, .scroll-button-right:active {
-	filter: opacity(1);
+	filter: opacity(0.75);
 	width: 90%;
+	margin: auto 5%;
 }
 .scroll-button-left img, .scroll-button-right img {
 	width: 90%;
@@ -265,8 +273,9 @@ html, body {
 	margin: auto 0;
 }
 .app-scroll-button-left:active, .app-scroll-button-right:active {
-	filter: opacity(1);
+	filter: opacity(0.75);
 	width: 90%;
+	margin: auto 5%;
 }
 .app-scroll-button-left img, .app-scroll-button-right img {
 	width: 90%;
@@ -306,7 +315,7 @@ html, body {
 /* Fonts */
 .description h1, .privacy h1 {
 	font-size: 0.7cm;
-	padding: 0.2cm 0;
+	padding: 0.4cm 0 0.2cm 0;
 }
 .description p {
 	font-size: 0.5cm;
@@ -317,6 +326,12 @@ html, body {
 	border-radius: 0.15cm;
 	padding: 0.3cm;
 }
+/*.description button:active {
+	font-size: 0.45cm;
+	border-radius: 0.15cm;
+	padding: 0.25cm;
+	margin: 0.07cm;
+}*/
 .app-text h2 {
 	font-size: 0.6cm;
 	padding-bottom: 0.1cm;
@@ -333,6 +348,11 @@ html, body {
 	height: 0.9cm;
 	width: auto;
 	padding: 0.5cm 0.25cm;
+}
+.icon:active {
+	height: 0.8cm;
+	width: auto;
+	padding: 0.55cm 0.3cm;
 }
 .bottombar {
 	font-size: 0.4cm;
