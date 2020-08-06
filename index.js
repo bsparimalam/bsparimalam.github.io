@@ -1,6 +1,8 @@
 
 dropdownbutton = document.getElementById('dropdown-button');
 dropdown = document.getElementById('dropdown');
+opendd = document.getElementById('open-dropdown');
+closedd = document.getElementById('close-dropdown');
 
 wrapper = document.getElementById('screenshots');
 screenshot = document.getElementById('screenshot');
@@ -19,13 +21,19 @@ document.addEventListener('click', event => {
 	if (name === "open-dropdown") {
 		dropdown.style.display = "block";
 		dropdown.style.visibility = "visible";
-		dropdownbutton.name = "close-dropdown";
-		dropdownbutton.innerHTML = '<img name="close-dropdown" src="./index/icons/icon-menu2.svg">';
+		opendd.style.display = "none";
+		opendd.style.visibility = "hidden";
+		closedd.style.display = "inline";
+		closedd.style.visibility = "visible";
+		
 	} else if (dropdownbutton.name !== "open-dropdown"){
 		dropdown.style.display = "none";
 		dropdown.style.visibility = "hidden";
-		dropdownbutton.name = "open-dropdown";
-		dropdownbutton.innerHTML = '<img name="open-dropdown" src="./index/icons/icon-menu.svg">';
+		closedd.style.display = "none";
+		closedd.style.visibility = "hidden";
+		opendd.style.display = "inline";
+		opendd.style.visibility = "visible";
+
 	}
 	switch (name) {
 		case("scroll-left"):
