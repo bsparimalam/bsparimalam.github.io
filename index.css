@@ -369,3 +369,27 @@ html, body {
 	height: auto;
 	min-height: calc(90vh - var(--height-topbar));
 }
+.page-not-found {
+	width: 20cm;
+	max-width: 98%;
+	margin: auto;
+}
+.page-not-found h1 {
+	font-size: 0.7cm;
+	padding: 0.4cm;
+}
+.page-not-found p, .page-not-found a {
+	font-size: 0.5cm;
+	padding: 0.1cm;
+}
+.page-not-found button {
+	font-size: 0.5cm;
+	border-radius: 0.15cm;
+	padding: 0.3cm;
+	border-style: none;
+	background-color: var(--dark);
+	color: var(--lightest);
+}
+.page-not-found h1, .page-not-found p, .page-not-found a {
+	text-align: center;
+}
