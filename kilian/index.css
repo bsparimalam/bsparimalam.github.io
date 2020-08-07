@@ -22,34 +22,25 @@ html {
 	background-position: center;
 	background-color: #000000;
 }
-@media (min-width: 20cm) {
-	:root {
-		--radius-input: 0.75cm;
-		--font-size-input: 1cm;
-		--font-size-link: 0.5cm;
-		--padding-link: 0.4cm;
-		--searchbar-default: 25vh;
-	}
-	body {
-		width: 20cm;
-	}
+:root {
+	--radius-input: 0.60cm;
 }
 @media (max-width: 20cm) {
 	:root {
-		--radius-input: 5vw;
-		--font-size-input: 7vw;
-		--font-size-link: 2.5vw;
-		--padding-link: 2vw;
-		--searchbar-default: 30vh;
+		--searchbar-default: 35vh;
 	}
-	body {
-		width: 100vw;
+}
+@media (min-width: 20cm) {
+	:root {
+		--searchbar-default: 25vh;
 	}
 }
 body {
 	margin: auto;
 	margin-top: var(--searchbar-default);
 	height: auto;
+	width: 20cm;
+	max-width: 98vw;
 	border-radius: var(--radius-input);
 	transition-property: margin-top;
 	transition-duration: 500ms;
@@ -67,12 +58,21 @@ body {
 	border-style: none;
 }
 #linkbar {
-	width: 95%;
+	width: 100%;
 	margin: auto;
-	height: auto;
-	padding: var(--padding-link);
+	padding: 0.2cm 0;
 	text-align: center;
 	overflow: ellipsis;
+	display: inline-block;
+	white-space: nowrap;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	text-overflow: ellipsis;
+	color: white;
+	scrollbar-width: none;
+}
+#linkbar::-webkit-scrollbar {
+	display: none;
 }
 input {
 	grid-row: span 1;
@@ -82,7 +82,7 @@ input {
 	margin: auto;
 	text-align: center;
 	align-self: center;
-	font-size: var(--font-size-input);
+	font-size: 0.8cm;
 	border-radius: 0;
 	background-color: var(--background-color);
 }
@@ -102,48 +102,55 @@ span {
 }
 h1 {
 	text-align: center;
-	margin: 0.5rem;
+	width: 96%;
+	margin: 2%;
 	font-size: 0.7cm;
 }
-h4 {
+.episode h4 {
 	text-align: center;
-	margin: 0.5rem;
-	font-size: 0.4cm;
+	width: 96%;
+	margin: 2%;
+	font-size: 0.5cm;
 }
-p {
+.episode p {
 	text-align: justify;
-	margin: 0.5rem 1rem 0.5rem 1rem;
+	width: 96%;
+	margin: 2%;
+	font-size: 0.5cm;
 }
 a, a:active, a:hover, a:visited {
 	text-decoration: none;
 }
 .linkout {
 	color: white;
-	font-size: var(--font-size-link);
+	font-size: 0.50cm;
+	text-align: center;
+	margin: auto;
 }
-iframe {
-	width: 96vw;
-	height: 54vw;
-	max-width: 19.2cm;
-	max-height: 10.8cm;
+.episode iframe {
+	width: 96%;
 	text-align: center;
 	margin: 2%;
 	border-style: none;
+	height: 10.584cm;
+	max-height: 53vw;
 }
-img {
+.episode img {
 	width: 96%;
 	height: auto;
 	text-align: center;
 	margin: 2%;	
+}
+#banner-image {
+	margin: auto;
+	width: 100%;
 }
 :focus {
 	outline: none!important; 
 }
 #twitter-timeline, #twitter-widget-0 {
 	max-width: 15cm;
+	width: 96%;
 	margin: auto;
-	padding: auto;
-	display: block;
 	height: auto;
-	max-height: none;
 }

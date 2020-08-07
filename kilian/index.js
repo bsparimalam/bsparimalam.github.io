@@ -94,34 +94,29 @@ function noresults(resultnode) {
 function buildanepisode(jsobject, id, textindex, player) {
     let episode = document.createElement('div');
     episode.id = 'episode-' + id;
-    episode.class = 'episode';
+    episode.classList.add("episode");
     let title = document.createElement('h1');
     title.innerText = jsobject.title;
     title.id = 'episode-title-' + id;
-    title.class = 'episode-title';
     let link = document.createElement('a');
     link.id = 'episode-link-' + id;
-    link.class = 'episode-link';
     link.href = `https://youtube.com/watch?v=${jsobject.id}`;
     link.target = "_blank";
     let date = document.createElement('h4');
     date.innerText = beautifydate(jsobject.date);
     date.id = 'episode-date-' + id;
-    date.class = 'episode-date';
     link.appendChild(title);
     episode.appendChild(link);
     episode.appendChild(date);
     if (textindex > -1) {
     let text = document.createElement('p');
     text.id = 'episode-text-' + id + '-' + String(textindex);
-    text.class = 'episode-text';
     text.innerHTML = `<a target = "_blank" href='https://youtube.com/watch?v=${jsobject.id}&t=${jsobject.script[textindex].timestamp}'>${beautifytime(jsobject.script[textindex].timestamp)}</a> ${jsobject.script[textindex].text}`;
     episode.appendChild(text);
     }
     if (player && isonline) {
         let iframe = document.createElement('iframe');
         iframe.id = 'episode-iframe-' + id;
-        iframe.class = 'episode-iframe';
         iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
         iframe.setAttribute('allowFullScreen', '');
         if (textindex > -1) {
