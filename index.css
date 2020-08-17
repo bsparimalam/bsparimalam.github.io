@@ -393,3 +393,6 @@ html, body {
 .page-not-found h1, .page-not-found p, .page-not-found a {
 	text-align: center;
 }
+.text-body a, .text-body a:visited, .text-body a:active {
+	color: var(--dark);
+}
