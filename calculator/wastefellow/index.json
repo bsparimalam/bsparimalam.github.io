@@ -3,7 +3,7 @@
   "short_name": "Calculator",
   "description" : "Scientific calculator with unit conversions",
   "categories": ["education", "productivity"],
-  "version": "6.2.3",
+  "version": "6.2.6",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",

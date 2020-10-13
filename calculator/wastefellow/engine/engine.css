@@ -80,6 +80,7 @@ html, body, div, input, p, button {
 	border-style: none;
 	border-radius: 0;
 	overflow: hidden;
+	overscroll-behavior: none;
 } /*common parameters*/
 body {
 	border-radius: var(--app-corner-radius);

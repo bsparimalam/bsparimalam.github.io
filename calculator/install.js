@@ -1,4 +1,4 @@
-var appversion = "v6_2_5";
+var appversion = "v6_2_6";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
