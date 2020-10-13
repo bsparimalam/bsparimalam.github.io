@@ -367,7 +367,7 @@ html, body {
 .google-form {
 	width: 100%;
 	height: auto;
-	min-height: calc(90vh - var(--height-topbar));
+	min-height: 12cm;
 }
 .page-not-found {
 	width: 20cm;
