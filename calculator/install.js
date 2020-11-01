@@ -1,4 +1,4 @@
-var appversion = "v6_2_6";
+var appversion = "v6_2_9";
 const expectedCaches = ['Calculator-' + appversion ];
 const files2cache = [
     './',
@@ -19,6 +19,7 @@ const files2cache = [
     './engine/compute.js',
     './engine/log.js'
 ];
+
 self.addEventListener('install', function(event) {
   console.log(appversion + ' downloading...');
   event.waitUntil(caches.open('Calculator-' + appversion )
