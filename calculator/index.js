@@ -6,14 +6,14 @@ setTimeout(() => {
 url = new URL(window.location.href);
 param = url.searchParams.get("utm_source");
 console.log(param);
-
+if (param !== "install") {
+	install.style.display = "none";
+}
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
 	if (param === "install") {
 		e.preventDefault();
 		deferredPrompt = e;
-	} else {
-		install.style.display = "none";
 	}
 });
 install = document.getElementById('install');
