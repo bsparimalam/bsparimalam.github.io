@@ -1,0 +1,17 @@
+{
+  "name": "Red/Green",
+  "short_name": "Red/Green",
+  "description" : "Blinks colors",
+  "categories": ["productivity"],
+  "version": "0.0.1",
+  "lang": "en-US",
+  "start_url": "./",
+  "display": "fullscreen",
+  "icons": [
+    {
+    	"src": "./index.png",
+    	"sizes": "400x400",
+    	"type": "image/png"
+    }
+  ]
+}
