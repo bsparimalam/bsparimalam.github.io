@@ -1,4 +1,4 @@
-var appversion = '0.0.1';
+var appversion = '0.0.2';
 const expectedCaches = ['red/green-' + appversion ];
 const files2cache = [
     './',

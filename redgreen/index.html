@@ -9,13 +9,12 @@
 <body>
 	<audio id="alert" src="index.mp3" type="audio/mpeg"></audio>
 	<script>
-		timer = 1.5*60*1000;
+		timer = 1.5*60*1000
 		html = document.getElementsByTagName('BODY')[0];
 		beep = document.getElementById('alert');
 		t1 = new Date();
 		lastrecord = t1.getTime();
 		html.style.backgroundColor = 'red';
-
 		document.addEventListener('keydown', event => {
 			t1 = new Date();
 			lastrecord = t1.getTime();
@@ -26,9 +25,10 @@
 		});
 		setInterval(() => {
 			t2 = new Date();
-			current = t2.getTime();
-			if ((current - lastrecord) > timer) {
-				beep.play();
+			if (t2.getTime() - lastrecord > timer) {
+				if (document.hasFocus()) {
+					beep.play();
+				}
 				if (html.style.backgroundColor !== 'red') {
 					html.style.backgroundColor = 'red';
 				}
