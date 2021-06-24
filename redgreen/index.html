@@ -19,13 +19,11 @@
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 		width: 100vw;
-		display: none;
-	}
-	:root {
 		font-family:  system-ui;
 		color: white;
-		font-size: 7vw;
+		font-size: 15vw;
 		text-align: center;
+		display: none;
 	}
 	</style>
 </head>
@@ -44,6 +42,7 @@
 			t1 = new Date();
 			lastrecord = t1.getTime();
 			beep.pause();
+			message.style.display = 'none';
 			if (html.style.backgroundColor !== 'green') {
 				html.style.backgroundColor = 'green';
 			}
@@ -53,10 +52,10 @@
 			if (t2.getTime() - lastrecord > timer) {
 				if (document.hasFocus()) {
 					beep.play();
+					message.style.display = 'block';
 				}
 				if (html.style.backgroundColor !== 'red') {
 					html.style.backgroundColor = 'red';
-					message.style.display = block;
 				}
 			}
 		}, timer)

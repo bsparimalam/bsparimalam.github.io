@@ -3,7 +3,7 @@
   "short_name": "Red/Green",
   "description" : "Blinks colors",
   "categories": ["productivity"],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "lang": "en-US",
   "start_url": "./",
   "display": "fullscreen",
