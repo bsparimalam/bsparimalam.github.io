@@ -12,7 +12,7 @@ Nov 2021 - Present
 
 ``Jupyter``  ``Python``  ``molicel``  ``pandas``  ``matplotlib``  ``SciPy``  ``NumPy``  ``cyclers``  ``maccor``  ``GCMS``  ``DOE``  ``CV``  ``EIS``
 
-Screening additives and solvents to improve silicon retention and high-rate performance. Designing experiments using optimal mixture design to determine optimal fraction of various solvents in the electrolyte to meet the performance goals. Determining optimal electrolyte volume. Estimating the influence of various factors and designs on FEC consumption rate using GCMS.
+Screened additives and solvents to improve silicon retention and high-rate performance. Designed experiments using optimal mixture method to determine optimal fraction of various solvents in the electrolyte to meet the performance goals. Determined optimal electrolyte volume to achieve a balanced performance profile for cylindrical cells. Estimated the influence of various factors and designs on FEC consumption rate using GCMS.
 
 *********************
 Molicel Python Module
@@ -62,7 +62,7 @@ Jul 2020 - Aug 2020
 
 ``HTML``  ``CSS``  ``JavaScript``  ``Python``  ``GIMP``
 
-A searchable script archive for the youtube channel *Kilian Experience*. Queries return a list of embedded youtube videos with timestamps.
+Built a searchable script archive for the youtube channel *Kilian Experience*. Queries return a list of embedded youtube videos with timestamps.
 
 *********************************************************
 `Browser Extension: Sideview Plus <pages/sideview.html>`_
@@ -72,7 +72,7 @@ Apr 2020 - May 2020
 
 ``HTML``  ``CSS``  ``JavaScript``  ``Chrome APIs``  ``GIMP``
 
-A browser extension to improve web layouts for multitasking. It allows doing a quick google search or checking out a link without leaving the current tab; improves the layout on narrow windows by requesting the mobile version automatically; and includes intuitive but granular customization. The extension has garnered over 5000 users with 4.5+/5 ratings across platforms.
+Built a browser extension to improve web layouts for multitasking. It allows doing a quick google search or checking out a link without leaving the current tab; improves the layout on narrow windows by requesting the mobile version automatically; and includes intuitive but granular customization. The extension has garnered over 5000 users with 4.5+/5 ratings across platforms.
 
 *********************************
 3D Analysis of Fuel Cell Membrane

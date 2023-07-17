@@ -33,8 +33,13 @@ section#browser-extension-sideview-plus table.docutils td {
     margin-left: 0;
     margin-right: 0;
     padding: 0;
-    font-size: 100%;
     background-color: unset;
+}
+section#about-me table.docutils td p,
+section#searchable-script-archive table.docutils td p,
+section#browser-extension-sideview-plus table.docutils td p {
+    font-size: 110%;
+    padding: 2px 0 2px 0;
 }
 section#about-me table.docutils,
 section#searchable-script-archive table.docutils,
