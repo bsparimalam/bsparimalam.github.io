@@ -7,13 +7,13 @@
 }
 body, div.body :is(h1, h2, h3, h4, h5, h6), div.sphinxsidebar :is(h3, h4, input), input {
     font-family: 'Fira Sans', sans-serif;
-} */
+}
 
 section > ul > li > p,
 section > p
 {
     text-align: justify;
-}
+} */
 
 /*  TABLE FOR LAYOUT    */
 
