@@ -16,6 +16,10 @@ section > p
 } */
 
 /*  TABLE FOR LAYOUT    */
+section > img,
+section > video {
+    padding-bottom: 1.5em;
+}
 
 section#about-me table.docutils,
 section#about-me table.docutils tbody,
@@ -29,11 +33,11 @@ section#browser-extension-sideview-plus table.docutils,
 section#browser-extension-sideview-plus table.docutils tbody,
 section#browser-extension-sideview-plus table.docutils tr,
 section#browser-extension-sideview-plus table.docutils td {
-    border: 0;
+    /* border: 0; */
     margin-left: 0;
     margin-right: 0;
-    padding: 0;
-    background-color: unset;
+    /* padding: 0; */
+    /* background-color: unset; */
 }
 section#about-me table.docutils td p,
 section#searchable-script-archive table.docutils td p,
