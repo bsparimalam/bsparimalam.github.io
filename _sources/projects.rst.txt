@@ -64,9 +64,9 @@ Postdoctoral Fellow  Simon Fraser University  Jan 2020 - Sep 2021
 
 Studied pore size distribution, porosity on zinc-air battery, and water/ionomer distribution in fuel cell cathodes. Designed and fabricated custom fixtures with humidity and temperature controls using Solidworks(CAD). Acquired high-resolution 3D images using nano/micro X-ray computed tomography (Nano-CT/Micro-CT) and scanning electron microscopy (FIB-SEM). Carried out image processing with ImageJ, and Python(scikit-image, NumPy). Segmented the 3D images for quantitative analysis using machine learning methods with Python (scikit-learn, TensorFlow, pandas, NumPy). Conducted quantitative analyses on images with Python using the porespy library. Mentored graduate and undergraduate researchers with varying levels of expertise.
 
-************************************************************************
-`Searchable Script Archive <pages/kilian.html?site=home&page=projects>`_
-************************************************************************
+********************************************************************
+`Searchable Script Archive <pages/kilian.html?utm_source=projects>`_
+********************************************************************
 
 ========    ===================
 Personal    Jul 2020 - Aug 2020
@@ -76,9 +76,9 @@ Personal    Jul 2020 - Aug 2020
 
 Built a searchable script archive for the youtube channel *Kilian Experience*. Queries return a list of embedded youtube videos with timestamps.
 
-*********************************************************************************
-`Browser Extension: Sideview Plus <pages/sideview.html?site=home&page=projects>`_
-*********************************************************************************
+*****************************************************************************
+`Browser Extension: Sideview Plus <pages/sideview.html?utm_source=projects>`_
+*****************************************************************************
 
 ========    ===================
 Personal    Apr 2020 - May 2020
@@ -112,9 +112,9 @@ Postdoctoral Researcher  Carnegie Mellon University  Jun 2018 - Mar 2019
 
 Designed, fabricated, and optimized custom electrochemical coin cells to suit specific goals. Studied the impact of current density, temperature, and electrolytes, on lithium electroplating and dendrite growth in lithium-ion/ lithium metal battery anodes, using a combination of electrochemical techniques, and nano X-ray computed tomography (Nano-CT). Mentored graduate and undergraduate researchers with varying levels of expertise.
 
-*************************************************************************************************************
-`Understanding Formation and Evolution of Lithium-ion Anode SEI <pages/thesis.html?site=home&page=projects>`_
-*************************************************************************************************************
+*********************************************************************************************************
+`Understanding Formation and Evolution of Lithium-ion Anode SEI <pages/thesis.html?utm_source=projects>`_
+*********************************************************************************************************
 
 ===========================  ==========================  ===================
 Graduate Research Assistant  University of Rhode Island  Aug 2012 - Dec 2017
