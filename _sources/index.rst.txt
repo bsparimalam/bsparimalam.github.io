@@ -6,7 +6,13 @@ Home
 .. raw:: html
 
 	<script>
-		window.location.href = "./about-me.html";
+	current_location = window.location.href;
+	target_location = "./about-me.html";
+	if (current_location.indexOf("?") == -1){
+		window.location.href = target_location;
+	} else {
+		window.location.href = target_location + '?' + current_location.split("?")[1];
+	}
 	</script>
 
 

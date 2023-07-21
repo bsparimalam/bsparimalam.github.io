@@ -78,7 +78,13 @@
   <section id="home">
 <h1>Home<a class="headerlink" href="#home" title="Permalink to this heading"></a></h1>
 <script>
-        window.location.href = "./about-me.html";
+current_location = window.location.href;
+target_location = "./about-me.html";
+if (current_location.indexOf("?") == -1){
+        window.location.href = target_location;
+} else {
+        window.location.href = target_location + '?' + current_location.split("?")[1];
+}
 </script><div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about-me.html">About me</a><ul>
