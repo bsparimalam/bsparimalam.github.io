@@ -9,9 +9,9 @@ Jul 2020 - Aug 2020
 
 A searchable script archive for the youtube channel *Kilian Experience*. Queries return a list of embedded youtube videos with timestamps.
 
-+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-|   `Github Repository <https://github.com/bsparimalam/Kilian-Experience-Script-Archive>`_    | `Script Archive <https://parimalam.me/Kilian-Experience-Script-Archive/?site=home&page=kilian>`_    |
-+---------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+|   `Github Repository <https://github.com/bsparimalam/Kilian-Experience-Script-Archive>`_    | `Script Archive <https://parimalam.me/Kilian-Experience-Script-Archive/?utm_source=projects>`_    |
++---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. image:: ../_static/kilian.png
     :align: center
