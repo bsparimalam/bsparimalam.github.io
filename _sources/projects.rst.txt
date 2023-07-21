@@ -8,7 +8,9 @@ Projects
 Lithium-ion Electrolyte Optimization
 ************************************
 
-Nov 2021 - Present
+==================  ===============================  ==================
+Research Scientist  E-one Moli Energy (Canada) Ltd.  Nov 2021 - Present
+==================  ===============================  ==================
 
 ``Jupyter``  ``Python``  ``molicel``  ``pandas``  ``matplotlib``  ``SciPy``  ``NumPy``  ``cyclers``  ``maccor``  ``GCMS``  ``DOE``  ``CV``  ``EIS``
 
@@ -18,7 +20,9 @@ Screened additives and solvents to improve silicon retention and high-rate perfo
 Molicel Python Module
 *********************
 
-Nov 2021 - Present
+==================  ===============================  ==================
+Research Scientist  E-one Moli Energy (Canada) Ltd.  Nov 2021 - Present
+==================  ===============================  ==================
 
 ``Python``  ``pandas``  ``matplotlib``  ``SciPy``  ``NumPy``  ``reST``  ``Sphinx``
 
@@ -28,7 +32,9 @@ Written a Python library to automate parsing, processing, and plotting large set
 Numerical Model of Lithium-ion Battery
 **************************************
 
-Nov 2021 - Oct 2022
+==================  ===============================  ===================
+Research Scientist  E-one Moli Energy (Canada) Ltd.  Nov 2021 - Oct 2022
+==================  ===============================  ===================
 
 ``Python``  ``pandas``  ``matplotlib``  ``SciPy``  ``NumPy``  ``cyclers``  ``pouch cells``
 
@@ -38,7 +44,9 @@ Developed a numerical model of lithium-ion battery using half cell voltage curve
 Composite Silicon Anode Health Estimation
 *****************************************
 
-Nov 2021 - Apr 2022
+==================  ===============================  ===================
+Research Scientist  E-one Moli Energy (Canada) Ltd.  Nov 2021 - Apr 2022
+==================  ===============================  ===================
 
 ``Python``  ``pandas``  ``matplotlib``  ``SciPy``  ``NumPy``  ``cyclers``  ``maccor``
 
@@ -48,7 +56,9 @@ Developed a novel, simple, yet robust method to measure silicon active mass loss
 3D Analysis of Air Electrode Interactions
 *****************************************
 
-Jan 2020 - Sep 2021
+===================  =======================  ===================
+Postdoctoral Fellow  Simon Fraser University  Jan 2020 - Sep 2021
+===================  =======================  ===================
 
 ``Python``  ``ImageJ``  ``scikit-image``  ``scikit-learn``  ``TensorFlow``  ``pandas``  ``NumPy``  ``matplotlib``  ``porespy``  ``Micro-CT``  ``Nano-CT``  ``FIB-SEM``
 
@@ -58,7 +68,9 @@ Studied pore size distribution, porosity on zinc-air battery, and water/ionomer 
 `Searchable Script Archive <pages/kilian.html?site=home&page=projects>`_
 ************************************************************************
 
-Jul 2020 - Aug 2020
+========    ===================
+Personal    Jul 2020 - Aug 2020
+========    ===================
 
 ``HTML``  ``CSS``  ``JavaScript``  ``Python``  ``GIMP``
 
@@ -68,7 +80,9 @@ Built a searchable script archive for the youtube channel *Kilian Experience*. Q
 `Browser Extension: Sideview Plus <pages/sideview.html?site=home&page=projects>`_
 *********************************************************************************
 
-Apr 2020 - May 2020
+========    ===================
+Personal    Apr 2020 - May 2020
+========    ===================
 
 ``HTML``  ``CSS``  ``JavaScript``  ``Chrome APIs``  ``GIMP``
 
@@ -78,7 +92,9 @@ Built a browser extension to improve web layouts for multitasking. It allows doi
 3D Analysis of Fuel Cell Membrane
 *********************************
 
-Mar 2018 - Nov 2019
+=======================  ==========================  ===================
+Postdoctoral Researcher  Carnegie Mellon University  Mar 2018 - Nov 2019
+=======================  ==========================  ===================
 
 ``ImageJ``  ``Avizo``  ``MATLAB``  ``Python``  ``Nano-CT``  ``potentiostat``
 
@@ -88,7 +104,9 @@ Studied the reversal tolerant anodes and OER catalyst failure mechanisms in fuel
 3D Analysis of Lithium Metal Anodes
 ***********************************
 
-Jun 2018 - Mar 2019
+=======================  ==========================  ===================
+Postdoctoral Researcher  Carnegie Mellon University  Jun 2018 - Mar 2019
+=======================  ==========================  ===================
 
 ``ImageJ``  ``Avizo``  ``MATLAB``  ``Python``  ``Nano-CT``  ``potentiostat``
 
@@ -98,7 +116,9 @@ Designed, fabricated, and optimized custom electrochemical coin cells to suit sp
 `Understanding Formation and Evolution of Lithium-ion Anode SEI <pages/thesis.html?site=home&page=projects>`_
 *************************************************************************************************************
 
-Aug 2012 - Dec 2017
+===========================  ==========================  ===================
+Graduate Research Assistant  University of Rhode Island  Aug 2012 - Dec 2017
+===========================  ==========================  ===================
 
 ``Mnova``  ``XPSPEAK``  ``Avantage``  ``MS Excel``  ``ChemDraw``  ``GIMP``  ``NMR``  ``GCMS``  ``FTIR``  ``XPS``  ``LCMS``  ``glove box``  ``synthesis``  ``Arbin``
 
@@ -108,7 +128,9 @@ Investigated the components of lithium-ion anode SEI through novel methods. Iden
 Intermetallic Lithium-ion Anode Development
 *******************************************
 
-Jan 2010 - May 2012
+==================  ==========================================  ===================
+Research Assistant  Central Electrochemical Research Institute  Jan 2010 - May 2012
+==================  ==========================================  ===================
 
 ``MS Excel``  ``synthesis``  ``Arbin``
 
