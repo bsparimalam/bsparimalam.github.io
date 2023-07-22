@@ -3,7 +3,9 @@
 Understanding Formation and Evolution of Lithium-ion Anode SEI
 ***************************************************************
 
-Aug 2012 - Dec 2017
+===========================  ==========================  ===================
+Graduate Research Assistant  University of Rhode Island  Aug 2012 - Dec 2017
+===========================  ==========================  ===================
 
 ``Mnova``  ``XPSPEAK``  ``Avantage``  ``MS Excel``  ``ChemDraw``  ``GIMP``  ``NMR``  ``GCMS``  ``FTIR``  ``XPS``  ``LCMS``  ``glove box``  ``synthesis``  ``Arbin``
 

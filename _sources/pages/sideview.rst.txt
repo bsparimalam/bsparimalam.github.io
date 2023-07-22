@@ -3,9 +3,11 @@
 Browser Extension: Sideview Plus
 ********************************
 
-April 2020 - May 2020
+========    ===================
+Personal    Apr 2020 - May 2020
+========    ===================
 
-``HTML``    ``CSS``    ``JavaScript``    ``Chrome APIs``    ``GIMP``
+``HTML``  ``CSS``  ``JavaScript``  ``Chrome APIs``  ``GIMP``
 
 A browser extension to improve web layouts for multitasking. It allows doing a quick google search or checking out a link without leaving the current tab; improves the layout on narrow windows by requesting the mobile version automatically; and includes intuitive but granular customization. The extension has garnered over 5000 users with 4.5+/5 ratings across platforms. 
 
