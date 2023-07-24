@@ -22,4 +22,5 @@ Home
 	about-me
 	projects
 	cv
-
+	privacy
+	

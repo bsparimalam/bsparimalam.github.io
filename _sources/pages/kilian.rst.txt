@@ -17,5 +17,3 @@ A searchable script archive for the youtube channel *Kilian Experience*. Queries
 
 .. image:: ../_static/kilian.png
     :align: center
-
-

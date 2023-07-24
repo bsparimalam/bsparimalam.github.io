@@ -1,0 +1,41 @@
+
+################
+Privacy Policy
+################
+
+**********************
+`parimalam.me <./>`_
+**********************
+
+No personally identifiable or demographic information is collected. Traffic-related information such as visits, sessions, coarse geolocation, some device specifications, some browser specifications, language preference, etc., are collected using Google Analytics™ per their `privacy policy <https://policies.google.com/privacy>`_.
+
+*******************
+Browser Extensions
+*******************
+
+`Sideview Plus <./pages/sideview.html>`_
+==========================================
+
+No personally identifiable or demographic information is collected. Usage-related information such as total daily users, coarse geolocation, some device specifications, some browser specifications, language preference, etc., are collected using the tools provided by the extension/add-on stores per their privacy policy.
+
+**What do we do with the requested permissions?**
+
+- Observe the window width and request mobile version of the website on narrow windows
+- Implement workarounds to improve reliability in switching between desktop and mobile web
+
+**What do we do with the user data?**
+
+- No user data is transmitted or shared
+- User preference and select usage parameters are locally stored to improve user experience
+- You can permanently delete the locally stored data by uninstalling the extension
+
+`Scientific Calculator <https://bhar.app/?utm_source=parimalam.me#calculator>`_
+=================================================================================
+
+No personally identifiable or demographic information is collected. Usage-related information such as total daily users, coarse geolocation, some device specifications, some browser specifications, language preference, etc., are collected using the tools provided by the extension/add-on stores per their privacy policy.
+
+**What do we do with the user data?**
+
+- No user data is transmitted or shared
+- Select usage history and user preferences are locally stored to improve user experience
+- You can permanently delete the locally stored data by uninstalling the extension
