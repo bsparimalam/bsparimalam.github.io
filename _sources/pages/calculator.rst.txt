@@ -1,0 +1,24 @@
+
+***************************************
+Scientific Calculator & Unit Converter
+***************************************
+
+========    ===================
+Personal    Feb 2020 - Apr 2020
+========    ===================
+
+``HTML``  ``CSS``  ``JavaScript``  ``Chrome APIs``  ``GIMP``
+
+A simple scientific calculator & unit converter which provides instant results as you type; detects and warns of wrong angle unit choice; generates shortcuts for the most used conversions; and supports dark mode. It is available as a web application and browser extension and garnered over 2000 users.
+
++--------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   `Github Repository <https://github.com/bsparimalam/Scientific-Calculator>`_  |  `Web Application <https://parimalam.me/Scientific-Calculator/?utm_source=projects>`_     |   `MS Edge Add-ons <https://microsoftedge.microsoft.com/addons/detail/scientific-calculator-u/akabfpieadpjidbioncmdbklilhnbeck>`_  | `Chrome Web Store <https://chrome.google.com/webstore/detail/scientific-calculator-uni/ogbpkankgohcjdjaljlaflohjgepbokb>`_   | 
++--------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+.. image:: ../_static/calculator_1.png
+    :align: center
+
+.. image:: ../_static/calculator_2.png
+    :align: center
+
+
