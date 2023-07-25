@@ -29,7 +29,7 @@ No personally identifiable or demographic information is collected. Usage-relate
 - User preference and select usage parameters are locally stored to improve user experience
 - You can permanently delete the locally stored data by uninstalling the extension
 
-`Scientific Calculator <https://bhar.app/?utm_source=parimalam.me#calculator>`_
+`Scientific Calculator <./pages/calculator.html>`_
 =================================================================================
 
 No personally identifiable or demographic information is collected. Usage-related information such as total daily users, coarse geolocation, some device specifications, some browser specifications, language preference, etc., are collected using the tools provided by the extension/add-on stores per their privacy policy.
