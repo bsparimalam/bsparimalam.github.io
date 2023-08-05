@@ -143,5 +143,4 @@ Studied coppper-bismuth nanoparticulate composite material as anodes for lithium
 	pages/thesis.rst
 	pages/sideview.rst
 	pages/kilian.rst
-	pages/calculator.rst
 
