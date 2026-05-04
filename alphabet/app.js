@@ -231,8 +231,24 @@ document.addEventListener('keydown', (e) => {
   }, DISPLAY_DELAY_MS);
 });
 
-// ── Warm up speech synthesis on load ──────────────────
+// ── Preload & warm-up on page load ────────────────────
+
+/** Preload all images into the browser cache so they display instantly. */
+function preloadImages() {
+  const urls = [
+    ...Object.values(alphabetWords).map(w => w.image),
+    ...Object.values(numberImages),
+  ];
+  urls.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
 window.addEventListener('load', () => {
+  preloadImages();
+
+  // Warm up speech synthesis
   const warm = new SpeechSynthesisUtterance('');
   warm.volume = 0;
   window.speechSynthesis.speak(warm);
