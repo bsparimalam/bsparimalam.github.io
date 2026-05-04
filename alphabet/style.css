@@ -29,25 +29,12 @@ body {
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  animation: pulse 2.5s ease-in-out infinite;
   transition: opacity 0.4s ease;
   pointer-events: none;
 }
 
 #prompt.hidden {
   opacity: 0;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.04);
-  }
 }
 
 /* ── Main content display area ─────────────────────── */
@@ -58,7 +45,7 @@ body {
   justify-content: center;
   gap: clamp(1.5rem, 5vw, 4rem);
   opacity: 0;
-  transition: none;
+  transition: opacity 0.3s ease;
   pointer-events: none;
   position: relative;
   z-index: 2;
@@ -66,12 +53,6 @@ body {
 
 #display-area.show {
   opacity: 1;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
 
 /* ── The big letter ────────────────────────────────── */
@@ -84,23 +65,8 @@ body {
     0 0 40px rgba(255, 255, 255, 0.3),
     0 0 80px rgba(255, 255, 255, 0.15),
     0 4px 20px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transform: scale(0.5);
-  transition: none;
   pointer-events: none;
   line-height: 1;
-}
-
-#letter.show {
-  opacity: 1;
-  transform: scale(1);
-  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes popIn {
-  0%   { opacity: 0; transform: scale(0.3) rotate(-8deg); }
-  60%  { opacity: 1; transform: scale(1.08) rotate(2deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
 
 /* ── Word + Image panel (for alphabet letters) ─────── */
@@ -110,16 +76,10 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 #word-panel.show {
   display: flex;
-}
-
-@keyframes slideIn {
-  0%   { opacity: 0; transform: translateX(40px) scale(0.8); }
-  100% { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 #word-image {
@@ -128,7 +88,6 @@ body {
   object-fit: contain;
   border-radius: 1.5rem;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
-  animation: imgBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Larger size for number hand-counting images */
@@ -138,12 +97,6 @@ body {
   border-radius: 2rem;
 }
 
-@keyframes imgBounce {
-  0%   { opacity: 0; transform: scale(0.4) rotate(10deg); }
-  70%  { opacity: 1; transform: scale(1.1) rotate(-3deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); }
-}
-
 #word-label {
   font-size: clamp(1.8rem, 5vw, 3.5rem);
   font-weight: 700;
@@ -151,42 +104,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
-}
-
-/* ── Ripple ring on keypress ───────────────────────── */
-
-.ripple {
-  position: absolute;
-  border: 3px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  width: 10vmin;
-  height: 10vmin;
-  pointer-events: none;
-  animation: rippleOut 0.9s ease-out forwards;
-  z-index: 1;
-}
-
-@keyframes rippleOut {
-  0%   { transform: scale(0.5); opacity: 0.5; }
-  100% { transform: scale(6);   opacity: 0; }
-}
-
-/* ── Floating particles ────────────────────────────── */
-
-.particle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatUp 1.2s ease-out forwards;
-}
-
-@keyframes floatUp {
-  0%   { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-120px) scale(0); }
 }
 
 /* ── Subtle footer ─────────────────────────────────── */

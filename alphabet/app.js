@@ -132,38 +132,7 @@ function speak(words) {
   speakNext();
 }
 
-// ── Visual effects ────────────────────────────────────
-
-function spawnRipple() {
-  const ripple = document.createElement('div');
-  ripple.className = 'ripple';
-  document.body.appendChild(ripple);
-  ripple.addEventListener('animationend', () => ripple.remove());
-}
-
-function spawnParticles(count) {
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const angle = (Math.PI * 2 * i) / count;
-    const dist  = 60 + Math.random() * 80;
-    p.style.left       = `calc(50% + ${Math.cos(angle) * dist}px)`;
-    p.style.top        = `calc(50% + ${Math.sin(angle) * dist}px)`;
-    p.style.width      = p.style.height = `${4 + Math.random() * 6}px`;
-    p.style.background = `hsla(${Math.random() * 360}, 80%, 75%, 0.7)`;
-    document.body.appendChild(p);
-    p.addEventListener('animationend', () => p.remove());
-  }
-}
-
 // ── Helpers ───────────────────────────────────────────
-
-/** Force a reflow so that re-adding a CSS class re-triggers its animation. */
-function restartAnimation(el, className) {
-  el.classList.remove(className);
-  void el.offsetWidth;          // force reflow
-  el.classList.add(className);
-}
 
 /** Show the word/image panel with the given source, alt text, and optional label. */
 function showWordPanel(src, alt, label, isNumber) {
@@ -171,7 +140,7 @@ function showWordPanel(src, alt, label, isNumber) {
   wordImage.src = src;
   wordImage.alt = alt;
   wordLabel.textContent = label || '';
-  restartAnimation(wordPanel, 'show');
+  wordPanel.classList.add('show');
 }
 
 // ── Input handling ────────────────────────────────────
@@ -211,9 +180,8 @@ document.addEventListener('keydown', (e) => {
 
   // Delay before showing — gives time to look at the screen
   setTimeout(() => {
-    restartAnimation(displayArea, 'show');
-    restartAnimation(letterEl, 'show');
     letterEl.textContent = displayChar;
+    displayArea.classList.add('show');
 
     // Show word panel for letters, hand images for numbers, or hide
     const numberImg = numberImages[key];
@@ -225,8 +193,6 @@ document.addEventListener('keydown', (e) => {
       wordPanel.classList.remove('show');
     }
 
-    spawnRipple();
-    spawnParticles(10);
     speak(spokenText);
   }, DISPLAY_DELAY_MS);
 });
