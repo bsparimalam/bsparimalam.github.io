@@ -536,10 +536,15 @@ body::before {
 
 /* ── Results Screen ── */
 #results-screen {
+    position: absolute;
+    min-height: 100dvh;
+    height: auto;
     justify-content: flex-start;
     gap: 20px;
     padding-top: calc(40px + var(--safe-top));
     padding-bottom: calc(32px + var(--safe-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .results-header {
@@ -913,32 +918,7 @@ body::before {
         margin-top: 6px;
     }
 
-    /* Results screen */
-    #results-screen {
-        gap: 14px;
-        padding-top: calc(24px + var(--safe-top));
-    }
-
-    .result-bpm {
-        font-size: 56px;
-    }
-
-    .result-hero-card {
-        padding: 24px 20px;
-        border-radius: 20px;
-    }
-
-    .metric-card {
-        padding: 14px 12px;
-    }
-
-    .metric-value {
-        font-size: 24px;
-    }
-
-    .interpretation-card {
-        padding: 16px;
-    }
+    /* Results screen — scrolls naturally, no squishing needed */
 }
 
 /* Very small phones — iPhone SE 1st gen, narrow viewports (≤ 570px height) */
@@ -980,13 +960,7 @@ body::before {
         font-size: 14px;
     }
 
-    .result-bpm {
-        font-size: 48px;
-    }
-
-    .result-hero-card {
-        padding: 18px 16px;
-    }
+    /* Results screen scrolls — no overrides needed */
 }
 
 /* Wider screens */

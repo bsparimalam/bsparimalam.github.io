@@ -72,7 +72,9 @@ Heart emoji pulses and BPM number scales up briefly when a new peak is detected 
 - `prefers-reduced-motion`: Disables all animations
 
 ### Screen Structure
-Three `.screen` divs, positioned `fixed inset:0`, toggled via `.active` class with fade+slide transition. Only one active at a time.
+Three `.screen` divs toggled via `.active` class with fade+slide transition. Only one active at a time.
+- Welcome + Measurement screens: `position: fixed; inset: 0` (fill viewport exactly)
+- Results screen: `position: absolute; min-height: 100dvh` (scrolls naturally — too much content to squish on small phones)
 
 ## HRV Metrics (Results Screen)
 
