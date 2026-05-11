@@ -85,6 +85,44 @@ let isSpeaking = false;
 /** Pause duration (ms) between sequential spoken words. */
 const WORD_PAUSE_MS = 300;
 
+/** Cached reference to the best available voice. */
+let bestVoice = null;
+
+/**
+ * Pick the highest-quality English voice available.
+ * Priority: Google US English > Google UK English > any Google voice >
+ *           any voice with "Natural" / "Enhanced" in the name >
+ *           any en-US voice > first English voice > default.
+ */
+function pickBestVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  // Priority tiers — first match wins
+  const tiers = [
+    v => v.name === 'Google US English',
+    v => v.name === 'Google UK English Female',
+    v => v.name === 'Google UK English Male',
+    v => /^Google/.test(v.name) && /en/i.test(v.lang),
+    v => /natural|enhanced|premium/i.test(v.name) && /en/i.test(v.lang),
+    v => v.lang === 'en-US',
+    v => /^en/i.test(v.lang),
+  ];
+
+  for (const test of tiers) {
+    const found = voices.find(test);
+    if (found) return found;
+  }
+  return null;
+}
+
+/** Re-evaluate best voice whenever the voice list changes. */
+window.speechSynthesis.addEventListener('voiceschanged', () => {
+  bestVoice = pickBestVoice();
+});
+// Also try immediately (some browsers populate synchronously)
+bestVoice = pickBestVoice();
+
 /**
  * Speak one or more words sequentially via the Web Speech API.
  * Accepts a single string or an array of strings (with pauses between each).
@@ -110,8 +148,12 @@ function speak(words) {
     if (index >= parts.length) { isSpeaking = false; return; }
 
     const utterance = new SpeechSynthesisUtterance(parts[index]);
-    utterance.rate   = 0.85;
-    utterance.pitch  = 1.1;
+
+    // Use the best voice we found, or fall back to the browser default
+    if (bestVoice) utterance.voice = bestVoice;
+
+    utterance.rate   = 0.9;   // slightly slower for clarity
+    utterance.pitch  = 1.0;   // natural pitch (no cartoon-ish warble)
     utterance.volume = 1;
 
     let handled = false;

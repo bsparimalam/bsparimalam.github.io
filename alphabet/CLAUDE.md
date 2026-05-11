@@ -24,8 +24,9 @@ alphabet/
 2. **Numbers (0-9)** — Displays numeral + hand-counting image. Speaks the number.
 3. **Special keys** — Displays a symbol (e.g. `⏎` for Enter). Speaks the key name.
 
-### Speech system (`speak()`)
+### Speech system (`speak()` + `pickBestVoice()`)
 - Uses the **Web Speech API** (`SpeechSynthesisUtterance`).
+- **Voice selection** (`pickBestVoice()`) — on load and whenever `voiceschanged` fires, picks the highest-quality English voice in priority order: Google US English → Google UK English → any Google en voice → Natural/Enhanced/Premium voices → en-US → any English → default.
 - Accepts a single string or an **array of strings** — each spoken sequentially with a configurable pause (`WORD_PAUSE_MS`).
 - Includes a **polling fallback** (50ms interval) because Chrome fires `onend` late, which would otherwise block input.
 - The `isSpeaking` flag **locks input** during speech and during the display delay to prevent overlapping animations.
