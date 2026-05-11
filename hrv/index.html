@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Measure your heart rate and heart rate variability using your phone's camera and flash. A PPG-based pulse monitor.">
+    <meta name="theme-color" content="#06060b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pulse HRV — Heart Rate Variability Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Hidden camera elements -->
+    <video id="camera-video" autoplay playsinline muted></video>
+    <canvas id="processing-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════
+         SCREEN 1: Welcome / Landing
+         ═══════════════════════════════════ -->
+    <div id="welcome-screen" class="screen active">
+        <div class="app-logo" aria-hidden="true">❤️</div>
+
+        <div>
+            <h1 class="app-title">Pulse HRV</h1>
+            <p class="app-subtitle">Measure your heart rate &amp; heart rate variability using your phone's camera</p>
+        </div>
+
+        <div class="instructions-card" id="instructions-card">
+            <div class="instruction-step">
+                <div class="step-number">1</div>
+                <div class="step-text">Place your <strong>fingertip</strong> gently over the <strong>rear camera</strong> and flash</div>
+            </div>
+            <div class="instruction-step">
+                <div class="step-number">2</div>
+                <div class="step-text">Keep your finger <strong>still</strong> and maintain light, steady pressure</div>
+            </div>
+            <div class="instruction-step">
+                <div class="step-number">3</div>
+                <div class="step-text">Wait <strong>30 seconds</strong> while the app detects your pulse</div>
+            </div>
+        </div>
+
+        <button id="start-btn" class="btn-primary">
+            Start Measurement
+        </button>
+
+        <div class="disclaimer">
+            <span class="disclaimer-icon">⚠️</span>
+            This app is for <strong>informational purposes only</strong> and is not a medical device. Do not use it for medical decisions. Consult a healthcare professional for health concerns.
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SCREEN 2: Measurement
+         ═══════════════════════════════════ -->
+    <div id="measure-screen" class="screen">
+        <!-- Top bar -->
+        <div class="measure-header">
+            <div class="status-badge">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">Waiting for finger…</span>
+            </div>
+            <button class="cancel-btn" id="cancel-btn">Cancel</button>
+        </div>
+
+        <!-- Finger prompt (shown when no finger detected) -->
+        <div class="finger-prompt" id="finger-prompt">
+            <div class="finger-prompt-icon">👆</div>
+            <div class="finger-prompt-text">Place your fingertip over the<br>rear camera &amp; flash</div>
+            <div class="finger-prompt-sub">Cover the lens completely with gentle pressure</div>
+        </div>
+
+        <!-- BPM display (hidden until measuring) -->
+        <div class="bpm-display" id="bpm-display" style="display: none;">
+            <div class="bpm-value-wrapper">
+                <span class="heartbeat-icon" id="heartbeat-icon">❤️</span>
+                <span class="bpm-value" id="bpm-value">--</span>
+            </div>
+            <div class="bpm-label">beats per minute</div>
+        </div>
+
+        <!-- Waveform -->
+        <div class="waveform-container" id="waveform-container" style="display: none;">
+            <div class="waveform-label">Live PPG Signal</div>
+            <canvas id="waveform-canvas"></canvas>
+            <div class="stabilizing-overlay" id="stabilizing-overlay">
+                <div class="stabilizing-spinner"></div>
+                <div class="stabilizing-text">Stabilizing signal…</div>
+            </div>
+        </div>
+
+        <!-- Progress ring -->
+        <div class="progress-section" id="progress-section" style="display: none;">
+            <div class="progress-ring-wrapper">
+                <svg class="progress-ring" viewBox="0 0 80 80">
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ff3b5c"/>
+                            <stop offset="100%" stop-color="#00e676"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="progress-ring-bg" cx="40" cy="40" r="36"/>
+                    <circle class="progress-ring-fill" id="progress-ring-fill" cx="40" cy="40" r="36"/>
+                </svg>
+                <div class="progress-time" id="progress-time">30s</div>
+            </div>
+            <div class="progress-label">Measurement time remaining</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SCREEN 3: Results
+         ═══════════════════════════════════ -->
+    <div id="results-screen" class="screen">
+        <div class="results-header">
+            <div class="results-title">Measurement Complete</div>
+            <div class="results-subtitle">Here are your results</div>
+        </div>
+
+        <!-- Hero BPM card -->
+        <div class="result-hero-card">
+            <div class="result-bpm" id="result-bpm">--</div>
+            <div class="result-bpm-label">beats per minute</div>
+            <div class="result-quality" id="result-quality">
+                <span id="result-quality-icon">●</span>
+                <span id="result-quality-text">--</span>
+            </div>
+        </div>
+
+        <!-- HRV Metrics -->
+        <div class="metrics-grid" id="metrics-grid">
+            <div class="metric-card rmssd">
+                <div class="metric-value" id="metric-rmssd">--</div>
+                <div class="metric-unit">ms</div>
+                <div class="metric-label">RMSSD</div>
+            </div>
+            <div class="metric-card sdnn">
+                <div class="metric-value" id="metric-sdnn">--</div>
+                <div class="metric-unit">ms</div>
+                <div class="metric-label">SDNN</div>
+            </div>
+            <div class="metric-card pnn50">
+                <div class="metric-value" id="metric-pnn50">--</div>
+                <div class="metric-unit">%</div>
+                <div class="metric-label">pNN50</div>
+            </div>
+            <div class="metric-card mean-rr">
+                <div class="metric-value" id="metric-meanrr">--</div>
+                <div class="metric-unit">ms</div>
+                <div class="metric-label">Mean RR</div>
+            </div>
+        </div>
+
+        <!-- Interpretation -->
+        <div class="interpretation-card" id="interpretation-card">
+            <div class="interpretation-title">
+                <span>💡</span> What This Means
+            </div>
+            <div class="interpretation-text" id="interpretation-text">
+                Your results will be interpreted here after the measurement.
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="results-actions">
+            <button class="btn-primary" id="measure-again-btn">Measure Again</button>
+            <button class="btn-secondary" id="back-home-btn">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
