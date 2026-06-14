@@ -1,41 +1,45 @@
 // ── DOM References ────────────────────────────────────
-const letterEl    = document.getElementById('letter');
-const promptEl    = document.getElementById('prompt');
+const letterEl = document.getElementById('letter');
+const promptEl = document.getElementById('prompt');
 const displayArea = document.getElementById('display-area');
-const wordPanel   = document.getElementById('word-panel');
-const wordImage   = document.getElementById('word-image');
-const wordLabel   = document.getElementById('word-label');
+const wordPanel = document.getElementById('word-panel');
+const wordImage = document.getElementById('word-image');
+const wordLabel = document.getElementById('word-label');
+const btnRowLetters = document.getElementById('btn-row-letters');
+const btnRowNumbers = document.getElementById('btn-row-numbers');
+const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
 
 // ── Data ──────────────────────────────────────────────
 
 /** Alphabet → word + image associations (a-z). */
 const alphabetWords = {
-  a: { word: 'Apple',      image: 'images/apple.png' },
-  b: { word: 'Bee',        image: 'images/bee.png' },
-  c: { word: 'Cat',        image: 'images/cat.png' },
-  d: { word: 'Dog',        image: 'images/dog.png' },
-  e: { word: 'Elephant',   image: 'images/elephant.png' },
-  f: { word: 'Fish',       image: 'images/fish.png' },
-  g: { word: 'Grapes',     image: 'images/grapes.png' },
-  h: { word: 'Horse',      image: 'images/horse.png' },
-  i: { word: 'Ice Cream',  image: 'images/icecream.png' },
-  j: { word: 'Jellyfish',  image: 'images/jellyfish.png' },
-  k: { word: 'Kite',       image: 'images/kite.png' },
-  l: { word: 'Lion',       image: 'images/lion.png' },
-  m: { word: 'Moon',       image: 'images/moon.png' },
-  n: { word: 'Nest',       image: 'images/nest.png' },
-  o: { word: 'Orange',     image: 'images/orange.png' },
-  p: { word: 'Penguin',    image: 'images/penguin.png' },
-  q: { word: 'Queen',      image: 'images/queen.png' },
-  r: { word: 'Rainbow',    image: 'images/rainbow.png' },
-  s: { word: 'Sun',        image: 'images/sun.png' },
-  t: { word: 'Turtle',     image: 'images/turtle.png' },
-  u: { word: 'Umbrella',   image: 'images/umbrella.png' },
-  v: { word: 'Violin',     image: 'images/violin.png' },
-  w: { word: 'Whale',      image: 'images/whale.png' },
-  x: { word: 'Xylophone',  image: 'images/xylophone.png' },
-  y: { word: 'Yak',        image: 'images/yak.png' },
-  z: { word: 'Zebra',      image: 'images/zebra.png' },
+  a: { word: 'Apple', image: 'images/apple.png' },
+  b: { word: 'Bumble Bee', image: 'images/bee.png' },
+  c: { word: 'Cat', image: 'images/cat.png' },
+  d: { word: 'Dog', image: 'images/dog.png' },
+  e: { word: 'Elephant', image: 'images/elephant.png' },
+  f: { word: 'Fish', image: 'images/fish.png' },
+  g: { word: 'Grapes', image: 'images/grapes.png' },
+  h: { word: 'Horse', image: 'images/horse.png' },
+  i: { word: 'Ice Cream', image: 'images/icecream.png' },
+  j: { word: 'Jellyfish', image: 'images/jellyfish.png' },
+  k: { word: 'Kite', image: 'images/kite.png' },
+  l: { word: 'Lion', image: 'images/lion.png' },
+  m: { word: 'Moon', image: 'images/moon.png' },
+  n: { word: 'Nest', image: 'images/nest.png' },
+  o: { word: 'Orange', image: 'images/orange.png' },
+  p: { word: 'Penguin', image: 'images/penguin.png' },
+  q: { word: 'Queen', image: 'images/queen.png' },
+  r: { word: 'Rainbow', image: 'images/rainbow.png' },
+  s: { word: 'Sun', image: 'images/sun.png' },
+  t: { word: 'Turtle', image: 'images/turtle.png' },
+  u: { word: 'Umbrella', image: 'images/umbrella.png' },
+  v: { word: 'Violin', image: 'images/violin.png' },
+  w: { word: 'Whale', image: 'images/whale.png' },
+  x: { word: 'Xylophone', image: 'images/xylophone.png' },
+  y: { word: 'Yak', image: 'images/yak.png' },
+  z: { word: 'Zebra', image: 'images/zebra.png' },
 };
 
 /** Number → hand-counting image (0-9). */
@@ -43,35 +47,41 @@ const numberImages = Object.fromEntries(
   Array.from({ length: 10 }, (_, i) => [String(i), `images/hands_${i}.png`])
 );
 
+/** Ordered sequence for auto-play: a-z then 0-9. */
+const AUTO_PLAY_SEQUENCE = [
+  ...'abcdefghijklmnopqrstuvwxyz'.split(''),
+  ...'0123456789'.split(''),
+];
+
 /** Spoken names for special / non-printable keys. */
 const keyNames = {
-  ' ':          'space',
-  'Enter':      'enter',
-  'Backspace':  'backspace',
-  'Tab':        'tab',
-  'Escape':     'escape',
-  'ArrowUp':    'up',
-  'ArrowDown':  'down',
-  'ArrowLeft':  'left',
+  ' ': 'space',
+  'Enter': 'enter',
+  'Backspace': 'backspace',
+  'Tab': 'tab',
+  'Escape': 'escape',
+  'ArrowUp': 'up',
+  'ArrowDown': 'down',
+  'ArrowLeft': 'left',
   'ArrowRight': 'right',
-  'CapsLock':   'caps lock',
-  'Shift':      'shift',
-  'Control':    'control',
-  'Alt':        'alt',
-  'Meta':       'command',
-  'Delete':     'delete',
+  'CapsLock': 'caps lock',
+  'Shift': 'shift',
+  'Control': 'control',
+  'Alt': 'alt',
+  'Meta': 'command',
+  'Delete': 'delete',
 };
 
 /** Display symbols for special keys. */
 const displayNames = {
-  ' ':          '␣',
-  'Enter':      '⏎',
-  'Backspace':  '⌫',
-  'Tab':        '⇥',
-  'Escape':     'Esc',
-  'ArrowUp':    '↑',
-  'ArrowDown':  '↓',
-  'ArrowLeft':  '←',
+  ' ': '␣',
+  'Enter': '⏎',
+  'Backspace': '⌫',
+  'Tab': '⇥',
+  'Escape': 'Esc',
+  'ArrowUp': '↑',
+  'ArrowDown': '↓',
+  'ArrowLeft': '←',
   'ArrowRight': '→',
 };
 
@@ -98,7 +108,6 @@ function pickBestVoice() {
   const voices = window.speechSynthesis.getVoices();
   if (!voices.length) return null;
 
-  // Priority tiers — first match wins
   const tiers = [
     v => v.name === 'Google US English',
     v => v.name === 'Google UK English Female',
@@ -116,19 +125,17 @@ function pickBestVoice() {
   return null;
 }
 
-/** Re-evaluate best voice whenever the voice list changes. */
 window.speechSynthesis.addEventListener('voiceschanged', () => {
   bestVoice = pickBestVoice();
 });
-// Also try immediately (some browsers populate synchronously)
 bestVoice = pickBestVoice();
 
 /**
  * Speak one or more words sequentially via the Web Speech API.
  * Accepts a single string or an array of strings (with pauses between each).
- * Uses a polling fallback because Chrome fires `onend` late.
+ * Calls onDone() when all parts have finished (optional callback).
  */
-function speak(words) {
+function speak(words, onDone) {
   window.speechSynthesis.cancel();
   isSpeaking = true;
 
@@ -141,28 +148,26 @@ function speak(words) {
       setTimeout(speakNext, WORD_PAUSE_MS);
     } else {
       isSpeaking = false;
+      if (onDone) onDone();
     }
   }
 
   function speakNext() {
-    if (index >= parts.length) { isSpeaking = false; return; }
+    if (index >= parts.length) { isSpeaking = false; if (onDone) onDone(); return; }
 
     const utterance = new SpeechSynthesisUtterance(parts[index]);
-
-    // Use the best voice we found, or fall back to the browser default
     if (bestVoice) utterance.voice = bestVoice;
-
-    utterance.rate   = 0.9;   // slightly slower for clarity
-    utterance.pitch  = 1.0;   // natural pitch (no cartoon-ish warble)
+    utterance.rate = 0.9;
+    utterance.pitch = 1.0;
     utterance.volume = 1;
 
     let handled = false;
-    utterance.onend   = () => { if (!handled) { handled = true; onFinished(); } };
-    utterance.onerror = () => { isSpeaking = false; };
+    utterance.onend = () => { if (!handled) { handled = true; onFinished(); } };
+    utterance.onerror = () => { isSpeaking = false; if (onDone) onDone(); };
 
     window.speechSynthesis.speak(utterance);
 
-    // Poll to detect speech end faster (Chrome fires onend late)
+    // Poll fallback (Chrome fires onend late)
     const poll = setInterval(() => {
       if (!window.speechSynthesis.speaking) {
         clearInterval(poll);
@@ -176,7 +181,7 @@ function speak(words) {
 
 // ── Helpers ───────────────────────────────────────────
 
-/** Show the word/image panel with the given source, alt text, and optional label. */
+/** Show the word/image panel. */
 function showWordPanel(src, alt, label, isNumber) {
   wordImage.classList.toggle('number-hands', !!isNumber);
   wordImage.src = src;
@@ -185,63 +190,178 @@ function showWordPanel(src, alt, label, isNumber) {
   wordPanel.classList.add('show');
 }
 
-// ── Input handling ────────────────────────────────────
+/** Highlight the on-screen button for the active character. */
+function setActiveButton(char) {
+  document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`btn-${char}`);
+  if (btn) btn.classList.add('active');
+}
 
-/** Delay (ms) before displaying content after a keypress. */
-const DISPLAY_DELAY_MS = 1000;
-
-document.addEventListener('keydown', (e) => {
-  e.preventDefault();
-
+/**
+ * Core display + speech routine.
+ * @param {string} char  - the raw character (lowercase letter or digit string)
+ * @param {Function} [onDone] - called after speech finishes (used by auto-play)
+ */
+function triggerChar(char, onDone) {
   if (isSpeaking) return;
-  if (MODIFIER_KEYS.has(e.key)) return;
 
-  // Lock immediately so key repeats during the delay are ignored
-  isSpeaking = true;
+  const lowerChar = char.toLowerCase();
+  const displayChar = lowerChar.length === 1 ? lowerChar.toUpperCase() : lowerChar;
 
-  const key      = e.key;
-  const lowerKey = key.toLowerCase();
+  const wordInfo = alphabetWords[lowerChar];
+  const numberImg = numberImages[char];
 
-  // Determine display character
-  let displayChar = displayNames[key] || key;
-  if (displayChar.length === 1) displayChar = displayChar.toUpperCase();
-
-  // Determine what to speak
-  const wordInfo = alphabetWords[lowerKey];
   let spokenText;
   if (wordInfo) {
     spokenText = [displayChar, 'for', wordInfo.word];
   } else {
-    let single = keyNames[key] || key;
-    if (single.length === 1) single = single.toUpperCase();
-    spokenText = single;
+    spokenText = char;
   }
 
-  // Hide idle prompt
   promptEl.classList.add('hidden');
+  setActiveButton(lowerChar);
 
-  // Delay before showing — gives time to look at the screen
+  // Brief delay so the eye can settle before the content pops in
   setTimeout(() => {
     letterEl.textContent = displayChar;
     displayArea.classList.add('show');
 
-    // Show word panel for letters, hand images for numbers, or hide
-    const numberImg = numberImages[key];
     if (wordInfo) {
       showWordPanel(wordInfo.image, wordInfo.word, wordInfo.word, false);
     } else if (numberImg) {
-      showWordPanel(numberImg, `${key} fingers`, '', true);
+      showWordPanel(numberImg, `${char} fingers`, '', true);
     } else {
       wordPanel.classList.remove('show');
     }
 
-    speak(spokenText);
+    speak(spokenText, onDone);
   }, DISPLAY_DELAY_MS);
+}
+
+// ── Input handling ────────────────────────────────────
+
+/** Delay (ms) before displaying content after a keypress / tap. */
+const DISPLAY_DELAY_MS = 1000;
+
+document.addEventListener('keydown', (e) => {
+  e.preventDefault();
+  if (isAutoPlaying) return;       // keyboard disabled during auto-play
+  if (isSpeaking) return;
+  if (MODIFIER_KEYS.has(e.key)) return;
+
+  const key = e.key;
+
+  // For letter/digit keys, delegate to triggerChar
+  const lowerKey = key.toLowerCase();
+  if (alphabetWords[lowerKey] || numberImages[key]) {
+    triggerChar(lowerKey === key ? key : lowerKey);
+    return;
+  }
+
+  // ── Fallback for special / other keys (original behaviour) ──
+  isSpeaking = true;
+
+  let displayChar = displayNames[key] || key;
+  if (displayChar.length === 1) displayChar = displayChar.toUpperCase();
+
+  let single = keyNames[key] || key;
+  if (single.length === 1) single = single.toUpperCase();
+
+  promptEl.classList.add('hidden');
+
+  setTimeout(() => {
+    letterEl.textContent = displayChar;
+    displayArea.classList.add('show');
+    wordPanel.classList.remove('show');
+    speak(single);
+  }, DISPLAY_DELAY_MS);
+});
+
+// ── On-screen buttons ─────────────────────────────────
+
+function buildButtons() {
+  // Letters A–Z
+  'abcdefghijklmnopqrstuvwxyz'.split('').forEach(ch => {
+    const btn = document.createElement('button');
+    btn.className = 'char-btn letter-btn';
+    btn.id = `btn-${ch}`;
+    btn.textContent = ch.toUpperCase();
+    btn.addEventListener('click', () => {
+      if (isAutoPlaying) return;
+      if (isSpeaking) return;
+      triggerChar(ch);
+    });
+    btnRowLetters.appendChild(btn);
+  });
+
+  // Numbers 0–9
+  '0123456789'.split('').forEach(ch => {
+    const btn = document.createElement('button');
+    btn.className = 'char-btn number-btn';
+    btn.id = `btn-${ch}`;
+    btn.textContent = ch;
+    btn.addEventListener('click', () => {
+      if (isAutoPlaying) return;
+      if (isSpeaking) return;
+      triggerChar(ch);
+    });
+    btnRowNumbers.appendChild(btn);
+  });
+}
+
+// ── Auto-play ─────────────────────────────────────────
+
+let isAutoPlaying = false;
+let autoPlayIndex = 0;
+let autoPlayTimer = null;
+
+/** How long (ms) to pause between characters during auto-play. */
+const AUTO_PLAY_PAUSE_MS = 600;
+
+function startAutoPlay() {
+  isAutoPlaying = true;
+  playIcon.innerHTML = '&#9646;&#9646;'; // ❚❚ pause
+  playBtn.classList.add('playing');
+  scheduleNext();
+}
+
+function stopAutoPlay() {
+  isAutoPlaying = false;
+  clearTimeout(autoPlayTimer);
+  window.speechSynthesis.cancel();
+  isSpeaking = false;
+  playIcon.innerHTML = '&#9654;'; // ▶ play
+  playBtn.classList.remove('playing');
+  document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+}
+
+function scheduleNext() {
+  if (!isAutoPlaying) return;
+
+  const char = AUTO_PLAY_SEQUENCE[autoPlayIndex];
+
+  // Advance index (wrap around for infinite loop)
+  autoPlayIndex = (autoPlayIndex + 1) % AUTO_PLAY_SEQUENCE.length;
+
+  triggerChar(char, () => {
+    // After speech finishes, wait a beat then move to next
+    if (isAutoPlaying) {
+      autoPlayTimer = setTimeout(scheduleNext, AUTO_PLAY_PAUSE_MS);
+    }
+  });
+}
+
+playBtn.addEventListener('click', () => {
+  if (isAutoPlaying) {
+    stopAutoPlay();
+  } else {
+    autoPlayIndex = 0;    // always restart from A
+    startAutoPlay();
+  }
 });
 
 // ── Preload & warm-up on page load ────────────────────
 
-/** Preload all images into the browser cache so they display instantly. */
 function preloadImages() {
   const urls = [
     ...Object.values(alphabetWords).map(w => w.image),
@@ -254,6 +374,7 @@ function preloadImages() {
 }
 
 window.addEventListener('load', () => {
+  buildButtons();
   preloadImages();
 
   // Warm up speech synthesis

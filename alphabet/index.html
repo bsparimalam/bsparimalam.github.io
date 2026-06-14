@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Key Speaker — Learn Letters & Numbers</title>
+  <title>Key Speaker — Learn Letters &amp; Numbers</title>
   <meta name="description"
     content="Press any key to see it displayed full-screen and hear it spoken aloud. A fun, interactive way to learn letters and numbers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,15 +14,33 @@
 </head>
 
 <body>
-  <p id="prompt">Press any key</p>
-  <div id="display-area">
-    <div id="letter" aria-live="assertive" role="alert"></div>
-    <div id="word-panel">
-      <img id="word-image" src="" alt="">
-      <p id="word-label"></p>
+  <!-- Left / Top: character display -->
+  <div id="main-area">
+    <p id="prompt">Tap a letter or press a key</p>
+    <div id="display-area">
+      <div id="letter" aria-live="assertive" role="alert"></div>
+      <div id="word-panel">
+        <img id="word-image" src="" alt="">
+        <p id="word-label"></p>
+      </div>
+    </div>
+    <p id="footer">Key Speaker</p>
+  </div>
+
+  <!-- Right / Bottom: clickable buttons -->
+  <div id="button-panel">
+    <div id="btn-row-letters">
+      <!-- A–Z injected by JS -->
+    </div>
+    <div id="btn-row-numbers">
+      <!-- 0–9 injected by JS -->
     </div>
   </div>
-  <p id="footer">Key Speaker</p>
+
+  <!-- Floating play / pause -->
+  <button id="play-btn" aria-label="Play auto-cycle" title="Auto-play A–Z then 0–9">
+    <span id="play-icon">&#9654;</span>
+  </button>
 
   <script src="app.js"></script>
 </body>
