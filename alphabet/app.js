@@ -137,6 +137,10 @@ bestVoice = pickBestVoice();
  */
 function speak(words, onDone) {
   window.speechSynthesis.cancel();
+
+  // iOS Safari: synthesis can get stuck in paused state — always resume first
+  window.speechSynthesis.resume();
+
   isSpeaking = true;
 
   const parts = Array.isArray(words) ? words : [words];
@@ -162,15 +166,34 @@ function speak(words, onDone) {
     utterance.volume = 1;
 
     let handled = false;
-    utterance.onend = () => { if (!handled) { handled = true; onFinished(); } };
-    utterance.onerror = () => { isSpeaking = false; if (onDone) onDone(); };
+    let keepAlive; // declared before onend so the closure can clear it
+
+    utterance.onend = () => {
+      if (!handled) {
+        handled = true;
+        clearInterval(keepAlive);
+        onFinished();
+      }
+    };
+    utterance.onerror = () => {
+      clearInterval(keepAlive);
+      isSpeaking = false;
+      if (onDone) onDone();
+    };
 
     window.speechSynthesis.speak(utterance);
+
+    // iOS bug: WebKit silently pauses synthesis ~30 s into a session.
+    // Calling resume() every 250 ms keeps the audio session alive.
+    keepAlive = setInterval(() => {
+      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+    }, 250);
 
     // Poll fallback (Chrome fires onend late)
     const poll = setInterval(() => {
       if (!window.speechSynthesis.speaking) {
         clearInterval(poll);
+        clearInterval(keepAlive);
         if (!handled) { handled = true; onFinished(); }
       }
     }, 50);
@@ -221,7 +244,15 @@ function triggerChar(char, onDone) {
   promptEl.classList.add('hidden');
   setActiveButton(lowerChar);
 
-  // Brief delay so the eye can settle before the content pops in
+  // ── iOS fix ───────────────────────────────────────────────────────────────
+  // iOS Safari requires speechSynthesis.speak() to be called SYNCHRONOUSLY
+  // within the user-gesture handler. Putting it inside a setTimeout breaks
+  // the gesture chain and iOS silently blocks all audio.
+  // Solution: speak immediately, delay only the visual DOM update.
+  // ─────────────────────────────────────────────────────────────────────────
+  speak(spokenText, onDone);
+
+  // Visual update is still delayed for the nice "look then show" effect
   setTimeout(() => {
     letterEl.textContent = displayChar;
     displayArea.classList.add('show');
@@ -233,8 +264,6 @@ function triggerChar(char, onDone) {
     } else {
       wordPanel.classList.remove('show');
     }
-
-    speak(spokenText, onDone);
   }, DISPLAY_DELAY_MS);
 }
 
