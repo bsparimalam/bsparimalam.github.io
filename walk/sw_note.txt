@@ -1,0 +1,2 @@
+/* ── SERVICE WORKER: sw.js ── */
+/* handled in sw.js file */

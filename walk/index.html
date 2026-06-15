@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Track your runs and walks with real-time pace, distance, time, and path visualization." />
+  <meta name="theme-color" content="#0a0f1e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Stride" />
+  <title>Stride — Activity Tracker</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── SPLASH / HOME SCREEN ── -->
+  <section id="screen-home" class="screen active">
+    <div class="home-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="home-content">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="31" cy="9" r="4" fill="currentColor"/>
+            <path d="M18 18l5-8 6 5 5 11-7 2-2 10h-4l1-11-6-3 2-6z" fill="currentColor" opacity="0.9"/>
+            <path d="M16 44l4-14M28 44l-3-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M8 28l8-4 6 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1 class="logo-text">Stride</h1>
+      </div>
+      <p class="tagline">Move. Track. Explore.</p>
+
+      <button class="btn-start" id="btn-start">
+        <span class="btn-start-inner">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Start
+        </span>
+        <div class="btn-glow"></div>
+      </button>
+
+      <div class="gps-status" id="gps-status">
+        <div class="gps-dot"></div>
+        <span id="gps-status-text">Checking GPS…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ACTIVE TRACKING SCREEN ── -->
+  <section id="screen-tracking" class="screen">
+    <header class="track-header">
+      <div class="track-mode-badge">📍 Tracking</div>
+      <div class="track-time-wrap">
+        <span class="track-time" id="track-time">00:00:00</span>
+      </div>
+      <button class="btn-icon" id="btn-stop" title="Finish">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+      </button>
+    </header>
+
+    <div class="metrics-grid">
+      <div class="metric-card glow-card" id="card-distance">
+        <div class="metric-value" id="metric-distance">0.00</div>
+        <div class="metric-label">km</div>
+        <div class="metric-sub">Distance</div>
+      </div>
+      <div class="metric-card glow-card" id="card-pace">
+        <div class="metric-value" id="metric-pace">--:--</div>
+        <div class="metric-label">min/km</div>
+        <div class="metric-sub">Pace</div>
+      </div>
+      <div class="metric-card glow-card" id="card-speed">
+        <div class="metric-value" id="metric-speed">0.0</div>
+        <div class="metric-label">km/h</div>
+        <div class="metric-sub">Speed</div>
+      </div>
+      <div class="metric-card glow-card" id="card-calories">
+        <div class="metric-value" id="metric-calories">0</div>
+        <div class="metric-label">kcal</div>
+        <div class="metric-sub">Est. Calories</div>
+      </div>
+    </div>
+
+    <!-- Live mini map during tracking -->
+    <div class="live-map-wrap">
+      <div id="live-map"></div>
+      <div class="map-overlay-pill">
+        <div class="pulse-dot"></div>
+        <span>Live</span>
+      </div>
+    </div>
+
+    <div class="track-footer">
+      <button class="btn-pause" id="btn-pause">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        Pause
+      </button>
+    </div>
+  </section>
+
+  <!-- ── SUMMARY / RESULTS SCREEN ── -->
+  <section id="screen-summary" class="screen">
+    <div class="summary-header">
+      <h2 class="summary-title" id="summary-title">Great job! 🎉</h2>
+      <p class="summary-date" id="summary-date"></p>
+    </div>
+
+    <div class="summary-stats">
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-val" id="sum-distance">0.00</div>
+          <div class="stat-lbl">Distance (km)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="sum-time">00:00:00</div>
+          <div class="stat-lbl">Duration</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-val" id="sum-pace">--:--</div>
+          <div class="stat-lbl">Avg Pace (min/km)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="sum-speed">0.0</div>
+          <div class="stat-lbl">Avg Speed (km/h)</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-item stat-item-full">
+          <div class="stat-val" id="sum-calories">0</div>
+          <div class="stat-lbl">Est. Calories (kcal)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pace chart -->
+    <div class="chart-wrap">
+      <h3 class="chart-title">Pace Over Time</h3>
+      <canvas id="pace-chart" height="120"></canvas>
+    </div>
+
+    <!-- Full path map -->
+    <div class="path-map-wrap">
+      <h3 class="chart-title">Your Route</h3>
+      <div id="path-map"></div>
+    </div>
+
+    <div class="summary-actions">
+      <button class="btn-secondary" id="btn-new-run">New Activity</button>
+    </div>
+  </section>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2/WXo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
