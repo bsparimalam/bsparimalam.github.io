@@ -2,7 +2,7 @@
   "name": "Key Speaker — Learn Letters & Numbers",
   "short_name": "Key Speaker",
   "description": "Tap a letter or number to see it full-screen and hear it spoken aloud.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#000000",

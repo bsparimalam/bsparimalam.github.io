@@ -20,7 +20,7 @@ html, body {
 body {
   font-family: 'Outfit', sans-serif;
   background: #000;
-  cursor: default;
+  cursor: none;         /* replaced by #custom-cursor on mouse devices */
   user-select: none;
   -webkit-user-select: none;
 
@@ -214,7 +214,7 @@ body {
   min-height: 0;
   border-radius: 0.7rem;
   border: none;
-  cursor: pointer;
+  cursor: none;         /* custom cursor takes over */
   transition:
     background 0.15s ease,
     transform  0.1s  ease,
@@ -406,5 +406,89 @@ body {
     color: #000;
     box-shadow: 0 0 40px 10px rgba(99, 179, 237, 0.65);
     transform: scale(1.18);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR  (mouse / pointer devices only)
+   ═══════════════════════════════════════════════ */
+
+#custom-cursor {
+  /* Hidden until first mousemove; invisible on touch devices */
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Centred on the pointer via translate(x, y) set from JS */
+  margin-left: -28px;
+  margin-top: -28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+
+  /* Glowing ring */
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 10px 2px rgba(255, 255, 255, 0.25),
+    inset 0 0 6px rgba(255, 255, 255, 0.1);
+
+  /* Smooth size transitions */
+  transition:
+    width   0.18s ease,
+    height  0.18s ease,
+    margin  0.18s ease,
+    border-color 0.18s ease,
+    background   0.18s ease,
+    box-shadow   0.18s ease;
+
+  /* Subtle idle pulse so it’s always obvious */
+  animation: cursor-idle-pulse 2s ease-in-out infinite;
+}
+
+/* JS adds .visible on first mousemove */
+#custom-cursor.visible {
+  display: block;
+}
+
+/* Grows and brightens when hovering over a button */
+#custom-cursor.over-btn {
+  width: 72px;
+  height: 72px;
+  margin-left: -36px;
+  margin-top: -36px;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 22px 6px rgba(255, 255, 255, 0.45),
+    inset 0 0 12px rgba(255, 255, 255, 0.2);
+  animation: cursor-btn-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes cursor-idle-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 8px 2px rgba(255, 255, 255, 0.2),
+      inset 0 0 4px rgba(255, 255, 255, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 18px 4px rgba(255, 255, 255, 0.4),
+      inset 0 0 8px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes cursor-btn-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px 6px rgba(255, 255, 255, 0.4),
+      inset 0 0 10px rgba(255, 255, 255, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 38px 10px rgba(255, 255, 255, 0.65),
+      inset 0 0 16px rgba(255, 255, 255, 0.28);
   }
 }

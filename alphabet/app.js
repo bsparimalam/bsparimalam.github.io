@@ -358,7 +358,7 @@ function buildButtons() {
       if (isSpeaking) return;
       triggerChar(ch);
     };
-    btn.addEventListener('click', activate);
+    // No click listener — activation is dwell-only (hover or touch-hold)
     addHoverDwell(btn, activate);
     btnRowLetters.appendChild(btn);
   });
@@ -374,7 +374,7 @@ function buildButtons() {
       if (isSpeaking) return;
       triggerChar(ch);
     };
-    btn.addEventListener('click', activate);
+    // No click listener — activation is dwell-only (hover or touch-hold)
     addHoverDwell(btn, activate);
     btnRowNumbers.appendChild(btn);
   });
@@ -452,4 +452,35 @@ window.addEventListener('load', () => {
   const warm = new SpeechSynthesisUtterance('');
   warm.volume = 0;
   window.speechSynthesis.speak(warm);
+
+  // ── Disable right-click / long-press context menu ──────────────────────────
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // ── Custom cursor ──────────────────────────────────────────────────────────
+  // Only activates when a real mouse is detected (first mousemove).
+  // Stays hidden on touch-only devices.
+  const cursorEl = document.getElementById('custom-cursor');
+  let mouseDetected = false;
+
+  document.addEventListener('mousemove', (e) => {
+    if (!mouseDetected) {
+      mouseDetected = true;
+      cursorEl.classList.add('visible');
+    }
+    // Use translate for sub-pixel smooth positioning
+    cursorEl.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  }, { passive: true });
+
+  // Hide cursor when mouse leaves the window
+  document.addEventListener('mouseleave', () => cursorEl.classList.remove('visible'));
+  document.addEventListener('mouseenter', () => { if (mouseDetected) cursorEl.classList.add('visible'); });
+
+  // Grow cursor when hovering over any interactive button
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('.char-btn, #play-btn')) {
+      cursorEl.classList.add('over-btn');
+    } else {
+      cursorEl.classList.remove('over-btn');
+    }
+  });
 });
