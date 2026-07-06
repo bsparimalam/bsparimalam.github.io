@@ -236,7 +236,8 @@ function triggerChar(char, onDone) {
 
   let spokenText;
   if (wordInfo) {
-    spokenText = [displayChar, 'for', wordInfo.word];
+    // Speak the letter as lowercase so iOS doesn't prefix it with "capital"
+    spokenText = [lowerChar, 'for', wordInfo.word];
   } else {
     spokenText = char;
   }
@@ -308,6 +309,43 @@ document.addEventListener('keydown', (e) => {
 
 // ── On-screen buttons ─────────────────────────────────
 
+/** How long (ms) a finger/cursor must hover before activating a button. */
+const HOVER_DWELL_MS = 800;
+
+/**
+ * Attach hover-dwell behaviour to a button.
+ * After HOVER_DWELL_MS of continuous hover the button fires as if clicked.
+ * Works for both mouse (mouseenter/mouseleave) and touch (touchstart/touchend).
+ */
+function addHoverDwell(btn, activate) {
+  let dwellTimer = null;
+
+  function startDwell() {
+    if (dwellTimer) return;
+    btn.classList.add('dwell-active');
+    dwellTimer = setTimeout(() => {
+      dwellTimer = null;
+      btn.classList.remove('dwell-active');
+      activate();
+    }, HOVER_DWELL_MS);
+  }
+
+  function cancelDwell() {
+    if (dwellTimer) {
+      clearTimeout(dwellTimer);
+      dwellTimer = null;
+    }
+    btn.classList.remove('dwell-active');
+  }
+
+  btn.addEventListener('mouseenter', startDwell);
+  btn.addEventListener('mouseleave', cancelDwell);
+  // Touch: start dwell on touchstart; cancel if finger moves away
+  btn.addEventListener('touchstart', (e) => { e.preventDefault(); startDwell(); }, { passive: false });
+  btn.addEventListener('touchend', cancelDwell);
+  btn.addEventListener('touchcancel', cancelDwell);
+}
+
 function buildButtons() {
   // Letters A–Z
   'abcdefghijklmnopqrstuvwxyz'.split('').forEach(ch => {
@@ -315,11 +353,13 @@ function buildButtons() {
     btn.className = 'char-btn letter-btn';
     btn.id = `btn-${ch}`;
     btn.textContent = ch.toUpperCase();
-    btn.addEventListener('click', () => {
+    const activate = () => {
       if (isAutoPlaying) return;
       if (isSpeaking) return;
       triggerChar(ch);
-    });
+    };
+    btn.addEventListener('click', activate);
+    addHoverDwell(btn, activate);
     btnRowLetters.appendChild(btn);
   });
 
@@ -329,11 +369,13 @@ function buildButtons() {
     btn.className = 'char-btn number-btn';
     btn.id = `btn-${ch}`;
     btn.textContent = ch;
-    btn.addEventListener('click', () => {
+    const activate = () => {
       if (isAutoPlaying) return;
       if (isSpeaking) return;
       triggerChar(ch);
-    });
+    };
+    btn.addEventListener('click', activate);
+    addHoverDwell(btn, activate);
     btnRowNumbers.appendChild(btn);
   });
 }

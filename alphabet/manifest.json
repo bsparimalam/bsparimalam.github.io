@@ -1,0 +1,24 @@
+{
+  "name": "Key Speaker — Learn Letters & Numbers",
+  "short_name": "Key Speaker",
+  "description": "Tap a letter or number to see it full-screen and hear it spoken aloud.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
