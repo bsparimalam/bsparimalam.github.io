@@ -1,0 +1,112 @@
+/*
+ * Write Along page chrome.
+ * Loaded *before* the document's template.css inside the editor frame and in HTML exports.
+ * It draws the "sheet of paper on a desk" look on screen; templates customise it through
+ * the CSS variables below rather than by restyling body box metrics directly.
+ */
+:root {
+  --page-width: 8.5in;
+  --page-min-height: 11in;
+  --page-padding: 1in;
+  --page-background: #fff;
+  --desk-background: #e6e7eb;
+}
+
+html {
+  background: var(--desk-background);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  width: min(100% - 32px, var(--page-width));
+  min-height: var(--page-min-height);
+  margin: 32px auto 96px;
+  padding: var(--page-padding);
+  background: var(--page-background);
+  box-shadow: 0 1px 3px rgb(0 0 0 / .12), 0 8px 28px rgb(0 0 0 / .08);
+  overflow-wrap: break-word;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* \newpage marker */
+.page-break {
+  break-after: page;
+  height: 0;
+  margin: 2em calc(-1 * var(--page-padding));
+  border-top: 1px dashed rgb(0 0 0 / .25);
+  position: relative;
+}
+.page-break::after {
+  content: "page break";
+  position: absolute;
+  right: 8px;
+  top: -0.7em;
+  font: 10px/1.4 system-ui, sans-serif;
+  color: rgb(0 0 0 / .4);
+  background: var(--page-background);
+  padding: 0 4px;
+}
+
+/*
+ * Page view: the document is laid out as the printed pages it will become. Each page is a column of a
+ * wrapping multi-column container (CSS Multicol Level 2), so paragraphs split across pages exactly where
+ * the browser's print fragmentation would split them.
+ */
+@media screen {
+  html.wa-paged { --page-gap: 24px; }
+  :where(html.wa-paged) body { column-count: 1; }
+  html.wa-paged body {
+    width: var(--page-width);
+    min-height: 0;
+    padding: var(--page-padding);
+    column-fill: auto;
+    background:
+      repeating-linear-gradient(to bottom,
+        var(--page-background) 0 var(--page-min-height),
+        transparent var(--page-min-height) calc(var(--page-min-height) + var(--page-gap)));
+    box-shadow: none;
+  }
+  @supports (column-wrap: wrap) {
+    html.wa-paged body {
+      column-height: calc(var(--page-min-height) - 2 * var(--page-padding));
+      column-wrap: wrap;
+      row-gap: calc(2 * var(--page-padding) + var(--page-gap));
+      --wa-page-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / .16)) drop-shadow(0 6px 16px rgb(0 0 0 / .08));
+    }
+    html.wa-paged .page-break { break-after: column; margin: 0; border: 0; }
+    html.wa-paged .page-break::after { display: none; }
+  }
+  @supports not (column-wrap: wrap) {
+    /* Older browsers: one long sheet with a guide where each page would end (approximate). */
+    html.wa-paged body {
+      background:
+        repeating-linear-gradient(to bottom,
+          transparent 0 calc(var(--page-min-height) - 2 * var(--page-padding) - 1px),
+          rgb(0 0 0 / .28) calc(var(--page-min-height) - 2 * var(--page-padding) - 1px) calc(var(--page-min-height) - 2 * var(--page-padding)))
+          0 var(--page-padding) / 100% auto no-repeat,
+        var(--page-background);
+      min-height: var(--page-min-height);
+      box-shadow: 0 1px 3px rgb(0 0 0 / .12), 0 8px 28px rgb(0 0 0 / .08);
+    }
+  }
+  body { filter: var(--wa-paper-filter,) var(--wa-page-shadow,); }
+}
+
+@media (max-width: 700px) {
+  html:not(.wa-paged) body { --page-padding: min(var(--page-padding), 24px); margin-top: 12px; }
+}
+
+@media print {
+  html { background: none; }
+  body {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .page-break { border: 0; margin: 0; }
+  .page-break::after { display: none; }
+}

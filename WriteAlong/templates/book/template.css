@@ -1,0 +1,302 @@
+/* Write Along template: Book */
+/*
+ * Fiction / non-fiction book typesetting on a 6 × 9 in trim.
+ *
+ * Expected Markdown:
+ *   • Optional front matter (title, subtitle, author, date) becomes a title page.
+ *   • Each "# Heading" (h1) is a chapter: centred, numbered I, II, III… above the
+ *     title, starting a new page in print. Set --chapter-number: "" to hide numbers
+ *     (e.g. if your headings already read "Chapter One").
+ *   • The first paragraph of a chapter gets a three-line drop cap and a small-caps
+ *     first line. A blockquote directly after the chapter heading is an epigraph.
+ *   • "---" (hr) is a scene break, drawn as an asterism (⁂).
+ *   • "## Heading" is a section break inside a chapter; "### Heading" a minor heading.
+ *   • Use \newpage between chapters if you want the break visible on screen too.
+ */
+
+/* ---------- Knobs ---------- */
+:root {
+  --font-body: "EB Garamond", "Garamond", "Adobe Garamond Pro", "Sabon", "Georgia", "Times New Roman", serif;
+  --font-heading: var(--font-body);
+  --font-mono: "JetBrains Mono", ui-monospace, "Courier New", monospace;
+  --font-size: 11.5pt;
+  --line-height: 1.42;
+  --accent: #7a2e1f;                 /* drop caps & ornaments */
+  --text-color: #1c1a17;
+  --parindent: 1.3em;
+  --chapter-number: counter(chapter, upper-roman);
+  --scene-break: "⁂";
+
+  --page-width: 6in;
+  --page-min-height: 9in;
+  --page-padding: 0.75in;
+  --page-background: #fffdf8;
+  --desk-background: #d8d3c9;
+}
+
+@page {
+  size: 6in 9in;
+  margin: 0.75in;
+  @bottom-center {
+    content: counter(page);
+    font-family: "EB Garamond", Garamond, Georgia, serif;
+    font-size: 10pt;
+    color: #444;
+  }
+}
+@page :first { @bottom-center { content: none; } }
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-wrap: pretty;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  counter-reset: chapter;
+}
+body > :first-child { margin-top: 0; }
+
+p { margin: 0; text-indent: var(--parindent); orphans: 2; widows: 2; }
+body > p:first-child,
+:is(h1, h2, h3, h4, h5, h6, hr, blockquote, figure, table, pre, ul, ol, nav, header, .page-break) + p { text-indent: 0; }
+:is(blockquote, figure, table, pre, ul, ol) + p { text-indent: var(--parindent); }
+
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.05em; text-underline-offset: 0.15em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* ---------- Title page (front matter) ---------- */
+#title-block-header {
+  text-align: center;
+  hyphens: manual;
+  padding: 1.5in 0 1in;
+  box-sizing: border-box;
+  min-height: calc(var(--page-min-height) - 2 * var(--page-padding));
+  position: relative;
+}
+/* On screen, mark where the title page ends (print starts a new page). */
+@media screen {
+  #title-block-header + h1 { margin-top: calc(1.4in + var(--page-padding)); }
+  #title-block-header::after {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--page-padding));
+    right: calc(-1 * var(--page-padding));
+    bottom: calc(-1 * var(--page-padding));
+    border-top: 1px dashed rgb(0 0 0 / .2);
+  }
+}
+#title-block-header .title {
+  font-size: 2.5em;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+#title-block-header .subtitle { font-size: 1.15em; font-style: italic; margin: 0.6em 0 0; text-indent: 0; }
+#title-block-header .title::after,
+#title-block-header .subtitle::after {
+  content: "";
+  display: block;
+  width: 2.5em; height: 0;
+  border-top: 0.5pt solid currentColor;
+  margin: 0.9em auto 0;
+}
+#title-block-header .title:has(+ .subtitle)::after { content: none; }
+#title-block-header .subtitle::after { width: 3em; margin-top: 1.4em; }
+#title-block-header .author {
+  font-size: 1.15em;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.12em;
+  margin: 1.6em 0 0;
+  text-indent: 0;
+}
+#title-block-header .author + .author { margin-top: 0.2em; }
+#title-block-header .date { margin: 3.5em 0 0; font-style: italic; text-indent: 0; }
+#title-block-header .abstract { margin: 3em auto 0; max-width: 85%; font-style: italic; text-align: center; }
+#title-block-header .abstract-title { display: none; }
+#title-block-header .abstract p { text-indent: 0; margin-bottom: 0.5em; }
+
+/* ---------- Contents ---------- */
+nav.toc { margin: 0 0 2em; text-align: left; hyphens: manual; counter-reset: tocchap; }
+nav.toc .toc-title {
+  text-align: center; font-size: 1.3em; font-variant-caps: all-small-caps; letter-spacing: 0.14em;
+  margin: 1.5em 0 1.4em;
+}
+nav.toc ol { list-style: none; margin: 0 auto; padding: 0; max-width: 85%; }
+nav.toc li { margin: 0.35em 0; }
+nav.toc li::marker { content: none; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc-h1 { counter-increment: tocchap; }
+nav.toc .toc-h1::before { content: counter(tocchap, upper-roman) "."; display: inline-block; width: 2.4em; font-variant-caps: normal; }
+nav.toc .toc-h2 { padding-left: 2.4em; font-style: italic; font-size: 0.95em; margin: 0.1em 0; }
+nav.toc .toc-h3 { display: none; }
+
+/* ---------- Chapters & headings ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  hyphens: manual;
+  margin: 2em 0 1em;
+}
+body > h1 {
+  counter-increment: chapter;
+  font-size: 1.75em;
+  letter-spacing: 0.01em;
+  margin: 1.6in 0 1.4em;
+}
+body > h1:first-child { margin-top: 1.2in; }
+body > h1::before {
+  content: var(--chapter-number);
+  display: block;
+  font-size: 0.6em;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 0.7em;
+}
+body > h1::after {
+  content: "";
+  display: block;
+  width: 1.5em; height: 0;
+  margin: 0.8em auto 0;
+  border-top: 0.5pt solid currentColor;
+  opacity: 0.6;
+}
+h2 { font-size: 1.1em; font-style: italic; margin: 2em 0 0.9em; }
+h3 { font-size: 1em; font-variant-caps: all-small-caps; letter-spacing: 0.12em; margin: 1.8em 0 0.6em; }
+h4, h5, h6 { font-size: 1em; font-style: italic; text-align: left; margin: 1.4em 0 0.3em; }
+
+/* ---------- Opening of a chapter: drop cap + small-caps first line ---------- */
+:is(body > h1 + p, body > h1 + blockquote + p)::first-letter {
+  float: left;
+  font-size: 3.55em;
+  line-height: 0.8;
+  margin: 0.07em 0.08em 0 -0.02em;
+  color: var(--accent);
+}
+@supports (initial-letter: 3) {
+  :is(body > h1 + p, body > h1 + blockquote + p)::first-letter {
+    float: none;
+    font-size: inherit;
+    line-height: inherit;
+    initial-letter: 3;
+    margin: 0 0.1em 0 0;
+  }
+}
+:is(body > h1 + p, body > h1 + blockquote + p)::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+}
+/* After a scene break: small-caps opening words without a drop cap */
+hr + p::first-line { font-variant-caps: small-caps; letter-spacing: 0.04em; }
+
+/* ---------- Epigraph & quotations ---------- */
+blockquote { margin: 1em var(--parindent); font-size: 0.95em; }
+blockquote p { text-indent: 0; }
+blockquote p + p { text-indent: var(--parindent); }
+body > h1 + blockquote {
+  margin: -0.4em 0 2.2em auto;
+  max-width: 72%;
+  font-style: italic;
+  text-align: right;
+  font-size: 0.92em;
+  hyphens: manual;
+}
+body > h1 + blockquote p + p { text-indent: 0; margin-top: 0.3em; font-style: normal; font-variant-caps: small-caps; letter-spacing: 0.04em; }
+
+/* ---------- Scene break ---------- */
+hr {
+  border: 0;
+  height: auto;
+  overflow: visible;
+  margin: 1.1em 0;
+  text-align: center;
+  color: var(--accent);
+}
+hr::after {
+  content: var(--scene-break);
+  display: block;
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 0.6em 0; padding-left: 2.2em; text-align: left; }
+li { margin: 0.15em 0; }
+li > p { text-indent: 0; }
+li > ul, li > ol { margin: 0.1em 0; }
+ul > li::marker { content: "•\2002"; }
+ul ul > li::marker { content: "◦\2002"; }
+ol ol { list-style-type: lower-alpha; }
+
+ul.contains-task-list > li.task-list-item { list-style: none; position: relative; }
+ul.contains-task-list > li.task-list-item::marker { content: none; }
+li.task-list-item > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  position: absolute; left: -1.3em; top: 0.3em; top: calc(0.5lh - 0.4em);
+  width: 0.8em; height: 0.8em; margin: 0;
+  border: 0.06em solid currentColor; background: none;
+  color: inherit; opacity: 1;
+}
+li.task-list-item > input[type="checkbox"]:checked::after {
+  content: "✓"; position: absolute; left: 0.06em; top: -0.25em; font: 1em/1 var(--font-body);
+}
+
+/* ---------- Code (rare in books) ---------- */
+code { font-family: var(--font-mono); font-variant-ligatures: none; font-size: 0.82em; hyphens: none; }
+pre {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.78em;
+  line-height: 1.45;
+  text-align: left;
+  margin: 1em var(--parindent);
+  white-space: pre-wrap;
+}
+pre code { font-size: 1em; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  margin: 1.2em auto;
+  font-size: 0.92em;
+  font-variant-numeric: lining-nums tabular-nums;
+  text-align: left;
+  hyphens: manual;
+  border-top: 0.75pt solid currentColor;
+  border-bottom: 0.75pt solid currentColor;
+}
+thead tr { border-bottom: 0.4pt solid currentColor; }
+th { font-weight: 400; font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
+th, td { padding: 0.25em 0.7em; vertical-align: top; }
+th[align="center"], td[align="center"] { text-align: center; }
+th[align="right"], td[align="right"] { text-align: right; }
+
+/* ---------- Figures ---------- */
+figure { margin: 1.4em 0; text-align: center; }
+figure img { display: block; margin: 0 auto; }
+figcaption { margin-top: 0.5em; font-style: italic; font-size: 0.9em; text-align: center; }
+
+/* ---------- Print ---------- */
+@media print {
+  :root { --page-background: transparent; }
+  #title-block-header { break-after: page; padding-top: 1.6in; min-height: 0; }
+  #title-block-header + h1 { margin-top: 1.4in; }
+  hr { break-after: avoid; }
+  nav.toc { break-after: page; }
+  body > h1 { break-before: page; margin-top: 1.4in; }
+  body > h1:first-child { break-before: auto; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  body > h1 + blockquote { break-after: avoid; }
+  figure, table, pre, blockquote { break-inside: avoid; }
+  p { orphans: 2; widows: 2; }
+}

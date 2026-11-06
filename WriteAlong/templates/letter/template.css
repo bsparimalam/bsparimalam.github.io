@@ -1,0 +1,204 @@
+/* Write Along template: Formal Letter */
+/*
+ * Block-style business letter. No front matter needed. Structure (top to bottom):
+ *
+ *   # Sender Name or Organisation        ← h1, optional: centred letterhead
+ *   Street · City · email · phone          ← 1st paragraph: sender address / contact
+ *                                            (use line breaks or " · " separators)
+ *   3 November 2026                        ← 2nd paragraph: date
+ *   Recipient Name␠␠                       ← 3rd paragraph: recipient address block
+ *   Title / Organisation␠␠                    (end lines with two spaces or "\" for
+ *   Street, City                              line breaks)
+ *   ## Re: Subject of the letter           ← h2, optional: subject line
+ *   Dear Ms Jensen,                        ← salutation, then body paragraphs
+ *   …
+ *   Yours sincerely,                       ← closing (second-to-last paragraph before
+ *                                            the signature)
+ *   Daniel Hart␠␠                          ← last paragraph (before any "---"):
+ *   Principal Architect                       signature block, with signing space above
+ *   ---                                    ← optional: everything after a rule is
+ *   Enclosures: … / cc: …                     small print (enclosures, copies)
+ *
+ * Without an h1 the sender address is set flush right, traditional style.
+ * If YAML front matter is present, its title is used as the letterhead.
+ */
+
+/* ---------- Knobs ---------- */
+:root {
+  --font-body: "Source Serif 4", "Source Serif Pro", "Charter", "Georgia", "Cambria", serif;
+  --font-heading: var(--font-body);
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-size: 10.5pt;
+  --line-height: 1.42;
+  --accent: #1f3a5c;
+  --text-color: #1b1d20;
+  --muted-color: #5d636b;
+  --signature-space: 3em;
+
+  --page-width: 8.5in;
+  --page-min-height: 11in;
+  --page-padding: 1in;
+  --page-background: #fff;
+  --desk-background: #e4e5e8;
+}
+
+@page { size: letter; margin: 1in; }
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  font-kerning: normal;
+  hyphens: manual;
+}
+body > :first-child { margin-top: 0; }
+
+p { margin: 0 0 0.9em; }
+a { color: var(--accent); text-decoration: none; }
+strong { font-weight: 600; }
+
+/* ---------- Letterhead ---------- */
+body > h1,
+#title-block-header .title {
+  font-family: var(--font-heading);
+  font-size: 1.55em;
+  font-weight: 600;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--accent);
+  margin: 0 0 0.3em;
+}
+/* Sender address under a letterhead: centred, small, with a rule beneath */
+body > h1 + p {
+  text-align: center;
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
+  color: var(--muted-color);
+  margin: 0 0 2.4em;
+  padding-bottom: 1.1em;
+  border-bottom: 0.75pt solid color-mix(in srgb, var(--accent) 45%, white);
+}
+/* No letterhead: sender address flush right */
+body:not(:has(> h1)) > p:first-of-type {
+  text-align: right;
+  margin: 0 0 2.2em;
+  margin-left: auto;
+}
+
+/* Front matter (unusual for letters) degrades to a letterhead */
+#title-block-header { text-align: center; margin: 0 0 2.5em; padding-bottom: 1em; border-bottom: 0.75pt solid color-mix(in srgb, var(--accent) 45%, white); }
+#title-block-header .subtitle,
+#title-block-header .author,
+#title-block-header .date { margin: 0.15em 0 0; font-size: 0.88em; color: var(--muted-color); }
+#title-block-header .abstract { margin-top: 1em; font-size: 0.9em; text-align: left; }
+#title-block-header .abstract-title { font-weight: 600; }
+
+/* ---------- Date, recipient, subject ---------- */
+body > p:nth-of-type(2) { margin-bottom: 1.6em; }          /* date */
+body > p:nth-of-type(3) { margin-bottom: 1.8em; }          /* recipient address */
+
+body > h2 {                                                /* subject line */
+  font-family: var(--font-heading);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: inherit;
+  margin: 0 0 1.2em;
+}
+h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-size: 1em;
+  font-weight: 600;
+  margin: 1.4em 0 0.4em;
+}
+h3 { font-style: italic; font-weight: 600; }
+
+/* ---------- Closing & signature ---------- */
+body:not(:has(> hr)) > p:last-of-type,
+body > p:has(+ hr) {
+  margin-top: var(--signature-space);
+  margin-bottom: 0;
+}
+body:not(:has(> hr)) > p:last-of-type::first-line,
+body > p:has(+ hr)::first-line { font-weight: 600; }
+
+/* ---------- Post-signature small print ---------- */
+body > hr {
+  border: 0;
+  height: 0;
+  margin: 1.6em 0 0.7em;
+}
+body > hr ~ * { font-size: 0.85em; color: var(--muted-color); }
+body > hr ~ p { margin: 0 0 0.35em; }
+hr { border: 0; border-top: 0.75pt solid #c9cdd2; margin: 1.5em 0; }
+
+/* ---------- Lists, quotes, tables in the body ---------- */
+ul, ol { margin: 0 0 1em; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+li > p { margin: 0 0 0.4em; }
+li > ul, li > ol { margin: 0.2em 0; }
+li::marker { color: var(--accent); }
+
+ul.contains-task-list { list-style: none; padding-left: 0.2em; }
+li.task-list-item { position: relative; padding-left: 1.5em; }
+li.task-list-item::marker { content: none; }
+li.task-list-item > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  position: absolute; left: 0; top: 0.3em; top: calc(0.5lh - 0.45em);
+  width: 0.9em; height: 0.9em; margin: 0;
+  border: 1px solid currentColor; border-radius: 0.1em; background: none;
+  color: inherit; opacity: 1;
+}
+li.task-list-item > input[type="checkbox"]:checked::after {
+  content: "✓"; position: absolute; left: 0.08em; top: -0.2em; font: 600 0.95em/1 var(--font-body); color: var(--accent);
+}
+
+blockquote {
+  margin: 1em 2em;
+  font-style: italic;
+  color: #34383d;
+}
+blockquote p { margin: 0 0 0.5em; }
+
+code { font-family: var(--font-mono); font-variant-ligatures: none; font-size: 0.86em; }
+pre {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.82em;
+  line-height: 1.5;
+  margin: 1em 0;
+  padding: 0.7em 1em;
+  background: #f5f6f7;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
+pre code { font-size: 1em; }
+
+table { border-collapse: collapse; margin: 1em 0 1.3em; font-size: 0.94em; min-width: 60%; }
+th, td { padding: 0.35em 0.9em 0.35em 0; border-bottom: 0.75pt solid #d6d9dd; text-align: left; vertical-align: top; }
+th { font-weight: 600; border-bottom-color: var(--text-color); }
+th[align="center"], td[align="center"] { text-align: center; }
+th[align="right"], td[align="right"] { text-align: right; font-variant-numeric: tabular-nums; }
+
+figure { margin: 1.2em 0; text-align: center; }
+figcaption { font-size: 0.88em; font-style: italic; color: var(--muted-color); margin-top: 0.4em; }
+
+/* A TOC is unusual in a letter; keep it quiet */
+nav.toc { margin: 0 0 1.5em; font-size: 0.92em; }
+nav.toc .toc-title { font-weight: 600; margin-bottom: 0.3em; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; }
+nav.toc li::marker { content: none; }
+nav.toc a { color: inherit; }
+nav.toc .toc-h3 { padding-left: 1.2em; }
+
+/* ---------- Print ---------- */
+@media print {
+  body > p:has(+ p:last-of-type),
+  body > p:has(+ p + hr) { break-after: avoid; }             /* keep closing with signature */
+  body:not(:has(> hr)) > p:last-of-type,
+  body > p:has(+ hr) { break-inside: avoid; }
+  table, figure, blockquote, pre { break-inside: avoid; }
+}

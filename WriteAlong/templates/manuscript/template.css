@@ -1,0 +1,183 @@
+/* Write Along template: Manuscript */
+/*
+ * Standard manuscript submission format (after William Shunn's guidelines):
+ * monospaced 12pt, double-spaced, 1in margins, indented paragraphs, ragged right.
+ *
+ * Expected Markdown:
+ *   • Front matter: title, author (shown as "by …" byline), optional subtitle,
+ *     and date — shown flush right at the top of the first page; use it for the
+ *     word count, e.g.  date: About 4,200 words
+ *   • "# Heading" (h1) = chapter heading: centred, a third of the way down a new
+ *     page in print. "## Heading" = centred sub-heading.
+ *   • "---" (hr) = scene break, printed as a centred "#".
+ *   • In print every page carries a running head at top right: set
+ *     --running-head to e.g. "Vance / The Cartographer / " to precede the page number.
+ */
+
+/* ---------- Knobs ---------- */
+:root {
+  --font-body: "CMU Typewriter Text", "Courier Prime", "Courier New", Courier, "Liberation Mono", monospace;
+  --font-heading: var(--font-body);
+  --font-mono: var(--font-body);
+  --font-size: 12pt;
+  --line-height: 2;
+  --accent: #000;
+  --text-color: #111;
+  --parindent: 0.5in;
+  --running-head: "";
+
+  --page-width: 8.5in;
+  --page-min-height: 11in;
+  --page-padding: 1in;
+  --page-background: #fff;
+  --desk-background: #dedede;
+}
+
+@page {
+  size: letter;
+  margin: 1in;
+  @top-right {
+    content: var(--running-head) counter(page);
+    font-family: "CMU Typewriter Text", "Courier Prime", "Courier New", Courier, monospace;
+    font-size: 12pt;
+    vertical-align: bottom;
+    padding-bottom: 0.25in;
+  }
+}
+@page :first { @top-right { content: none; } }
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  text-align: left;
+  hyphens: manual;
+  font-variant-ligatures: none;
+}
+body > :first-child { margin-top: 0; }
+
+p { margin: 0; text-indent: var(--parindent); orphans: 2; widows: 2; }
+a { color: inherit; text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+del { text-decoration: line-through; }
+
+/* ---------- Title block ---------- */
+#title-block-header {
+  position: relative;
+  text-align: center;
+  padding-top: 3.2in;            /* title sits about halfway down the first page */
+  margin-bottom: 2em;
+}
+#title-block-header .date {
+  position: absolute;
+  top: 0; right: 0;
+  margin: 0;
+  line-height: 1.2;
+  text-indent: 0;
+}
+#title-block-header .title {
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: var(--line-height);
+  margin: 0;
+}
+#title-block-header .subtitle { margin: 0; text-indent: 0; }
+#title-block-header .author { margin: 0; text-indent: 0; }
+#title-block-header .author:first-of-type::before { content: "by "; }
+#title-block-header .subtitle + .author,
+#title-block-header .title + .author { margin-top: 1em; }
+#title-block-header .abstract { margin-top: 2em; text-align: left; }
+#title-block-header .abstract-title { text-align: center; }
+#title-block-header .abstract p { text-indent: var(--parindent); }
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-size: 1em;
+  font-weight: 400;
+  line-height: var(--line-height);
+  text-align: center;
+  margin: 2em 0 1em;
+}
+h1 { margin: 2.2in 0 2em; text-transform: none; }
+body > h1:first-child { margin-top: 2.2in; }
+#title-block-header + h1 { margin-top: 0; }
+h2 { margin: 2em 0 1em; }
+h3, h4, h5, h6 { text-align: left; font-weight: 700; margin: 1em 0 0; }
+:is(h1, h2, h3, h4, h5, h6) + p { text-indent: var(--parindent); }
+
+/* ---------- Scene break ---------- */
+hr {
+  border: 0;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  text-align: center;
+  line-height: var(--line-height);
+}
+hr::after { content: "#"; display: block; }
+
+/* ---------- Quotations, lists ---------- */
+blockquote { margin: 0 var(--parindent); }
+blockquote p { text-indent: 0; }
+blockquote p + p { text-indent: var(--parindent); }
+
+ul, ol { margin: 0; padding-left: calc(var(--parindent) + 1.5em); }
+li { margin: 0; }
+li > p { text-indent: 0; }
+li > ul, li > ol { padding-left: 2.5em; }
+ul > li::marker { content: "-  "; }
+ol ol { list-style-type: lower-alpha; }
+
+ul.contains-task-list > li.task-list-item { list-style: none; }
+ul.contains-task-list > li.task-list-item::marker { content: none; }
+li.task-list-item > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: auto; height: auto; margin: 0 0.6em 0 -2em; border: 0; background: none;
+  font: inherit; color: inherit; opacity: 1; vertical-align: baseline;
+}
+li.task-list-item > input[type="checkbox"]::before { content: "[ ]"; }
+li.task-list-item > input[type="checkbox"]:checked::before { content: "[x]"; }
+
+/* ---------- Code & tables (typewriter-plain) ---------- */
+code { font-family: var(--font-mono); font-size: 1em; }
+pre {
+  font-family: var(--font-mono);
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 1em 0 1em var(--parindent);
+  white-space: pre-wrap;
+}
+pre code { font-size: 1em; }
+
+table { border-collapse: collapse; margin: 1em auto; line-height: 1.5; }
+th, td { padding: 0.2em 1em; text-align: left; vertical-align: top; }
+thead th { border-bottom: 1px solid currentColor; font-weight: 400; text-transform: uppercase; }
+th[align="center"], td[align="center"] { text-align: center; }
+th[align="right"], td[align="right"] { text-align: right; }
+
+figure { margin: 1em 0; text-align: center; }
+figcaption { line-height: 1.5; margin-top: 0.5em; }
+figcaption::before { content: "[Figure: "; }
+figcaption::after { content: "]"; }
+
+nav.toc { margin: 0 0 2em; }
+nav.toc .toc-title { text-align: center; text-transform: uppercase; margin-bottom: 1em; }
+nav.toc ol { list-style: none; margin: 0; padding: 0 0 0 var(--parindent); }
+nav.toc li::marker { content: none; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc-h2 { padding-left: 2em; }
+nav.toc .toc-h3 { padding-left: 4em; }
+
+/* ---------- Print ---------- */
+@media print {
+  body > h1 { break-before: page; }
+  body > h1:first-child,
+  #title-block-header + h1 { break-before: auto; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  table, figure, pre { break-inside: avoid; }
+}

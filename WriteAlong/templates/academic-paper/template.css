@@ -1,0 +1,248 @@
+/* Write Along template: Academic Paper */
+/*
+ * Two-column conference paper in the spirit of IEEEtran / ACM proceedings.
+ *
+ * Expected Markdown:
+ *   • YAML front matter with title, author (list), optional date and abstract.
+ *     The title block spans both columns; the abstract is set IEEE-style as a
+ *     run-in "Abstract—" paragraph across the full width.
+ *   • Section levels are detected like the LaTeX Article template:
+ *     if the body has an h1 (other than a leading "# Title"), h1 = section
+ *     (I., II., … small caps, centred), h2 = subsection (A., B., … italic),
+ *     h3 = subsubsection (1), 2), … italic run-in style); otherwise the same
+ *     mapping starts at h2.
+ *   • On screen the two columns are balanced over the whole sheet; insert
+ *     \newpage to end a "page" of columns early. In print, columns flow page by page.
+ */
+
+/* ---------- Knobs ---------- */
+:root {
+  --font-body: "Source Serif 4", "STIX Two Text", "Nimbus Roman", "Times New Roman", Times, serif;
+  --font-heading: var(--font-body);
+  --font-mono: "JetBrains Mono", "CMU Typewriter Text", ui-monospace, "Courier New", monospace;
+  --font-size: 10pt;
+  --line-height: 1.22;
+  --accent: #1d3f8f;
+  --text-color: #111;
+  --column-gap: 0.25in;
+  --parindent: 1em;
+
+  --page-width: 8.5in;
+  --page-min-height: 11in;
+  --page-padding: 0.7in;
+  --page-background: #fff;
+  --desk-background: #d9dbe0;
+}
+
+@page { size: letter; margin: 0.7in; }
+
+/* ---------- Base & columns ---------- */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-wrap: pretty;
+  font-kerning: normal;
+  columns: 2;
+  column-gap: var(--column-gap);
+  column-fill: balance;
+  counter-reset: s1 s2 s3 figure;
+}
+body > :first-child { margin-top: 0; }
+
+/* Things that must cross both columns */
+#title-block-header,
+body > h1:first-child,
+.page-break { column-span: all; }
+
+p { margin: 0; text-indent: var(--parindent); orphans: 2; widows: 2; }
+:is(h1, h2, h3, h4, h5, h6, figure, table, pre, ul, ol, blockquote, hr, nav) + p { text-indent: var(--parindent); }
+
+a { color: var(--accent); text-decoration: none; }
+strong { font-weight: 700; }
+
+/* ---------- Title block ---------- */
+#title-block-header { text-align: center; margin: 0 0 1.8em; hyphens: manual; }
+#title-block-header .title,
+body > h1:first-child {
+  font-size: 2.4em;              /* 24pt */
+  font-weight: 400;
+  line-height: 1.12;
+  text-align: center;
+  margin: 0 0 0.35em;
+  hyphens: manual;
+}
+body > h1:first-child { margin-bottom: 1em; }
+#title-block-header .subtitle { font-size: 1.3em; font-style: italic; margin: 0 0 0.8em; text-indent: 0; }
+#title-block-header .author {
+  display: inline-block;
+  font-size: 1.1em;
+  margin: 0.5em 1.4em 0;
+  text-indent: 0;
+}
+#title-block-header .date { font-size: 0.9em; font-style: italic; margin: 0.6em 0 0; text-indent: 0; }
+#title-block-header .abstract {
+  margin: 1.8em 0 0;
+  padding: 0.9em 0 0;
+  border-top: 0.5pt solid #999;
+  text-align: justify;
+  hyphens: auto;
+  font-size: 0.9em;              /* 9pt */
+  font-weight: 700;
+  line-height: 1.25;
+}
+#title-block-header .abstract-title { display: inline; font-style: italic; }
+#title-block-header .abstract-title::after { content: "—"; font-style: normal; }
+#title-block-header .abstract p { text-indent: 0; }
+#title-block-header .abstract p:first-of-type { display: inline; }
+#title-block-header .abstract p + p { margin-top: 0.3em; text-indent: var(--parindent); }
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.2;
+  text-align: left;
+  hyphens: manual;
+  margin: 1em 0 0.4em;
+}
+
+/* section: I. INTRODUCTION (small caps, centred) */
+body:has(> h1:not(:first-child)) > h1:not(:first-child),
+body:not(:has(> h1:not(:first-child))) > h2 {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 1.25em 0 0.5em;
+  counter-increment: s1;
+  counter-set: s2 0 s3 0;
+}
+/* subsection: A. Italic */
+body:has(> h1:not(:first-child)) > h2,
+body:not(:has(> h1:not(:first-child))) > h3 {
+  font-style: italic;
+  margin: 0.9em 0 0.35em;
+  counter-increment: s2;
+  counter-set: s3 0;
+}
+/* subsubsection: 1) Italic */
+body:has(> h1:not(:first-child)) > h3,
+body:not(:has(> h1:not(:first-child))) > h4 {
+  font-style: italic;
+  margin: 0.7em 0 0.2em;
+  padding-left: var(--parindent);
+  counter-increment: s3;
+}
+body:has(> h1:not(:first-child)) > :is(h4, h5, h6),
+body:not(:has(> h1:not(:first-child))) > :is(h5, h6) {
+  font-style: italic;
+  margin: 0.6em 0 0.2em;
+  padding-left: var(--parindent);
+}
+body:has(> h1:not(:first-child)) > h1:not(:first-child)::before,
+body:not(:has(> h1:not(:first-child))) > h2::before { content: counter(s1, upper-roman) ".\2002"; }
+body:has(> h1:not(:first-child)) > h2::before,
+body:not(:has(> h1:not(:first-child))) > h3::before { content: counter(s2, upper-alpha) ".\2002"; font-style: normal; }
+body:has(> h1:not(:first-child)) > h3::before,
+body:not(:has(> h1:not(:first-child))) > h4::before { content: counter(s3) ")\2002"; font-style: normal; }
+
+/* ---------- Table of contents (compact) ---------- */
+nav.toc { margin: 0 0 1em; text-align: left; font-size: 0.9em; break-inside: avoid; }
+nav.toc .toc-title { font-variant: small-caps; letter-spacing: 0.04em; text-align: center; margin-bottom: 0.4em; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; }
+nav.toc li { margin: 0.1em 0; }
+nav.toc li::marker { content: none; }
+nav.toc a { color: inherit; }
+nav.toc .toc-h2 { padding-left: 1em; }
+nav.toc .toc-h3 { padding-left: 2em; font-style: italic; }
+body:not(:has(> h1:not(:first-child))) nav.toc .toc-h1 { display: none; }
+body:not(:has(> h1:not(:first-child))) nav.toc .toc-h2 { padding-left: 0; }
+body:not(:has(> h1:not(:first-child))) nav.toc .toc-h3 { padding-left: 1em; }
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 0.35em 0; padding-left: 1.6em; }
+li { margin: 0.15em 0; }
+li > p { text-indent: 0; }
+li > ul, li > ol { margin: 0.1em 0; padding-left: 1.3em; }
+ul > li::marker { content: "•\2002"; }
+ul ul > li::marker { content: "–\2002"; }
+ol ol { list-style-type: lower-alpha; }
+ol ol ol { list-style-type: lower-roman; }
+
+ul.contains-task-list > li.task-list-item { list-style: none; position: relative; }
+ul.contains-task-list > li.task-list-item::marker { content: none; }
+li.task-list-item > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  position: absolute; left: -1.2em; top: 0.2em; top: calc(0.5lh - 0.4em);
+  width: 0.8em; height: 0.8em; margin: 0;
+  border: 0.07em solid currentColor; background: none;
+  color: inherit; opacity: 1;
+}
+li.task-list-item > input[type="checkbox"]:checked::after {
+  content: "✓"; position: absolute; left: 0.08em; top: -0.2em; font: 700 0.9em/1 var(--font-body);
+}
+
+/* ---------- Quotes & rules ---------- */
+blockquote { margin: 0.6em 1em; font-size: 0.95em; }
+blockquote p { text-indent: 0; }
+blockquote p + p { margin-top: 0.3em; }
+hr { border: 0; border-top: 0.5pt solid #777; margin: 0.9em 20%; }
+
+/* ---------- Code ---------- */
+code { font-family: var(--font-mono); font-variant-ligatures: none; font-size: 0.86em; hyphens: none; }
+pre {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.8em;
+  line-height: 1.3;
+  text-align: left;
+  margin: 0.6em 0;
+  padding: 0.5em 0.6em;
+  border-top: 0.5pt solid #999;
+  border-bottom: 0.5pt solid #999;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+pre code { font-size: 1em; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  margin: 0.8em auto;
+  max-width: 100%;
+  font-size: 0.85em;
+  line-height: 1.2;
+  text-align: left;
+  hyphens: manual;
+  border-top: 1pt solid currentColor;
+  border-bottom: 1pt solid currentColor;
+  break-inside: avoid;
+}
+thead tr { border-bottom: 0.5pt solid currentColor; }
+th { font-weight: 400; font-variant: small-caps; letter-spacing: 0.02em; }
+th, td { padding: 0.25em 0.5em; vertical-align: top; }
+tbody tr:first-child td { padding-top: 0.4em; }
+tbody tr:last-child td { padding-bottom: 0.4em; }
+th[align="center"], td[align="center"] { text-align: center; }
+th[align="right"], td[align="right"] { text-align: right; }
+
+/* ---------- Figures ---------- */
+figure { margin: 0.8em 0; text-align: center; counter-increment: figure; break-inside: avoid; }
+figure img { display: block; margin: 0 auto; max-width: 100%; }
+figcaption { margin-top: 0.5em; font-size: 0.8em; text-align: justify; text-align-last: center; text-indent: 0; }
+figcaption::before { content: "Fig. " counter(figure) ".\2002"; }
+
+/* ---------- Narrow screens: one column ---------- */
+@media screen and (max-width: 760px) { body { columns: 1; } }
+
+/* ---------- Print ---------- */
+@media print {
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  figure, table, pre, blockquote { break-inside: avoid; }
+}

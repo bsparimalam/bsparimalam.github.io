@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Write Along</title>
+  <meta name="description" content="A private, offline-first word processor. Markdown + CSS documents, beautiful templates, and proofreading from your browser, on-device AI, local models or your own cloud keys.">
+  <meta name="theme-color" content="#3b5bdb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="modulepreload" href="js/app.js">
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon.svg" alt="" width="26" height="26">
+        <span class="brand-name">Write Along</span>
+      </div>
+      <div class="docname-wrap">
+        <input id="doc-name" class="docname" value="Untitled" aria-label="Document name" spellcheck="false">
+        <span id="save-state" class="save-state" title=""></span>
+      </div>
+      <button class="icon-btn menu-all" id="menu-all" title="Menu" aria-label="Menu"><svg><use href="icons/sprite.svg#ellipsis"/></svg></button>
+      <nav class="menubar" id="menubar" aria-label="Menu">
+        <button class="menu-btn" data-menu="file">File</button>
+        <button class="menu-btn" data-menu="edit">Edit</button>
+        <button class="menu-btn" data-menu="insert">Insert</button>
+        <button class="menu-btn" data-menu="format">Format</button>
+        <button class="menu-btn" data-menu="view">View</button>
+        <button class="menu-btn" data-menu="tools">Tools</button>
+        <button class="menu-btn" data-menu="help">Help</button>
+      </nav>
+      <div class="topbar-actions">
+        <button id="install-btn" class="btn ghost small" hidden><svg><use href="icons/sprite.svg#arrow-down-to-line"/></svg>Install</button>
+        <button class="btn primary small" data-action="save" title="Save (Ctrl+S)"><svg><use href="icons/sprite.svg#save"/></svg><span>Save</span></button>
+        <button class="icon-btn" data-action="settings" title="Settings"><svg><use href="icons/sprite.svg#settings"/></svg></button>
+        <button class="icon-btn" data-action="toggle-sidebar" title="Toggle side panel"><svg><use href="icons/sprite.svg#panel-right"/></svg></button>
+      </div>
+    </header>
+
+    <div class="toolbar" id="toolbar" role="toolbar" aria-label="Formatting">
+      <button class="icon-btn" data-cmd="undo" title="Undo (Ctrl+Z)"><svg><use href="icons/sprite.svg#undo-2"/></svg></button>
+      <button class="icon-btn" data-cmd="redo" title="Redo (Ctrl+Shift+Z)"><svg><use href="icons/sprite.svg#redo-2"/></svg></button>
+      <span class="sep"></span>
+      <select id="block-select" class="block-select" title="Paragraph style" aria-label="Paragraph style">
+        <option value="p">Paragraph</option>
+        <option value="h1">Heading 1</option>
+        <option value="h2">Heading 2</option>
+        <option value="h3">Heading 3</option>
+        <option value="h4">Heading 4</option>
+        <option value="h5">Heading 5</option>
+        <option value="h6">Heading 6</option>
+        <option value="pre">Code block</option>
+      </select>
+      <span class="sep"></span>
+      <button class="icon-btn" data-cmd="bold" data-state="bold" title="Bold (Ctrl+B)"><svg><use href="icons/sprite.svg#bold"/></svg></button>
+      <button class="icon-btn" data-cmd="italic" data-state="italic" title="Italic (Ctrl+I)"><svg><use href="icons/sprite.svg#italic"/></svg></button>
+      <button class="icon-btn" data-cmd="strikeThrough" data-state="strike" title="Strikethrough (Ctrl+Shift+X)"><svg><use href="icons/sprite.svg#strikethrough"/></svg></button>
+      <button class="icon-btn" data-cmd="code" data-state="code" title="Inline code (Ctrl+E)"><svg><use href="icons/sprite.svg#code"/></svg></button>
+      <button class="icon-btn" data-cmd="link" data-state="link" title="Link (Ctrl+K)"><svg><use href="icons/sprite.svg#link"/></svg></button>
+      <span class="sep"></span>
+      <button class="icon-btn" data-cmd="insertUnorderedList" data-state="ul" title="Bulleted list (Ctrl+Shift+8)"><svg><use href="icons/sprite.svg#list"/></svg></button>
+      <button class="icon-btn" data-cmd="insertOrderedList" data-state="ol" title="Numbered list (Ctrl+Shift+7)"><svg><use href="icons/sprite.svg#list-ordered"/></svg></button>
+      <button class="icon-btn" data-cmd="task" data-state="task" title="Checklist"><svg><use href="icons/sprite.svg#list-todo"/></svg></button>
+      <button class="icon-btn" data-cmd="quote" data-state="quote" title="Quote"><svg><use href="icons/sprite.svg#text-quote"/></svg></button>
+      <span class="sep"></span>
+      <button class="icon-btn" data-cmd="image" title="Insert image"><svg><use href="icons/sprite.svg#image"/></svg></button>
+      <button class="icon-btn" data-cmd="table" title="Insert table"><svg><use href="icons/sprite.svg#table"/></svg></button>
+      <button class="icon-btn" data-cmd="hr" title="Horizontal rule"><svg><use href="icons/sprite.svg#minus"/></svg></button>
+      <button class="icon-btn" data-cmd="pagebreak" title="Page break"><svg><use href="icons/sprite.svg#separator-horizontal"/></svg></button>
+      <span class="sep"></span>
+      <div class="table-tools" id="table-tools" hidden>
+        <button class="icon-btn" data-table="row-below" title="Add row below"><svg><use href="icons/sprite.svg#between-horizontal-start"/></svg></button>
+        <button class="icon-btn" data-table="col-right" title="Add column right"><svg><use href="icons/sprite.svg#between-vertical-start"/></svg></button>
+        <button class="icon-btn" data-table="align-left" title="Align column left"><svg><use href="icons/sprite.svg#align-left"/></svg></button>
+        <button class="icon-btn" data-table="align-center" title="Center column"><svg><use href="icons/sprite.svg#align-center"/></svg></button>
+        <button class="icon-btn" data-table="align-right" title="Align column right"><svg><use href="icons/sprite.svg#align-right"/></svg></button>
+        <button class="icon-btn" data-table="delete-row" title="Delete row"><svg><use href="icons/sprite.svg#rows-2"/></svg></button>
+        <button class="icon-btn" data-table="delete-col" title="Delete column"><svg><use href="icons/sprite.svg#columns-2"/></svg></button>
+        <span class="sep"></span>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn ghost small" data-action="check" title="Check document (F7)"><svg><use href="icons/sprite.svg#spell-check"/></svg><span>Check</span></button>
+      <div class="segmented" role="group" aria-label="Editing mode">
+        <button data-mode="visual" class="active" title="Visual editing">Visual</button>
+        <button data-mode="source" title="Edit the Markdown source">Markdown</button>
+      </div>
+    </div>
+
+    <div class="findbar" id="findbar" hidden>
+      <svg class="find-icon"><use href="icons/sprite.svg#search"/></svg>
+      <input id="find-input" placeholder="Find" spellcheck="false">
+      <input id="replace-input" placeholder="Replace with" spellcheck="false">
+      <label class="chk"><input type="checkbox" id="find-case"> Aa</label>
+      <span id="find-count" class="muted"></span>
+      <button class="btn small" data-find="prev">Previous</button>
+      <button class="btn small" data-find="next">Next</button>
+      <button class="btn small" data-find="replace">Replace</button>
+      <button class="btn small" data-find="all">Replace all</button>
+      <button class="icon-btn" data-find="close" title="Close"><svg><use href="icons/sprite.svg#x"/></svg></button>
+    </div>
+
+    <div class="reviewbar" id="reviewbar" hidden></div>
+
+    <main class="workspace">
+      <section class="canvas" id="canvas">
+        <iframe id="editor-frame" title="Document" class="editor-frame"></iframe>
+        <textarea id="source" class="source" spellcheck="true" hidden aria-label="Markdown source"></textarea>
+        <div class="drop-hint" id="drop-hint" hidden>Drop to open</div>
+      </section>
+
+      <aside class="sidebar" id="sidebar">
+        <div class="tabs" role="tablist">
+          <button role="tab" data-tab="proof" title="Proofreading"><svg><use href="icons/sprite.svg#spell-check"/></svg><span>Proofread</span><b class="badge" id="issue-badge" hidden></b></button>
+          <button role="tab" data-tab="assist" title="AI writing assistant"><svg><use href="icons/sprite.svg#sparkles"/></svg><span>AI</span></button>
+          <button role="tab" data-tab="style" title="Template and style"><svg><use href="icons/sprite.svg#palette"/></svg><span>Style</span></button>
+          <button role="tab" data-tab="outline" title="Outline"><svg><use href="icons/sprite.svg#list-tree"/></svg><span>Outline</span></button>
+        </div>
+        <div class="panel" data-panel="proof" id="panel-proof"></div>
+        <div class="panel" data-panel="assist" id="panel-assist" hidden></div>
+        <div class="panel" data-panel="style" id="panel-style" hidden></div>
+        <div class="panel" data-panel="outline" id="panel-outline" hidden></div>
+      </aside>
+    </main>
+
+    <footer class="statusbar">
+      <span id="stat-words"></span>
+      <span id="stat-chars" class="hide-narrow"></span>
+      <span id="stat-read" class="hide-narrow"></span>
+      <span class="spacer"></span>
+      <span id="proof-status" class="proof-status"></span>
+      <span id="offline-state" class="offline-state" title=""></span>
+      <span id="page-info" class="page-info"></span>
+      <button id="page-size-btn" class="status-btn" title="Page size and orientation (saved in template.css)"></button>
+      <button id="pageview-btn" class="icon-btn tiny" data-action="toggle-pages" title="Page view: show the document as printed pages"><svg><use href="icons/sprite.svg#files"/></svg></button>
+      <button id="paper-btn" class="icon-btn tiny" data-action="paper" title="Paper brightness"><svg><use href="icons/sprite.svg#sun"/></svg></button>
+      <span class="zoom">
+        <button class="icon-btn tiny" data-action="zoom-out" title="Zoom out"><svg><use href="icons/sprite.svg#zoom-out"/></svg></button>
+        <button id="zoom-level" class="zoom-level" data-action="zoom-reset" title="Reset zoom">100%</button>
+        <button class="icon-btn tiny" data-action="zoom-in" title="Zoom in"><svg><use href="icons/sprite.svg#zoom-in"/></svg></button>
+      </span>
+    </footer>
+  </div>
+
+  <div id="menu-layer" class="menu-layer" hidden></div>
+  <div id="popover" class="popover" hidden></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <dialog id="dialog" class="dialog"></dialog>
+
+  <noscript><p style="padding:2rem;font:16px system-ui">Write Along needs JavaScript to run.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
