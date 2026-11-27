@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Write Along Template: Doctoral Thesis Chapter
+   Category: Academic Papers · Archetype: academic
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 1.15in 1.05in 1.1in 1.25in;
+
+  /* Color Palette */
+  --page-background: #fffefa;
+  --text-color: #1f2421;
+  --muted-color: #5a625e;
+  --accent-color: #1b4332;
+  --accent-secondary: #2d6a4f;
+  --surface-color: #f4f7f5;
+  --border-color: #d1dcd5;
+
+  /* Typography */
+  --body-font: "EB Garamond", Georgia, serif;
+  --heading-font: "EB Garamond", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 11.5pt;
+  --line-height: 1.62;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 1.15in 1.05in 1.1in 1.25in;
+  background: #fffefa;
+  @top-left {
+    content: "Doctoral Thesis Chapter";
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #5a625e;
+  }
+  @top-right {
+    content: "Academic Papers";
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8pt;
+    color: #5a625e;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8.5pt;
+    color: #5a625e;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (academic)
+   ========================================================================== */
+
+.title-block {
+  text-align: center;
+  border-bottom: 1pt solid var(--border-color);
+  padding-bottom: 1.15em;
+  margin-bottom: 1.4em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.95);
+  letter-spacing: -0.01em;
+}
+.title-block .meta-line { justify-content: center; font-size: 0.92em; }
+.title-block .abstract {
+  text-align: left;
+  margin-top: 1em;
+  padding: 0.8em 1.05em;
+  font-size: 0.9em;
+  background: var(--surface-color);
+  border-left: 3px solid var(--accent-color);
+}
+h2 {
+  font-size: calc(var(--body-size) * 1.24);
+  margin-top: 1.35em;
+  border-bottom: 0.6pt solid var(--border-color);
+  padding-bottom: 0.2em;
+  color: var(--accent-color);
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.06);
+  font-style: italic;
+  margin-top: 1em;
+}
+table {
+  border-top: 1.5pt solid var(--text-color);
+  border-bottom: 1.5pt solid var(--text-color);
+}
+th {
+  background: transparent;
+  border-top: 0;
+  border-bottom: 0.8pt solid var(--text-color);
+}
+td { border-bottom: 0.4pt solid var(--border-color); }
+.figure {
+  padding: 0.5em;
+  border: 0.5pt solid var(--border-color);
+  background: var(--page-background);
+}
+
+/* Literary drop cap on the opening paragraph (Page 1 only) */
+.wa-first-body-p::first-letter {
+  float: left;
+  font-family: var(--heading-font);
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.14em;
+  padding-top: 0.04em;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* Automatic LaTeX-style section numbering (continuous across pages) */
+.wa-pages, .wa-document { counter-reset: sec; }
+.wa-body h2 { counter-increment: sec; counter-reset: subsec; }
+.wa-body h2::before {
+  content: counter(sec) ". ";
+  color: var(--accent-color);
+  font-weight: 700;
+}
+.wa-body h3 { counter-increment: subsec; }
+.wa-body h3::before {
+  content: counter(sec) "." counter(subsec) " ";
+  color: var(--muted-color);
+  font-weight: 600;
+}
+
+/* Justified book/academic text with hyphenation */
+p {
+  text-align: justify;
+  hyphens: auto;
+}

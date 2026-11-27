@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Write Along Template: Public Policy Memorandum
+   Category: Reports & Business · Archetype: report
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.95in 0.95in 0.95in 0.95in;
+
+  /* Color Palette */
+  --page-background: #fdfcf9;
+  --text-color: #1c1917;
+  --muted-color: #57534e;
+  --accent-color: #1e3a5f;
+  --accent-secondary: #2563eb;
+  --surface-color: #f3f5f8;
+  --border-color: #d1d8e0;
+
+  /* Typography */
+  --body-font: "Source Serif 4", Georgia, serif;
+  --heading-font: "Source Serif 4", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.58;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.95in 0.95in 0.95in 0.95in;
+  background: #fdfcf9;
+  @top-left {
+    content: "Public Policy Memorandum";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #57534e;
+  }
+  @top-right {
+    content: "Reports & Business";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    color: #57534e;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8.5pt;
+    color: #57534e;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (report)
+   ========================================================================== */
+
+.title-block {
+  border-left: 5px solid var(--accent-color);
+  padding: 0.4em 0 0.6em 1.25em;
+  margin-bottom: 1.8em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.35);
+  letter-spacing: -0.025em;
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1.5px solid var(--accent-color);
+  padding-bottom: 0.22em;
+  margin-top: 1.6em;
+}
+h3 {
+  color: var(--accent-secondary);
+}
+table th {
+  background: var(--accent-color);
+  color: var(--page-background);
+  border: 0;
+}
+table tr:nth-child(even) td {
+  background: var(--surface-color);
+}
+.callout {
+  border-left-width: 4px;
+  border-radius: var(--radius);
+}
+
+/* Justified book/academic text with hyphenation */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Double editorial rule beneath header */
+.title-block {
+  border-top: 3px solid var(--text-color);
+  border-bottom: 3px double var(--text-color);
+  padding: 1.1em 0;
+}

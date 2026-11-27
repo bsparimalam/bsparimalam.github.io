@@ -1,156 +1,455 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1c2a">
+  <meta name="description" content="Write Along — Markdown word processor with publication-grade CSS templates and print-identical paged preview.">
   <title>Write Along</title>
-  <meta name="description" content="A private, offline-first word processor. Markdown + CSS documents, beautiful templates, and proofreading from your browser, on-device AI, local models or your own cloud keys.">
-  <meta name="theme-color" content="#3b5bdb">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="modulepreload" href="js/app.js">
+  <link rel="icon" type="image/svg+xml" href="./app/icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./app/app.css">
 </head>
 <body>
-  <div id="app" class="app">
-    <header class="topbar">
-      <div class="brand">
-        <img src="icons/icon.svg" alt="" width="26" height="26">
-        <span class="brand-name">Write Along</span>
+  <div id="app" class="wa-app" data-mode="edit">
+    <!-- Top Chrome: Sculpted WA Logo + Accessible Menu Bar + Mode Switch -->
+    <header class="wa-topbar">
+      <div class="wa-brand" title="Write Along">
+        <span class="wa-logo" aria-hidden="true">
+          <svg viewBox="0 0 144 104" width="32" height="23">
+            <path fill="currentColor" fill-rule="evenodd" d="M 6,14.5 L 35.5,14.5 L 35.5,16.8 C 29.8,17.2 27.6,19.1 28.8,24.4 L 41.8,74.2 L 54.6,23.2 C 55.6,19.1 53.2,17.2 48.0,16.8 L 48.0,14.5 L 70.0,14.5 L 70.0,16.8 C 65.5,17.2 64.2,19.2 65.4,24.0 L 79.4,74.8 L 97.4,12.5 L 101.6,12.5 L 124.2,82.6 C 125.9,87.4 128.4,88.8 136.5,89.2 L 136.5,91.5 L 103.5,91.5 L 103.5,89.2 C 110.2,88.8 112.1,87.2 110.5,82.2 L 106.0,68.0 L 84.8,68.0 L 78.2,91.5 L 75.4,91.5 L 57.6,27.8 L 41.2,91.5 L 38.2,91.5 L 16.6,23.6 C 14.9,18.8 12.6,17.2 6,16.8 Z M 85.8,64.6 L 104.9,64.6 L 95.3,31.6 Z"/>
+          </svg>
+        </span>
+        <span class="wa-brand-name">Write Along</span>
       </div>
-      <div class="docname-wrap">
-        <input id="doc-name" class="docname" value="Untitled" aria-label="Document name" spellcheck="false">
-        <span id="save-state" class="save-state" title=""></span>
-      </div>
-      <button class="icon-btn menu-all" id="menu-all" title="Menu" aria-label="Menu"><svg><use href="icons/sprite.svg#ellipsis"/></svg></button>
-      <nav class="menubar" id="menubar" aria-label="Menu">
-        <button class="menu-btn" data-menu="file">File</button>
-        <button class="menu-btn" data-menu="edit">Edit</button>
-        <button class="menu-btn" data-menu="insert">Insert</button>
-        <button class="menu-btn" data-menu="format">Format</button>
-        <button class="menu-btn" data-menu="view">View</button>
-        <button class="menu-btn" data-menu="tools">Tools</button>
-        <button class="menu-btn" data-menu="help">Help</button>
+
+      <nav class="wa-menubar" role="menubar" aria-label="Application menu">
+        <!-- File -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="file">File</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-file">
+            <button role="menuitem" data-action="file:new"><span>New Document</span><kbd>Ctrl+N</kbd></button>
+            <button role="menuitem" data-action="templates:open"><span>New from Template…</span><kbd>Ctrl+Shift+T</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="file:open"><span>Open .wa Folder…</span><kbd>Ctrl+O</kbd></button>
+            <button role="menuitem" data-action="file:import-zip"><span>Import .wa.zip…</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="file:save"><span>Save</span><kbd>Ctrl+S</kbd></button>
+            <button role="menuitem" data-action="file:save-as"><span>Save As Folder…</span><kbd>Ctrl+Shift+S</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="export:pdf"><span>Export PDF (Print)…</span><kbd>Ctrl+P</kbd></button>
+            <button role="menuitem" data-action="export:html"><span>Export Standalone HTML…</span></button>
+            <button role="menuitem" data-action="export:zip"><span>Export .wa.zip…</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="file:close"><span>Close / Reset</span></button>
+          </div>
+        </div>
+
+        <!-- Edit -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="edit">Edit</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-edit">
+            <button role="menuitem" data-action="edit:undo"><span>Undo</span><kbd>Ctrl+Z</kbd></button>
+            <button role="menuitem" data-action="edit:redo"><span>Redo</span><kbd>Ctrl+Y</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="edit:find"><span>Find &amp; Replace…</span><kbd>Ctrl+F</kbd></button>
+            <button role="menuitem" data-action="edit:select-all"><span>Select All</span><kbd>Ctrl+A</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="edit:page-setup"><span>Page Setup…</span><kbd>Ctrl+Shift+P</kbd></button>
+            <button role="menuitem" data-action="templates:revert-style" id="btn-revert-style" disabled><span>Undo Last Style Apply</span></button>
+          </div>
+        </div>
+
+        <!-- Insert -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="insert">Insert</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-insert">
+            <button role="menuitem" data-action="insert:image"><span>Image…</span></button>
+            <button role="menuitem" data-action="insert:table"><span>Table</span></button>
+            <button role="menuitem" data-action="insert:link"><span>Link</span><kbd>Ctrl+K</kbd></button>
+            <button role="menuitem" data-action="insert:codeblock"><span>Code Block</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="insert:callout-note"><span>Callout: Note</span></button>
+            <button role="menuitem" data-action="insert:callout-tip"><span>Callout: Tip</span></button>
+            <button role="menuitem" data-action="insert:callout-warning"><span>Callout: Warning</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="insert:pagebreak"><span>Page Break</span></button>
+            <button role="menuitem" data-action="insert:toc"><span>Table of Contents [TOC]</span></button>
+            <button role="menuitem" data-action="insert:footnote"><span>Footnote</span></button>
+          </div>
+        </div>
+
+        <!-- Format -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="format">Format</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-format">
+            <button role="menuitem" data-action="format:bold"><span>Bold</span><kbd>Ctrl+B</kbd></button>
+            <button role="menuitem" data-action="format:italic"><span>Italic</span><kbd>Ctrl+I</kbd></button>
+            <button role="menuitem" data-action="format:strike"><span>Strikethrough</span></button>
+            <button role="menuitem" data-action="format:code"><span>Inline Code</span><kbd>Ctrl+`</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="format:h1"><span>Heading 1</span></button>
+            <button role="menuitem" data-action="format:h2"><span>Heading 2</span></button>
+            <button role="menuitem" data-action="format:h3"><span>Heading 3</span></button>
+            <button role="menuitem" data-action="format:p"><span>Paragraph</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="format:ul"><span>Bulleted List</span></button>
+            <button role="menuitem" data-action="format:ol"><span>Numbered List</span></button>
+            <button role="menuitem" data-action="format:task"><span>Task List</span></button>
+            <button role="menuitem" data-action="format:quote"><span>Blockquote</span></button>
+          </div>
+        </div>
+
+        <!-- View -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="view">View</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-view">
+            <button role="menuitem" data-action="view:edit"><span>Edit Mode (Split)</span><kbd>Ctrl+E</kbd></button>
+            <button role="menuitem" data-action="view:read"><span>Read Mode (Centered)</span><kbd>Ctrl+E</kbd></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="view:zoom-in"><span>Zoom In</span><kbd>Ctrl+=</kbd></button>
+            <button role="menuitem" data-action="view:zoom-out"><span>Zoom Out</span><kbd>Ctrl+-</kbd></button>
+            <button role="menuitem" data-action="view:zoom-reset"><span>Reset Zoom (100%)</span><kbd>Ctrl+0</kbd></button>
+            <button role="menuitem" data-action="view:page-grid"><span>Toggle Margin Guides</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="theme:auto"><span>Theme: System Default</span></button>
+            <button role="menuitem" data-action="theme:light"><span>Theme: Light</span></button>
+            <button role="menuitem" data-action="theme:dark"><span>Theme: Dark (Dim Preview)</span></button>
+          </div>
+        </div>
+
+        <!-- Templates -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="templates">Templates</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-templates">
+            <button role="menuitem" data-action="templates:open"><span>Template Gallery (110+)…</span></button>
+            <button role="menuitem" data-action="templates:revert-style"><span>Revert Last Applied Style</span></button>
+          </div>
+        </div>
+
+        <!-- Help -->
+        <div class="wa-menu-item" role="none">
+          <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="help">Help</button>
+          <div class="wa-menu-dropdown" role="menu" id="menu-help">
+            <button role="menuitem" data-action="help:syntax"><span>Syntax &amp; Template Guide</span><kbd>F1</kbd></button>
+            <button role="menuitem" data-action="help:shortcuts"><span>Keyboard Shortcuts</span></button>
+            <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="help:about"><span>About Write Along</span></button>
+          </div>
+        </div>
       </nav>
-      <div class="topbar-actions">
-        <button id="install-btn" class="btn ghost small" hidden><svg><use href="icons/sprite.svg#arrow-down-to-line"/></svg>Install</button>
-        <button class="btn primary small" data-action="save" title="Save (Ctrl+S)"><svg><use href="icons/sprite.svg#save"/></svg><span>Save</span></button>
-        <button class="icon-btn" data-action="settings" title="Settings"><svg><use href="icons/sprite.svg#settings"/></svg></button>
-        <button class="icon-btn" data-action="toggle-sidebar" title="Toggle side panel"><svg><use href="icons/sprite.svg#panel-right"/></svg></button>
+
+      <div class="wa-doc-title-wrap">
+        <span id="doc-name-label" class="wa-doc-name" title="Active .wa document">untitled.wa</span>
+        <span id="doc-dirty-dot" class="wa-dirty-dot" title="Unsaved changes" hidden>●</span>
+      </div>
+
+      <div class="wa-topbar-actions">
+        <div class="wa-mode-switch" role="group" aria-label="View mode">
+          <button id="btn-mode-edit" class="wa-seg-btn active" data-action="view:edit" aria-pressed="true">Edit</button>
+          <button id="btn-mode-read" class="wa-seg-btn" data-action="view:read" aria-pressed="false">Read</button>
+        </div>
+        <button id="btn-theme-toggle" class="wa-icon-btn" title="Cycle theme (System / Light / Dark)" aria-label="Toggle color theme">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16a8 8 0 0 0 0-16Z" fill="currentColor" stroke="none"/></svg>
+        </button>
       </div>
     </header>
 
-    <div class="toolbar" id="toolbar" role="toolbar" aria-label="Formatting">
-      <button class="icon-btn" data-cmd="undo" title="Undo (Ctrl+Z)"><svg><use href="icons/sprite.svg#undo-2"/></svg></button>
-      <button class="icon-btn" data-cmd="redo" title="Redo (Ctrl+Shift+Z)"><svg><use href="icons/sprite.svg#redo-2"/></svg></button>
-      <span class="sep"></span>
-      <select id="block-select" class="block-select" title="Paragraph style" aria-label="Paragraph style">
-        <option value="p">Paragraph</option>
-        <option value="h1">Heading 1</option>
-        <option value="h2">Heading 2</option>
-        <option value="h3">Heading 3</option>
-        <option value="h4">Heading 4</option>
-        <option value="h5">Heading 5</option>
-        <option value="h6">Heading 6</option>
-        <option value="pre">Code block</option>
-      </select>
-      <span class="sep"></span>
-      <button class="icon-btn" data-cmd="bold" data-state="bold" title="Bold (Ctrl+B)"><svg><use href="icons/sprite.svg#bold"/></svg></button>
-      <button class="icon-btn" data-cmd="italic" data-state="italic" title="Italic (Ctrl+I)"><svg><use href="icons/sprite.svg#italic"/></svg></button>
-      <button class="icon-btn" data-cmd="strikeThrough" data-state="strike" title="Strikethrough (Ctrl+Shift+X)"><svg><use href="icons/sprite.svg#strikethrough"/></svg></button>
-      <button class="icon-btn" data-cmd="code" data-state="code" title="Inline code (Ctrl+E)"><svg><use href="icons/sprite.svg#code"/></svg></button>
-      <button class="icon-btn" data-cmd="link" data-state="link" title="Link (Ctrl+K)"><svg><use href="icons/sprite.svg#link"/></svg></button>
-      <span class="sep"></span>
-      <button class="icon-btn" data-cmd="insertUnorderedList" data-state="ul" title="Bulleted list (Ctrl+Shift+8)"><svg><use href="icons/sprite.svg#list"/></svg></button>
-      <button class="icon-btn" data-cmd="insertOrderedList" data-state="ol" title="Numbered list (Ctrl+Shift+7)"><svg><use href="icons/sprite.svg#list-ordered"/></svg></button>
-      <button class="icon-btn" data-cmd="task" data-state="task" title="Checklist"><svg><use href="icons/sprite.svg#list-todo"/></svg></button>
-      <button class="icon-btn" data-cmd="quote" data-state="quote" title="Quote"><svg><use href="icons/sprite.svg#text-quote"/></svg></button>
-      <span class="sep"></span>
-      <button class="icon-btn" data-cmd="image" title="Insert image"><svg><use href="icons/sprite.svg#image"/></svg></button>
-      <button class="icon-btn" data-cmd="table" title="Insert table"><svg><use href="icons/sprite.svg#table"/></svg></button>
-      <button class="icon-btn" data-cmd="hr" title="Horizontal rule"><svg><use href="icons/sprite.svg#minus"/></svg></button>
-      <button class="icon-btn" data-cmd="pagebreak" title="Page break"><svg><use href="icons/sprite.svg#separator-horizontal"/></svg></button>
-      <span class="sep"></span>
-      <div class="table-tools" id="table-tools" hidden>
-        <button class="icon-btn" data-table="row-below" title="Add row below"><svg><use href="icons/sprite.svg#between-horizontal-start"/></svg></button>
-        <button class="icon-btn" data-table="col-right" title="Add column right"><svg><use href="icons/sprite.svg#between-vertical-start"/></svg></button>
-        <button class="icon-btn" data-table="align-left" title="Align column left"><svg><use href="icons/sprite.svg#align-left"/></svg></button>
-        <button class="icon-btn" data-table="align-center" title="Center column"><svg><use href="icons/sprite.svg#align-center"/></svg></button>
-        <button class="icon-btn" data-table="align-right" title="Align column right"><svg><use href="icons/sprite.svg#align-right"/></svg></button>
-        <button class="icon-btn" data-table="delete-row" title="Delete row"><svg><use href="icons/sprite.svg#rows-2"/></svg></button>
-        <button class="icon-btn" data-table="delete-col" title="Delete column"><svg><use href="icons/sprite.svg#columns-2"/></svg></button>
-        <span class="sep"></span>
+    <!-- Uniform Formatting Toolbar (16x16 stroke SVG iconography on 28px grid) -->
+    <div class="wa-toolbar" role="toolbar" aria-label="Formatting toolbar">
+      <div class="wa-tb-group">
+        <button class="wa-tb-btn" data-action="edit:undo" title="Undo (Ctrl+Z)" aria-label="Undo">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="edit:redo" title="Redo (Ctrl+Y)" aria-label="Redo">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
+        </button>
       </div>
-      <div class="spacer"></div>
-      <button class="btn ghost small" data-action="check" title="Check document (F7)"><svg><use href="icons/sprite.svg#spell-check"/></svg><span>Check</span></button>
-      <div class="segmented" role="group" aria-label="Editing mode">
-        <button data-mode="visual" class="active" title="Visual editing">Visual</button>
-        <button data-mode="source" title="Edit the Markdown source">Markdown</button>
+      <div class="wa-tb-sep" role="separator"></div>
+      <div class="wa-tb-group">
+        <div class="wa-select-wrap">
+          <select id="tb-block-style" class="wa-tb-select" aria-label="Text style">
+            <option value="p">Paragraph</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+            <option value="h5">Heading 5</option>
+            <option value="h6">Heading 6</option>
+          </select>
+          <svg class="wa-select-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="wa-tb-sep" role="separator"></div>
+      <div class="wa-tb-group">
+        <button class="wa-tb-btn" data-action="format:bold" title="Bold (Ctrl+B)" aria-label="Bold">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h8a4 4 0 0 1 0 8H6z"/><path d="M6 12h9a4 4 0 0 1 0 8H6z"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:italic" title="Italic (Ctrl+I)" aria-label="Italic">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:strike" title="Strikethrough" aria-label="Strikethrough">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:code" title="Inline Code" aria-label="Inline code">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </button>
+      </div>
+      <div class="wa-tb-sep" role="separator"></div>
+      <div class="wa-tb-group">
+        <button class="wa-tb-btn" data-action="format:ul" title="Bulleted List" aria-label="Bulleted list">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4.5" cy="6" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="18" r="1" fill="currentColor"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:ol" title="Numbered List" aria-label="Numbered list">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="10" y1="6" x2="20" y2="6"/><line x1="10" y1="12" x2="20" y2="12"/><line x1="10" y1="18" x2="20" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:task" title="Task List" aria-label="Task list">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m4.5 8 1.2 1.2L8 6.8"/><line x1="13" y1="8" x2="21" y2="8"/><rect x="3" y="14" width="6" height="6" rx="1"/><line x1="13" y1="17" x2="21" y2="17"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="format:quote" title="Blockquote" aria-label="Blockquote">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 3-1 4-4 5"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 3-1 4-4 5"/></svg>
+        </button>
+      </div>
+      <div class="wa-tb-sep" role="separator"></div>
+      <div class="wa-tb-group">
+        <button class="wa-tb-btn" data-action="insert:link" title="Insert Link (Ctrl+K)" aria-label="Insert link">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="insert:image" title="Insert Image" aria-label="Insert image">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 16-5-5L5 20"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="insert:table" title="Insert Table" aria-label="Insert table">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="insert:callout-note" title="Insert Callout" aria-label="Insert callout">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </button>
+        <button class="wa-tb-btn" data-action="insert:pagebreak" title="Insert Page Break" aria-label="Insert page break">
+          <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v5h14V3"/><path d="M5 21v-5h14v5"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="10" y1="12" x2="14" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/></svg>
+        </button>
+      </div>
+      <div class="wa-tb-spacer"></div>
+      <div class="wa-tb-group wa-tb-actions">
+        <button class="wa-tb-pill" data-action="templates:open" title="Browse 110+ templates (Ctrl+Shift+T)">
+          <svg class="wa-ico-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.2"/><rect x="14" y="3" width="7" height="5" rx="1.2"/><rect x="14" y="12" width="7" height="9" rx="1.2"/><rect x="3" y="16" width="7" height="5" rx="1.2"/></svg>
+          <span>Templates</span>
+        </button>
+        <button class="wa-tb-pill" data-action="help:syntax" title="Open Syntax Guide (F1)">
+          <svg class="wa-ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5a2 2 0 0 1 2-2h5a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4a2 2 0 0 1-2-2z"/><path d="M22 5a2 2 0 0 0-2-2h-5a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h6a2 2 0 0 0 2-2z"/></svg>
+          <span>Guide</span>
+        </button>
+        <button class="wa-tb-pill wa-tb-primary" data-action="export:pdf" title="Print / Export PDF (Ctrl+P)">
+          <svg class="wa-ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg>
+          <span>Export PDF</span>
+        </button>
       </div>
     </div>
 
-    <div class="findbar" id="findbar" hidden>
-      <svg class="find-icon"><use href="icons/sprite.svg#search"/></svg>
-      <input id="find-input" placeholder="Find" spellcheck="false">
-      <input id="replace-input" placeholder="Replace with" spellcheck="false">
-      <label class="chk"><input type="checkbox" id="find-case"> Aa</label>
-      <span id="find-count" class="muted"></span>
-      <button class="btn small" data-find="prev">Previous</button>
-      <button class="btn small" data-find="next">Next</button>
-      <button class="btn small" data-find="replace">Replace</button>
-      <button class="btn small" data-find="all">Replace all</button>
-      <button class="icon-btn" data-find="close" title="Close"><svg><use href="icons/sprite.svg#x"/></svg></button>
+    <!-- Read-only Syntax Guide Banner (shown when viewing Help -> Syntax Guide) -->
+    <div id="guide-banner" class="wa-guide-banner" hidden>
+      <span>Viewing <strong>Write Along Syntax &amp; Template Guide</strong> (read-only). Rendered with the shared .wa engine.</span>
+      <button id="btn-close-guide" class="wa-btn-sm">Return to Document</button>
     </div>
 
-    <div class="reviewbar" id="reviewbar" hidden></div>
-
-    <main class="workspace">
-      <section class="canvas" id="canvas">
-        <iframe id="editor-frame" title="Document" class="editor-frame"></iframe>
-        <textarea id="source" class="source" spellcheck="true" hidden aria-label="Markdown source"></textarea>
-        <div class="drop-hint" id="drop-hint" hidden>Drop to open</div>
+    <!-- Main Workspace: Split Edit Pane + Preview Pane -->
+    <main class="wa-workspace" id="workspace">
+      <!-- Left Editor Pane -->
+      <section class="wa-editor-pane" id="editor-pane" aria-label="Document source editor">
+        <div class="wa-tabs" role="tablist" aria-label="Source files">
+          <button class="wa-tab active" role="tab" aria-selected="true" data-tab="content" id="tab-content">content.md</button>
+          <button class="wa-tab" role="tab" aria-selected="false" data-tab="css" id="tab-css">style.css</button>
+          <div class="wa-tabs-right">
+            <span id="images-count-badge" class="wa-badge" title="Images embedded in images/">0 images</span>
+          </div>
+        </div>
+        <div id="editor-host" class="wa-editor-host"></div>
       </section>
 
-      <aside class="sidebar" id="sidebar">
-        <div class="tabs" role="tablist">
-          <button role="tab" data-tab="proof" title="Proofreading"><svg><use href="icons/sprite.svg#spell-check"/></svg><span>Proofread</span><b class="badge" id="issue-badge" hidden></b></button>
-          <button role="tab" data-tab="assist" title="AI writing assistant"><svg><use href="icons/sprite.svg#sparkles"/></svg><span>AI</span></button>
-          <button role="tab" data-tab="style" title="Template and style"><svg><use href="icons/sprite.svg#palette"/></svg><span>Style</span></button>
-          <button role="tab" data-tab="outline" title="Outline"><svg><use href="icons/sprite.svg#list-tree"/></svg><span>Outline</span></button>
-        </div>
-        <div class="panel" data-panel="proof" id="panel-proof"></div>
-        <div class="panel" data-panel="assist" id="panel-assist" hidden></div>
-        <div class="panel" data-panel="style" id="panel-style" hidden></div>
-        <div class="panel" data-panel="outline" id="panel-outline" hidden></div>
-      </aside>
+      <!-- Draggable Split Divider -->
+      <div id="split-divider" class="wa-divider" role="separator" aria-orientation="vertical" aria-label="Resize editor and preview" tabindex="0"></div>
+
+      <!-- Right Live Preview Pane -->
+      <section class="wa-preview-pane" id="preview-pane" aria-label="Live document preview">
+        <iframe id="preview-frame" class="wa-preview-frame" title="Document live preview" sandbox="allow-same-origin allow-modals"></iframe>
+      </section>
     </main>
 
-    <footer class="statusbar">
-      <span id="stat-words"></span>
-      <span id="stat-chars" class="hide-narrow"></span>
-      <span id="stat-read" class="hide-narrow"></span>
-      <span class="spacer"></span>
-      <span id="proof-status" class="proof-status"></span>
-      <span id="offline-state" class="offline-state" title=""></span>
-      <span id="page-info" class="page-info"></span>
-      <button id="page-size-btn" class="status-btn" title="Page size and orientation (saved in template.css)"></button>
-      <button id="pageview-btn" class="icon-btn tiny" data-action="toggle-pages" title="Page view: show the document as printed pages"><svg><use href="icons/sprite.svg#files"/></svg></button>
-      <button id="paper-btn" class="icon-btn tiny" data-action="paper" title="Paper brightness"><svg><use href="icons/sprite.svg#sun"/></svg></button>
-      <span class="zoom">
-        <button class="icon-btn tiny" data-action="zoom-out" title="Zoom out"><svg><use href="icons/sprite.svg#zoom-out"/></svg></button>
-        <button id="zoom-level" class="zoom-level" data-action="zoom-reset" title="Reset zoom">100%</button>
-        <button class="icon-btn tiny" data-action="zoom-in" title="Zoom in"><svg><use href="icons/sprite.svg#zoom-in"/></svg></button>
-      </span>
+    <!-- Status Bar -->
+    <footer class="wa-statusbar">
+      <div class="wa-status-left">
+        <span id="status-fs-mode">Local Draft</span>
+        <span class="wa-status-sep">·</span>
+        <span id="status-words">0 words</span>
+        <span class="wa-status-sep">·</span>
+        <span id="status-pages">1 page</span>
+        <span class="wa-status-sep">·</span>
+        <button class="wa-status-link" id="status-page-setup" data-action="edit:page-setup" title="Open Page Setup (Ctrl+Shift+P)">Letter · Portrait</button>
+        <span class="wa-status-sep">·</span>
+        <span id="status-autosave">Ready</span>
+      </div>
+      <div class="wa-status-right">
+        <button class="wa-status-btn" data-action="view:zoom-out" aria-label="Zoom out">−</button>
+        <span id="status-zoom">100%</span>
+        <button class="wa-status-btn" data-action="view:zoom-in" aria-label="Zoom in">+</button>
+        <span class="wa-status-sep">·</span>
+        <span id="status-version">v1.1.0</span>
+      </div>
     </footer>
   </div>
 
-  <div id="menu-layer" class="menu-layer" hidden></div>
-  <div id="popover" class="popover" hidden></div>
-  <div id="toasts" class="toasts" aria-live="polite"></div>
-  <dialog id="dialog" class="dialog"></dialog>
+  <!-- Hidden file inputs for fallbacks and image insert -->
+  <input type="file" id="input-dir-fallback" webkitdirectory directory multiple hidden>
+  <input type="file" id="input-zip-file" accept=".zip,.wa.zip" hidden>
+  <input type="file" id="input-image-file" accept="image/*" multiple hidden>
 
-  <noscript><p style="padding:2rem;font:16px system-ui">Write Along needs JavaScript to run.</p></noscript>
-  <script type="module" src="js/app.js"></script>
+  <!-- Page Setup Modal (Edit -> Page Setup…) -->
+  <div id="modal-page-setup" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="ps-modal-title">
+    <div class="wa-modal wa-modal-ps">
+      <div class="wa-modal-header">
+        <div>
+          <h2 id="ps-modal-title">Page Setup</h2>
+          <p class="wa-modal-sub">Configure paper size, orientation, and margins. Changes write cleanly to <code>style.css</code>.</p>
+        </div>
+        <button class="wa-modal-close" data-close-modal="modal-page-setup" aria-label="Close">✕</button>
+      </div>
+      <form id="form-page-setup" class="wa-ps-form" novalidate>
+        <div class="wa-ps-grid">
+          <div class="wa-ps-controls">
+            <div class="wa-field">
+              <label for="ps-size-preset">Paper Size</label>
+              <select id="ps-size-preset" class="wa-input">
+                <option value="Letter">Letter (8.5 × 11 in)</option>
+                <option value="A4">A4 (210 × 297 mm)</option>
+                <option value="A5">A5 (148 × 210 mm)</option>
+                <option value="Legal">Legal (8.5 × 14 in)</option>
+                <option value="Executive">Executive (7.25 × 10.5 in)</option>
+                <option value="TradeBook">Trade Book (6 × 9 in)</option>
+                <option value="Tabloid">Tabloid (11 × 17 in)</option>
+                <option value="Custom">Custom…</option>
+              </select>
+            </div>
+
+            <div id="ps-custom-size-row" class="wa-field-row" hidden>
+              <div class="wa-field">
+                <label for="ps-custom-width">Width</label>
+                <input id="ps-custom-width" type="number" step="any" min="1" max="2000" class="wa-input" value="8.5">
+              </div>
+              <div class="wa-field">
+                <label for="ps-custom-height">Height</label>
+                <input id="ps-custom-height" type="number" step="any" min="1" max="2000" class="wa-input" value="11">
+              </div>
+              <div class="wa-field wa-field-unit">
+                <label for="ps-size-unit">Unit</label>
+                <select id="ps-size-unit" class="wa-input">
+                  <option value="in">in</option>
+                  <option value="mm">mm</option>
+                  <option value="cm">cm</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wa-field">
+              <label>Orientation</label>
+              <div class="wa-orient-group" role="group" aria-label="Page orientation">
+                <button type="button" class="wa-orient-btn active" data-ps-orient="portrait" aria-pressed="true">
+                  <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1.5"/></svg>
+                  <span>Portrait</span>
+                </button>
+                <button type="button" class="wa-orient-btn" data-ps-orient="landscape" aria-pressed="false">
+                  <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5"/></svg>
+                  <span>Landscape</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="wa-field-row">
+              <div class="wa-field" style="flex:1">
+                <label for="ps-margin-preset">Margins</label>
+                <select id="ps-margin-preset" class="wa-input">
+                  <option value="normal">Normal (1 in)</option>
+                  <option value="moderate">Moderate (0.75 in)</option>
+                  <option value="narrow">Narrow (0.5 in)</option>
+                  <option value="wide">Wide (1.25 in)</option>
+                  <option value="academic">Academic (0.9 × 0.85 in)</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </div>
+              <div class="wa-field wa-field-unit">
+                <label for="ps-margin-unit">Unit</label>
+                <select id="ps-margin-unit" class="wa-input">
+                  <option value="in">in</option>
+                  <option value="mm">mm</option>
+                  <option value="cm">cm</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wa-margin-inputs">
+              <div class="wa-field"><label for="ps-m-top">Top</label><input id="ps-m-top" type="number" step="any" min="0" max="200" class="wa-input" value="1"></div>
+              <div class="wa-field"><label for="ps-m-bottom">Bottom</label><input id="ps-m-bottom" type="number" step="any" min="0" max="200" class="wa-input" value="1"></div>
+              <div class="wa-field"><label for="ps-m-left">Left</label><input id="ps-m-left" type="number" step="any" min="0" max="200" class="wa-input" value="1"></div>
+              <div class="wa-field"><label for="ps-m-right">Right</label><input id="ps-m-right" type="number" step="any" min="0" max="200" class="wa-input" value="1"></div>
+            </div>
+
+            <label class="wa-checkbox-row">
+              <input type="checkbox" id="ps-margins-linked" checked>
+              <span>Keep all four margins equal</span>
+            </label>
+          </div>
+
+          <div class="wa-ps-preview-col">
+            <div class="wa-ps-preview-stage">
+              <div id="ps-preview-sheet" class="wa-ps-sheet">
+                <div id="ps-preview-content" class="wa-ps-content-box">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div id="ps-preview-meta" class="wa-ps-meta">8.5 × 11 in</div>
+          </div>
+        </div>
+
+        <div class="wa-modal-footer">
+          <button type="button" class="wa-btn-secondary" data-close-modal="modal-page-setup">Cancel</button>
+          <button type="submit" class="wa-btn-primary" id="btn-ps-apply">Apply Page Setup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Templates Gallery Modal -->
+  <div id="modal-templates" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="tpl-modal-title">
+    <div class="wa-modal wa-modal-xl">
+      <div class="wa-modal-header">
+        <div>
+          <h2 id="tpl-modal-title">Template Gallery</h2>
+          <p class="wa-modal-sub">Preview with sample content, or apply only <code>style.css</code> to your current document.</p>
+        </div>
+        <button class="wa-modal-close" data-close-modal="modal-templates" aria-label="Close">✕</button>
+      </div>
+      <div class="wa-tpl-controls">
+        <input type="search" id="tpl-search" class="wa-search-input" placeholder="Search 110+ templates by name, category, font, or tag…" aria-label="Search templates">
+        <span id="tpl-count-label" class="wa-tpl-count">Loading…</span>
+      </div>
+      <div id="tpl-categories" class="wa-tpl-pills" role="tablist" aria-label="Template categories"></div>
+      <div id="tpl-grid" class="wa-tpl-grid"></div>
+    </div>
+  </div>
+
+  <!-- Info / Shortcuts / About Modal -->
+  <div id="modal-info" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+    <div class="wa-modal wa-modal-md">
+      <div class="wa-modal-header">
+        <h2 id="info-modal-title">About Write Along</h2>
+        <button class="wa-modal-close" data-close-modal="modal-info" aria-label="Close">✕</button>
+      </div>
+      <div id="info-modal-body" class="wa-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast notifications (status & SW updates) -->
+  <div id="toast-container" class="wa-toasts" aria-live="polite"></div>
+
+  <script type="module" src="./app/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,2944 @@
+{
+  "version": "1.1.0",
+  "count": 110,
+  "templates": [
+    {
+      "id": "academic-ieee-twocol",
+      "name": "IEEE Two-Column Proceedings",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0b3d91",
+        "#111827"
+      ],
+      "tags": [
+        "ieee",
+        "two-column",
+        "engineering",
+        "conference",
+        "latex"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-acm-transactions",
+      "name": "ACM Transactions",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Inter",
+        "Crimson Pro"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f4c81",
+        "#18181b"
+      ],
+      "tags": [
+        "acm",
+        "computer-science",
+        "two-column",
+        "journal"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-apa-7",
+      "name": "APA 7th Edition Manuscript",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e3a5f",
+        "#1a1a1a"
+      ],
+      "tags": [
+        "apa",
+        "psychology",
+        "social-science",
+        "double-spaced"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-mla-essay",
+      "name": "MLA Humanities Essay",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fffef9",
+        "#6b212c",
+        "#1c1917"
+      ],
+      "tags": [
+        "mla",
+        "humanities",
+        "literature",
+        "essay"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-chicago-notes",
+      "name": "Chicago Notes & Bibliography",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cormorant Garamond"
+      ],
+      "palette": [
+        "#fdfcf7",
+        "#7c2d12",
+        "#1e1b18"
+      ],
+      "tags": [
+        "chicago",
+        "history",
+        "bibliography",
+        "classical"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-springer-lncs",
+      "name": "Springer LNCS Style",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "A4",
+      "columns": 1,
+      "fonts": [
+        "Source Sans 3",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#005a9c",
+        "#111827"
+      ],
+      "tags": [
+        "springer",
+        "lncs",
+        "a4",
+        "computer-science"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-arxiv-preprint",
+      "name": "arXiv Preprint Clean",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Sans",
+        "IBM Plex Serif"
+      ],
+      "palette": [
+        "#ffffff",
+        "#991b1b",
+        "#171717"
+      ],
+      "tags": [
+        "arxiv",
+        "preprint",
+        "physics",
+        "ml",
+        "latex"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-nature-science",
+      "name": "Nature Scientific Article",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "A4",
+      "columns": 2,
+      "fonts": [
+        "Inter",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#18181b"
+      ],
+      "tags": [
+        "nature",
+        "science",
+        "biology",
+        "two-column"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-thesis-chapter",
+      "name": "Doctoral Thesis Chapter",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fffefa",
+        "#1b4332",
+        "#1f2421"
+      ],
+      "tags": [
+        "thesis",
+        "dissertation",
+        "phd",
+        "chapter",
+        "latex"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-lab-report",
+      "name": "Laboratory Investigation Report",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1d4ed8",
+        "#0f172a"
+      ],
+      "tags": [
+        "lab",
+        "experiment",
+        "chemistry",
+        "physics",
+        "stem"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-oxford-essay",
+      "name": "Oxford Analytical Essay",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "A4",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Merriweather"
+      ],
+      "palette": [
+        "#fcfbf7",
+        "#1e3a8a",
+        "#1c1917"
+      ],
+      "tags": [
+        "essay",
+        "oxford",
+        "a4",
+        "analytical"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "academic-journal-article",
+      "name": "Peer-Reviewed Journal Article",
+      "category": "Academic Papers",
+      "archetype": "academic",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Lora"
+      ],
+      "palette": [
+        "#ffffff",
+        "#7a1f2b",
+        "#1e293b"
+      ],
+      "tags": [
+        "journal",
+        "peer-reviewed",
+        "burgundy",
+        "serif"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-classic-novel",
+      "name": "Classic Literary Novel",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "6in 9in",
+      "columns": 1,
+      "fonts": [
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fdfbf5",
+        "#7a1f2b",
+        "#1f1c18"
+      ],
+      "tags": [
+        "novel",
+        "fiction",
+        "drop-cap",
+        "6x9",
+        "garamond"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-poetry-collection",
+      "name": "Poetry Collection Chapbook",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "6in 9in",
+      "columns": 1,
+      "fonts": [
+        "Cormorant Garamond"
+      ],
+      "palette": [
+        "#faf8f4",
+        "#3f4e4f",
+        "#1c1b1a"
+      ],
+      "tags": [
+        "poetry",
+        "verse",
+        "chapbook",
+        "literary"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-literary-memoir",
+      "name": "Literary Memoir",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "6in 9in",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Crimson Pro"
+      ],
+      "palette": [
+        "#fffdf8",
+        "#854d0e",
+        "#231f1c"
+      ],
+      "tags": [
+        "memoir",
+        "biography",
+        "nonfiction",
+        "book"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-childrens-illustrated",
+      "name": "Illustrated Children's Book",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Lora",
+        "Work Sans"
+      ],
+      "palette": [
+        "#fffef7",
+        "#c2410c",
+        "#1e293b"
+      ],
+      "tags": [
+        "children",
+        "storybook",
+        "warm",
+        "large-type"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-academic-textbook",
+      "name": "University Textbook Chapter",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Sans 3",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e40af",
+        "#18202c"
+      ],
+      "tags": [
+        "textbook",
+        "university",
+        "structured",
+        "chapters"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-artisan-cookbook",
+      "name": "Artisan Kitchen Cookbook",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Lora"
+      ],
+      "palette": [
+        "#fdfaf4",
+        "#9a3412",
+        "#26211b"
+      ],
+      "tags": [
+        "cookbook",
+        "recipes",
+        "culinary",
+        "kitchen"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-coffee-table",
+      "name": "Coffee-Table Art Monograph",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cormorant Garamond",
+        "Inter"
+      ],
+      "palette": [
+        "#f9f8f6",
+        "#1f2937",
+        "#161616"
+      ],
+      "tags": [
+        "art",
+        "monograph",
+        "coffee-table",
+        "museum"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-pocket-paperback",
+      "name": "Pocket Paperback (A5)",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "A5",
+      "columns": 1,
+      "fonts": [
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#fbf8f1",
+        "#4c1d95",
+        "#1e1b18"
+      ],
+      "tags": [
+        "paperback",
+        "a5",
+        "pocket",
+        "compact"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-short-anthology",
+      "name": "Short Story Anthology",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "6in 9in",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#fffefb",
+        "#0f766e",
+        "#1c1917"
+      ],
+      "tags": [
+        "anthology",
+        "stories",
+        "fiction",
+        "collection"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-hollywood-screenplay",
+      "name": "Hollywood Screenplay",
+      "category": "Books & Fiction",
+      "archetype": "script",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Courier Prime"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1f2937",
+        "#111111"
+      ],
+      "tags": [
+        "screenplay",
+        "film",
+        "courier",
+        "script"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-stage-play",
+      "name": "Stage Play Script",
+      "category": "Books & Fiction",
+      "archetype": "script",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fdfcf8",
+        "#7f1d1d",
+        "#1a1816"
+      ],
+      "tags": [
+        "theater",
+        "play",
+        "drama",
+        "script"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "book-fantasy-ornate",
+      "name": "Fantasy Chronicle with Ornaments",
+      "category": "Books & Fiction",
+      "archetype": "book",
+      "pageSize": "6in 9in",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#f8f3e6",
+        "#7c2d12",
+        "#231b12"
+      ],
+      "tags": [
+        "fantasy",
+        "ornate",
+        "parchment",
+        "cinzel",
+        "drop-cap"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-annual-report",
+      "name": "Corporate Annual Report",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f3d63",
+        "#0f172a"
+      ],
+      "tags": [
+        "annual-report",
+        "corporate",
+        "finance",
+        "executive"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-white-paper",
+      "name": "Enterprise White Paper",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Work Sans",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e40af",
+        "#1e293b"
+      ],
+      "tags": [
+        "whitepaper",
+        "research",
+        "enterprise",
+        "b2b"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-executive-brief",
+      "name": "Executive Decision Brief",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "DM Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#7a1f2b",
+        "#111827"
+      ],
+      "tags": [
+        "brief",
+        "executive",
+        "board",
+        "summary"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-business-proposal",
+      "name": "Client Business Proposal",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#1c1f24"
+      ],
+      "tags": [
+        "proposal",
+        "client",
+        "consulting",
+        "sales"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-case-study",
+      "name": "Customer Case Study",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#c2410c",
+        "#18181b"
+      ],
+      "tags": [
+        "case-study",
+        "marketing",
+        "customer",
+        "modern"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-quarterly-review",
+      "name": "Quarterly Business Review (QBR)",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#3730a3",
+        "#0f172a"
+      ],
+      "tags": [
+        "qbr",
+        "quarterly",
+        "metrics",
+        "kpi"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-consulting-handout",
+      "name": "Consulting Deck Handout",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Work Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#065f46",
+        "#111827"
+      ],
+      "tags": [
+        "consulting",
+        "handout",
+        "strategy",
+        "clean"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-policy-memo",
+      "name": "Public Policy Memorandum",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#fdfcf9",
+        "#1e3a5f",
+        "#1c1917"
+      ],
+      "tags": [
+        "policy",
+        "government",
+        "think-tank",
+        "memo"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-press-release",
+      "name": "Official Press Release",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#b91c1c",
+        "#111827"
+      ],
+      "tags": [
+        "press",
+        "pr",
+        "media",
+        "announcement"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-engineering-rfc",
+      "name": "Engineering RFC / Design Doc",
+      "category": "Reports & Business",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#4338ca",
+        "#0f172a"
+      ],
+      "tags": [
+        "rfc",
+        "design-doc",
+        "architecture",
+        "engineering"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-standard-sop",
+      "name": "Standard Operating Procedure (SOP)",
+      "category": "Reports & Business",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0369a1",
+        "#18181b"
+      ],
+      "tags": [
+        "sop",
+        "operations",
+        "compliance",
+        "procedure"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "report-dark-cover-whitepaper",
+      "name": "Executive Whitepaper (Dark Cover)",
+      "category": "Reports & Business",
+      "archetype": "report",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#111827",
+        "#18202c"
+      ],
+      "tags": [
+        "whitepaper",
+        "dark-cover",
+        "bold",
+        "executive"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-formal-executive",
+      "name": "Formal Executive Letterhead",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e3a5f",
+        "#1c1f24"
+      ],
+      "tags": [
+        "formal",
+        "letterhead",
+        "executive",
+        "serif"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-modern-minimal",
+      "name": "Modern Minimal Letter",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#18181b"
+      ],
+      "tags": [
+        "modern",
+        "minimal",
+        "sans",
+        "clean"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-cover-letter",
+      "name": "Job Application Cover Letter",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1d4ed8",
+        "#1e293b"
+      ],
+      "tags": [
+        "cover-letter",
+        "career",
+        "application",
+        "job"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-formal-resignation",
+      "name": "Formal Resignation & Transition Letter",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Lora"
+      ],
+      "palette": [
+        "#fffefa",
+        "#374151",
+        "#1f2937"
+      ],
+      "tags": [
+        "resignation",
+        "hr",
+        "transition",
+        "formal"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-formal-invitation",
+      "name": "Formal Gala & Symposium Invitation",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "Cormorant Garamond"
+      ],
+      "palette": [
+        "#faf6ee",
+        "#7a1f2b",
+        "#231c16"
+      ],
+      "tags": [
+        "invitation",
+        "event",
+        "gala",
+        "ornate"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-thank-you",
+      "name": "Gracious Thank-You & Appreciation",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Crimson Pro"
+      ],
+      "palette": [
+        "#fffdf9",
+        "#166534",
+        "#24201c"
+      ],
+      "tags": [
+        "thank-you",
+        "gratitude",
+        "warm",
+        "correspondence"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-internal-memo",
+      "name": "Corporate Internal Memorandum",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f3d63",
+        "#111827"
+      ],
+      "tags": [
+        "memo",
+        "internal",
+        "corporate",
+        "brief"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "letter-fax-retro",
+      "name": "Retro Facsimile Transmission",
+      "category": "Letters & Correspondence",
+      "archetype": "letter",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "Courier Prime"
+      ],
+      "palette": [
+        "#f8f8f5",
+        "#1f2937",
+        "#141414"
+      ],
+      "tags": [
+        "fax",
+        "retro",
+        "monospace",
+        "dispatch"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-classic-serif",
+      "name": "Classic Serif Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "EB Garamond"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e3a5f",
+        "#1a1a1a"
+      ],
+      "tags": [
+        "resume",
+        "classic",
+        "serif",
+        "ats-friendly"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-modern-accent",
+      "name": "Modern Accent Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#0f172a"
+      ],
+      "tags": [
+        "resume",
+        "modern",
+        "teal",
+        "banner"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-compact-dense",
+      "name": "Compact High-Density Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1d4ed8",
+        "#111827"
+      ],
+      "tags": [
+        "resume",
+        "compact",
+        "dense",
+        "engineering"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-academic-cv",
+      "name": "Academic Curriculum Vitae",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#fffefb",
+        "#7a1f2b",
+        "#1c1917"
+      ],
+      "tags": [
+        "cv",
+        "academic",
+        "faculty",
+        "publications"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-creative-portfolio",
+      "name": "Creative Director Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "DM Sans"
+      ],
+      "palette": [
+        "#fdfbf7",
+        "#b45309",
+        "#1e1b18"
+      ],
+      "tags": [
+        "creative",
+        "design",
+        "editorial",
+        "resume"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-software-developer",
+      "name": "Software Developer Technical Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Mono",
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#4338ca",
+        "#0f172a"
+      ],
+      "tags": [
+        "developer",
+        "software",
+        "tech",
+        "mono"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-executive-leader",
+      "name": "Executive Leadership Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Lora"
+      ],
+      "palette": [
+        "#ffffff",
+        "#111827",
+        "#111827"
+      ],
+      "tags": [
+        "executive",
+        "vp",
+        "cto",
+        "leadership"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-swiss-minimal",
+      "name": "Swiss Minimalist Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "A4",
+      "columns": 1,
+      "fonts": [
+        "Work Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#dc2626",
+        "#121212"
+      ],
+      "tags": [
+        "swiss",
+        "minimal",
+        "a4",
+        "red-accent"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-two-column",
+      "name": "Two-Column Structured Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Raleway",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0369a1",
+        "#18202c"
+      ],
+      "tags": [
+        "two-column",
+        "structured",
+        "clean",
+        "resume"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "resume-career-timeline",
+      "name": "Career Timeline Resume",
+      "category": "Resumes & CVs",
+      "archetype": "resume",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "DM Sans"
+      ],
+      "palette": [
+        "#fcfcfd",
+        "#6d28d9",
+        "#1e293b"
+      ],
+      "tags": [
+        "timeline",
+        "purple",
+        "modern",
+        "resume"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-broadsheet-newspaper",
+      "name": "Broadsheet Newspaper",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Playfair Display",
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#faf8f2",
+        "#141414",
+        "#141414"
+      ],
+      "tags": [
+        "newspaper",
+        "broadsheet",
+        "two-column",
+        "classic"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-compact-tabloid",
+      "name": "Compact Urban Tabloid",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Bebas Neue",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#dc2626",
+        "#111111"
+      ],
+      "tags": [
+        "tabloid",
+        "bold",
+        "headline",
+        "two-column"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-tech-review",
+      "name": "Tech Review Magazine",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#2563eb",
+        "#0f172a"
+      ],
+      "tags": [
+        "tech",
+        "magazine",
+        "review",
+        "modern"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-literary-journal",
+      "name": "Literary Review Journal",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cormorant Garamond",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fdfbf7",
+        "#7a1f2b",
+        "#1e1b18"
+      ],
+      "tags": [
+        "literary",
+        "journal",
+        "essays",
+        "serif"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-club-newsletter",
+      "name": "Community Club Newsletter",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Lora",
+        "Work Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#15803d",
+        "#1e293b"
+      ],
+      "tags": [
+        "newsletter",
+        "community",
+        "club",
+        "friendly"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-indie-zine",
+      "name": "Indie Risograph Zine",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "A5",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "IBM Plex Mono"
+      ],
+      "palette": [
+        "#fff8eb",
+        "#e11d48",
+        "#1a1817"
+      ],
+      "tags": [
+        "zine",
+        "risograph",
+        "indie",
+        "a5"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-fashion-editorial",
+      "name": "Fashion & Culture Editorial",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Raleway"
+      ],
+      "palette": [
+        "#ffffff",
+        "#141414",
+        "#141414"
+      ],
+      "tags": [
+        "fashion",
+        "editorial",
+        "luxury",
+        "high-contrast"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-travel-dispatch",
+      "name": "Travel & Dispatch Feature",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Lora"
+      ],
+      "palette": [
+        "#fcfaf5",
+        "#b45309",
+        "#1f2421"
+      ],
+      "tags": [
+        "travel",
+        "feature",
+        "warm",
+        "magazine"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-science-digest",
+      "name": "Science Digest Monthly",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Merriweather",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0284c7",
+        "#0f172a"
+      ],
+      "tags": [
+        "science",
+        "digest",
+        "two-column",
+        "accessible"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "mag-school-gazette",
+      "name": "Campus Gazette",
+      "category": "Newsletters & Magazines",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Oswald",
+        "Merriweather"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e3a8a",
+        "#1c1f24"
+      ],
+      "tags": [
+        "gazette",
+        "campus",
+        "school",
+        "two-column"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-api-reference",
+      "name": "REST API Reference",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#2563eb",
+        "#0f172a"
+      ],
+      "tags": [
+        "api",
+        "rest",
+        "reference",
+        "developer"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-user-manual",
+      "name": "Product User Manual",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Work Sans",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#18202c"
+      ],
+      "tags": [
+        "manual",
+        "handbook",
+        "guide",
+        "product"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-readme-pretty",
+      "name": "README Pretty Edition",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0969da",
+        "#1f2328"
+      ],
+      "tags": [
+        "readme",
+        "github",
+        "opensource",
+        "clean"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-hardware-datasheet",
+      "name": "Hardware Component Datasheet",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0b3d91",
+        "#111827"
+      ],
+      "tags": [
+        "datasheet",
+        "hardware",
+        "spec",
+        "electronics"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-ops-runbook",
+      "name": "Operations Incident Runbook",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#b91c1c",
+        "#18181b"
+      ],
+      "tags": [
+        "runbook",
+        "sre",
+        "incident",
+        "devops"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-release-notes",
+      "name": "Software Release Notes",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "DM Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#6d28d9",
+        "#1e293b"
+      ],
+      "tags": [
+        "release-notes",
+        "changelog",
+        "product",
+        "modern"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-cheat-sheet",
+      "name": "Quick-Reference Cheat Sheet",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Space Grotesk",
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0369a1",
+        "#0f172a"
+      ],
+      "tags": [
+        "cheat-sheet",
+        "reference",
+        "two-column",
+        "compact"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-tutorial-guide",
+      "name": "Hands-On Developer Tutorial",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Work Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#059669",
+        "#1c2026"
+      ],
+      "tags": [
+        "tutorial",
+        "walkthrough",
+        "learning",
+        "code"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-protocol-rfc",
+      "name": "IETF Protocol Specification (RFC)",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Mono"
+      ],
+      "palette": [
+        "#ffffff",
+        "#141414",
+        "#141414"
+      ],
+      "tags": [
+        "ietf",
+        "rfc",
+        "protocol",
+        "monospace"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "tech-man-page",
+      "name": "UNIX Man-Page Edition",
+      "category": "Technical Docs",
+      "archetype": "techdoc",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Courier Prime"
+      ],
+      "palette": [
+        "#fcfcfa",
+        "#1e293b",
+        "#111111"
+      ],
+      "tags": [
+        "unix",
+        "man-page",
+        "cli",
+        "monospace"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-lecture-notes",
+      "name": "University Lecture Notes",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Inter",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1d4ed8",
+        "#1e293b"
+      ],
+      "tags": [
+        "lecture",
+        "notes",
+        "university",
+        "stem"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-practice-worksheet",
+      "name": "Classroom Practice Worksheet",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Work Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#0f766e",
+        "#18181b"
+      ],
+      "tags": [
+        "worksheet",
+        "practice",
+        "classroom",
+        "clean"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-course-syllabus",
+      "name": "University Course Syllabus",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Lora"
+      ],
+      "palette": [
+        "#fffefa",
+        "#7a1f2b",
+        "#1c1917"
+      ],
+      "tags": [
+        "syllabus",
+        "course",
+        "university",
+        "schedule"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-formal-exam",
+      "name": "Formal Examination Paper",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#ffffff",
+        "#111827",
+        "#111111"
+      ],
+      "tags": [
+        "exam",
+        "test",
+        "formal",
+        "assessment"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-study-guide",
+      "name": "Comprehensive Study Guide",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "DM Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#7c3aed",
+        "#1e293b"
+      ],
+      "tags": [
+        "study-guide",
+        "review",
+        "exam-prep",
+        "purple"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-lesson-plan",
+      "name": "Educator Lesson Plan",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Merriweather",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#ffffff",
+        "#c2410c",
+        "#1f2937"
+      ],
+      "tags": [
+        "lesson-plan",
+        "teacher",
+        "curriculum",
+        "k12"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-study-cards",
+      "name": "Two-Column Concept Reference Cards",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#fafbff",
+        "#0369a1",
+        "#0f172a"
+      ],
+      "tags": [
+        "flashcards",
+        "cards",
+        "two-column",
+        "study"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "edu-cornell-notes",
+      "name": "Cornell Method Study Notes",
+      "category": "Education",
+      "archetype": "education",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Serif",
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#fffef9",
+        "#15803d",
+        "#1e293b"
+      ],
+      "tags": [
+        "cornell",
+        "notes",
+        "ruled",
+        "study"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-bullet-journal",
+      "name": "Dot-Grid Bullet Journal",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Caveat",
+        "Work Sans"
+      ],
+      "palette": [
+        "#fcfbf7",
+        "#0f766e",
+        "#24211d"
+      ],
+      "tags": [
+        "bullet-journal",
+        "dot-grid",
+        "habits",
+        "handwritten"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-reflective-diary",
+      "name": "Private Reflective Diary",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Caveat",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#faf7f0",
+        "#7a1f2b",
+        "#262019"
+      ],
+      "tags": [
+        "diary",
+        "journal",
+        "personal",
+        "warm"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-recipe-folio",
+      "name": "Kitchen Recipe Card Folio",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Lora"
+      ],
+      "palette": [
+        "#fffdf8",
+        "#b45309",
+        "#231e19"
+      ],
+      "tags": [
+        "recipe",
+        "cooking",
+        "kitchen",
+        "cards"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-travel-log",
+      "name": "Field Travel Logbook",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "Crimson Pro"
+      ],
+      "palette": [
+        "#f9f7f2",
+        "#1e40af",
+        "#1e2421"
+      ],
+      "tags": [
+        "travel",
+        "logbook",
+        "field-notes",
+        "adventure"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-meeting-notes",
+      "name": "Structured Meeting Notes",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#2563eb",
+        "#18202c"
+      ],
+      "tags": [
+        "meeting",
+        "notes",
+        "minutes",
+        "action-items"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-daily-planner",
+      "name": "Daily Focus Planner",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "DM Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#4f46e5",
+        "#18181b"
+      ],
+      "tags": [
+        "planner",
+        "productivity",
+        "daily",
+        "checklist"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-weekly-review",
+      "name": "Weekly Reflection Review",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Lora",
+        "Source Sans 3"
+      ],
+      "palette": [
+        "#fcfdfb",
+        "#166534",
+        "#1c2420"
+      ],
+      "tags": [
+        "weekly-review",
+        "reflection",
+        "gtd",
+        "green"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "personal-gratitude-journal",
+      "name": "Gratitude & Mindfulness Journal",
+      "category": "Personal & Journal",
+      "archetype": "journal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Caveat",
+        "Lora"
+      ],
+      "palette": [
+        "#fdfaf6",
+        "#9d174d",
+        "#29221d"
+      ],
+      "tags": [
+        "gratitude",
+        "mindfulness",
+        "calm",
+        "journal"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-services-contract",
+      "name": "Master Services Contract",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1e3a5f",
+        "#111111"
+      ],
+      "tags": [
+        "contract",
+        "msa",
+        "agreement",
+        "legal"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-mutual-nda",
+      "name": "Mutual Non-Disclosure Agreement",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#ffffff",
+        "#111827",
+        "#141414"
+      ],
+      "tags": [
+        "nda",
+        "confidentiality",
+        "legal",
+        "mutual"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-terms-of-service",
+      "name": "Terms of Service & Privacy Policy",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "IBM Plex Sans"
+      ],
+      "palette": [
+        "#ffffff",
+        "#1d4ed8",
+        "#18202c"
+      ],
+      "tags": [
+        "tos",
+        "terms",
+        "saas",
+        "compliance"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-appellate-brief",
+      "name": "Appellate Legal Brief",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "EB Garamond"
+      ],
+      "palette": [
+        "#fffef9",
+        "#1e3a5f",
+        "#141414"
+      ],
+      "tags": [
+        "brief",
+        "court",
+        "litigation",
+        "garamond"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-corporate-bylaws",
+      "name": "Corporate & Nonprofit Bylaws",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "Crimson Pro"
+      ],
+      "palette": [
+        "#ffffff",
+        "#7a1f2b",
+        "#1c1917"
+      ],
+      "tags": [
+        "bylaws",
+        "governance",
+        "board",
+        "nonprofit"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "legal-official-certificate",
+      "name": "Official Certificate & Citation",
+      "category": "Legal & Formal",
+      "archetype": "legal",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "Cormorant Garamond"
+      ],
+      "palette": [
+        "#faf6ec",
+        "#7a1f2b",
+        "#1f1912"
+      ],
+      "tags": [
+        "certificate",
+        "award",
+        "citation",
+        "framed"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-typewriter",
+      "name": "Vintage Typewriter Dispatch",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Special Elite",
+        "Courier Prime"
+      ],
+      "palette": [
+        "#f6f2e8",
+        "#991b1b",
+        "#1d1a16"
+      ],
+      "tags": [
+        "typewriter",
+        "vintage",
+        "retro",
+        "monospace"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-blueprint",
+      "name": "Architectural Blueprint",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Space Grotesk",
+        "IBM Plex Mono"
+      ],
+      "palette": [
+        "#0d2847",
+        "#7dd3fc",
+        "#f0f7ff"
+      ],
+      "tags": [
+        "blueprint",
+        "architecture",
+        "cyan",
+        "dark-paper"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-chalkboard",
+      "name": "Classroom Chalkboard",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Caveat",
+        "Work Sans"
+      ],
+      "palette": [
+        "#1b2e24",
+        "#fde047",
+        "#f3f6f1"
+      ],
+      "tags": [
+        "chalkboard",
+        "slate",
+        "dark-paper",
+        "handwritten"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-retro-70s",
+      "name": "Retro 1970s Editorial",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Playfair Display",
+        "Merriweather"
+      ],
+      "palette": [
+        "#fbf3e4",
+        "#c2410c",
+        "#2b1d12"
+      ],
+      "tags": [
+        "retro",
+        "1970s",
+        "warm",
+        "groovy"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-art-deco",
+      "name": "Art Deco Gilded Folio",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "Cormorant Garamond"
+      ],
+      "palette": [
+        "#161922",
+        "#e0b86b",
+        "#f5efe0"
+      ],
+      "tags": [
+        "art-deco",
+        "gold",
+        "noir",
+        "dark-paper"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-brutalist",
+      "name": "Neo-Brutalist Zine",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Bebas Neue",
+        "Space Grotesk"
+      ],
+      "palette": [
+        "#f4f4f0",
+        "#0a0a0a",
+        "#0a0a0a"
+      ],
+      "tags": [
+        "brutalist",
+        "bold",
+        "raw",
+        "poster"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-swiss-grid",
+      "name": "Swiss International Grid",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "A4",
+      "columns": 1,
+      "fonts": [
+        "Inter"
+      ],
+      "palette": [
+        "#ffffff",
+        "#dc2626",
+        "#111111"
+      ],
+      "tags": [
+        "swiss",
+        "international",
+        "grid",
+        "zurich"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-bauhaus",
+      "name": "Bauhaus Geometric",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Montserrat",
+        "Work Sans"
+      ],
+      "palette": [
+        "#faf6ec",
+        "#1d4ed8",
+        "#141414"
+      ],
+      "tags": [
+        "bauhaus",
+        "geometric",
+        "primary",
+        "modernism"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-vaporwave",
+      "name": "Vaporwave Synthwave",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Oswald",
+        "Space Grotesk"
+      ],
+      "palette": [
+        "#19122e",
+        "#f472b6",
+        "#f4edff"
+      ],
+      "tags": [
+        "vaporwave",
+        "synthwave",
+        "neon",
+        "dark-paper"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-illuminated-manuscript",
+      "name": "Illuminated Manuscript",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cinzel",
+        "EB Garamond"
+      ],
+      "palette": [
+        "#f6eedc",
+        "#8c1d18",
+        "#261c12"
+      ],
+      "tags": [
+        "manuscript",
+        "medieval",
+        "illuminated",
+        "parchment"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-newspaper-sepia",
+      "name": "Sepia Heritage Newspaper",
+      "category": "Creative & Special",
+      "archetype": "magazine",
+      "pageSize": "Letter",
+      "columns": 2,
+      "fonts": [
+        "Playfair Display",
+        "Libre Baskerville"
+      ],
+      "palette": [
+        "#f3ead8",
+        "#5c2d16",
+        "#221a12"
+      ],
+      "tags": [
+        "sepia",
+        "heritage",
+        "antique",
+        "newspaper"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-crt-terminal",
+      "name": "CRT Phosphor Terminal",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "JetBrains Mono"
+      ],
+      "palette": [
+        "#0d1117",
+        "#34d399",
+        "#d1fae5"
+      ],
+      "tags": [
+        "terminal",
+        "phosphor",
+        "hacker",
+        "dark-paper"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-watercolor-botanical",
+      "name": "Botanical Watercolor Atelier",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Cormorant Garamond",
+        "Lora"
+      ],
+      "palette": [
+        "#fbfaf7",
+        "#2f6b55",
+        "#242925"
+      ],
+      "tags": [
+        "watercolor",
+        "botanical",
+        "soft",
+        "organic"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    },
+    {
+      "id": "creative-minimal-zen",
+      "name": "Minimalist Zen Monograph",
+      "category": "Creative & Special",
+      "archetype": "creative",
+      "pageSize": "Letter",
+      "columns": 1,
+      "fonts": [
+        "Raleway",
+        "Source Serif 4"
+      ],
+      "palette": [
+        "#f9f9f7",
+        "#3f4f44",
+        "#1e1f1c"
+      ],
+      "tags": [
+        "zen",
+        "minimal",
+        "calm",
+        "whitespace"
+      ],
+      "images": [
+        "images/figure-1.svg"
+      ],
+      "thumbnail": "thumb.png"
+    }
+  ]
+}

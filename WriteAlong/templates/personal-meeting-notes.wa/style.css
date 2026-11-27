@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Write Along Template: Structured Meeting Notes
+   Category: Personal & Journal · Archetype: journal
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.8in 0.82in 0.85in 0.82in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #18202c;
+  --muted-color: #516075;
+  --accent-color: #2563eb;
+  --accent-secondary: #0f766e;
+  --surface-color: #f4f7fb;
+  --border-color: #d5dfec;
+
+  /* Typography */
+  --body-font: "Inter", -apple-system, sans-serif;
+  --heading-font: "Inter", -apple-system, sans-serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10pt;
+  --line-height: 1.54;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.8in 0.82in 0.85in 0.82in;
+  background: #ffffff;
+  @top-left {
+    content: "Structured Meeting Notes";
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #516075;
+  }
+  @top-right {
+    content: "Personal & Journal";
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #516075;
+  }
+  @bottom-left {
+    content: "Personal & Journal";
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #516075;
+    border-top: 0.5pt solid #d5dfec;
+    padding-top: 6pt;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #516075;
+    border-top: 0.5pt solid #d5dfec;
+    padding-top: 6pt;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (journal)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 1.5px dashed var(--accent-color);
+  padding-bottom: 1em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.15);
+  color: var(--accent-color);
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.55em;
+}
+blockquote {
+  border-left: 3px solid var(--accent-secondary);
+  background: var(--surface-color);
+  font-style: italic;
+}
+.callout {
+  border-style: dashed;
+}
+
+h2 {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 0.55em;
+}

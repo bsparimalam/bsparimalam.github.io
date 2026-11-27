@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Write Along Template: Retro Facsimile Transmission
+   Category: Letters & Correspondence · Archetype: letter
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.85in 0.85in 0.85in 0.85in;
+
+  /* Color Palette */
+  --page-background: #f8f8f5;
+  --text-color: #141414;
+  --muted-color: #4d4d4d;
+  --accent-color: #1f2937;
+  --accent-secondary: #374151;
+  --surface-color: #ededeb;
+  --border-color: #b8b8b2;
+
+  /* Typography */
+  --body-font: "Courier Prime", ui-monospace, monospace;
+  --heading-font: "Oswald", -apple-system, sans-serif;
+  --code-font: "Courier Prime", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.48;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.85in 0.85in 0.85in 0.85in;
+  background: #f8f8f5;
+  @top-left {
+    content: "Retro Facsimile Transmission";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #4d4d4d;
+  }
+  @top-right {
+    content: "Letters & Correspondence";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #4d4d4d;
+  }
+  @bottom-left {
+    content: "Retro Facsimile Transmission";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #4d4d4d;
+  }
+  @bottom-right {
+    content: "Page " counter(page);
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #4d4d4d;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (letter)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.9em;
+  margin-bottom: 1.6em;
+}
+.title-block .organization {
+  font-size: 1.05em;
+  letter-spacing: 0.12em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.65);
+  margin-bottom: 0.2em;
+}
+.title-block .abstract { display: none; }
+h2 {
+  font-size: calc(var(--body-size) * 1.12);
+  color: var(--accent-color);
+  margin-top: 1.3em;
+  margin-bottom: 0.4em;
+}
+blockquote {
+  border-left: 2.5px solid var(--accent-color);
+  background: var(--surface-color);
+  font-size: 0.95em;
+}
+table {
+  font-size: 0.92em;
+}
+.signature-block {
+  margin-top: 2.2em;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.8em;
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Double editorial rule beneath header */
+.title-block {
+  border-top: 3px solid var(--text-color);
+  border-bottom: 3px double var(--text-color);
+  padding: 1.1em 0;
+}

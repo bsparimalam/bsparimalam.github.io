@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Write Along Template: Vaporwave Synthwave
+   Category: Creative & Special · Archetype: creative
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.85in 0.85in 0.9in 0.85in;
+
+  /* Color Palette */
+  --page-background: #19122e;
+  --text-color: #f4edff;
+  --muted-color: #c4b5fd;
+  --accent-color: #f472b6;
+  --accent-secondary: #38bdf8;
+  --surface-color: #251c42;
+  --border-color: #4c3b7a;
+
+  /* Typography */
+  --body-font: "Space Grotesk", -apple-system, sans-serif;
+  --heading-font: "Oswald", -apple-system, sans-serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10pt;
+  --line-height: 1.58;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.85in 0.85in 0.9in 0.85in;
+  background: #19122e;
+  @top-left {
+    content: "Vaporwave Synthwave";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #c4b5fd;
+  }
+  @top-right {
+    content: "Creative & Special";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #c4b5fd;
+  }
+  @bottom-left {
+    content: "Creative & Special";
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #c4b5fd;
+    border-top: 0.5pt solid #4c3b7a;
+    padding-top: 6pt;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Oswald", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #c4b5fd;
+    border-top: 0.5pt solid #4c3b7a;
+    padding-top: 6pt;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (creative)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 3px solid var(--accent-color);
+  padding-bottom: 1.1em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.45);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--accent-color);
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1.5px solid var(--border-color);
+  padding-bottom: 0.22em;
+  margin-top: 1.55em;
+}
+h3 {
+  color: var(--accent-secondary);
+}
+blockquote {
+  border-left: 4px solid var(--accent-color);
+  background: var(--surface-color);
+}
+table th {
+  background: var(--surface-color);
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* High-contrast callouts & tables tuned for dark paper themes */
+.callout {
+  background: var(--surface-color);
+  border-color: var(--border-color);
+}
+.callout-note .callout-title { color: #7dd3fc; }
+.callout-tip .callout-title { color: #86efac; }
+.callout-important .callout-title { color: #d8b4fe; }
+.callout-warning .callout-title { color: #fcd34d; }
+.callout-caution .callout-title { color: #fca5a5; }
+th {
+  border-top-color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 0.55em;
+}

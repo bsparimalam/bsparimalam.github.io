@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Write Along Template: Kitchen Recipe Card Folio
+   Category: Personal & Journal · Archetype: journal
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.85in 0.85in 0.88in 0.85in;
+
+  /* Color Palette */
+  --page-background: #fffdf8;
+  --text-color: #231e19;
+  --muted-color: #64594d;
+  --accent-color: #b45309;
+  --accent-secondary: #15803d;
+  --surface-color: #faf3e6;
+  --border-color: #e4d4b9;
+
+  /* Typography */
+  --body-font: "Lora", Georgia, serif;
+  --heading-font: "Playfair Display", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.56;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.85in 0.85in 0.88in 0.85in;
+  background: #fffdf8;
+  @top-left {
+    content: "Kitchen Recipe Card Folio";
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #64594d;
+  }
+  @top-right {
+    content: "Personal & Journal";
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    color: #64594d;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8.5pt;
+    color: #64594d;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (journal)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 1.5px dashed var(--accent-color);
+  padding-bottom: 1em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.15);
+  color: var(--accent-color);
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.55em;
+}
+blockquote {
+  border-left: 3px solid var(--accent-secondary);
+  background: var(--surface-color);
+  font-style: italic;
+}
+.callout {
+  border-style: dashed;
+}
+
+/* Decorative sheet frame on every page (screen & print) */
+.wa-page, .wa-document {
+  outline: 1.5px dashed #d6be96;
+  outline-offset: -18px;
+}

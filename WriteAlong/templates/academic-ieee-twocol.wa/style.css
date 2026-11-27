@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Write Along Template: IEEE Two-Column Proceedings
+   Category: Academic Papers · Archetype: academic
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.72in 0.65in 0.78in 0.65in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #111827;
+  --muted-color: #4b5563;
+  --accent-color: #0b3d91;
+  --accent-secondary: #1d4ed8;
+  --surface-color: #f3f6fb;
+  --border-color: #cbd5e1;
+
+  /* Typography */
+  --body-font: "Source Serif 4", Georgia, serif;
+  --heading-font: "Source Serif 4", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 9.5pt;
+  --line-height: 1.44;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 2;
+  --column-gap: 0.25in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.72in 0.65in 0.78in 0.65in;
+  background: #ffffff;
+  @top-left {
+    content: "IEEE Two-Column Proceedings";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #4b5563;
+  }
+  @top-right {
+    content: "Academic Papers";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    color: #4b5563;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8.5pt;
+    color: #4b5563;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (academic)
+   ========================================================================== */
+
+.title-block {
+  text-align: center;
+  border-bottom: 1pt solid var(--border-color);
+  padding-bottom: 1.15em;
+  margin-bottom: 1.4em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.95);
+  letter-spacing: -0.01em;
+}
+.title-block .meta-line { justify-content: center; font-size: 0.92em; }
+.title-block .abstract {
+  text-align: left;
+  margin-top: 1em;
+  padding: 0.8em 1.05em;
+  font-size: 0.9em;
+  background: var(--surface-color);
+  border-left: 3px solid var(--accent-color);
+}
+h2 {
+  font-size: calc(var(--body-size) * 1.24);
+  margin-top: 1.35em;
+  border-bottom: 0.6pt solid var(--border-color);
+  padding-bottom: 0.2em;
+  color: var(--accent-color);
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.06);
+  font-style: italic;
+  margin-top: 1em;
+}
+table {
+  border-top: 1.5pt solid var(--text-color);
+  border-bottom: 1.5pt solid var(--text-color);
+}
+th {
+  background: transparent;
+  border-top: 0;
+  border-bottom: 0.8pt solid var(--text-color);
+}
+td { border-bottom: 0.4pt solid var(--border-color); }
+.figure {
+  padding: 0.5em;
+  border: 0.5pt solid var(--border-color);
+  background: var(--page-background);
+}
+
+/* Full-width figures and tables across two-column layouts (LaTeX table*/figure*) */
+.wa-body > table,
+.wa-body > .figure {
+  column-span: all;
+}
+
+/* Automatic LaTeX-style section numbering (continuous across pages) */
+.wa-pages, .wa-document { counter-reset: sec; }
+.wa-body h2 { counter-increment: sec; counter-reset: subsec; }
+.wa-body h2::before {
+  content: counter(sec) ". ";
+  color: var(--accent-color);
+  font-weight: 700;
+}
+.wa-body h3 { counter-increment: subsec; }
+.wa-body h3::before {
+  content: counter(sec) "." counter(subsec) " ";
+  color: var(--muted-color);
+  font-weight: 600;
+}
+
+/* Justified book/academic text with hyphenation */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Write Along Template: Software Developer Technical Resume
+   Category: Resumes & CVs · Archetype: resume
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.7in 0.72in 0.75in 0.72in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #0f172a;
+  --muted-color: #475569;
+  --accent-color: #4338ca;
+  --accent-secondary: #6366f1;
+  --surface-color: #f1f5f9;
+  --border-color: #cbd5e1;
+
+  /* Typography */
+  --body-font: "IBM Plex Sans", -apple-system, sans-serif;
+  --heading-font: "IBM Plex Mono", ui-monospace, monospace;
+  --code-font: "IBM Plex Mono", ui-monospace, monospace;
+  --body-size: 9.8pt;
+  --line-height: 1.48;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.7in 0.72in 0.75in 0.72in;
+  background: #ffffff;
+  @top-left {
+    content: "Software Developer Technical Resume";
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #475569;
+  }
+  @top-right {
+    content: "Resumes & CVs";
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #475569;
+  }
+  @bottom-left {
+    content: "Resumes & CVs";
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #475569;
+    border-top: 0.5pt solid #cbd5e1;
+    padding-top: 6pt;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #475569;
+    border-top: 0.5pt solid #cbd5e1;
+    padding-top: 6pt;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (resume)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 2.5px solid var(--accent-color);
+  padding-bottom: 0.85em;
+  margin-bottom: 1.25em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.25);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15em;
+}
+.title-block .subtitle {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: calc(var(--body-size) * 1.12);
+  margin-bottom: 0.45em;
+}
+.title-block .meta-line {
+  gap: 0.25em 1.1em;
+  font-size: 0.88em;
+}
+h2 {
+  font-size: calc(var(--body-size) * 1.08);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.25em;
+  margin-bottom: 0.55em;
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.02);
+  margin-top: 0.85em;
+  margin-bottom: 0.2em;
+}
+ul {
+  padding-left: 1.25em;
+  margin-bottom: 0.6em;
+}
+li { margin-bottom: 0.2em; }
+table th {
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1.5px solid var(--accent-color);
+}
+
+h2 {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 0.55em;
+}

@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Write Along Template: Formal Gala & Symposium Invitation
+   Category: Letters & Correspondence · Archetype: letter
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 1in 1.05in 1in 1.05in;
+
+  /* Color Palette */
+  --page-background: #faf6ee;
+  --text-color: #231c16;
+  --muted-color: #645648;
+  --accent-color: #7a1f2b;
+  --accent-secondary: #92400e;
+  --surface-color: #f3eadb;
+  --border-color: #d9c8ae;
+
+  /* Typography */
+  --body-font: "Cormorant Garamond", Georgia, serif;
+  --heading-font: "Cinzel", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 12pt;
+  --line-height: 1.6;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 1in 1.05in 1in 1.05in;
+  background: #faf6ee;
+  @top-left {
+    content: "Formal Gala & Symposium Invitation";
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #645648;
+  }
+  @top-right {
+    content: "Letters & Correspondence";
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8pt;
+    color: #645648;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8.5pt;
+    color: #645648;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (letter)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.9em;
+  margin-bottom: 1.6em;
+}
+.title-block .organization {
+  font-size: 1.05em;
+  letter-spacing: 0.12em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.65);
+  margin-bottom: 0.2em;
+}
+.title-block .abstract { display: none; }
+h2 {
+  font-size: calc(var(--body-size) * 1.12);
+  color: var(--accent-color);
+  margin-top: 1.3em;
+  margin-bottom: 0.4em;
+}
+blockquote {
+  border-left: 2.5px solid var(--accent-color);
+  background: var(--surface-color);
+  font-size: 0.95em;
+}
+table {
+  font-size: 0.92em;
+}
+.signature-block {
+  margin-top: 2.2em;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.8em;
+}
+
+/* Decorative sheet frame on every page (screen & print) */
+.wa-page, .wa-document {
+  outline: 2px double #bfa57a;
+  outline-offset: -18px;
+}
+
+/* Centered classical title block */
+.title-block {
+  text-align: center;
+}
+.title-block .meta-line {
+  justify-content: center;
+}

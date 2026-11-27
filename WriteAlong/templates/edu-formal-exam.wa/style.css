@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Write Along Template: Formal Examination Paper
+   Category: Education · Archetype: education
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.9in 0.9in 0.9in 0.9in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #111111;
+  --muted-color: #4b5563;
+  --accent-color: #111827;
+  --accent-secondary: #374151;
+  --surface-color: #f8f9fa;
+  --border-color: #d1d5db;
+
+  /* Typography */
+  --body-font: "Libre Baskerville", Georgia, serif;
+  --heading-font: "Libre Baskerville", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.6;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.9in 0.9in 0.9in 0.9in;
+  background: #ffffff;
+  @top-left {
+    content: "Formal Examination Paper";
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #4b5563;
+  }
+  @top-right {
+    content: "Education";
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 8pt;
+    color: #4b5563;
+  }
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 8pt;
+    color: #4b5563;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (education)
+   ========================================================================== */
+
+.title-block {
+  border: 1.5px solid var(--accent-color);
+  border-radius: var(--radius);
+  padding: 1.1em 1.35em;
+  margin-bottom: 1.5em;
+  background: var(--surface-color);
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.9);
+  color: var(--accent-color);
+}
+h2 {
+  background: var(--surface-color);
+  border-left: 4px solid var(--accent-color);
+  padding: 0.3em 0.7em;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--accent-color);
+  margin-top: 1.5em;
+}
+h3 {
+  color: var(--accent-secondary);
+}
+table th {
+  background: var(--surface-color);
+  border-top: 1.5px solid var(--accent-color);
+  border-bottom: 1.5px solid var(--accent-color);
+}
+
+/* Centered classical title block */
+.title-block {
+  text-align: center;
+}
+.title-block .meta-line {
+  justify-content: center;
+}
+
+/* Double editorial rule beneath header */
+.title-block {
+  border-top: 3px solid var(--text-color);
+  border-bottom: 3px double var(--text-color);
+  padding: 1.1em 0;
+}

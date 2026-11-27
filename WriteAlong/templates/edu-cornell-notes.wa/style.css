@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Write Along Template: Cornell Method Study Notes
+   Category: Education · Archetype: education
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.85in 0.85in 0.9in 1.15in;
+
+  /* Color Palette */
+  --page-background: #fffef9;
+  --text-color: #1e293b;
+  --muted-color: #475569;
+  --accent-color: #15803d;
+  --accent-secondary: #0f766e;
+  --surface-color: #f3faf5;
+  --border-color: #cde5d3;
+
+  /* Typography */
+  --body-font: "IBM Plex Sans", -apple-system, sans-serif;
+  --heading-font: "IBM Plex Serif", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.2pt;
+  --line-height: 1.58;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.85in 0.85in 0.9in 1.15in;
+  background: #fffef9;
+  @top-left {
+    content: "Cornell Method Study Notes";
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #475569;
+  }
+  @top-right {
+    content: "Education";
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 8pt;
+    color: #475569;
+  }
+  @bottom-left {
+    content: "Cornell Method Study Notes";
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 8pt;
+    color: #475569;
+  }
+  @bottom-right {
+    content: "Page " counter(page);
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 8pt;
+    color: #475569;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (education)
+   ========================================================================== */
+
+.title-block {
+  border: 1.5px solid var(--accent-color);
+  border-radius: var(--radius);
+  padding: 1.1em 1.35em;
+  margin-bottom: 1.5em;
+  background: var(--surface-color);
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.9);
+  color: var(--accent-color);
+}
+h2 {
+  background: var(--surface-color);
+  border-left: 4px solid var(--accent-color);
+  padding: 0.3em 0.7em;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--accent-color);
+  margin-top: 1.5em;
+}
+h3 {
+  color: var(--accent-secondary);
+}
+table th {
+  background: var(--surface-color);
+  border-top: 1.5px solid var(--accent-color);
+  border-bottom: 1.5px solid var(--accent-color);
+}
+
+/* Subtle ruled notebook lines */
+.wa-page, .wa-document {
+  background-image: linear-gradient(to bottom, transparent calc(1.75em - 1px), #cde5d3 1.75em);
+  background-size: 100% 1.75em;
+}
+
+h2 {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 0.55em;
+}

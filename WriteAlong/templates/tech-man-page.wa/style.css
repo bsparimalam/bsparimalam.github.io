@@ -1,0 +1,130 @@
+/* ==========================================================================
+   Write Along Template: UNIX Man-Page Edition
+   Category: Technical Docs · Archetype: techdoc
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.85in 0.85in 0.85in 0.85in;
+
+  /* Color Palette */
+  --page-background: #fcfcfa;
+  --text-color: #111111;
+  --muted-color: #4a4a4a;
+  --accent-color: #1e293b;
+  --accent-secondary: #475569;
+  --surface-color: #f2f2ee;
+  --border-color: #d4d4cc;
+
+  /* Typography */
+  --body-font: "Courier Prime", ui-monospace, monospace;
+  --heading-font: "Courier Prime", ui-monospace, monospace;
+  --code-font: "Courier Prime", ui-monospace, monospace;
+  --body-size: 10pt;
+  --line-height: 1.46;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.85in 0.85in 0.85in 0.85in;
+  background: #fcfcfa;
+  @top-left {
+    content: "UNIX Man-Page Edition";
+    font-family: "Courier Prime", ui-monospace, monospace;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #4a4a4a;
+  }
+  @top-right {
+    content: "Technical Docs";
+    font-family: "Courier Prime", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #4a4a4a;
+  }
+  @bottom-left {
+    content: "Technical Docs";
+    font-family: "Courier Prime", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #4a4a4a;
+    border-top: 0.5pt solid #d4d4cc;
+    padding-top: 6pt;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Courier Prime", ui-monospace, monospace;
+    font-size: 8pt;
+    color: #4a4a4a;
+    border-top: 0.5pt solid #d4d4cc;
+    padding-top: 6pt;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (techdoc)
+   ========================================================================== */
+
+.title-block {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--accent-color);
+  border-radius: var(--radius);
+  padding: 1.25em 1.4em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.05);
+  letter-spacing: -0.02em;
+}
+h2 {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.25em;
+  margin-top: 1.6em;
+}
+h3 {
+  color: var(--accent-color);
+  margin-top: 1.2em;
+}
+code {
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+}
+pre {
+  border-left: 3px solid var(--accent-color);
+  background: var(--surface-color);
+}
+pre code {
+  border: 0;
+  color: var(--text-color);
+}
+table th {
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

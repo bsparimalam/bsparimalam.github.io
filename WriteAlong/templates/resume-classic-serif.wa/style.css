@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Write Along Template: Classic Serif Resume
+   Category: Resumes & CVs · Archetype: resume
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.72in 0.75in 0.75in 0.75in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #1a1a1a;
+  --muted-color: #525252;
+  --accent-color: #1e3a5f;
+  --accent-secondary: #33658a;
+  --surface-color: #f6f8fa;
+  --border-color: #d1d5db;
+
+  /* Typography */
+  --body-font: "EB Garamond", Georgia, serif;
+  --heading-font: "EB Garamond", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.46;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.72in 0.75in 0.75in 0.75in;
+  background: #ffffff;
+  @top-left {
+    content: "Classic Serif Resume";
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #525252;
+  }
+  @top-right {
+    content: "Resumes & CVs";
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8pt;
+    color: #525252;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 8.5pt;
+    color: #525252;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (resume)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 2.5px solid var(--accent-color);
+  padding-bottom: 0.85em;
+  margin-bottom: 1.25em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.25);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15em;
+}
+.title-block .subtitle {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: calc(var(--body-size) * 1.12);
+  margin-bottom: 0.45em;
+}
+.title-block .meta-line {
+  gap: 0.25em 1.1em;
+  font-size: 0.88em;
+}
+h2 {
+  font-size: calc(var(--body-size) * 1.08);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.25em;
+  margin-bottom: 0.55em;
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.02);
+  margin-top: 0.85em;
+  margin-bottom: 0.2em;
+}
+ul {
+  padding-left: 1.25em;
+  margin-bottom: 0.6em;
+}
+li { margin-bottom: 0.2em; }
+table th {
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1.5px solid var(--accent-color);
+}
+
+/* Centered classical title block */
+.title-block {
+  text-align: center;
+}
+.title-block .meta-line {
+  justify-content: center;
+}

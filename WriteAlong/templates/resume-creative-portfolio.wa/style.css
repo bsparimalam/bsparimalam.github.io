@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Write Along Template: Creative Director Resume
+   Category: Resumes & CVs · Archetype: resume
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.78in 0.8in 0.8in 0.8in;
+
+  /* Color Palette */
+  --page-background: #fdfbf7;
+  --text-color: #1e1b18;
+  --muted-color: #5e564e;
+  --accent-color: #b45309;
+  --accent-secondary: #d97706;
+  --surface-color: #fef9ee;
+  --border-color: #e8d7b7;
+
+  /* Typography */
+  --body-font: "DM Sans", -apple-system, sans-serif;
+  --heading-font: "Playfair Display", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10pt;
+  --line-height: 1.52;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.78in 0.8in 0.8in 0.8in;
+  background: #fdfbf7;
+  @top-left {
+    content: "Creative Director Resume";
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #5e564e;
+  }
+  @top-right {
+    content: "Resumes & CVs";
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    color: #5e564e;
+  }
+  @bottom-left {
+    content: "Creative Director Resume";
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    color: #5e564e;
+  }
+  @bottom-right {
+    content: "Page " counter(page);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 8pt;
+    color: #5e564e;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (resume)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 2.5px solid var(--accent-color);
+  padding-bottom: 0.85em;
+  margin-bottom: 1.25em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.25);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15em;
+}
+.title-block .subtitle {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: calc(var(--body-size) * 1.12);
+  margin-bottom: 0.45em;
+}
+.title-block .meta-line {
+  gap: 0.25em 1.1em;
+  font-size: 0.88em;
+}
+h2 {
+  font-size: calc(var(--body-size) * 1.08);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.25em;
+  margin-bottom: 0.55em;
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.02);
+  margin-top: 0.85em;
+  margin-bottom: 0.2em;
+}
+ul {
+  padding-left: 1.25em;
+  margin-bottom: 0.6em;
+}
+li { margin-bottom: 0.2em; }
+table th {
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1.5px solid var(--accent-color);
+}
+
+h2 {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 0.55em;
+}

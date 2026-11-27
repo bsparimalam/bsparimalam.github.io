@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Write Along Template: Daily Focus Planner
+   Category: Personal & Journal · Archetype: journal
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.78in 0.78in 0.82in 0.78in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #18181b;
+  --muted-color: #52525b;
+  --accent-color: #4f46e5;
+  --accent-secondary: #0ea5e9;
+  --surface-color: #f5f6ff;
+  --border-color: #d4d8f7;
+
+  /* Typography */
+  --body-font: "DM Sans", -apple-system, sans-serif;
+  --heading-font: "Space Grotesk", -apple-system, sans-serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10pt;
+  --line-height: 1.55;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.78in 0.78in 0.82in 0.78in;
+  background: #ffffff;
+  @top-left {
+    content: "Daily Focus Planner";
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #52525b;
+  }
+  @top-right {
+    content: "Personal & Journal";
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 8pt;
+    color: #52525b;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 8.5pt;
+    color: #52525b;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (journal)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 1.5px dashed var(--accent-color);
+  padding-bottom: 1em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.15);
+  color: var(--accent-color);
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.55em;
+}
+blockquote {
+  border-left: 3px solid var(--accent-secondary);
+  background: var(--surface-color);
+  font-style: italic;
+}
+.callout {
+  border-style: dashed;
+}
+
+/* Subtle dot-grid stationery paper */
+.wa-page, .wa-document {
+  background-image: radial-gradient(#d4d8f7 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+h2 {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--page-background);
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius);
+  font-size: calc(var(--body-size) * 1.15);
+}

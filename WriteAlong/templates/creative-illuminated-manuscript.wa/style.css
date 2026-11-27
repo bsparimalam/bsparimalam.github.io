@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Write Along Template: Illuminated Manuscript
+   Category: Creative & Special · Archetype: creative
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 1in 1in 1in 1in;
+
+  /* Color Palette */
+  --page-background: #f6eedc;
+  --text-color: #261c12;
+  --muted-color: #634f38;
+  --accent-color: #8c1d18;
+  --accent-secondary: #1e3a8a;
+  --surface-color: #ede0c5;
+  --border-color: #cfb88e;
+
+  /* Typography */
+  --body-font: "EB Garamond", Georgia, serif;
+  --heading-font: "Cinzel", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 11.5pt;
+  --line-height: 1.58;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 1in 1in 1in 1in;
+  background: #f6eedc;
+  @top-left {
+    content: "Illuminated Manuscript";
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #634f38;
+  }
+  @top-right {
+    content: "Creative & Special";
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8pt;
+    color: #634f38;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 8.5pt;
+    color: #634f38;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (creative)
+   ========================================================================== */
+
+.title-block {
+  border-bottom: 3px solid var(--accent-color);
+  padding-bottom: 1.1em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 2.45);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--accent-color);
+}
+h2 {
+  color: var(--accent-color);
+  border-bottom: 1.5px solid var(--border-color);
+  padding-bottom: 0.22em;
+  margin-top: 1.55em;
+}
+h3 {
+  color: var(--accent-secondary);
+}
+blockquote {
+  border-left: 4px solid var(--accent-color);
+  background: var(--surface-color);
+}
+table th {
+  background: var(--surface-color);
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Literary drop cap on the opening paragraph (Page 1 only) */
+.wa-first-body-p::first-letter {
+  float: left;
+  font-family: var(--heading-font);
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.14em;
+  padding-top: 0.04em;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* Small-caps opening line for classic editorial poise */
+.wa-first-body-p::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.05em;
+}
+
+/* Justified book/academic text with hyphenation */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Decorative sheet frame on every page (screen & print) */
+.wa-page, .wa-document {
+  outline: 3px double #8c1d18;
+  outline-offset: -18px;
+}

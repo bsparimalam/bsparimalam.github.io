@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Write Along Template: Mutual Non-Disclosure Agreement
+   Category: Legal & Formal · Archetype: legal
+   --------------------------------------------------------------------------
+   LAYER 1: Edit the variables inside :root to customize page size, fonts,
+            colors, and spacing without writing complex CSS.
+   LAYER 2: Element and class rules below control layout and typography.
+   ========================================================================== */
+
+:root {
+  /* Page Geometry */
+  --page-size: Letter;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --page-margin: 0.95in 0.95in 0.95in 0.95in;
+
+  /* Color Palette */
+  --page-background: #ffffff;
+  --text-color: #141414;
+  --muted-color: #525252;
+  --accent-color: #111827;
+  --accent-secondary: #4b5563;
+  --surface-color: #f7f7f7;
+  --border-color: #d4d4d4;
+
+  /* Typography */
+  --body-font: "Source Serif 4", Georgia, serif;
+  --heading-font: "Source Serif 4", Georgia, serif;
+  --code-font: "JetBrains Mono", ui-monospace, monospace;
+  --body-size: 10.5pt;
+  --line-height: 1.54;
+  --scale: 1.24;
+  --paragraph-spacing: 0.78em;
+  --paragraph-indent: 0;
+  --radius: 4px;
+
+  /* Multi-column Layout */
+  --columns: 1;
+  --column-gap: 0.28in;
+}
+
+/* Running Headers, Footers & Physical Page Box */
+@page {
+  size: Letter;
+  margin: 0.95in 0.95in 0.95in 0.95in;
+  background: #ffffff;
+  @top-left {
+    content: "Mutual Non-Disclosure Agreement";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: #525252;
+  }
+  @top-right {
+    content: "Legal & Formal";
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    color: #525252;
+  }
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 8pt;
+    color: #525252;
+  }
+}
+
+@page :first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* ==========================================================================
+   LAYER 2: Archetype Structure & Element Styling (legal)
+   ========================================================================== */
+
+.title-block {
+  text-align: center;
+  border-top: 2.5pt double var(--text-color);
+  border-bottom: 2.5pt double var(--text-color);
+  padding: 1.2em 0.8em;
+  margin-bottom: 1.6em;
+}
+.title-block .title {
+  font-size: calc(var(--body-size) * 1.75);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.title-block .meta-line { justify-content: center; }
+h2 {
+  font-size: calc(var(--body-size) * 1.15);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 0.8pt solid var(--text-color);
+  padding-bottom: 0.2em;
+  margin-top: 1.5em;
+}
+h3 {
+  font-size: calc(var(--body-size) * 1.04);
+  font-weight: 700;
+}
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+table th {
+  background: var(--surface-color);
+  border-top: 1.2pt solid var(--text-color);
+  border-bottom: 1.2pt solid var(--text-color);
+}
+
+
