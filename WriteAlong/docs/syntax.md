@@ -2,46 +2,47 @@
 title: Write Along Syntax & Template Guide
 subtitle: Complete Reference for Authors, Designers, and AI Agents
 author: Write Along Documentation
-date: Version 1.1.0
+date: Version 2.0.0
 category: Reference Manual
-abstract: Write Along combines the calm simplicity of GitHub Flavored Markdown with publication-grade CSS typography. Every document is a transparent .wa folder containing plain Markdown, CSS, images, and a self-contained HTML reader.
+abstract: Write Along combines the calm simplicity of GitHub Flavored Markdown with publication-grade CSS typography. Every document is a portable .wa.zip archive containing plain Markdown, CSS, images, a versioned live HTML reader, and an AI-ready syntax reference.
 ---
 
 [TOC]
 
 ## 1. Quick Start in 5 Minutes
 
-Welcome to **Write Along**. Every document you create is stored as a normal directory ending in `.wa`—for example, `quarterly-report.wa/`.
+Welcome to **Write Along**. Every document you create is stored as a single portable **`.wa.zip`** archive—for example, `quarterly-report.wa.zip`.
 
-1. **Create or open a document**: Use **File → New**, **Templates → Gallery**, or **File → Open .wa Folder…** to load an existing `.wa` directory from disk.
-2. **Write in Markdown**: Edit `content.md` on the left side of Edit Mode using standard GitHub Flavored Markdown.
+1. **Create, name, or open a document**: Use **File → New Document…** to choose a filename and title, click the document name in the topbar (`F2`) to rename inline, browse **Templates → Gallery**, or open an existing `.wa.zip` file from disk (or drag and drop it right onto the editor).
+2. **Write in Markdown & manage images**: Edit `content.md` on the left side of Edit Mode using standard GitHub Flavored Markdown—scrolling stays **synced both ways** between `content.md` and the live preview (toggle anytime via **View → Sync Scroll**). Switch to the **`images/`** tab next to `style.css` to upload, preview, rename (auto-updating references), replace, insert, or delete images.
 3. **Style & Page Setup**: Open **Edit → Page Setup…** (`Ctrl+Shift+P`) to pick paper size (`Letter`, `A4`, `A5`, `Legal`, `6×9`, or custom), Portrait/Landscape orientation, and margins—or switch to the `style.css` tab to customize any color, font, or selector live.
 4. **Preview and Read**: The live preview renders **discrete PDF-like pages** with running headers and page numbers that match print-to-PDF 1-to-1. Press `Ctrl+E` (or click **Read**) to hide the editor and read full-width.
-5. **Export or share**: Choose **File → Export PDF…** (uses native browser print with exact `@page` parity), **Export Standalone HTML…**, or share the `.wa` folder directly—anyone can open `read.html` in a modern browser.
+5. **Save, export, or share**: Click **File → Save** (`Ctrl+S`) or **File → Save As…** to write `content.md`, `style.css`, `images/`, live `wa-reader.2.0.0.html`, and `syntax.md` into your `.wa.zip` archive. Export print-ready PDFs anytime via **File → Export PDF (Print)…** (`Ctrl+P`).
 
 > [!TIP]
 > You can switch templates at any time without losing a single word. Open **Templates → Gallery** and click **Apply Style** to replace only `style.css` while keeping your `content.md` untouched.
 
 ---
 
-## 2. The `.wa` Format and Why It Is a Folder
+## 2. The `.wa.zip` Archive Format
 
-Unlike opaque binary `.docx` files, a `.wa` document is an ordinary directory:
+Unlike opaque proprietary formats, a `.wa.zip` document is a standard ZIP archive with plain-text source files at its root:
 
 ```text
-my-document.wa/
-├── content.md      # Document text in strict GitHub Flavored Markdown
-├── style.css       # Page size, fonts, colors, spacing, and element layout
-├── images/         # Local images referenced as images/figure-1.png
-├── read.html       # Self-contained viewer (works via HTTP and file://)
-└── syntax.md       # This reference + template-specific variables & classes
+my-document.wa.zip
+├── content.md              # Document text in strict GitHub Flavored Markdown
+├── style.css               # Page size, fonts, colors, spacing, and element layout
+├── images/                 # Local images referenced as images/figure-1.png
+├── wa-reader.2.0.0.html    # Versioned live HTML reader (no embedded copy of content.md)
+└── syntax.md               # This reference + template-specific variables & classes
 ```
 
-Because every file is plain text or standard media:
+Because it is a single ZIP file of standard web & Markdown artifacts:
 
-- It works effortlessly with **Git** diffs, code reviews, and text editors (VS Code, Vim, Emacs).
+- You can email, share, upload, or archive it as a **single portable file** without scattered loose folders.
+- Unzip it anywhere to inspect or edit `content.md` and `style.css` with **VS Code, Vim, Emacs, or Git**.
 - **AI coding assistants** can read `syntax.md`, inspect `style.css`, and help you edit or create custom templates with zero guesswork.
-- `read.html` renders identically on screen and when printed to PDF—and embeds an offline fallback copy of `content.md` and `style.css` whenever you save, so double-clicking `read.html` works even without a local web server.
+- **`wa-reader.2.0.0.html`** loads `content.md` and `style.css` live (never storing a stale copy)—either over a local HTTP server after unzipping (`python3 -m http.server 8000` or `npx serve .`) or directly via `file://` using its built-in **Open `.wa.zip` File…** button and drag-and-drop support.
 
 ---
 
@@ -276,11 +277,11 @@ All 25 bundled OFL/Apache font families load automatically offline whenever refe
 
 ## 6. Building Your Own Template in 10 Minutes
 
-1. Create a folder named `my-template.wa/` with an empty `images/` subfolder.
+1. Create a new document in Write Along (**File → New Document…**) or prepare `content.md`, `style.css`, and an `images/` folder locally.
 2. Add `content.md` with YAML front-matter and at least 3 pages of realistic sample text (headings, lists, table, quote, callout, and a figure).
 3. Write `style.css` starting with a clear `:root` block of Layer 1 variables, followed by `@page` rules and Layer 2 element refinements.
-4. Open the folder in Write Along and click **File → Save** to generate a self-contained `read.html` and updated `syntax.md`.
-5. Toggle **Read Mode** (`Ctrl+E`) and print-preview (**File → Export PDF…**) to verify page breaks, contrast, and running headers.
+4. Click **File → Save** to package everything cleanly into `my-template.wa.zip` (with `wa-reader.2.0.0.html` and updated `syntax.md`).
+5. Toggle **Read Mode** (`Ctrl+E`) and print-preview (**File → Export PDF (Print)…**) to verify page breaks, contrast, and running headers.
 
 ---
 
@@ -289,7 +290,7 @@ All 25 bundled OFL/Apache font families load automatically offline whenever refe
 - **Background colors & callouts**: In Chrome's Print dialog, enable **Background graphics** (Write Along sets `print-color-adjust: exact` automatically).
 - **Margins**: Choose **Margins: Default** in the print dialog so `@page` margins from `style.css` are respected without double-padding.
 - **Headers & footers**: Uncheck the browser's built-in "Headers and footers" checkbox so only your template's `@page` margin boxes appear.
-- **Standalone HTML**: Use **File → Export Standalone HTML…** to produce a single `.html` file with CSS, images, and renderer fully embedded for offline sharing.
+- **Standalone HTML**: Use **File → Export Standalone HTML…** to produce a single `.html` file with CSS, fonts, images, and pre-paginated sheets fully embedded for offline sharing.
 
 ---
 
@@ -299,14 +300,14 @@ All 25 bundled OFL/Apache font families load automatically offline whenever refe
 |---|---|
 | Images do not appear in preview | Ensure the image is inside `images/` and referenced relatively: `![Alt](images/photo.png)` (no leading `/`). |
 | Preview and PDF page breaks differ | Check that your print dialog uses the same paper size (`Letter`/`A4`) as `--page-size` and **Margins: Default**. |
-| `read.html` looks blank on `file://` | Re-save the document in Write Along (or run `tools/build.py`) so the inlined fallback blocks are refreshed. |
-| Directory open button says "Fallback mode" | File System Access API requires Chromium (Chrome/Edge/Brave). On Firefox/Safari, import a folder or `.wa.zip` and export as `.wa.zip`. |
+| `wa-reader.2.0.0.html` shows a Local Viewer Guide on `file://` | `wa-reader.2.0.0.html` always loads `content.md` live (never a stale copy), and browsers block local `fetch()` on `file://`. Click **Open .wa.zip File…** right on the page, drop the `.wa.zip` archive onto the card, or serve the unzipped directory with `python3 -m http.server 8000`. |
+| Save downloads a new file instead of overwriting in-place | Direct in-place file overwriting (`showSaveFilePicker`) requires Chromium on `localhost` or HTTPS. On Firefox/Safari, Write Along saves cleanly by downloading your `.wa.zip` archive. |
 
 ---
 
 ## 9. For AI Agents
 
-When an AI assistant edits an existing `.wa` document or designs a new template, follow these mandatory rules:
+When an AI assistant edits an existing `.wa.zip` document or designs a new template, follow these mandatory rules:
 
 1. **Preserve GFM purity**: Never inject raw `<div>` or `<style>` hacks into `content.md`. Express layout exclusively in `style.css` and standard GFM + the four documented WA extensions (front-matter, `<!-- .class -->`, `<!-- pagebreak -->`, `[TOC]`).
 2. **Use Layer 1 variables first**: Always define `:root` variables (`--page-size`, `--page-margin`, `--page-background`, `--text-color`, `--accent-color`, `--body-font`, `--heading-font`, `--code-font`, `--body-size`, `--line-height`, `--scale`) at the top of `style.css` with helpful comments.
@@ -314,7 +315,7 @@ When an AI assistant edits an existing `.wa` document or designs a new template,
 4. **Ensure print fidelity**: Avoid fixed pixel widths wider than the printable content box; set `break-after: avoid` on headings and `break-inside: avoid` on callouts, figures, code blocks, and table rows.
 5. **Respect WCAG AA contrast**: Body text vs. `--page-background` must achieve at least **4.5:1** contrast (target 7:1+ for long-form reading).
 6. **Validation checklist**:
-   - [ ] Folder ends with `.wa` and contains `content.md`, `style.css`, `images/`, `read.html`, `syntax.md`.
+   - [ ] Archive ends with `.wa.zip` and contains flat-root `content.md`, `style.css`, `images/`, `wa-reader.<version>.html` (live-fetching, no embedded copy), and `syntax.md` (no `.pdf` files).
    - [ ] All `images/...` paths referenced in `content.md` exist inside `images/`.
    - [ ] `style.css` parses cleanly with balanced braces and valid CSS properties.
    - [ ] Document renders cleanly to at least 3 pages with zero horizontal overflow and zero blank pages.

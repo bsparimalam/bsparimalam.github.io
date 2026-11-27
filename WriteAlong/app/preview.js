@@ -4,7 +4,7 @@
  */
 import { renderIntoDocument } from '../runtime/render.js';
 
-export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
+export function createPreviewController(iframeEl, { onPageMetrics, onRendered, runWithoutFeedback } = {}) {
   let baseCss = '';
   let debounceTimer = null;
   let objectUrls = new Map();
@@ -12,6 +12,7 @@ export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
   let renderSeq = 0;
   let lastPageCount = 1;
   let scrollHandlerBound = false;
+  let feedbackWrapper = runWithoutFeedback || ((fn) => fn());
 
   async function init() {
     const res = await fetch('./runtime/base.css');
@@ -25,6 +26,10 @@ export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
       scrollHandlerBound = true;
       iframeEl.contentWindow.addEventListener('scroll', () => reportCurrentPage(), { passive: true });
     }
+  }
+
+  function setFeedbackWrapper(fn) {
+    feedbackWrapper = fn || ((cb) => cb());
   }
 
   function reportCurrentPage() {
@@ -69,9 +74,20 @@ export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
       root.style.transformOrigin = 'top center';
       root.style.transform = zoom === 1 ? '' : `scale(${zoom})`;
     }
+    if (typeof onRendered === 'function') {
+      requestAnimationFrame(() => onRendered({ pageCount: lastPageCount, reason: 'zoom' }));
+    }
   }
 
-  async function renderNow({ content, css, images = new Map(), pageGrid = false, zoom = lastZoom, baseAssetUrl = '' }) {
+  async function renderNow({
+    content,
+    css,
+    images = new Map(),
+    pageGrid = false,
+    zoom = lastZoom,
+    baseAssetUrl = '',
+    includeSourceMap = true,
+  }) {
     const doc = iframeEl.contentDocument;
     if (!doc || !doc.body) return;
 
@@ -99,17 +115,22 @@ export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
       fontsBaseUrl,
       resolveImage,
       pageGrid,
+      includeSourceMap,
     });
 
-    // Drop stale async completions if a newer edit superseded us
     if (seq !== renderSeq) return;
 
     lastPageCount = result.pageCount || 1;
     applyZoom(zoom);
 
     requestAnimationFrame(() => {
-      iframeEl.contentWindow?.scrollTo(prevScrollX, prevScrollY);
+      feedbackWrapper(() => {
+        iframeEl.contentWindow?.scrollTo(prevScrollX, prevScrollY);
+      });
       reportCurrentPage();
+      if (typeof onRendered === 'function') {
+        onRendered({ pageCount: lastPageCount, reason: 'render' });
+      }
     });
   }
 
@@ -130,6 +151,7 @@ export function createPreviewController(iframeEl, { onPageMetrics } = {}) {
 
   return {
     init,
+    setFeedbackWrapper,
     renderNow,
     scheduleRender,
     applyZoom,

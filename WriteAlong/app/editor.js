@@ -58,7 +58,15 @@ const lightTheme = EditorView.theme({
   },
 });
 
-export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, onChangeContent, onChangeCss, onDropImages }) {
+export function createCodeEditor(hostEl, {
+  initialContent,
+  initialCss,
+  isDark,
+  onChangeContent,
+  onChangeCss,
+  onDropImages,
+  onRequestMarkdownTab,
+}) {
   const themeCompartment = new Compartment();
   let activeTab = 'content';
   let suppressChange = false;
@@ -139,7 +147,11 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
   });
 
   function switchTab(tab) {
-    if (tab === activeTab) return;
+    if (tab !== 'content' && tab !== 'css') return;
+    if (tab === activeTab) {
+      view.focus();
+      return;
+    }
     if (activeTab === 'content') {
       contentState = view.state;
     } else {
@@ -153,7 +165,6 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
   function setTheme(dark) {
     const ext = dark ? oneDark : lightTheme;
     view.dispatch({ effects: themeCompartment.reconfigure(ext) });
-    // Also update the inactive state so switching tabs matches
     if (activeTab === 'content') {
       cssState = cssState.update({ effects: themeCompartment.reconfigure(ext) }).state;
     } else {
@@ -183,6 +194,23 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
     }
   }
 
+  function replaceContentOnly(nextContent) {
+    suppressChange = true;
+    try {
+      if (activeTab === 'content') {
+        view.dispatch({
+          changes: { from: 0, to: view.state.doc.length, insert: nextContent },
+        });
+      } else {
+        contentState = contentState.update({
+          changes: { from: 0, to: contentState.doc.length, insert: nextContent },
+        }).state;
+      }
+    } finally {
+      suppressChange = false;
+    }
+  }
+
   function replaceCssOnly(nextCss) {
     suppressChange = true;
     try {
@@ -201,7 +229,11 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
   }
 
   function ensureMarkdownTab() {
-    if (activeTab !== 'content') switchTab('content');
+    if (typeof onRequestMarkdownTab === 'function') {
+      onRequestMarkdownTab();
+    } else if (activeTab !== 'content') {
+      switchTab('content');
+    }
   }
 
   function wrapSelection(before, after = before, placeholder = 'text') {
@@ -234,8 +266,15 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
 
   function insertBlock(blockText) {
     ensureMarkdownTab();
-    const { from, to } = view.state.selection.main;
-    const prefix = from > 0 && view.state.sliceDoc(from - 1, from) !== '\n' ? '\n\n' : '';
+    let { from, to } = view.state.selection.main;
+    // Never break YAML front-matter at the top of content.md when cursor is at pos 0 or inside ---...---
+    const docText = view.state.doc.toString();
+    const fmMatch = docText.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/);
+    if (fmMatch && from < fmMatch[0].length) {
+      from = fmMatch[0].length;
+      to = Math.max(to, from);
+    }
+    const prefix = from > 0 && view.state.sliceDoc(from - 1, from) !== '\n' ? '\n\n' : '\n';
     const text = `${prefix}${blockText}\n`;
     view.dispatch({
       changes: { from, to, insert: text },
@@ -244,16 +283,43 @@ export function createCodeEditor(hostEl, { initialContent, initialCss, isDark, o
     view.focus();
   }
 
+  /**
+   * Return the exact fractional 1-based line number currently at the top of the CodeMirror viewport.
+   */
+  function getTopVisibleLine() {
+    const scrollTop = view.scrollDOM.scrollTop;
+    const block = view.lineBlockAtHeight(scrollTop);
+    const lineObj = view.state.doc.lineAt(block.from);
+    const frac = block.height > 0 ? Math.min(1, Math.max(0, (scrollTop - block.top) / block.height)) : 0;
+    return lineObj.number + frac;
+  }
+
+  /**
+   * Return the CodeMirror scrollTop (px) corresponding to a fractional 1-based line number.
+   */
+  function getScrollTopForLine(exactLine) {
+    const doc = view.state.doc;
+    const clamped = Math.min(doc.lines, Math.max(1, exactLine));
+    const baseNum = Math.floor(clamped);
+    const frac = clamped - baseNum;
+    const lineObj = doc.line(baseNum);
+    const block = view.lineBlockAt(lineObj.from);
+    return block.top + frac * block.height;
+  }
+
   return {
     view,
     getActiveTab: () => activeTab,
     switchTab,
     setTheme,
     replaceDocuments,
+    replaceContentOnly,
     replaceCssOnly,
     wrapSelection,
     setLinePrefix,
     insertBlock,
+    getTopVisibleLine,
+    getScrollTopForLine,
     undo: () => { undo(view); view.focus(); },
     redo: () => { redo(view); view.focus(); },
     selectAll: () => { selectAll(view); view.focus(); },

@@ -484,6 +484,15 @@ function trySplitParagraph(pEl, container, limitBottom, lineHeightPx) {
 
   tail.classList.add('wa-fragment-cont');
   tail.classList.remove('wa-first-body-p', 'drop-cap');
+  if (pEl.hasAttribute('data-wa-line')) {
+    const sLine = parseInt(pEl.getAttribute('data-wa-line'), 10) || 1;
+    const eLine = parseInt(pEl.getAttribute('data-wa-line-end') || String(sLine), 10) || sLine;
+    const ratio = (head.textContent || '').length / Math.max(1, (pEl.textContent || '').length);
+    const interp = Math.min(eLine, Math.max(sLine, Math.round(sLine + (eLine - sLine) * ratio)));
+    tail.setAttribute('data-wa-line', String(interp));
+    if (eLine > interp) tail.setAttribute('data-wa-line-end', String(eLine));
+    else tail.removeAttribute('data-wa-line-end');
+  }
   return { head, tail };
 }
 
@@ -519,6 +528,8 @@ function trySplitList(listEl, container, limitBottom) {
   for (let i = fitted; i < items.length; i++) {
     tail.appendChild(items[i].cloneNode(true));
   }
+  const firstTailLi = tail.querySelector('li[data-wa-line]');
+  if (firstTailLi) tail.setAttribute('data-wa-line', firstTailLi.getAttribute('data-wa-line'));
   return { head, tail };
 }
 
@@ -559,6 +570,8 @@ function trySplitTable(tableEl, container, limitBottom) {
     tailBody.appendChild(rows[i].cloneNode(true));
   }
   tailTable.appendChild(tailBody);
+  const firstTailTr = tailBody.querySelector('tr[data-wa-line]');
+  if (firstTailTr) tailTable.setAttribute('data-wa-line', firstTailTr.getAttribute('data-wa-line'));
   return { head: headTable, tail: tailTable };
 }
 

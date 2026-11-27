@@ -1,5 +1,6 @@
 /**
- * Export Flows: Print-to-PDF (1-to-1 Paginated), Self-Contained Standalone HTML, and .wa.zip
+ * Export Flows: Print-to-PDF (1-to-1 Paginated), Self-Contained Standalone HTML,
+ * and .wa.zip Archive Download
  */
 import {
   renderIntoDocument,
@@ -11,7 +12,7 @@ import {
   buildPaginatedPageCss,
   stripAtPageRules,
 } from '../runtime/paginate.js';
-import { createWaZipBlob } from './fs.js';
+import { createWaZipBlob, normalizeWaName, stripWaExt } from './fs.js';
 
 function triggerDownload(blob, filename) {
   const url = URL.createObjectURL(blob);
@@ -24,7 +25,7 @@ function triggerDownload(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 
-function blobToDataUrl(blob) {
+export function blobToDataUrl(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
@@ -33,7 +34,7 @@ function blobToDataUrl(blob) {
   });
 }
 
-function createHiddenWorkIframe() {
+export function createHiddenWorkIframe() {
   const iframe = document.createElement('iframe');
   iframe.style.position = 'fixed';
   iframe.style.left = '-20000px';
@@ -48,6 +49,38 @@ function createHiddenWorkIframe() {
   targetDoc.write('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"></head><body><div id="wa-root"></div></body></html>');
   targetDoc.close();
   return { iframe, targetDoc };
+}
+
+/**
+ * Fetch and base64-inline every bundled WOFF2 font family referenced in `styleCss`.
+ */
+export async function inlineBundledFontsCss(styleCss, fontsBaseUrl) {
+  const fontRules = [];
+  const lowerCss = (styleCss || '').toLowerCase();
+
+  for (const [family, files] of Object.entries(BUNDLED_FONT_FILES)) {
+    if (!lowerCss.includes(family.toLowerCase())) continue;
+    for (const [filename, weight, style] of files) {
+      try {
+        const res = await fetch(`${fontsBaseUrl}${filename}`);
+        if (!res.ok) continue;
+        const b = await res.blob();
+        const dataUrl = await blobToDataUrl(b);
+        fontRules.push(
+`@font-face {
+  font-family: '${family}';
+  font-style: ${style};
+  font-weight: ${weight};
+  font-display: swap;
+  src: url('${dataUrl}') format('woff2');
+}`
+        );
+      } catch (_e) {
+        // skip font if unavailable
+      }
+    }
+  }
+  return fontRules.join('\n');
 }
 
 /**
@@ -116,37 +149,11 @@ export async function buildStandaloneHtmlString(doc, baseCss) {
     iframe.remove();
   }
 
-  // Inline referenced bundled fonts as base64 data URIs
-  const fontRules = [];
-  const lowerCss = (doc.css || '').toLowerCase();
-
-  for (const [family, files] of Object.entries(BUNDLED_FONT_FILES)) {
-    if (!lowerCss.includes(family.toLowerCase())) continue;
-    for (const [filename, weight, style] of files) {
-      try {
-        const res = await fetch(`${fontsBaseUrl}${filename}`);
-        if (!res.ok) continue;
-        const b = await res.blob();
-        const dataUrl = await blobToDataUrl(b);
-        fontRules.push(
-`@font-face {
-  font-family: '${family}';
-  font-style: ${style};
-  font-weight: ${weight};
-  font-display: swap;
-  src: url('${dataUrl}') format('woff2');
-}`
-        );
-      } catch (_e) {
-        // skip if unavailable
-      }
-    }
-  }
-
+  const fontRulesCss = await inlineBundledFontsCss(doc.css || '', fontsBaseUrl);
   const config = parsePageConfig(doc.css, meta);
   const pageRulesCss = buildPaginatedPageCss(config);
   const sanitizedUserCss = stripAtPageRules(doc.css || '');
-  const title = (meta.title || doc.name.replace(/\.wa$/, '') || 'Write Along Document')
+  const title = (meta.title || stripWaExt(doc.name) || 'Write Along Document')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
@@ -162,7 +169,7 @@ export async function buildStandaloneHtmlString(doc, baseCss) {
   <link rel="icon" href="data:,">
   <title>${title}</title>
   <style id="wa-base-css">${baseCss}</style>
-  <style id="wa-font-css">${fontRules.join('\n')}</style>
+  <style id="wa-font-css">${fontRulesCss}</style>
   <style id="wa-page-rules">${pageRulesCss}</style>
   <style id="wa-user-css">${sanitizedUserCss}</style>
 </head>
@@ -175,12 +182,12 @@ export async function buildStandaloneHtmlString(doc, baseCss) {
 
 export async function exportStandaloneHtml(doc, baseCss) {
   const htmlStr = await buildStandaloneHtmlString(doc, baseCss);
-  const stem = (doc.name || 'document').replace(/\.wa$/, '');
+  const stem = stripWaExt(doc.name) || 'document';
   triggerDownload(new Blob([htmlStr], { type: 'text/html;charset=utf-8' }), `${stem}.html`);
 }
 
 export async function exportWaZip(doc) {
   const blob = await createWaZipBlob(doc);
-  const stem = (doc.name || 'document').replace(/\.wa$/, '');
-  triggerDownload(blob, `${stem}.wa.zip`);
+  const filename = normalizeWaName(doc.name || 'document');
+  triggerDownload(blob, filename);
 }

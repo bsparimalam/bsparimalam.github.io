@@ -1,5 +1,6 @@
 {
-  "version": "1.1.0",
+  "version": "2.0.0",
+  "readerFilename": "wa-reader.2.0.0.html",
   "count": 110,
   "templates": [
     {
@@ -24,10 +25,11 @@
         "conference",
         "latex"
       ],
+      "archive": "academic-ieee-twocol.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-ieee-twocol.png"
     },
     {
       "id": "academic-acm-transactions",
@@ -51,10 +53,11 @@
         "two-column",
         "journal"
       ],
+      "archive": "academic-acm-transactions.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-acm-transactions.png"
     },
     {
       "id": "academic-apa-7",
@@ -77,10 +80,11 @@
         "social-science",
         "double-spaced"
       ],
+      "archive": "academic-apa-7.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-apa-7.png"
     },
     {
       "id": "academic-mla-essay",
@@ -103,10 +107,11 @@
         "literature",
         "essay"
       ],
+      "archive": "academic-mla-essay.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-mla-essay.png"
     },
     {
       "id": "academic-chicago-notes",
@@ -129,10 +134,11 @@
         "bibliography",
         "classical"
       ],
+      "archive": "academic-chicago-notes.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-chicago-notes.png"
     },
     {
       "id": "academic-springer-lncs",
@@ -156,10 +162,11 @@
         "a4",
         "computer-science"
       ],
+      "archive": "academic-springer-lncs.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-springer-lncs.png"
     },
     {
       "id": "academic-arxiv-preprint",
@@ -184,10 +191,11 @@
         "ml",
         "latex"
       ],
+      "archive": "academic-arxiv-preprint.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-arxiv-preprint.png"
     },
     {
       "id": "academic-nature-science",
@@ -211,10 +219,11 @@
         "biology",
         "two-column"
       ],
+      "archive": "academic-nature-science.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-nature-science.png"
     },
     {
       "id": "academic-thesis-chapter",
@@ -238,10 +247,11 @@
         "chapter",
         "latex"
       ],
+      "archive": "academic-thesis-chapter.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-thesis-chapter.png"
     },
     {
       "id": "academic-lab-report",
@@ -265,10 +275,11 @@
         "physics",
         "stem"
       ],
+      "archive": "academic-lab-report.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-lab-report.png"
     },
     {
       "id": "academic-oxford-essay",
@@ -292,10 +303,11 @@
         "a4",
         "analytical"
       ],
+      "archive": "academic-oxford-essay.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-oxford-essay.png"
     },
     {
       "id": "academic-journal-article",
@@ -318,10 +330,11 @@
         "burgundy",
         "serif"
       ],
+      "archive": "academic-journal-article.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/academic-journal-article.png"
     },
     {
       "id": "book-classic-novel",
@@ -345,10 +358,11 @@
         "6x9",
         "garamond"
       ],
+      "archive": "book-classic-novel.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-classic-novel.png"
     },
     {
       "id": "book-poetry-collection",
@@ -371,10 +385,11 @@
         "chapbook",
         "literary"
       ],
+      "archive": "book-poetry-collection.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-poetry-collection.png"
     },
     {
       "id": "book-literary-memoir",
@@ -398,10 +413,11 @@
         "nonfiction",
         "book"
       ],
+      "archive": "book-literary-memoir.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-literary-memoir.png"
     },
     {
       "id": "book-childrens-illustrated",
@@ -425,10 +441,11 @@
         "warm",
         "large-type"
       ],
+      "archive": "book-childrens-illustrated.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-childrens-illustrated.png"
     },
     {
       "id": "book-academic-textbook",
@@ -452,10 +469,11 @@
         "structured",
         "chapters"
       ],
+      "archive": "book-academic-textbook.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-academic-textbook.png"
     },
     {
       "id": "book-artisan-cookbook",
@@ -479,10 +497,11 @@
         "culinary",
         "kitchen"
       ],
+      "archive": "book-artisan-cookbook.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-artisan-cookbook.png"
     },
     {
       "id": "book-coffee-table",
@@ -506,10 +525,11 @@
         "coffee-table",
         "museum"
       ],
+      "archive": "book-coffee-table.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-coffee-table.png"
     },
     {
       "id": "book-pocket-paperback",
@@ -532,10 +552,11 @@
         "pocket",
         "compact"
       ],
+      "archive": "book-pocket-paperback.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-pocket-paperback.png"
     },
     {
       "id": "book-short-anthology",
@@ -559,10 +580,11 @@
         "fiction",
         "collection"
       ],
+      "archive": "book-short-anthology.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-short-anthology.png"
     },
     {
       "id": "book-hollywood-screenplay",
@@ -585,10 +607,11 @@
         "courier",
         "script"
       ],
+      "archive": "book-hollywood-screenplay.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-hollywood-screenplay.png"
     },
     {
       "id": "book-stage-play",
@@ -612,10 +635,11 @@
         "drama",
         "script"
       ],
+      "archive": "book-stage-play.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-stage-play.png"
     },
     {
       "id": "book-fantasy-ornate",
@@ -640,10 +664,11 @@
         "cinzel",
         "drop-cap"
       ],
+      "archive": "book-fantasy-ornate.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/book-fantasy-ornate.png"
     },
     {
       "id": "report-annual-report",
@@ -667,10 +692,11 @@
         "finance",
         "executive"
       ],
+      "archive": "report-annual-report.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-annual-report.png"
     },
     {
       "id": "report-white-paper",
@@ -694,10 +720,11 @@
         "enterprise",
         "b2b"
       ],
+      "archive": "report-white-paper.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-white-paper.png"
     },
     {
       "id": "report-executive-brief",
@@ -721,10 +748,11 @@
         "board",
         "summary"
       ],
+      "archive": "report-executive-brief.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-executive-brief.png"
     },
     {
       "id": "report-business-proposal",
@@ -748,10 +776,11 @@
         "consulting",
         "sales"
       ],
+      "archive": "report-business-proposal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-business-proposal.png"
     },
     {
       "id": "report-case-study",
@@ -775,10 +804,11 @@
         "customer",
         "modern"
       ],
+      "archive": "report-case-study.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-case-study.png"
     },
     {
       "id": "report-quarterly-review",
@@ -801,10 +831,11 @@
         "metrics",
         "kpi"
       ],
+      "archive": "report-quarterly-review.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-quarterly-review.png"
     },
     {
       "id": "report-consulting-handout",
@@ -827,10 +858,11 @@
         "strategy",
         "clean"
       ],
+      "archive": "report-consulting-handout.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-consulting-handout.png"
     },
     {
       "id": "report-policy-memo",
@@ -853,10 +885,11 @@
         "think-tank",
         "memo"
       ],
+      "archive": "report-policy-memo.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-policy-memo.png"
     },
     {
       "id": "report-press-release",
@@ -880,10 +913,11 @@
         "media",
         "announcement"
       ],
+      "archive": "report-press-release.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-press-release.png"
     },
     {
       "id": "report-engineering-rfc",
@@ -907,10 +941,11 @@
         "architecture",
         "engineering"
       ],
+      "archive": "report-engineering-rfc.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-engineering-rfc.png"
     },
     {
       "id": "report-standard-sop",
@@ -933,10 +968,11 @@
         "compliance",
         "procedure"
       ],
+      "archive": "report-standard-sop.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-standard-sop.png"
     },
     {
       "id": "report-dark-cover-whitepaper",
@@ -960,10 +996,11 @@
         "bold",
         "executive"
       ],
+      "archive": "report-dark-cover-whitepaper.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/report-dark-cover-whitepaper.png"
     },
     {
       "id": "letter-formal-executive",
@@ -987,10 +1024,11 @@
         "executive",
         "serif"
       ],
+      "archive": "letter-formal-executive.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-formal-executive.png"
     },
     {
       "id": "letter-modern-minimal",
@@ -1013,10 +1051,11 @@
         "sans",
         "clean"
       ],
+      "archive": "letter-modern-minimal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-modern-minimal.png"
     },
     {
       "id": "letter-cover-letter",
@@ -1040,10 +1079,11 @@
         "application",
         "job"
       ],
+      "archive": "letter-cover-letter.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-cover-letter.png"
     },
     {
       "id": "letter-formal-resignation",
@@ -1066,10 +1106,11 @@
         "transition",
         "formal"
       ],
+      "archive": "letter-formal-resignation.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-formal-resignation.png"
     },
     {
       "id": "letter-formal-invitation",
@@ -1093,10 +1134,11 @@
         "gala",
         "ornate"
       ],
+      "archive": "letter-formal-invitation.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-formal-invitation.png"
     },
     {
       "id": "letter-thank-you",
@@ -1120,10 +1162,11 @@
         "warm",
         "correspondence"
       ],
+      "archive": "letter-thank-you.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-thank-you.png"
     },
     {
       "id": "letter-internal-memo",
@@ -1146,10 +1189,11 @@
         "corporate",
         "brief"
       ],
+      "archive": "letter-internal-memo.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-internal-memo.png"
     },
     {
       "id": "letter-fax-retro",
@@ -1173,10 +1217,11 @@
         "monospace",
         "dispatch"
       ],
+      "archive": "letter-fax-retro.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/letter-fax-retro.png"
     },
     {
       "id": "resume-classic-serif",
@@ -1199,10 +1244,11 @@
         "serif",
         "ats-friendly"
       ],
+      "archive": "resume-classic-serif.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-classic-serif.png"
     },
     {
       "id": "resume-modern-accent",
@@ -1226,10 +1272,11 @@
         "teal",
         "banner"
       ],
+      "archive": "resume-modern-accent.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-modern-accent.png"
     },
     {
       "id": "resume-compact-dense",
@@ -1252,10 +1299,11 @@
         "dense",
         "engineering"
       ],
+      "archive": "resume-compact-dense.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-compact-dense.png"
     },
     {
       "id": "resume-academic-cv",
@@ -1278,10 +1326,11 @@
         "faculty",
         "publications"
       ],
+      "archive": "resume-academic-cv.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-academic-cv.png"
     },
     {
       "id": "resume-creative-portfolio",
@@ -1305,10 +1354,11 @@
         "editorial",
         "resume"
       ],
+      "archive": "resume-creative-portfolio.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-creative-portfolio.png"
     },
     {
       "id": "resume-software-developer",
@@ -1332,10 +1382,11 @@
         "tech",
         "mono"
       ],
+      "archive": "resume-software-developer.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-software-developer.png"
     },
     {
       "id": "resume-executive-leader",
@@ -1359,10 +1410,11 @@
         "cto",
         "leadership"
       ],
+      "archive": "resume-executive-leader.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-executive-leader.png"
     },
     {
       "id": "resume-swiss-minimal",
@@ -1385,10 +1437,11 @@
         "a4",
         "red-accent"
       ],
+      "archive": "resume-swiss-minimal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-swiss-minimal.png"
     },
     {
       "id": "resume-two-column",
@@ -1412,10 +1465,11 @@
         "clean",
         "resume"
       ],
+      "archive": "resume-two-column.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-two-column.png"
     },
     {
       "id": "resume-career-timeline",
@@ -1438,10 +1492,11 @@
         "modern",
         "resume"
       ],
+      "archive": "resume-career-timeline.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/resume-career-timeline.png"
     },
     {
       "id": "mag-broadsheet-newspaper",
@@ -1465,10 +1520,11 @@
         "two-column",
         "classic"
       ],
+      "archive": "mag-broadsheet-newspaper.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-broadsheet-newspaper.png"
     },
     {
       "id": "mag-compact-tabloid",
@@ -1492,10 +1548,11 @@
         "headline",
         "two-column"
       ],
+      "archive": "mag-compact-tabloid.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-compact-tabloid.png"
     },
     {
       "id": "mag-tech-review",
@@ -1519,10 +1576,11 @@
         "review",
         "modern"
       ],
+      "archive": "mag-tech-review.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-tech-review.png"
     },
     {
       "id": "mag-literary-journal",
@@ -1546,10 +1604,11 @@
         "essays",
         "serif"
       ],
+      "archive": "mag-literary-journal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-literary-journal.png"
     },
     {
       "id": "mag-club-newsletter",
@@ -1573,10 +1632,11 @@
         "club",
         "friendly"
       ],
+      "archive": "mag-club-newsletter.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-club-newsletter.png"
     },
     {
       "id": "mag-indie-zine",
@@ -1600,10 +1660,11 @@
         "indie",
         "a5"
       ],
+      "archive": "mag-indie-zine.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-indie-zine.png"
     },
     {
       "id": "mag-fashion-editorial",
@@ -1627,10 +1688,11 @@
         "luxury",
         "high-contrast"
       ],
+      "archive": "mag-fashion-editorial.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-fashion-editorial.png"
     },
     {
       "id": "mag-travel-dispatch",
@@ -1654,10 +1716,11 @@
         "warm",
         "magazine"
       ],
+      "archive": "mag-travel-dispatch.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-travel-dispatch.png"
     },
     {
       "id": "mag-science-digest",
@@ -1681,10 +1744,11 @@
         "two-column",
         "accessible"
       ],
+      "archive": "mag-science-digest.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-science-digest.png"
     },
     {
       "id": "mag-school-gazette",
@@ -1708,10 +1772,11 @@
         "school",
         "two-column"
       ],
+      "archive": "mag-school-gazette.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/mag-school-gazette.png"
     },
     {
       "id": "tech-api-reference",
@@ -1734,10 +1799,11 @@
         "reference",
         "developer"
       ],
+      "archive": "tech-api-reference.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-api-reference.png"
     },
     {
       "id": "tech-user-manual",
@@ -1761,10 +1827,11 @@
         "guide",
         "product"
       ],
+      "archive": "tech-user-manual.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-user-manual.png"
     },
     {
       "id": "tech-readme-pretty",
@@ -1787,10 +1854,11 @@
         "opensource",
         "clean"
       ],
+      "archive": "tech-readme-pretty.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-readme-pretty.png"
     },
     {
       "id": "tech-hardware-datasheet",
@@ -1814,10 +1882,11 @@
         "spec",
         "electronics"
       ],
+      "archive": "tech-hardware-datasheet.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-hardware-datasheet.png"
     },
     {
       "id": "tech-ops-runbook",
@@ -1841,10 +1910,11 @@
         "incident",
         "devops"
       ],
+      "archive": "tech-ops-runbook.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-ops-runbook.png"
     },
     {
       "id": "tech-release-notes",
@@ -1868,10 +1938,11 @@
         "product",
         "modern"
       ],
+      "archive": "tech-release-notes.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-release-notes.png"
     },
     {
       "id": "tech-cheat-sheet",
@@ -1895,10 +1966,11 @@
         "two-column",
         "compact"
       ],
+      "archive": "tech-cheat-sheet.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-cheat-sheet.png"
     },
     {
       "id": "tech-tutorial-guide",
@@ -1921,10 +1993,11 @@
         "learning",
         "code"
       ],
+      "archive": "tech-tutorial-guide.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-tutorial-guide.png"
     },
     {
       "id": "tech-protocol-rfc",
@@ -1947,10 +2020,11 @@
         "protocol",
         "monospace"
       ],
+      "archive": "tech-protocol-rfc.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-protocol-rfc.png"
     },
     {
       "id": "tech-man-page",
@@ -1973,10 +2047,11 @@
         "cli",
         "monospace"
       ],
+      "archive": "tech-man-page.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/tech-man-page.png"
     },
     {
       "id": "edu-lecture-notes",
@@ -2000,10 +2075,11 @@
         "university",
         "stem"
       ],
+      "archive": "edu-lecture-notes.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-lecture-notes.png"
     },
     {
       "id": "edu-practice-worksheet",
@@ -2026,10 +2102,11 @@
         "classroom",
         "clean"
       ],
+      "archive": "edu-practice-worksheet.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-practice-worksheet.png"
     },
     {
       "id": "edu-course-syllabus",
@@ -2053,10 +2130,11 @@
         "university",
         "schedule"
       ],
+      "archive": "edu-course-syllabus.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-course-syllabus.png"
     },
     {
       "id": "edu-formal-exam",
@@ -2079,10 +2157,11 @@
         "formal",
         "assessment"
       ],
+      "archive": "edu-formal-exam.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-formal-exam.png"
     },
     {
       "id": "edu-study-guide",
@@ -2106,10 +2185,11 @@
         "exam-prep",
         "purple"
       ],
+      "archive": "edu-study-guide.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-study-guide.png"
     },
     {
       "id": "edu-lesson-plan",
@@ -2133,10 +2213,11 @@
         "curriculum",
         "k12"
       ],
+      "archive": "edu-lesson-plan.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-lesson-plan.png"
     },
     {
       "id": "edu-study-cards",
@@ -2159,10 +2240,11 @@
         "two-column",
         "study"
       ],
+      "archive": "edu-study-cards.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-study-cards.png"
     },
     {
       "id": "edu-cornell-notes",
@@ -2186,10 +2268,11 @@
         "ruled",
         "study"
       ],
+      "archive": "edu-cornell-notes.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/edu-cornell-notes.png"
     },
     {
       "id": "personal-bullet-journal",
@@ -2213,10 +2296,11 @@
         "habits",
         "handwritten"
       ],
+      "archive": "personal-bullet-journal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-bullet-journal.png"
     },
     {
       "id": "personal-reflective-diary",
@@ -2240,10 +2324,11 @@
         "personal",
         "warm"
       ],
+      "archive": "personal-reflective-diary.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-reflective-diary.png"
     },
     {
       "id": "personal-recipe-folio",
@@ -2267,10 +2352,11 @@
         "kitchen",
         "cards"
       ],
+      "archive": "personal-recipe-folio.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-recipe-folio.png"
     },
     {
       "id": "personal-travel-log",
@@ -2294,10 +2380,11 @@
         "field-notes",
         "adventure"
       ],
+      "archive": "personal-travel-log.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-travel-log.png"
     },
     {
       "id": "personal-meeting-notes",
@@ -2320,10 +2407,11 @@
         "minutes",
         "action-items"
       ],
+      "archive": "personal-meeting-notes.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-meeting-notes.png"
     },
     {
       "id": "personal-daily-planner",
@@ -2347,10 +2435,11 @@
         "daily",
         "checklist"
       ],
+      "archive": "personal-daily-planner.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-daily-planner.png"
     },
     {
       "id": "personal-weekly-review",
@@ -2374,10 +2463,11 @@
         "gtd",
         "green"
       ],
+      "archive": "personal-weekly-review.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-weekly-review.png"
     },
     {
       "id": "personal-gratitude-journal",
@@ -2401,10 +2491,11 @@
         "calm",
         "journal"
       ],
+      "archive": "personal-gratitude-journal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/personal-gratitude-journal.png"
     },
     {
       "id": "legal-services-contract",
@@ -2427,10 +2518,11 @@
         "agreement",
         "legal"
       ],
+      "archive": "legal-services-contract.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-services-contract.png"
     },
     {
       "id": "legal-mutual-nda",
@@ -2453,10 +2545,11 @@
         "legal",
         "mutual"
       ],
+      "archive": "legal-mutual-nda.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-mutual-nda.png"
     },
     {
       "id": "legal-terms-of-service",
@@ -2479,10 +2572,11 @@
         "saas",
         "compliance"
       ],
+      "archive": "legal-terms-of-service.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-terms-of-service.png"
     },
     {
       "id": "legal-appellate-brief",
@@ -2505,10 +2599,11 @@
         "litigation",
         "garamond"
       ],
+      "archive": "legal-appellate-brief.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-appellate-brief.png"
     },
     {
       "id": "legal-corporate-bylaws",
@@ -2532,10 +2627,11 @@
         "board",
         "nonprofit"
       ],
+      "archive": "legal-corporate-bylaws.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-corporate-bylaws.png"
     },
     {
       "id": "legal-official-certificate",
@@ -2559,10 +2655,11 @@
         "citation",
         "framed"
       ],
+      "archive": "legal-official-certificate.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/legal-official-certificate.png"
     },
     {
       "id": "creative-typewriter",
@@ -2586,10 +2683,11 @@
         "retro",
         "monospace"
       ],
+      "archive": "creative-typewriter.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-typewriter.png"
     },
     {
       "id": "creative-blueprint",
@@ -2613,10 +2711,11 @@
         "cyan",
         "dark-paper"
       ],
+      "archive": "creative-blueprint.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-blueprint.png"
     },
     {
       "id": "creative-chalkboard",
@@ -2640,10 +2739,11 @@
         "dark-paper",
         "handwritten"
       ],
+      "archive": "creative-chalkboard.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-chalkboard.png"
     },
     {
       "id": "creative-retro-70s",
@@ -2667,10 +2767,11 @@
         "warm",
         "groovy"
       ],
+      "archive": "creative-retro-70s.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-retro-70s.png"
     },
     {
       "id": "creative-art-deco",
@@ -2694,10 +2795,11 @@
         "noir",
         "dark-paper"
       ],
+      "archive": "creative-art-deco.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-art-deco.png"
     },
     {
       "id": "creative-brutalist",
@@ -2721,10 +2823,11 @@
         "raw",
         "poster"
       ],
+      "archive": "creative-brutalist.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-brutalist.png"
     },
     {
       "id": "creative-swiss-grid",
@@ -2747,10 +2850,11 @@
         "grid",
         "zurich"
       ],
+      "archive": "creative-swiss-grid.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-swiss-grid.png"
     },
     {
       "id": "creative-bauhaus",
@@ -2774,10 +2878,11 @@
         "primary",
         "modernism"
       ],
+      "archive": "creative-bauhaus.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-bauhaus.png"
     },
     {
       "id": "creative-vaporwave",
@@ -2801,10 +2906,11 @@
         "neon",
         "dark-paper"
       ],
+      "archive": "creative-vaporwave.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-vaporwave.png"
     },
     {
       "id": "creative-illuminated-manuscript",
@@ -2828,10 +2934,11 @@
         "illuminated",
         "parchment"
       ],
+      "archive": "creative-illuminated-manuscript.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-illuminated-manuscript.png"
     },
     {
       "id": "creative-newspaper-sepia",
@@ -2855,10 +2962,11 @@
         "antique",
         "newspaper"
       ],
+      "archive": "creative-newspaper-sepia.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-newspaper-sepia.png"
     },
     {
       "id": "creative-crt-terminal",
@@ -2881,10 +2989,11 @@
         "hacker",
         "dark-paper"
       ],
+      "archive": "creative-crt-terminal.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-crt-terminal.png"
     },
     {
       "id": "creative-watercolor-botanical",
@@ -2908,10 +3017,11 @@
         "soft",
         "organic"
       ],
+      "archive": "creative-watercolor-botanical.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-watercolor-botanical.png"
     },
     {
       "id": "creative-minimal-zen",
@@ -2935,10 +3045,11 @@
         "calm",
         "whitespace"
       ],
+      "archive": "creative-minimal-zen.wa.zip",
       "images": [
         "images/figure-1.svg"
       ],
-      "thumbnail": "thumb.png"
+      "thumbnail": "thumbs/creative-minimal-zen.png"
     }
   ]
 }

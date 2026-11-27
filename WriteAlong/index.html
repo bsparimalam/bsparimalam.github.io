@@ -28,18 +28,17 @@
         <div class="wa-menu-item" role="none">
           <button class="wa-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="file">File</button>
           <div class="wa-menu-dropdown" role="menu" id="menu-file">
-            <button role="menuitem" data-action="file:new"><span>New Document</span><kbd>Ctrl+N</kbd></button>
+            <button role="menuitem" data-action="file:new"><span>New Document…</span><kbd>Ctrl+N</kbd></button>
             <button role="menuitem" data-action="templates:open"><span>New from Template…</span><kbd>Ctrl+Shift+T</kbd></button>
             <div class="wa-menu-sep" role="separator"></div>
-            <button role="menuitem" data-action="file:open"><span>Open .wa Folder…</span><kbd>Ctrl+O</kbd></button>
-            <button role="menuitem" data-action="file:import-zip"><span>Import .wa.zip…</span></button>
+            <button role="menuitem" data-action="file:open"><span>Open .wa.zip…</span><kbd>Ctrl+O</kbd></button>
             <div class="wa-menu-sep" role="separator"></div>
+            <button role="menuitem" data-action="file:rename"><span>Rename…</span><kbd>F2</kbd></button>
             <button role="menuitem" data-action="file:save"><span>Save</span><kbd>Ctrl+S</kbd></button>
-            <button role="menuitem" data-action="file:save-as"><span>Save As Folder…</span><kbd>Ctrl+Shift+S</kbd></button>
+            <button role="menuitem" data-action="file:save-as"><span>Save As…</span><kbd>Ctrl+Shift+S</kbd></button>
             <div class="wa-menu-sep" role="separator"></div>
             <button role="menuitem" data-action="export:pdf"><span>Export PDF (Print)…</span><kbd>Ctrl+P</kbd></button>
             <button role="menuitem" data-action="export:html"><span>Export Standalone HTML…</span></button>
-            <button role="menuitem" data-action="export:zip"><span>Export .wa.zip…</span></button>
             <div class="wa-menu-sep" role="separator"></div>
             <button role="menuitem" data-action="file:close"><span>Close / Reset</span></button>
           </div>
@@ -111,6 +110,7 @@
             <button role="menuitem" data-action="view:zoom-out"><span>Zoom Out</span><kbd>Ctrl+-</kbd></button>
             <button role="menuitem" data-action="view:zoom-reset"><span>Reset Zoom (100%)</span><kbd>Ctrl+0</kbd></button>
             <button role="menuitem" data-action="view:page-grid"><span>Toggle Margin Guides</span></button>
+            <button role="menuitem" data-action="view:sync-scroll" id="menu-sync-scroll" aria-checked="true"><span>Sync Scroll (Editor ↔ Preview)</span><span class="wa-menu-check" id="menu-sync-check">✓</span></button>
             <div class="wa-menu-sep" role="separator"></div>
             <button role="menuitem" data-action="theme:auto"><span>Theme: System Default</span></button>
             <button role="menuitem" data-action="theme:light"><span>Theme: Light</span></button>
@@ -140,7 +140,14 @@
       </nav>
 
       <div class="wa-doc-title-wrap">
-        <span id="doc-name-label" class="wa-doc-name" title="Active .wa document">untitled.wa</span>
+        <button type="button" id="btn-doc-rename" class="wa-doc-name-btn" title="Click to rename document (F2)">
+          <span id="doc-name-label" class="wa-doc-name">untitled.wa.zip</span>
+          <svg class="wa-ico-xs wa-rename-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </button>
+        <div id="doc-name-editor" class="wa-doc-name-editor" hidden>
+          <input type="text" id="doc-name-input" class="wa-doc-name-input" aria-label="Document filename" spellcheck="false">
+          <span class="wa-ext-pill">.wa.zip</span>
+        </div>
         <span id="doc-dirty-dot" class="wa-dirty-dot" title="Unsaved changes" hidden>●</span>
       </div>
 
@@ -258,11 +265,19 @@
         <div class="wa-tabs" role="tablist" aria-label="Source files">
           <button class="wa-tab active" role="tab" aria-selected="true" data-tab="content" id="tab-content">content.md</button>
           <button class="wa-tab" role="tab" aria-selected="false" data-tab="css" id="tab-css">style.css</button>
+          <button class="wa-tab wa-tab-images" role="tab" aria-selected="false" data-tab="images" id="tab-images">
+            <span>images/</span>
+            <span id="images-count-badge" class="wa-tab-count" title="Images in images/">0</span>
+          </button>
           <div class="wa-tabs-right">
-            <span id="images-count-badge" class="wa-badge" title="Images embedded in images/">0 images</span>
+            <button type="button" id="btn-sync-scroll" class="wa-sync-toggle active" data-action="view:sync-scroll" aria-pressed="true" title="Toggle two-way scroll sync between content.md and preview">
+              <svg class="wa-ico-xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 16V4m0 0-3 3m3-3 3 3"/><path d="M17 8v12m0 0 3-3m-3 3-3-3"/></svg>
+              <span>Sync</span>
+            </button>
           </div>
         </div>
         <div id="editor-host" class="wa-editor-host"></div>
+        <div id="images-panel" class="wa-images-panel" role="tabpanel" aria-labelledby="tab-images" hidden></div>
       </section>
 
       <!-- Draggable Split Divider -->
@@ -292,15 +307,97 @@
         <span id="status-zoom">100%</span>
         <button class="wa-status-btn" data-action="view:zoom-in" aria-label="Zoom in">+</button>
         <span class="wa-status-sep">·</span>
-        <span id="status-version">v1.1.0</span>
+        <span id="status-version">v2.0.0</span>
       </div>
     </footer>
   </div>
 
-  <!-- Hidden file inputs for fallbacks and image insert -->
-  <input type="file" id="input-dir-fallback" webkitdirectory directory multiple hidden>
-  <input type="file" id="input-zip-file" accept=".zip,.wa.zip" hidden>
+  <!-- Hidden file inputs for .wa.zip open fallback and image insert/replace -->
+  <input type="file" id="input-zip-file" accept=".wa.zip,.zip,application/zip" hidden>
   <input type="file" id="input-image-file" accept="image/*" multiple hidden>
+  <input type="file" id="input-image-replace" accept="image/*" hidden>
+
+  <!-- New Document Modal (File -> New Document…) -->
+  <div id="modal-new-doc" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="new-doc-modal-title">
+    <div class="wa-modal wa-modal-sm">
+      <div class="wa-modal-header">
+        <div>
+          <h2 id="new-doc-modal-title">New Document</h2>
+          <p class="wa-modal-sub">Choose a filename and title for your new <code>.wa.zip</code> document.</p>
+        </div>
+        <button class="wa-modal-close" data-close-modal="modal-new-doc" aria-label="Close">✕</button>
+      </div>
+      <form id="form-new-doc" class="wa-dialog-form" novalidate>
+        <div class="wa-dialog-body">
+          <div id="new-doc-dirty-warn" class="wa-warn-banner" hidden>
+            Your current document has unsaved changes. Creating a new document will replace it in the editor.
+          </div>
+          <div class="wa-field">
+            <label for="new-doc-name">Document Filename</label>
+            <div class="wa-ext-input-wrap">
+              <input id="new-doc-name" type="text" class="wa-input" value="untitled" placeholder="my-document" spellcheck="false" autocomplete="off">
+              <span class="wa-ext-chip">.wa.zip</span>
+            </div>
+            <div id="new-doc-preview" class="wa-field-hint">File: untitled.wa.zip</div>
+          </div>
+          <div class="wa-field">
+            <label for="new-doc-title">Document Title (front-matter)</label>
+            <input id="new-doc-title" type="text" class="wa-input" value="Untitled Document" placeholder="Untitled Document">
+          </div>
+        </div>
+        <div class="wa-modal-footer wa-modal-footer-split">
+          <button type="button" class="wa-link-btn" id="btn-new-from-tpl">Browse 110+ Templates…</button>
+          <div class="wa-modal-footer-actions">
+            <button type="button" class="wa-btn-secondary" data-close-modal="modal-new-doc">Cancel</button>
+            <button type="submit" class="wa-btn-primary" id="btn-new-create">Create Document</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Save / Save As Modal (File -> Save [unsaved] / Save As…) -->
+  <div id="modal-save-as" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="save-as-title">
+    <div class="wa-modal wa-modal-sm">
+      <div class="wa-modal-header">
+        <div>
+          <h2 id="save-as-title">Save Document As</h2>
+          <p id="save-as-sub" class="wa-modal-sub">Choose a filename for your <code>.wa.zip</code> archive.</p>
+        </div>
+        <button class="wa-modal-close" data-close-modal="modal-save-as" aria-label="Close">✕</button>
+      </div>
+      <form id="form-save-as" class="wa-dialog-form" novalidate>
+        <div class="wa-dialog-body">
+          <div class="wa-field">
+            <label for="save-as-name">Archive Filename</label>
+            <div class="wa-ext-input-wrap">
+              <input id="save-as-name" type="text" class="wa-input" value="untitled" placeholder="my-document" spellcheck="false" autocomplete="off">
+              <span class="wa-ext-chip">.wa.zip</span>
+            </div>
+            <div id="save-as-preview" class="wa-field-hint">File: untitled.wa.zip</div>
+          </div>
+
+          <div class="wa-pkg-summary">
+            <div class="wa-pkg-title">Files packaged inside .wa.zip:</div>
+            <div class="wa-pkg-grid">
+              <span><code>content.md</code> Markdown source</span>
+              <span><code>style.css</code> Layout &amp; theme</span>
+              <span><code>images/</code> <em id="save-as-img-count">0 files</em></span>
+              <span><code>syntax.md</code> Format &amp; AI guide</span>
+              <span class="wa-pkg-wide"><code id="save-as-reader-name">wa-reader.2.0.0.html</code> Live HTML reader</span>
+            </div>
+          </div>
+
+          <p id="save-as-dest-note" class="wa-field-hint"></p>
+        </div>
+        <div class="wa-modal-footer">
+          <button type="button" class="wa-btn-secondary" data-close-modal="modal-save-as">Cancel</button>
+          <button type="button" class="wa-btn-secondary" id="btn-save-download">Download Copy</button>
+          <button type="submit" class="wa-btn-primary" id="btn-save-file">Save .wa.zip…</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Page Setup Modal (Edit -> Page Setup…) -->
   <div id="modal-page-setup" class="wa-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="ps-modal-title">

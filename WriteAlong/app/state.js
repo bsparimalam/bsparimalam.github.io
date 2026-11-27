@@ -1,13 +1,17 @@
 /**
  * Central Document State + IndexedDB Crash-Recovery Autosave
  */
+import { normalizeWaName } from './fs.js';
+import { WA_READER_FILENAME } from '../runtime/render.js';
 
 const DB_NAME = 'write-along-autosave';
 const STORE_NAME = 'drafts';
 const DRAFT_KEY = 'current';
 
-export const DEFAULT_CONTENT = `---
-title: Untitled Document
+export function buildStarterContent(title = 'Untitled Document') {
+  const safeTitle = String(title || 'Untitled Document').replace(/\r?\n/g, ' ').trim() || 'Untitled Document';
+  return `---
+title: ${safeTitle}
 subtitle: Drafted in Write Along
 author: Your Name
 date: ${new Date().toISOString().slice(0, 10)}
@@ -16,17 +20,20 @@ abstract: Replace this summary with a concise overview of your document. Open Te
 
 ## Introduction
 
-Welcome to **Write Along**. Edit \`content.md\` on the left and watch your typeset page update live on the right. Switch to the \`style.css\` tab to customize fonts, colors, page size, and spacing.
+Welcome to **Write Along**. Edit \`content.md\` on the left and watch your typeset page update live on the right. Switch to the \`style.css\` tab to customize fonts, colors, page size, and spacing, or manage local assets in the \`images/\` tab.
 
 > [!TIP]
-> Press \`Ctrl+E\` to toggle between **Edit Mode** and **Read Mode**, or click **✦ Templates** to preview 110+ styles and apply any style directly to your writing.
+> Press \`Ctrl+E\` to toggle between **Edit Mode** and **Read Mode**, or click **Templates** to preview 110+ styles and apply any style directly to your writing.
 
 ### Quick Checklist
 
-- [x] Create a new \`.wa\` document
+- [x] Create a new \`.wa.zip\` document
 - [ ] Apply a template style from the Gallery
-- [ ] Export a print-identical PDF or standalone HTML
+- [ ] Save your \`.wa.zip\` archive (with live \`${WA_READER_FILENAME}\`)
 `;
+}
+
+export const DEFAULT_CONTENT = buildStarterContent('Untitled Document');
 
 export const DEFAULT_CSS = `/* ==========================================================================
    Write Along — Default Clean Serif Style
@@ -133,19 +140,28 @@ export async function loadAutosaveDraft() {
 export function createAppState() {
   const listeners = new Set();
 
+  let initialSync = true;
+  try {
+    const stored = localStorage.getItem('wa-scroll-sync');
+    if (stored === 'false') initialSync = false;
+  } catch (_e) {
+    // ignore
+  }
+
   const state = {
     doc: {
-      name: 'untitled.wa',
+      name: 'untitled.wa.zip',
       content: DEFAULT_CONTENT,
       css: DEFAULT_CSS,
       images: new Map(), // Map<'images/foo.png', Blob>
-      handle: null,      // FileSystemDirectoryHandle | null
+      handle: null,      // FileSystemFileHandle | null
     },
     dirty: false,
-    mode: 'edit',        // 'edit' | 'read'
-    activeTab: 'content',// 'content' | 'css'
+    mode: 'edit',         // 'edit' | 'read'
+    activeTab: 'content', // 'content' | 'css' | 'images'
     zoom: 1.0,
     pageGrid: false,
+    syncScroll: initialSync,
     viewingGuide: false,
     previousStyleCss: null,
     previousStyleImages: null,
@@ -162,6 +178,20 @@ export function createAppState() {
       return () => listeners.delete(fn);
     },
     emit,
+    setName(rawName, { markDirty = false, detachHandle = false } = {}) {
+      const normalized = normalizeWaName(rawName, state.doc.name || 'untitled.wa.zip');
+      const changed = normalized !== state.doc.name;
+      const hadHandle = Boolean(state.doc.handle);
+      state.doc.name = normalized;
+      let detached = false;
+      if (changed && detachHandle && hadHandle) {
+        state.doc.handle = null;
+        detached = true;
+      }
+      if (changed && markDirty) state.dirty = true;
+      emit('name');
+      return { name: normalized, changed, detached };
+    },
     setContent(text, { markDirty = true } = {}) {
       state.doc.content = text;
       if (markDirty) state.dirty = true;
@@ -172,8 +202,60 @@ export function createAppState() {
       if (markDirty) state.dirty = true;
       emit('css');
     },
+    setSyncScroll(enabled) {
+      state.syncScroll = Boolean(enabled);
+      try {
+        localStorage.setItem('wa-scroll-sync', String(state.syncScroll));
+      } catch (_e) {
+        // ignore
+      }
+      emit('sync-scroll');
+    },
+    addImages(entries) {
+      for (const [imgPath, blob] of entries) {
+        state.doc.images.set(imgPath, blob);
+      }
+      state.dirty = true;
+      emit('images');
+    },
+    renameImage(oldPath, newPath, { nextContent = null, nextCss = null } = {}) {
+      if (!state.doc.images.has(oldPath) || oldPath === newPath) return false;
+      const blob = state.doc.images.get(oldPath);
+      // Preserve order when renaming key
+      const rebuilt = new Map();
+      for (const [k, v] of state.doc.images.entries()) {
+        rebuilt.set(k === oldPath ? newPath : k, k === oldPath ? blob : v);
+      }
+      state.doc.images = rebuilt;
+      if (nextContent !== null) state.doc.content = nextContent;
+      if (nextCss !== null) state.doc.css = nextCss;
+      state.dirty = true;
+      emit('images');
+      return true;
+    },
+    replaceImage(imgPath, newBlob) {
+      if (!state.doc.images.has(imgPath)) return false;
+      state.doc.images.set(imgPath, newBlob);
+      state.dirty = true;
+      emit('images');
+      return true;
+    },
+    deleteImage(imgPath) {
+      if (!state.doc.images.has(imgPath)) return null;
+      const blob = state.doc.images.get(imgPath);
+      state.doc.images.delete(imgPath);
+      state.dirty = true;
+      emit('images');
+      return blob;
+    },
     loadDocument({ name, content, css, images = new Map(), handle = null, dirty = false }) {
-      state.doc = { name, content, css, images, handle };
+      state.doc = {
+        name: normalizeWaName(name || 'untitled.wa.zip'),
+        content,
+        css,
+        images,
+        handle,
+      };
       state.dirty = dirty;
       state.viewingGuide = false;
       emit('document');

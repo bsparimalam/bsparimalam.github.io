@@ -1,9 +1,10 @@
 /**
  * Write Along — Main Application Bootstrap (app/main.js)
  */
-import { WA_VERSION } from '../runtime/render.js';
+import { WA_VERSION, WA_READER_FILENAME } from '../runtime/render.js';
 import {
   createAppState,
+  buildStarterContent,
   DEFAULT_CONTENT,
   DEFAULT_CSS,
   saveAutosaveDraft,
@@ -14,16 +15,24 @@ import { createCodeEditor } from './editor.js';
 import { createPreviewController } from './preview.js';
 import { setupMenusAndToolbar } from './toolbar.js';
 import { createTemplatesGallery } from './templates.js';
+import { createFileDialogsController } from './file-dialogs.js';
+import { createImagesPanelController } from './images-panel.js';
+import { createScrollSyncController } from './scroll-sync.js';
 import {
-  supportsDirectoryPicker,
-  openWaDirectory,
-  saveWaToHandle,
-  saveWaAsDirectory,
-  importFromFileList,
+  supportsOpenFilePicker,
+  supportsSaveFilePicker,
+  openWaZipFile,
+  saveWaZipToHandle,
+  saveWaZipAsFile,
   importFromZipFile,
+  parseWaZipBytes,
   addImageBlobsToDoc,
 } from './fs.js';
-import { exportToPdf, exportStandaloneHtml, exportWaZip } from './export.js';
+import {
+  exportToPdf,
+  exportStandaloneHtml,
+  exportWaZip,
+} from './export.js';
 import {
   createPageSetupController,
   parsePageSetupFromCss,
@@ -64,6 +73,14 @@ function countWords(md) {
   return tokens.length;
 }
 
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 async function boot() {
   const appEl = document.getElementById('app');
   const docNameLabel = document.getElementById('doc-name-label');
@@ -80,27 +97,39 @@ async function boot() {
   const btnModeEdit = document.getElementById('btn-mode-edit');
   const btnModeRead = document.getElementById('btn-mode-read');
   const btnRevertStyle = document.getElementById('btn-revert-style');
+  const btnSyncScroll = document.getElementById('btn-sync-scroll');
+  const menuSyncScroll = document.getElementById('menu-sync-scroll');
+  const menuSyncCheck = document.getElementById('menu-sync-check');
   const previewFrame = document.getElementById('preview-frame');
   const editorHost = document.getElementById('editor-host');
+  const imagesHost = document.getElementById('images-panel');
 
   statusVersion.textContent = `v${WA_VERSION}`;
 
   const store = createAppState();
+  let scrollSync = null;
+  let imagesPanel = null;
+  let editor = null;
+
   const preview = createPreviewController(previewFrame, {
     onPageMetrics: ({ currentPage, pageCount }) => {
       if (statusPages) {
         statusPages.textContent = pageCount === 1 ? 'Page 1 of 1' : `Page ${currentPage} of ${pageCount}`;
       }
     },
+    onRendered: () => {
+      scrollSync?.bindPreviewListener();
+      scrollSync?.rebuildAnchors();
+    },
   });
   await preview.init();
 
-  // Check IndexedDB autosave draft
+  // Check IndexedDB autosave draft (auto-normalizes legacy v1.x *.wa names to *.wa.zip)
   const savedDraft = await loadAutosaveDraft();
   if (savedDraft && savedDraft.content) {
     const imgMap = new Map(savedDraft.images || []);
     store.loadDocument({
-      name: savedDraft.name || 'untitled.wa',
+      name: savedDraft.name || 'untitled.wa.zip',
       content: savedDraft.content,
       css: savedDraft.css || DEFAULT_CSS,
       images: imgMap,
@@ -109,10 +138,39 @@ async function boot() {
     });
   }
 
-  let editor = null;
   const theme = createThemeController((resolved) => {
     editor?.setTheme(resolved === 'dark');
   });
+
+  // Unified tab switcher (content.md | style.css | images/)
+  const tabs = Array.from(document.querySelectorAll('.wa-tab'));
+  function switchEditorTab(tab) {
+    if (!['content', 'css', 'images'].includes(tab)) return;
+    store.state.activeTab = tab;
+    for (const b of tabs) {
+      const active = b.getAttribute('data-tab') === tab;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', String(active));
+    }
+    if (tab === 'images') {
+      editorHost.hidden = true;
+      imagesHost.hidden = false;
+      imagesPanel?.render();
+    } else {
+      imagesHost.hidden = true;
+      editorHost.hidden = false;
+      editor?.switchTab(tab);
+      if (tab === 'content') {
+        scrollSync?.rebuildAnchors();
+      }
+    }
+  }
+
+  for (const tabBtn of tabs) {
+    tabBtn.addEventListener('click', () => {
+      switchEditorTab(tabBtn.getAttribute('data-tab'));
+    });
+  }
 
   editor = createCodeEditor(editorHost, {
     initialContent: store.state.doc.content,
@@ -121,6 +179,51 @@ async function boot() {
     onChangeContent: (val) => store.setContent(val),
     onChangeCss: (val) => store.setCss(val),
     onDropImages: (files) => handleInsertImages(files),
+    onRequestMarkdownTab: () => switchEditorTab('content'),
+  });
+
+  // Bidirectional Scroll Sync (content.md <-> preview)
+  scrollSync = createScrollSyncController({ editor, previewFrame, store });
+  scrollSync.bindPreviewListener();
+  preview.setFeedbackWrapper((fn) => scrollSync.runWithoutFeedback(fn));
+
+  function showInfoModal(title, htmlContent) {
+    document.getElementById('info-modal-title').textContent = title;
+    document.getElementById('info-modal-body').innerHTML = htmlContent;
+    document.getElementById('modal-info').hidden = false;
+  }
+
+  // Images Tab Manager
+  imagesPanel = createImagesPanelController({
+    hostEl: imagesHost,
+    store,
+    onInsertMarkdown: (mdSnippet) => {
+      switchEditorTab('content');
+      editor.insertBlock(mdSnippet);
+    },
+    onUpdateDocumentRefs: ({ content, css }) => {
+      if (content !== null) {
+        editor.replaceContentOnly(content);
+      }
+      if (css !== null) {
+        editor.replaceCssOnly(css);
+      }
+    },
+    onOpenLightbox: ({ imgPath, shortName, url, sizeLabel, dims, refCount }) => {
+      showInfoModal(
+        shortName,
+        `<div style="text-align:center;margin-bottom:12px;background:var(--ui-bg);border:1px solid var(--ui-border);border-radius:8px;padding:14px;">
+          <img src="${url}" alt="${escapeHtml(shortName)}" style="max-width:100%;max-height:52vh;object-fit:contain;display:inline-block;">
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ui-muted);">
+          <span><strong>Path:</strong> <code>${escapeHtml(imgPath)}</code></span>
+          ${dims ? `<span><strong>Dimensions:</strong> ${escapeHtml(dims)} px</span>` : ''}
+          <span><strong>Size:</strong> ${escapeHtml(sizeLabel)}</span>
+          <span><strong>References:</strong> ${refCount}</span>
+        </div>`
+      );
+    },
+    showToast,
   });
 
   // Wire up Edit -> Page Setup… modal
@@ -143,6 +246,63 @@ async function boot() {
       store.applyTemplateStyle(css, images);
       editor.replaceCssOnly(css);
     },
+    showToast,
+  });
+
+  // Save helpers (canonical flat-root .wa.zip with live wa-reader.<version>.html)
+  async function performSaveFile(chosenName) {
+    statusAutosave.textContent = 'Saving .wa.zip…';
+    try {
+      const saved = await saveWaZipAsFile(store.state.doc, { chosenName });
+      store.state.doc.handle = saved.handle;
+      store.state.doc.name = saved.name;
+      store.state.dirty = false;
+      store.emit('save');
+      statusAutosave.textContent = 'Saved';
+      showToast(`Saved ${saved.name}`);
+    } catch (err) {
+      statusAutosave.textContent = 'Ready';
+      if (err.name !== 'AbortError') showToast(`Save error: ${err.message}`);
+    }
+  }
+
+  async function performSaveDownload(chosenName) {
+    statusAutosave.textContent = 'Packaging .wa.zip…';
+    try {
+      if (chosenName) {
+        store.setName(chosenName, { markDirty: false, detachHandle: false });
+      }
+      await exportWaZip(store.state.doc);
+      store.state.dirty = false;
+      store.emit('save');
+      statusAutosave.textContent = 'Saved';
+      showToast(`Downloaded ${store.state.doc.name}`);
+    } catch (err) {
+      statusAutosave.textContent = 'Ready';
+      showToast(`Save error: ${err.message}`);
+    }
+  }
+
+  // Wire up Filename Dialogs (New Document, Inline Rename, Save / Save As)
+  const fileDialogs = createFileDialogsController({
+    store,
+    onCreateNew: ({ name, title }) => {
+      const starterMd = buildStarterContent(title);
+      store.loadDocument({
+        name,
+        content: starterMd,
+        css: DEFAULT_CSS,
+        images: new Map(),
+        handle: null,
+        dirty: false,
+      });
+      editor.replaceDocuments(starterMd, DEFAULT_CSS);
+      switchEditorTab('content');
+      showToast(`Created ${name}`);
+    },
+    onSaveFile: performSaveFile,
+    onSaveDownload: performSaveDownload,
+    onOpenTemplates: () => gallery.open(),
     showToast,
   });
 
@@ -171,23 +331,47 @@ async function boot() {
     document.title = `${state.dirty ? '● ' : ''}${state.doc.name} — Write Along`;
 
     const imgCount = state.doc.images.size;
-    imagesBadge.textContent = `${imgCount} ${imgCount === 1 ? 'image' : 'images'}`;
+    imagesBadge.textContent = String(imgCount);
+    imagesBadge.title = `${imgCount} ${imgCount === 1 ? 'image' : 'images'} in images/`;
     statusWords.textContent = `${countWords(state.doc.content).toLocaleString()} words`;
     if (statusPageSetup) {
       statusPageSetup.textContent = formatPageSetupSummary(parsePageSetupFromCss(state.doc.css));
     }
     statusZoom.textContent = `${Math.round(state.zoom * 100)}%`;
 
+    if (btnSyncScroll) {
+      btnSyncScroll.classList.toggle('active', state.syncScroll);
+      btnSyncScroll.setAttribute('aria-pressed', String(state.syncScroll));
+    }
+    if (menuSyncScroll) {
+      menuSyncScroll.setAttribute('aria-checked', String(state.syncScroll));
+    }
+    if (menuSyncCheck) {
+      menuSyncCheck.textContent = state.syncScroll ? '✓' : '';
+    }
+
     if (state.doc.handle) {
-      statusFsMode.textContent = `Folder: ${state.doc.name}`;
-    } else if (supportsDirectoryPicker()) {
+      statusFsMode.textContent = `File: ${state.doc.name}`;
+    } else if (supportsSaveFilePicker()) {
       statusFsMode.textContent = 'Local Draft';
     } else {
-      statusFsMode.textContent = 'Zip Fallback Mode';
+      statusFsMode.textContent = 'Draft (Download Save)';
     }
 
     if (btnRevertStyle) {
       btnRevertStyle.disabled = state.previousStyleCss === null;
+    }
+
+    if (state.activeTab === 'images' && ['images', 'document', 'content', 'css', 'style-applied', 'init'].includes(changeType)) {
+      imagesPanel?.render();
+    }
+
+    if (changeType === 'name') {
+      queueAutosave();
+      return;
+    }
+    if (changeType === 'sync-scroll' || changeType === 'save') {
+      return;
     }
 
     if (!state.viewingGuide) {
@@ -198,6 +382,7 @@ async function boot() {
           images: state.doc.images,
           pageGrid: state.pageGrid,
           zoom: state.zoom,
+          includeSourceMap: true,
         });
         queueAutosave();
       } else {
@@ -207,8 +392,9 @@ async function boot() {
           images: state.doc.images,
           pageGrid: state.pageGrid,
           zoom: state.zoom,
+          includeSourceMap: true,
         });
-        if (changeType === 'document' || changeType === 'style-applied') {
+        if (changeType === 'document' || changeType === 'style-applied' || changeType === 'images') {
           queueAutosave();
         }
       }
@@ -217,21 +403,6 @@ async function boot() {
 
   store.subscribe(syncUi);
   syncUi(store.state, 'init');
-
-  // Tabs (content.md / style.css)
-  const tabs = Array.from(document.querySelectorAll('.wa-tab'));
-  for (const tabBtn of tabs) {
-    tabBtn.addEventListener('click', () => {
-      const tab = tabBtn.getAttribute('data-tab');
-      store.state.activeTab = tab;
-      for (const b of tabs) {
-        const active = b.getAttribute('data-tab') === tab;
-        b.classList.toggle('active', active);
-        b.setAttribute('aria-selected', String(active));
-      }
-      editor.switchTab(tab);
-    });
-  }
 
   // Draggable split divider
   const divider = document.getElementById('split-divider');
@@ -255,6 +426,7 @@ async function boot() {
     dragging = false;
     divider.classList.remove('dragging');
     previewFrame.style.pointerEvents = '';
+    scrollSync?.rebuildAnchors();
   });
 
   // Theme toggle button
@@ -283,24 +455,8 @@ async function boot() {
   });
 
   // Hidden file inputs
-  const dirFallbackInput = document.getElementById('input-dir-fallback');
   const zipFileInput = document.getElementById('input-zip-file');
   const imageFileInput = document.getElementById('input-image-file');
-
-  dirFallbackInput.addEventListener('change', async () => {
-    try {
-      const loaded = await importFromFileList(dirFallbackInput.files);
-      if (loaded) {
-        store.loadDocument(loaded);
-        editor.replaceDocuments(loaded.content, loaded.css);
-        showToast(`Opened ${loaded.name} (use Save or Export .wa.zip to download changes).`);
-      }
-    } catch (err) {
-      showToast(`Open failed: ${err.message}`);
-    } finally {
-      dirFallbackInput.value = '';
-    }
-  });
 
   zipFileInput.addEventListener('change', async () => {
     const file = zipFileInput.files?.[0];
@@ -309,17 +465,46 @@ async function boot() {
       const loaded = await importFromZipFile(file);
       store.loadDocument(loaded);
       editor.replaceDocuments(loaded.content, loaded.css);
-      showToast(`Imported ${loaded.name} from zip.`);
+      showToast(`Opened ${loaded.name}`);
     } catch (err) {
-      showToast(`Zip import failed: ${err.message}`);
+      showToast(`Open failed: ${err.message}`);
     } finally {
       zipFileInput.value = '';
     }
   });
 
+  // Allow dragging and dropping a .wa.zip archive directly onto the editor window
+  window.addEventListener('dragover', (e) => {
+    const files = Array.from(e.dataTransfer?.items || []);
+    if (files.some((it) => it.kind === 'file')) {
+      e.preventDefault();
+    }
+  });
+  window.addEventListener('drop', async (e) => {
+    if (e.target && imagesHost.contains(e.target)) return;
+    const files = Array.from(e.dataTransfer?.files || []);
+    const zipFile = files.find((f) => /\.zip$/i.test(f.name || ''));
+    if (!zipFile) return;
+    e.preventDefault();
+    try {
+      const loaded = await importFromZipFile(zipFile);
+      store.loadDocument(loaded);
+      editor.replaceDocuments(loaded.content, loaded.css);
+      showToast(`Opened ${loaded.name}`);
+    } catch (err) {
+      showToast(`Open failed: ${err.message}`);
+    }
+  });
+
   imageFileInput.addEventListener('change', () => {
     const files = Array.from(imageFileInput.files || []);
-    if (files.length > 0) handleInsertImages(files);
+    if (files.length > 0) {
+      if (store.state.activeTab === 'images') {
+        imagesPanel.addFilesToImagesTab(files);
+      } else {
+        handleInsertImages(files);
+      }
+    }
     imageFileInput.value = '';
   });
 
@@ -331,59 +516,46 @@ async function boot() {
     });
     editor.insertBlock(mdLines.join('\n\n'));
     store.state.dirty = true;
-    store.emit('content');
+    store.emit('images');
     showToast(`Added ${paths.length} image${paths.length > 1 ? 's' : ''} to images/.`);
   }
 
   async function openSyntaxGuide() {
     try {
-      const [mdRes, cssRes] = await Promise.all([
-        fetch('./docs/syntax.wa/content.md'),
-        fetch('./docs/syntax.wa/style.css'),
-      ]);
-      const md = await mdRes.text();
-      const css = await cssRes.text();
+      const res = await fetch('./docs/syntax.wa.zip');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const bytes = new Uint8Array(await res.arrayBuffer());
+      const guideDoc = parseWaZipBytes(bytes, 'syntax.wa.zip');
       store.state.viewingGuide = true;
       store.emit('mode');
       preview.renderNow({
-        content: md,
-        css,
-        images: new Map(),
+        content: guideDoc.content,
+        css: guideDoc.css,
+        images: guideDoc.images,
         pageGrid: false,
         zoom: store.state.zoom,
-        baseAssetUrl: new URL('./docs/syntax.wa/', window.location.href).href,
+        includeSourceMap: false,
       });
     } catch (err) {
       showToast(`Could not load Syntax Guide: ${err.message}`);
     }
   }
 
-  function showInfoModal(title, htmlContent) {
-    document.getElementById('info-modal-title').textContent = title;
-    document.getElementById('info-modal-body').innerHTML = htmlContent;
-    document.getElementById('modal-info').hidden = false;
-  }
-
   // Action Dispatcher (Menus, Toolbar, Keyboard Shortcuts)
   async function dispatchAction(action) {
     switch (action) {
       case 'file:new':
-        store.loadDocument({
-          name: 'untitled.wa',
-          content: DEFAULT_CONTENT,
-          css: DEFAULT_CSS,
-          images: new Map(),
-          handle: null,
-          dirty: false,
-        });
-        editor.replaceDocuments(DEFAULT_CONTENT, DEFAULT_CSS);
-        showToast('Created new document.');
+        fileDialogs.openNewDocumentModal();
+        break;
+
+      case 'file:rename':
+        fileDialogs.openInlineRename();
         break;
 
       case 'file:open':
-        if (supportsDirectoryPicker()) {
+        if (supportsOpenFilePicker()) {
           try {
-            const loaded = await openWaDirectory();
+            const loaded = await openWaZipFile();
             store.loadDocument(loaded);
             editor.replaceDocuments(loaded.content, loaded.css);
             showToast(`Opened ${loaded.name}`);
@@ -391,61 +563,35 @@ async function boot() {
             if (err.name !== 'AbortError') showToast(`Open error: ${err.message}`);
           }
         } else {
-          showToast('File System Access API is unavailable in this browser; opening folder import fallback.');
-          dirFallbackInput.click();
+          zipFileInput.click();
         }
         break;
 
-      case 'file:import-zip':
-        zipFileInput.click();
-        break;
-
       case 'file:save':
-        try {
-          if (store.state.doc.handle) {
-            await saveWaToHandle(store.state.doc.handle, store.state.doc);
+        if (store.state.doc.handle) {
+          statusAutosave.textContent = 'Saving .wa.zip…';
+          try {
+            await saveWaZipToHandle(store.state.doc.handle, store.state.doc);
             store.state.dirty = false;
             store.emit('save');
+            statusAutosave.textContent = 'Saved';
             showToast(`Saved ${store.state.doc.name}`);
-          } else if (supportsDirectoryPicker()) {
-            const saved = await saveWaAsDirectory(store.state.doc);
-            store.state.doc.handle = saved.handle;
-            store.state.doc.name = saved.name;
-            store.state.dirty = false;
-            store.emit('save');
-            showToast(`Saved ${saved.name}`);
-          } else {
-            await exportWaZip(store.state.doc);
-            store.state.dirty = false;
-            store.emit('save');
-            showToast('Exported .wa.zip (browser fallback for direct folder write).');
+          } catch (err) {
+            statusAutosave.textContent = 'Ready';
+            if (err.name !== 'AbortError') showToast(`Save error: ${err.message}`);
           }
-        } catch (err) {
-          if (err.name !== 'AbortError') showToast(`Save error: ${err.message}`);
+        } else {
+          fileDialogs.openSaveAsModal({ isFirstSave: true });
         }
         break;
 
       case 'file:save-as':
-        if (supportsDirectoryPicker()) {
-          try {
-            const saved = await saveWaAsDirectory(store.state.doc);
-            store.state.doc.handle = saved.handle;
-            store.state.doc.name = saved.name;
-            store.state.dirty = false;
-            store.emit('save');
-            showToast(`Saved as ${saved.name}`);
-          } catch (err) {
-            if (err.name !== 'AbortError') showToast(`Save As error: ${err.message}`);
-          }
-        } else {
-          await exportWaZip(store.state.doc);
-          showToast('Exported .wa.zip archive.');
-        }
+        fileDialogs.openSaveAsModal({ isFirstSave: false });
         break;
 
       case 'file:close':
         store.loadDocument({
-          name: 'untitled.wa',
+          name: 'untitled.wa.zip',
           content: DEFAULT_CONTENT,
           css: DEFAULT_CSS,
           images: new Map(),
@@ -453,6 +599,7 @@ async function boot() {
           dirty: false,
         });
         editor.replaceDocuments(DEFAULT_CONTENT, DEFAULT_CSS);
+        switchEditorTab('content');
         break;
 
       case 'export:pdf':
@@ -466,8 +613,7 @@ async function boot() {
         break;
 
       case 'export:zip':
-        await exportWaZip(store.state.doc);
-        showToast('Exported .wa.zip archive.');
+        await performSaveDownload(store.state.doc.name);
         break;
 
       // Edit
@@ -554,6 +700,10 @@ async function boot() {
         store.state.pageGrid = !store.state.pageGrid;
         store.emit('mode');
         break;
+      case 'view:sync-scroll':
+        store.setSyncScroll(!store.state.syncScroll);
+        showToast(`Scroll Sync: ${store.state.syncScroll ? 'On (Editor ↔ Preview)' : 'Off'}`);
+        break;
 
       // Theme
       case 'theme:auto': theme.setOverride('auto'); showToast('Theme: System Default'); break;
@@ -580,9 +730,10 @@ async function boot() {
           'Keyboard Shortcuts',
           `<table class="wa-shortcuts-table">
             <tr><td><kbd>Ctrl+E</kbd></td><td>Toggle Edit / Read Mode</td></tr>
-            <tr><td><kbd>Ctrl+S</kbd></td><td>Save .wa Folder</td></tr>
-            <tr><td><kbd>Ctrl+O</kbd></td><td>Open .wa Folder</td></tr>
-            <tr><td><kbd>Ctrl+N</kbd></td><td>New Document</td></tr>
+            <tr><td><kbd>Ctrl+S</kbd> / <kbd>Ctrl+Shift+S</kbd></td><td>Save / Save As…</td></tr>
+            <tr><td><kbd>F2</kbd></td><td>Rename Document</td></tr>
+            <tr><td><kbd>Ctrl+O</kbd></td><td>Open .wa.zip Document</td></tr>
+            <tr><td><kbd>Ctrl+N</kbd></td><td>New Document…</td></tr>
             <tr><td><kbd>Ctrl+Shift+T</kbd></td><td>Open Template Gallery</td></tr>
             <tr><td><kbd>Ctrl+Shift+P</kbd></td><td>Page Setup (Size, Margins, Orientation)</td></tr>
             <tr><td><kbd>Ctrl+P</kbd></td><td>Export PDF (Print)</td></tr>
@@ -603,8 +754,8 @@ async function boot() {
               <span style="color:var(--ui-muted)">Markdown word processor with publication-grade CSS templates</span>
             </div>
           </div>
-          <p>Every document is a transparent <code>.wa</code> folder containing strict GitHub Flavored Markdown (<code>content.md</code>), plain CSS (<code>style.css</code>), embedded media (<code>images/</code>), a portable static viewer (<code>read.html</code>), and an AI-ready reference (<code>syntax.md</code>).</p>
-          <p>Works completely offline via Service Worker precaching with print-identical screen preview.</p>`
+          <p>Every document is a portable <code>.wa.zip</code> archive containing strict GitHub Flavored Markdown (<code>content.md</code>), plain CSS (<code>style.css</code>), embedded media (<code>images/</code>), a live versioned HTML reader (<code>${WA_READER_FILENAME}</code>), and an AI-ready reference (<code>syntax.md</code>).</p>
+          <p>Works completely offline via Service Worker precaching with print-identical screen preview and two-way scroll sync.</p>`
         );
         break;
     }
@@ -618,10 +769,14 @@ async function boot() {
     if (e.key === 'F1') {
       e.preventDefault();
       dispatchAction('help:syntax');
+    } else if (e.key === 'F2') {
+      e.preventDefault();
+      dispatchAction('file:rename');
     } else if (e.key === 'Escape') {
       document.getElementById('modal-templates').hidden = true;
       document.getElementById('modal-info').hidden = true;
       document.getElementById('modal-page-setup').hidden = true;
+      fileDialogs.closeAll();
     } else if (mod && e.key.toLowerCase() === 'e') {
       e.preventDefault();
       dispatchAction(store.state.mode === 'edit' ? 'view:read' : 'view:edit');
@@ -683,7 +838,18 @@ async function boot() {
   }
 
   // Expose debug handle for automated browser verification
-  window.__WA_APP__ = { store, editor, preview, gallery, theme, dispatchAction };
+  window.__WA_APP__ = {
+    store,
+    editor,
+    preview,
+    gallery,
+    theme,
+    fileDialogs,
+    imagesPanel,
+    scrollSync,
+    switchEditorTab,
+    dispatchAction,
+  };
 }
 
 boot();

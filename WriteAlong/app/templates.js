@@ -1,6 +1,8 @@
 /**
  * Templates Gallery Modal (Preview Template vs Apply Style Only)
+ * Loads gallery thumbnails from templates/thumbs/ and fetches canonical .wa.zip archives.
  */
+import { parseWaZipBytes } from './fs.js';
 
 export function createTemplatesGallery({ onPreviewTemplate, onApplyStyle, showToast }) {
   const modal = document.getElementById('modal-templates');
@@ -77,7 +79,7 @@ export function createTemplatesGallery({ onPreviewTemplate, onApplyStyle, showTo
         .map((c) => `<span class="wa-swatch" style="background:${c}"></span>`)
         .join('');
 
-      const thumbSrc = tpl.thumbnail ? `./templates/${tpl.id}.wa/${tpl.thumbnail}` : '';
+      const thumbSrc = tpl.thumbnail ? `./templates/${tpl.thumbnail}` : '';
       card.innerHTML = `
         <div class="wa-tpl-thumb">
           ${thumbSrc ? `<img src="${thumbSrc}" alt="${tpl.name} page 1 preview" loading="lazy">` : ''}
@@ -107,31 +109,16 @@ export function createTemplatesGallery({ onPreviewTemplate, onApplyStyle, showTo
   }
 
   async function fetchTemplateFiles(tpl, includeContent) {
-    const base = `./templates/${tpl.id}.wa/`;
-    const styleRes = await fetch(`${base}style.css`);
-    if (!styleRes.ok) throw new Error(`Failed to fetch style.css for ${tpl.id}`);
-    const css = await styleRes.text();
-
-    let content = null;
-    if (includeContent) {
-      const mdRes = await fetch(`${base}content.md`);
-      if (!mdRes.ok) throw new Error(`Failed to fetch content.md for ${tpl.id}`);
-      content = await mdRes.text();
-    }
-
-    const images = new Map();
-    for (const imgRel of tpl.images || []) {
-      try {
-        const res = await fetch(`${base}${imgRel}`);
-        if (res.ok) {
-          images.set(imgRel, await res.blob());
-        }
-      } catch (_e) {
-        // optional
-      }
-    }
-
-    return { content, css, images };
+    const archiveName = tpl.archive || `${tpl.id}.wa.zip`;
+    const res = await fetch(`./templates/${archiveName}`);
+    if (!res.ok) throw new Error(`Failed to fetch ${archiveName}`);
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    const parsed = parseWaZipBytes(bytes, archiveName);
+    return {
+      content: includeContent ? parsed.content : null,
+      css: parsed.css,
+      images: parsed.images,
+    };
   }
 
   async function handleLoadTemplate(tpl, mode) {
@@ -141,7 +128,7 @@ export function createTemplatesGallery({ onPreviewTemplate, onApplyStyle, showTo
       if (mode === 'preview') {
         onPreviewTemplate({
           id: tpl.id,
-          name: `${tpl.id}.wa`,
+          name: `${tpl.id}.wa.zip`,
           content: data.content,
           css: data.css,
           images: data.images,

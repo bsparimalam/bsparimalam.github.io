@@ -12,7 +12,13 @@ import {
   paginateDocument,
 } from './paginate.js';
 
-export const WA_VERSION = '1.1.0';
+export const WA_VERSION = '2.0.0';
+
+export function getWaReaderFilename(version = WA_VERSION) {
+  return `wa-reader.${version}.html`;
+}
+
+export const WA_READER_FILENAME = getWaReaderFilename(WA_VERSION);
 
 const PAGE_SIZE_MAP = {
   'letter': ['8.5in', '11in'],
@@ -190,11 +196,12 @@ export function parseFrontMatter(markdown) {
   const normalized = markdown.replace(/\r\n/g, '\n');
   const match = normalized.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
   if (!match) {
-    return { meta: {}, body: normalized };
+    return { meta: {}, body: normalized, bodyStartLine: 1 };
   }
 
   const rawYaml = match[1];
   const body = normalized.slice(match[0].length);
+  const bodyStartLine = 1 + (match[0].match(/\n/g) || []).length;
   const meta = {};
   const lines = rawYaml.split('\n');
   let currentKey = null;
@@ -240,7 +247,7 @@ export function parseFrontMatter(markdown) {
     }
   }
 
-  return { meta, body };
+  return { meta, body, bodyStartLine };
 }
 
 function stripQuotes(s) {
@@ -269,17 +276,21 @@ function slugify(text) {
 
 /**
  * Extract footnotes from markdown body (outside fenced code blocks).
+ * Preserves a 1-based original line map for accurate editor<->preview scroll sync.
  */
-function extractFootnotes(md) {
+function extractFootnotes(md, startLine = 1) {
   const lines = md.split('\n');
   const definitions = new Map();
   const kept = [];
+  const keptLines = [];
   let inFence = false;
   let fenceChar = '';
   let activeDef = null;
+  let firstFootnoteLine = 0;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    const origLine = startLine + i;
     const fenceMatch = line.match(/^(\s*)(`{3,}|~{3,})/);
     if (fenceMatch) {
       const ch = fenceMatch[2][0];
@@ -291,6 +302,7 @@ function extractFootnotes(md) {
       }
       activeDef = null;
       kept.push(line);
+      keptLines.push(origLine);
       continue;
     }
 
@@ -298,6 +310,7 @@ function extractFootnotes(md) {
       const defMatch = line.match(/^\[\^([^\]]+)\]:\s*(.*)$/);
       if (defMatch) {
         activeDef = defMatch[1].trim();
+        if (!firstFootnoteLine) firstFootnoteLine = origLine;
         definitions.set(activeDef, defMatch[2]);
         continue;
       }
@@ -310,10 +323,11 @@ function extractFootnotes(md) {
       activeDef = null;
     }
     kept.push(line);
+    keptLines.push(origLine);
   }
 
   if (definitions.size === 0) {
-    return { markdown: md, footnotes: [] };
+    return { markdown: md, footnotes: [], lineMap: keptLines, firstFootnoteLine: 0 };
   }
 
   // Replace inline references [^id] outside code blocks and inline code
@@ -358,7 +372,7 @@ function extractFootnotes(md) {
     outLines.push(parts.join(''));
   }
 
-  return { markdown: outLines.join('\n'), footnotes: order };
+  return { markdown: outLines.join('\n'), footnotes: order, lineMap: keptLines, firstFootnoteLine };
 }
 
 /**
@@ -367,14 +381,24 @@ function extractFootnotes(md) {
  * - Block class directives: `<!-- .class1 .class2 -->` (before or trailing a block)
  * - `[TOC]` placeholder
  */
-function preprocessExtensions(md) {
+function preprocessExtensions(md, inLineMap = null) {
   const lines = md.split('\n');
   const out = [];
+  const outLineMap = [];
   let inFence = false;
   let fenceChar = '';
 
+  const pushChunk = (text, origLine) => {
+    const sub = text.split('\n');
+    for (const s of sub) {
+      out.push(s);
+      outLineMap.push(origLine);
+    }
+  };
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    const origLine = inLineMap ? (inLineMap[i] || i + 1) : i + 1;
     const fenceMatch = line.match(/^(\s*)(`{3,}|~{3,})/);
     if (fenceMatch) {
       const ch = fenceMatch[2][0];
@@ -385,29 +409,31 @@ function preprocessExtensions(md) {
         inFence = false;
       }
       out.push(line);
+      outLineMap.push(origLine);
       continue;
     }
     if (inFence) {
       out.push(line);
+      outLineMap.push(origLine);
       continue;
     }
 
     // Page break: "---" immediately followed by "<!-- pagebreak -->"
     if (/^\s*---+\s*$/.test(line) && i + 1 < lines.length && /^\s*<!--\s*page-?break\s*-->\s*$/i.test(lines[i + 1])) {
-      out.push('\n<div class="page-break" aria-hidden="true"></div>\n');
+      pushChunk('\n<div class="page-break" aria-hidden="true"></div>\n', origLine);
       i++;
       continue;
     }
 
     // Standalone <!-- pagebreak -->
     if (/^\s*<!--\s*page-?break\s*-->\s*$/i.test(line)) {
-      out.push('\n<div class="page-break" aria-hidden="true"></div>\n');
+      pushChunk('\n<div class="page-break" aria-hidden="true"></div>\n', origLine);
       continue;
     }
 
     // Standalone [TOC]
     if (/^\s*\[TOC\]\s*$/i.test(line)) {
-      out.push('\n<div data-wa-toc="true"></div>\n');
+      pushChunk('\n<div data-wa-toc="true"></div>\n', origLine);
       continue;
     }
 
@@ -415,7 +441,7 @@ function preprocessExtensions(md) {
     const standaloneClass = line.match(/^\s*<!--\s*((?:\.[a-zA-Z0-9_-]+\s*)+)-->\s*$/);
     if (standaloneClass) {
       const classes = standaloneClass[1].trim().replace(/\./g, '');
-      out.push(`\n<span data-wa-next-class="${escapeHtml(classes)}"></span>\n`);
+      pushChunk(`\n<span data-wa-next-class="${escapeHtml(classes)}"></span>\n`, origLine);
       continue;
     }
 
@@ -424,25 +450,28 @@ function preprocessExtensions(md) {
     if (trailingClass) {
       const classes = trailingClass[2].trim().replace(/\./g, '');
       out.push(`${trailingClass[1]}<span data-wa-parent-class="${escapeHtml(classes)}"></span>`);
+      outLineMap.push(origLine);
       continue;
     }
 
     out.push(line);
+    outLineMap.push(origLine);
   }
 
-  return out.join('\n');
+  return { text: out.join('\n'), lineMap: outLineMap };
 }
 
 /**
  * Build the Front-Matter title block HTML.
  */
-function buildTitleBlockHtml(meta) {
+function buildTitleBlockHtml(meta, includeSourceMap = false) {
   if (!meta || (!meta.title && !meta.subtitle && !meta.author && !meta.abstract)) {
     return '';
   }
 
   const coverClass = meta.cover ? ' cover' : '';
-  const parts = [`<header class="title-block${coverClass}">`];
+  const lineAttr = includeSourceMap ? ' data-wa-line="1"' : '';
+  const parts = [`<header class="title-block${coverClass}"${lineAttr}>`];
 
   if (meta.organization) {
     parts.push(`<div class="organization">${escapeHtml(meta.organization)}</div>`);
@@ -573,14 +602,81 @@ export function buildFontFacesCss(styleCss = '', fontsBaseUrl = '/runtime/fonts/
   return used.join('\n');
 }
 
+function stampFirstTagWithLines(html, startLine, endLine) {
+  if (!html || !startLine) return html;
+  const attrs = endLine && endLine > startLine
+    ? ` data-wa-line="${startLine}" data-wa-line-end="${endLine}"`
+    : ` data-wa-line="${startLine}"`;
+  return html.replace(/^(\s*<[a-zA-Z][a-zA-Z0-9-]*)(?=[\s/>])/, `$1${attrs}`);
+}
+
+function parseMarkdownWithSourceLines(marked, preprocessed, lineMap) {
+  const tokens = marked.lexer(preprocessed);
+  const chunks = [];
+  let lineCursor = 0;
+
+  for (const tok of tokens) {
+    const raw = tok.raw || '';
+    const leadingNewlines = (raw.match(/^\n+/) || [''])[0].length;
+    const rawNewlines = (raw.match(/\n/g) || []).length;
+    const trimmedRaw = raw.replace(/\n+$/, '');
+    const contentNewlines = (trimmedRaw.match(/\n/g) || []).length;
+
+    const startIdx = Math.min(lineMap.length - 1, lineCursor + leadingNewlines);
+    const endIdx = Math.min(lineMap.length - 1, Math.max(startIdx, lineCursor + contentNewlines));
+    const origStart = lineMap[startIdx] || 1;
+    const origEnd = lineMap[endIdx] || origStart;
+
+    if (tok.type === 'space' || tok.type === 'def') {
+      lineCursor += rawNewlines;
+      continue;
+    }
+
+    const slice = [tok];
+    slice.links = tokens.links || {};
+    let blockHtml = marked.parser(slice);
+
+    // Stamp individual <li> lines for lists and <tr> lines for tables so split lists/tables stay anchored
+    if (tok.type === 'list' && Array.isArray(tok.items)) {
+      let itemLineCursor = lineCursor + leadingNewlines;
+      const itemLines = tok.items.map((it) => {
+        const itRaw = it.raw || '';
+        const itLead = (itRaw.match(/^\n+/) || [''])[0].length;
+        const ln = lineMap[Math.min(lineMap.length - 1, itemLineCursor + itLead)] || origStart;
+        itemLineCursor += (itRaw.match(/\n/g) || []).length;
+        return ln;
+      });
+      let liIdx = 0;
+      blockHtml = blockHtml.replace(/<li(?=[\s>])/g, () => {
+        const ln = itemLines[liIdx++] || origStart;
+        return `<li data-wa-line="${ln}"`;
+      });
+    } else if (tok.type === 'table' && Array.isArray(tok.rows)) {
+      let rowIdx = 0;
+      blockHtml = blockHtml.replace(/<tbody>([\s\S]*?)<\/tbody>/, (full, inner) => {
+        const stamped = inner.replace(/<tr(?=[\s>])/g, () => {
+          const ln = lineMap[Math.min(lineMap.length - 1, startIdx + 2 + rowIdx++)] || origStart;
+          return `<tr data-wa-line="${ln}"`;
+        });
+        return `<tbody>${stamped}</tbody>`;
+      });
+    }
+
+    chunks.push(stampFirstTagWithLines(blockHtml, origStart, origEnd));
+    lineCursor += rawNewlines;
+  }
+
+  return chunks.join('');
+}
+
 /**
  * Render Markdown -> Sanitized DOM inside a target container element (or HTML string).
  */
 export function renderMarkdownToHtml(markdown, options = {}) {
-  const { resolveImage } = options;
-  const { meta, body } = parseFrontMatter(markdown || '');
-  const { markdown: withoutFn, footnotes } = extractFootnotes(body);
-  const preprocessed = preprocessExtensions(withoutFn);
+  const { resolveImage, includeSourceMap = false } = options;
+  const { meta, body, bodyStartLine } = parseFrontMatter(markdown || '');
+  const { markdown: withoutFn, footnotes, lineMap: fnLineMap, firstFootnoteLine } = extractFootnotes(body, bodyStartLine);
+  const { text: preprocessed, lineMap } = preprocessExtensions(withoutFn, fnLineMap);
 
   const marked = new Marked({
     gfm: true,
@@ -588,7 +684,9 @@ export function renderMarkdownToHtml(markdown, options = {}) {
     pedantic: false,
   });
 
-  let rawHtml = marked.parse(preprocessed);
+  let rawHtml = includeSourceMap
+    ? parseMarkdownWithSourceLines(marked, preprocessed, lineMap)
+    : marked.parse(preprocessed);
 
   // Append footnotes section if present
   if (footnotes.length > 0) {
@@ -598,15 +696,21 @@ export function renderMarkdownToHtml(markdown, options = {}) {
         return `<li id="fn-${fn.num}"><p>${fnHtml}<a href="#fnref-${fn.num}" class="footnote-backref" aria-label="Back to content">↩</a></p></li>`;
       })
       .join('\n');
-    rawHtml += `\n<section class="footnotes" role="doc-endnotes"><ol>${items}</ol></section>`;
+    const fnLineAttr = includeSourceMap && firstFootnoteLine ? ` data-wa-line="${firstFootnoteLine}"` : '';
+    rawHtml += `\n<section class="footnotes" role="doc-endnotes"${fnLineAttr}><ol>${items}</ol></section>`;
   }
 
-  const titleHtml = buildTitleBlockHtml(meta);
+  const titleHtml = buildTitleBlockHtml(meta, includeSourceMap);
   const fullHtml = `<article class="wa-document">${titleHtml}<div class="wa-body">${rawHtml}</div></article>`;
+
+  const addAttrs = ['data-wa-toc', 'data-wa-next-class', 'data-wa-parent-class', 'role', 'aria-hidden', 'aria-label', 'checked', 'disabled'];
+  if (includeSourceMap) {
+    addAttrs.push('data-wa-line', 'data-wa-line-end');
+  }
 
   const cleanHtml = DOMPurify.sanitize(fullHtml, {
     USE_PROFILES: { html: true, svg: true, svgFilters: true },
-    ADD_ATTR: ['data-wa-toc', 'data-wa-next-class', 'data-wa-parent-class', 'role', 'aria-hidden', 'aria-label', 'checked', 'disabled'],
+    ADD_ATTR: addAttrs,
   });
 
   // Post-process in a detached DOM template
@@ -652,6 +756,8 @@ export function renderMarkdownToHtml(markdown, options = {}) {
 
     const aside = document.createElement('aside');
     aside.className = `callout ${info.cls}`;
+    if (bq.hasAttribute('data-wa-line')) aside.setAttribute('data-wa-line', bq.getAttribute('data-wa-line'));
+    if (bq.hasAttribute('data-wa-line-end')) aside.setAttribute('data-wa-line-end', bq.getAttribute('data-wa-line-end'));
     // Preserve any user-attached classes
     bq.classList.forEach((c) => aside.classList.add(c));
 
@@ -696,6 +802,8 @@ export function renderMarkdownToHtml(markdown, options = {}) {
       const img = children[0];
       const fig = document.createElement('figure');
       fig.className = 'figure';
+      if (p.hasAttribute('data-wa-line')) fig.setAttribute('data-wa-line', p.getAttribute('data-wa-line'));
+      if (p.hasAttribute('data-wa-line-end')) fig.setAttribute('data-wa-line-end', p.getAttribute('data-wa-line-end'));
       p.classList.forEach((c) => fig.classList.add(c));
       fig.appendChild(img);
       const alt = (img.getAttribute('alt') || '').trim();
@@ -743,6 +851,7 @@ export function renderMarkdownToHtml(markdown, options = {}) {
     const nav = document.createElement('nav');
     nav.className = 'toc';
     nav.setAttribute('aria-label', 'Table of contents');
+    if (placeholder.hasAttribute('data-wa-line')) nav.setAttribute('data-wa-line', placeholder.getAttribute('data-wa-line'));
     const title = document.createElement('div');
     title.className = 'toc-title';
     title.textContent = 'Contents';
@@ -771,8 +880,8 @@ export function renderMarkdownToHtml(markdown, options = {}) {
  * Mount a complete rendered & paginated .wa document into a target Document (iframe or read.html).
  * Returns { meta, pageCount, config }.
  */
-export async function renderIntoDocument(targetDoc, { markdown, styleCss, baseCss, fontsBaseUrl, resolveImage, pageGrid = false }) {
-  const { html, meta } = renderMarkdownToHtml(markdown, { resolveImage });
+export async function renderIntoDocument(targetDoc, { markdown, styleCss, baseCss, fontsBaseUrl, resolveImage, pageGrid = false, includeSourceMap = false }) {
+  const { html, meta } = renderMarkdownToHtml(markdown, { resolveImage, includeSourceMap });
   const fontCss = buildFontFacesCss(styleCss, fontsBaseUrl);
   const config = parsePageConfig(styleCss, meta);
   const pageRulesCss = buildPaginatedPageCss(config);
